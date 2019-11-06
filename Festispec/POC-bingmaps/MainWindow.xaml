@@ -1,0 +1,81 @@
+﻿<Window x:Class="POC_bingmaps.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POC_bingmaps"
+        mc:Ignorable="d"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Proof of concept - Maps" Height="600" Width="1080">
+
+    <Window.DataContext>
+        <local:Map />
+    </Window.DataContext>
+
+
+    <Window.Resources>
+        <DataTemplate x:Key="LogoTemplate">
+
+            <Canvas
+                m:MapLayer.Position="{Binding Pos}"
+                m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30"
+               >
+                <Button Command="{Binding SelectCommand}"
+                        Background="Transparent"
+        BorderBrush="Transparent"
+        BorderThickness="0" 
+        Padding="0"
+                        >
+                    <materialDesign:PackIcon Kind="Location" Width="30" Height="30" Foreground="#FF3C3C3C"/>
+                </Button>
+            </Canvas>
+        </DataTemplate>
+    </Window.Resources>
+
+    <DockPanel>
+        <GroupBox Width="200">
+            <StackPanel>
+
+                <TextBlock FontSize="18">Voeg werknemer toe</TextBlock>
+
+                <TextBlock>Naam</TextBlock>
+                <TextBox BorderThickness="1" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <TextBlock>Adres</TextBlock>
+                <TextBox BorderThickness="1" Text="{Binding Adress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <Button Command="{Binding AddCommand}">Voeg toe!</Button>
+
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox>
+            <StackPanel
+                Orientation="Vertical"
+            >
+                <Grid Height="500">
+                    <m:Map x:Name="MapXAML" CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo" Mode="Road" Grid.Column="1" Grid.Row="1" ZoomLevel="16" Center="51.688641,5.287090">
+                        <m:Map.Children>
+
+                            <m:MapItemsControl ItemTemplate="{StaticResource LogoTemplate}" ItemsSource="{Binding Employees}" >
+                            </m:MapItemsControl>
+                            
+                        </m:Map.Children>
+                    </m:Map>
+                </Grid>
+
+                <DockPanel Height="100">
+                    <TextBlock 
+                        FontSize="20"
+                        Text="{Binding Path=SelectedEmployee.Name, 
+                                StringFormat='Selected Employee: {0}'}"
+                        ></TextBlock>
+
+                    <Button HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding RemoveCommand}" Content="Verwijder"/>
+                </DockPanel>
+
+            </StackPanel>
+        </GroupBox>
+    </DockPanel>
+</Window>
