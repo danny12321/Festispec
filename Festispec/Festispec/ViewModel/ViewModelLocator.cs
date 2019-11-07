@@ -4,7 +4,7 @@ using GalaSoft.MvvmLight.Ioc;
 
 namespace Festispec.ViewModel
 {
-    
+
     public class ViewModelLocator
     {
         public ViewModelLocator()
@@ -22,7 +22,15 @@ namespace Festispec.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+
+        public LoginViewModel Login
+        {
+            get
+            {
+                return new LoginViewModel();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
