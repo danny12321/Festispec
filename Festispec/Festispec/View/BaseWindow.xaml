@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         DataContext="{Binding }"
         Title="Home" Height="450" Width="800">
+    
     <StackPanel Orientation="Horizontal">
         <Border BorderThickness="20">
             <StackPanel>
