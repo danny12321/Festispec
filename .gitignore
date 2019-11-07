@@ -3,6 +3,8 @@
 
 /*/connections.config
 
+/Festispec/Database/Database.jfm
+
 # User-specific files
 *.suo
 *.user

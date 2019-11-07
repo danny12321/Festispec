@@ -9,20 +9,56 @@
         DataContext="{Binding Login, Source={StaticResource Locator}}"
         WindowState="Maximized"
         Title="Festispec"
-        Background="#32385D">
+
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="16"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+            <LinearGradientBrush.RelativeTransform>
+                <TransformGroup>
+                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                    <RotateTransform Angle="50" CenterY="0.5" CenterX="0.5"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </LinearGradientBrush.RelativeTransform>
+            <GradientStop Color="#FF1684B9"/>
+            <GradientStop Color="#FF27375B" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    
     <Grid VerticalAlignment="Center">
-        <StackPanel HorizontalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="500"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
 
-            <Label Content="Festispec" HorizontalAlignment="Center" FontSize="40" Foreground="White"/>
+        <Border Margin="100,0">
+            
+            <StackPanel Background="#FFF7F7F7" OpacityMask="Black">
+                <StackPanel.Effect>
+                    <DropShadowEffect Color="#FF6C6C6C" Opacity="0.795" ShadowDepth="3"/>
+                </StackPanel.Effect>
 
-            <Label Content="Email:" Foreground="White"/>
-            <TextBox Height="20" HorizontalAlignment="Stretch" Text="{Binding Email, Mode=TwoWay}"/>
+                <Label Content="Festispec" HorizontalAlignment="Left" FontSize="40" Width="280" Margin="14,20,0,10" Background="{x:Null}"/>
 
-            <Label Content="Wachtwoord:" Foreground="White"/>
-            <TextBox Height="20" HorizontalAlignment="Stretch" Text="{Binding Password, Mode=TwoWay}"/>
+                <TextBox Margin="20,0,20,20" materialDesign:HintAssist.Hint="Email" Text="{Binding Email, Mode=TwoWay}" Cursor="IBeam"/>
+                <PasswordBox Margin="20,0,20,10" materialDesign:HintAssist.Hint="Password" Cursor="IBeam" Background="{x:Null}"></PasswordBox>
 
-            <Button Height="20" HorizontalAlignment="Stretch" Margin="0, 10, 0, 0" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=LoginWindowName}">Log in</Button>
+                <Button
+                    Margin="20,20,0,20"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Width="100"
+                    ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                     Command="{Binding LoginCommand}"
+                    CommandParameter="{Binding ElementName=LoginWindowName}" Content="Log in" HorizontalAlignment="Left"/>
 
-        </StackPanel>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>

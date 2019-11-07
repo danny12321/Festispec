@@ -1,27 +1,48 @@
+using Festispec.View;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Festispec.ViewModel
 {
-    /// <summary>
-    /// This class contains properties that the main View can data bind to.
-    /// <para>
-    /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    /// </para>
-    /// <para>
-    /// You can also use Blend to data bind with the tool's support.
-    /// </para>
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
+
     public class MainViewModel : ViewModelBase
     {
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
+        private Page _frameContent;
+
+        public Page FrameContent
+        {
+            get { return _frameContent; }
+            set
+            {
+                _frameContent = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public ICommand NavigateHomeCommand { get; set; }
+        public ICommand NavigateScheduleCommand { get; set; }
+
+
         public MainViewModel()
         {
-         
+            FrameContent = new Home();
+
+            NavigateHomeCommand = new RelayCommand(NavigateHome);
+            NavigateScheduleCommand = new RelayCommand(NavigateSchedule);
+        }
+
+        private void NavigateHome()
+        {
+            System.Console.WriteLine("Dit is geweldig");
+            FrameContent = new Home();
+        }
+
+        private void NavigateSchedule()
+        {
+            System.Console.WriteLine("Dit is geweldig");
+            FrameContent = new Schedule();
         }
     }
 }
