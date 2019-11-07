@@ -45,7 +45,7 @@ namespace Festispec.ViewModel
 
         private void NavigateTestPage()
         {
-            FrameContent = new TestPage();
+            //FrameContent = new TestPage();
         }
     }
 }
