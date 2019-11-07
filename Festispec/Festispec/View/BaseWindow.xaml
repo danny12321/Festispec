@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Festispec.View"
         mc:Ignorable="d"
         DataContext="{Binding }"
-        Title="Home" Height="450" Width="800">
+        WindowState="Maximized"
+        Title="Home">
     
     <StackPanel Orientation="Horizontal">
         <Border BorderThickness="20">
