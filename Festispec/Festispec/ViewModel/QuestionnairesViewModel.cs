@@ -9,5 +9,9 @@ namespace Festispec.ViewModel
 {
     public class QuestionnairesViewModel : ViewModelBase
     {
+        public QuestionnairesViewModel()
+        {
+            Console.WriteLine("VIEW MONDEL VRAGeNLIJS");
+        }
     }
 }
