@@ -9,23 +9,31 @@
         DataContext="{Binding Main, Source={StaticResource Locator}}"
         WindowState="Maximized"
         Title="Festispec CIB">
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-
-    <StackPanel Orientation="Horizontal">
-
-        <Border Background="#32385D" Padding="0,30,0,0">
-            <ListBox FontSize="25" IsEnabled="{Binding IsChecked, ElementName=EnableListBox}" Background="#32385D">
-                <TextBlock><Hyperlink Command="{Binding NavigateHomeCommand}" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="HomeVariant" VerticalAlignment="Center"/>Home</Hyperlink></TextBlock>
-                    <TextBlock><Hyperlink Command="{Binding NavigateScheduleCommand}" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="CalendarMonthOutline" VerticalAlignment="Center"/>Planning</Hyperlink></TextBlock>
-                    <TextBlock><Hyperlink Command="{Binding }" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="Camping" VerticalAlignment="Center"/>Festival beheer</Hyperlink></TextBlock>
-                    <TextBlock><Hyperlink Command="{Binding }" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="CityVariant" VerticalAlignment="Center"/>Gemeentes</Hyperlink></TextBlock>
-                    <TextBlock><Hyperlink Command="{Binding }" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="AccountGroup" VerticalAlignment="Center"/>Inspecteurs overzicht</Hyperlink></TextBlock>
-                    <TextBlock><Hyperlink Command="{Binding }" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="FileDocument" VerticalAlignment="Center"/>Offerte overzicht</Hyperlink></TextBlock>
-                    <TextBlock><Hyperlink Command="{Binding }" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="MonitorDashboard" VerticalAlignment="Center"/>Dahboard</Hyperlink></TextBlock>
-                <TextBlock><Hyperlink Command="{Binding NavigateQuestionnairesCommand}" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="MonitorDashboard" VerticalAlignment="Center"/>Vragenlijsten TEMP</Hyperlink></TextBlock>
+        <Border Grid.Column="0" Background="#32385D" Padding="0,100,0,0">
+                 <ListBox FontSize="25" IsEnabled="{Binding IsChecked, ElementName=EnableListBox}" Background="#32385D">
+                
+                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Home" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="HomeVariant" VerticalAlignment="Center"/>Home</Hyperlink></TextBlock>
+                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Schedule" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="CalendarMonthOutline" VerticalAlignment="Center"/>Planning</Hyperlink></TextBlock>
+                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="Camping" VerticalAlignment="Center"/>Festival beheer</Hyperlink></TextBlock>
+                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="CityVariant" VerticalAlignment="Center"/>Gemeentes</Hyperlink></TextBlock>
+                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="AccountGroup" VerticalAlignment="Center"/>Inspecteurs overzicht</Hyperlink></TextBlock>
+                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="FileDocument" VerticalAlignment="Center"/>Offerte overzicht</Hyperlink></TextBlock>
+                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="MonitorDashboard" VerticalAlignment="Center"/>Dahboard</Hyperlink></TextBlock>
                  </ListBox>
             </Border>
+        <StackPanel Grid.Column="1">
+            <Border Background="LightGray" Height="100">
+                <TextBlock Text="{Binding PageTitle}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="20"/>
+            </Border>
+            <Frame Content="{Binding FrameContent}" NavigationUIVisibility="Hidden"></Frame>
+        </StackPanel>
 
-        <Frame Content="{Binding FrameContent}" NavigationUIVisibility="Hidden"></Frame>
-    </StackPanel>
+    </Grid>
 </Window>

@@ -1,5 +1,4 @@
 using Festispec.View;
-using Festispec.View.Questionnaires;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Windows.Controls;
@@ -18,38 +17,48 @@ namespace Festispec.ViewModel
             set
             {
                 _frameContent = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("FrameContent");
             }
         }
 
-        public ICommand NavigateHomeCommand { get; set; }
-        public ICommand NavigateScheduleCommand { get; set; }
-        public ICommand NavigateQuestionnairesCommand { get; set; }
+        private string _pageTitle;
+
+        public string PageTitle
+        {
+            get { return _pageTitle; }
+            set 
+            {
+                _pageTitle = value;
+                RaisePropertyChanged("PageTitle");
+            }
+        }
+
+        public ICommand SetPageCommand { get; set; }
 
         public MainViewModel()
         {
-            FrameContent = new Home();
+            SetPage("Home");
 
-            NavigateHomeCommand = new RelayCommand(NavigateHome);
-            NavigateScheduleCommand = new RelayCommand(NavigateSchedule);
-            NavigateQuestionnairesCommand = new RelayCommand(NavigateQuestionnaires);
+            SetPageCommand = new RelayCommand<string>(SetPage);
         }
 
-        private void NavigateHome()
+        public void SetPage(string page)
         {
-            System.Console.WriteLine("Dit is geweldig");
-            FrameContent = new Home();
-        }
-
-        private void NavigateSchedule()
-        {
-            System.Console.WriteLine("Dit is geweldig");
-            FrameContent = new Schedule();
-        }
-
-        private void NavigateQuestionnaires()
-        {
-            FrameContent = new Questionnaires();
+            switch (page)
+            {
+                case "Home":
+                    FrameContent = new Home();
+                    PageTitle = "Home"; 
+                    break;
+                case "Schedule":
+                    FrameContent = new Schedule();
+                    PageTitle = "Planning";
+                    break;
+                default:
+                    FrameContent = new Home();
+                    PageTitle = "Home";
+                    break;
+            }
         }
     }
 }
