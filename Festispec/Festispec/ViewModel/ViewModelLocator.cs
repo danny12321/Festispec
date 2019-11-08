@@ -31,6 +31,14 @@ namespace Festispec.ViewModel
             }
         }
 
+        public QuestionnairesViewModel Questionnaires
+        {
+            get
+            {
+                return new QuestionnairesViewModel();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

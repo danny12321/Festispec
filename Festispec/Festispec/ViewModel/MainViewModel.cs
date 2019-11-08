@@ -1,4 +1,5 @@
 using Festispec.View;
+using Festispec.View.Questionnaires;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Windows.Controls;
@@ -23,7 +24,7 @@ namespace Festispec.ViewModel
 
         public ICommand NavigateHomeCommand { get; set; }
         public ICommand NavigateScheduleCommand { get; set; }
-
+        public ICommand NavigateQuestionnairesCommand { get; set; }
 
         public MainViewModel()
         {
@@ -31,6 +32,7 @@ namespace Festispec.ViewModel
 
             NavigateHomeCommand = new RelayCommand(NavigateHome);
             NavigateScheduleCommand = new RelayCommand(NavigateSchedule);
+            NavigateQuestionnairesCommand = new RelayCommand(NavigateQuestionnaires);
         }
 
         private void NavigateHome()
@@ -43,6 +45,11 @@ namespace Festispec.ViewModel
         {
             System.Console.WriteLine("Dit is geweldig");
             FrameContent = new Schedule();
+        }
+
+        private void NavigateQuestionnaires()
+        {
+            FrameContent = new Questionnaires();
         }
     }
 }
