@@ -86,12 +86,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModel\Clients\AddClientsVM.cs" />
-    <Compile Include="ViewModel\Clients\ClientManageVM.cs" />
-    <Compile Include="ViewModel\Clients\ClientsVM.cs" />
-    <Compile Include="ViewModel\Festival VMs\AddFestivalVM.cs" />
-    <Compile Include="ViewModel\Festival VMs\FestivalManagementVM.cs" />
-    <Compile Include="ViewModel\Festival VMs\FestivalVM.cs" />
+    <Compile Include="ViewModel\ClientVM\AddClientsVM.cs" />
+    <Compile Include="ViewModel\ClientVM\ClientManageVM.cs" />
+    <Compile Include="ViewModel\ClientVM\ClientsVM.cs" />
+    <Compile Include="ViewModel\FestivalVM\AddFestivalVM.cs" />
+    <Compile Include="ViewModel\FestivalVM\FestivalManagementVM.cs" />
+    <Compile Include="ViewModel\FestivalVM\FestivalVM.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -99,11 +99,11 @@
     <Compile Include="ViewModel\Questionnaires\QuestionTypeViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="View\Clients\AddClient.xaml.cs">
-      <DependentUpon>AddClient.xaml</DependentUpon>
+    <Compile Include="View\ClientsViews\AddClients.xaml.cs">
+      <DependentUpon>AddClients.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Clients\Clients.xaml.cs">
-      <DependentUpon>Clients.xaml</DependentUpon>
+    <Compile Include="View\ClientsViews\Client.xaml.cs">
+      <DependentUpon>Client.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Festival Views\AddFestival.xaml.cs">
       <DependentUpon>AddFestival.xaml</DependentUpon>
@@ -127,11 +127,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Clients\AddClient.xaml">
+    <Page Include="View\ClientsViews\AddClients.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Clients\Clients.xaml">
+    <Page Include="View\ClientsViews\Client.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

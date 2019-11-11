@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Festispec.ViewModel.Clients
+namespace Festispec.ViewModel.ClientVM
 {
     public class AddClientsVM
     {

@@ -1,5 +1,5 @@
 using CommonServiceLocator;
-using Festispec.ViewModel.Clients;
+using Festispec.ViewModel.ClientVM;
 using Festispec.ViewModel.Festival_VMs;
 using Festispec.ViewModel.Questionnaires;
 using GalaSoft.MvvmLight;

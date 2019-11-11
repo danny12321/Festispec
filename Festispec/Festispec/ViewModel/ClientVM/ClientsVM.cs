@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Festispec.ViewModel.Clients
+namespace Festispec.ViewModel.ClientVM
 {
     public class ClientsVM
     {
-        private Client _client;
+        private Clients _client;
 
-        public ClientsVM(Client client)
+        public ClientsVM(Clients client)
         {
             this._client = client;
         }
@@ -58,7 +58,7 @@ namespace Festispec.ViewModel.Clients
             set { _client.phone = value; }
         }
 
-        internal Client ToModel()
+        internal Clients ToModel()
         {
             return _client;
         }

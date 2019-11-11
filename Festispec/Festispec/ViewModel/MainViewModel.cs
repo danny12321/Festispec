@@ -1,7 +1,6 @@
 using Festispec.Domain;
 using Festispec.View;
 using Festispec.View.Festival_Views;
-using Festispec.View.Clients;
 using Festispec.View.Questionnaires;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -60,11 +59,11 @@ namespace Festispec.ViewModel
                     PageTitle = "Planning";
                     break;
                 case "Festival":
-                    FrameContent = new Festivals();
+                    FrameContent = new View.Festival_Views.Festivals();
                     PageTitle = "Festival beheer";
                     break;
                 case "Clients":
-                    FrameContent = new View.Clients.Clients();
+                    FrameContent = new View.ClientsViews.Client();
                     PageTitle = "Klanten beheer";
                     break;
                 case "Vragenlijsten TEMP":
@@ -72,7 +71,7 @@ namespace Festispec.ViewModel
                     PageTitle = "Vragenlijsten";
                     break;
                 case "AddClient":
-                    FrameContent = new AddClient();
+                    FrameContent = new View.ClientsViews.AddClients();
                     PageTitle = "Klanten toevoegen";
                     break;
                 default:

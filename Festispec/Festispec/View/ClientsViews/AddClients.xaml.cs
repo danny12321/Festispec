@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec.View.Clients
+namespace Festispec.View.ClientsViews
 {
     /// <summary>
-    /// Interaction logic for Clients.xaml
+    /// Interaction logic for AddClients.xaml
     /// </summary>
-    public partial class Clients : Page
+    public partial class AddClients : Page
     {
-        public Clients()
+        public AddClients()
         {
             InitializeComponent();
         }

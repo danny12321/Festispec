@@ -1,5 +1,5 @@
 ﻿using Festispec.Domain;
-using Festispec.View.Clients;
+using Festispec.View.ClientsViews;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Festispec.ViewModel.Clients
+namespace Festispec.ViewModel.ClientVM
 {
     public class ClientManageVM : ViewModelBase
     {
@@ -25,7 +25,7 @@ namespace Festispec.ViewModel.Clients
         {
             _main = main;
 
-            using (var context = new FestispecEntities())
+            using (var context = new Entities())
             {
                 var clients = context.Clients.ToList()
                              .Select(client => new ClientsVM(client));

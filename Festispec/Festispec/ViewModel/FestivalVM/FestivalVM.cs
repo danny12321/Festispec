@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using Festispec.Domain;
 using GalaSoft.MvvmLight;
 
-namespace Festispec.ViewModel.Festival_VMs
+namespace Festispec.ViewModel.FestivalVM
 {
     public class FestivalVM : ViewModelBase
     {
-        private Festival _festival;
+        private Festivals _festival;
 
-        public FestivalVM(Festival festivals)
+        public FestivalVM(Festivals festivals)
         {
             this._festival = festivals;
         }
@@ -20,7 +20,7 @@ namespace Festispec.ViewModel.Festival_VMs
         //properties van tabel toevoegen
 
 
-        internal Festival ToModel()
+        internal Festivals ToModel()
         {
             return _festival;
         }
