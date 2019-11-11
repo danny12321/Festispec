@@ -11,40 +11,40 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-        <ColumnDefinition></ColumnDefinition>
-        <ColumnDefinition></ColumnDefinition>
-    </Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-    <Border Padding="20">
-        <StackPanel>
+        <Border Padding="20">
+            <StackPanel>
 
-            <TextBlock Text="Voeg een nieuwe klant toe" FontSize="25" Padding="0,10"/>
-            
-            <TextBlock Text="Klant id:"></TextBlock>
+                <TextBlock Text="Voeg een nieuwe klant toe" FontSize="25" Padding="0,10"/>
+
+                <TextBlock Text="Klant id:"></TextBlock>
                 <TextBox MaxLength="10" IsReadOnly="True" Text="{Binding Clients.ClientID}"></TextBox>
-            <TextBlock Text="Naam:"></TextBlock>
+                <TextBlock Text="Naam:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding Path=Clients.ClientName, Mode=TwoWay}"></TextBox>
-            <TextBlock Text="Postcode:"></TextBlock>
+                <TextBlock Text="Postcode:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding Path=Clients.PostalCode, Mode=TwoWay}"></TextBox>
-            <TextBlock Text="Straat:"></TextBlock>
+                <TextBlock Text="Straat:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding Path=Clients.Street, Mode=TwoWay}"></TextBox>
-            <TextBlock Text="Huisnummer:"></TextBlock>
+                <TextBlock Text="Huisnummer:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding Path=Clients.Housenumber, Mode=TwoWay}"></TextBox>
-            <TextBlock Text="Land:"></TextBlock>
+                <TextBlock Text="Land:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding Path=Clients.Country, Mode=TwoWay}"></TextBox>
-            <TextBlock Text="Telefoon nummer:"></TextBlock>
+                <TextBlock Text="Telefoon nummer:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding Path=Clients.Phone, Mode=TwoWay}"></TextBox>
 
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding saveClient}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="100"
-                    ToolTip="Resource name: MaterialDesignRaisedButton">        
-                    Save
-                </Button>
+                    ToolTip="Resource name: MaterialDesignRaisedButton">
+                        Save
+                    </Button>
                 </Border>
 
             </StackPanel>
-    </Border>
+        </Border>
     </Grid>
 </Page>
