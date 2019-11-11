@@ -71,6 +71,10 @@ namespace Festispec.ViewModel
                     FrameContent = new View.Questionnaires.Questionnaires();
                     PageTitle = "Vragenlijsten";
                     break;
+                case "AddClient":
+                    FrameContent = new AddClient();
+                    PageTitle = "Klanten toevoegen";
+                    break;
                 default:
                     FrameContent = new Home();
                     PageTitle = "Home";

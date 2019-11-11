@@ -46,7 +46,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new ClientManageVM();
+                return new ClientManageVM(Main);
             }
         }
         

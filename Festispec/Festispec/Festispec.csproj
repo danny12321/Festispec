@@ -86,6 +86,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Clients\AddClientsVM.cs" />
     <Compile Include="ViewModel\Clients\ClientManageVM.cs" />
     <Compile Include="ViewModel\Clients\ClientsVM.cs" />
     <Compile Include="ViewModel\Festival VMs\AddFestivalVM.cs" />
@@ -98,6 +99,9 @@
     <Compile Include="ViewModel\Questionnaires\QuestionTypeViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\Clients\AddClient.xaml.cs">
+      <DependentUpon>AddClient.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Clients\Clients.xaml.cs">
       <DependentUpon>Clients.xaml</DependentUpon>
     </Compile>
@@ -120,6 +124,10 @@
       <DependentUpon>Schedule.xaml</DependentUpon>
     </Compile>
     <Page Include="View\BaseWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Clients\AddClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
