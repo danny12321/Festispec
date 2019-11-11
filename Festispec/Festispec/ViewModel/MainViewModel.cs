@@ -1,9 +1,12 @@
+using Festispec.Domain;
 using Festispec.View;
 using Festispec.View.Festival_Views;
+using Festispec.View.Questionnaires;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Linq;
 
 namespace Festispec.ViewModel
 {
@@ -58,6 +61,10 @@ namespace Festispec.ViewModel
                 case "Festival":
                     FrameContent = new Festival();
                     PageTitle = "Festival beheer";
+                    break;
+                case "Vragenlijsten TEMP":
+                    FrameContent = new View.Questionnaires.Questionnaires();
+                    PageTitle = "Vragenlijsten";
                     break;
                 default:
                     FrameContent = new Home();
