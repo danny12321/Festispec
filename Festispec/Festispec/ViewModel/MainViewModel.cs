@@ -1,9 +1,11 @@
+using Festispec.Domain;
 using Festispec.View;
 using Festispec.View.Questionnaires;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Linq;
 
 namespace Festispec.ViewModel
 {

@@ -41,6 +41,7 @@ namespace Festispec.ViewModel.Questionnaires
             SelectQuestionCommand = new RelayCommand<int>(SelectQuestion);
             AddQuestionCommand = new RelayCommand(AddQuestion);
 
+
             Questions = new ObservableCollection<QuestionViewModel>();
 
             Questions.Add(new QuestionViewModel(this));
