@@ -1,34 +1,71 @@
+using Festispec.Domain;
+using Festispec.View;
+using Festispec.View.Questionnaires;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Linq;
 
 namespace Festispec.ViewModel
 {
-    /// <summary>
-    /// This class contains properties that the main View can data bind to.
-    /// <para>
-    /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    /// </para>
-    /// <para>
-    /// You can also use Blend to data bind with the tool's support.
-    /// </para>
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
+
     public class MainViewModel : ViewModelBase
     {
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
+        private Page _frameContent;
+
+        public Page FrameContent
+        {
+            get { return _frameContent; }
+            set
+            {
+                _frameContent = value;
+                RaisePropertyChanged("FrameContent");
+            }
+        }
+
+        private string _pageTitle;
+
+        public string PageTitle
+        {
+            get { return _pageTitle; }
+            set 
+            {
+                _pageTitle = value;
+                RaisePropertyChanged("PageTitle");
+            }
+        }
+
+        public ICommand SetPageCommand { get; set; }
+
         public MainViewModel()
         {
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
+            SetPage("Home");
+
+            SetPageCommand = new RelayCommand<string>(SetPage);
+        }
+
+        public void SetPage(string page)
+        {
+            switch (page)
+            {
+                case "Home":
+                    FrameContent = new Home();
+                    PageTitle = "Home"; 
+                    break;
+                case "Schedule":
+                    FrameContent = new Schedule();
+                    PageTitle = "Planning";
+                    break;
+                case "Vragenlijsten TEMP":
+                    FrameContent = new View.Questionnaires.Questionnaires();
+                    PageTitle = "Vragenlijsten";
+                    break;
+                default:
+                    FrameContent = new Home();
+                    PageTitle = "Home";
+                    break;
+            }
         }
     }
 }

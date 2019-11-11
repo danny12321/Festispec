@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festispec", "Festispec\Fest
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{D2D55EDF-2A0D-42A8-BA22-56F6942981C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festispec.Domain", "Festispec.Domain\Festispec.Domain.csproj", "{26F92110-69A7-4DFA-B246-625D32F30297}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{D2D55EDF-2A0D-42A8-BA22-56F6942981C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2D55EDF-2A0D-42A8-BA22-56F6942981C8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D2D55EDF-2A0D-42A8-BA22-56F6942981C8}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{26F92110-69A7-4DFA-B246-625D32F30297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26F92110-69A7-4DFA-B246-625D32F30297}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26F92110-69A7-4DFA-B246-625D32F30297}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26F92110-69A7-4DFA-B246-625D32F30297}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

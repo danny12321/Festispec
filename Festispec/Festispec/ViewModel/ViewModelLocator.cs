@@ -1,12 +1,11 @@
-
-
 using CommonServiceLocator;
+using Festispec.ViewModel.Questionnaires;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 
 namespace Festispec.ViewModel
 {
-    
+
     public class ViewModelLocator
     {
         public ViewModelLocator()
@@ -24,7 +23,23 @@ namespace Festispec.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+
+        public LoginViewModel Login
+        {
+            get
+            {
+                return new LoginViewModel();
+            }
+        }
+
+        public QuestionnairesViewModel Questionnaires
+        {
+            get
+            {
+                return new QuestionnairesViewModel();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
