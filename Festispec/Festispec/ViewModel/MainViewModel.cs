@@ -56,7 +56,7 @@ namespace Festispec.ViewModel
                     PageTitle = "Planning";
                     break;
                 case "Vragenlijsten TEMP":
-                    FrameContent = new Questionnaires();
+                    FrameContent = new View.Questionnaires.Questionnaires();
                     PageTitle = "Vragenlijsten";
                     break;
                 default:

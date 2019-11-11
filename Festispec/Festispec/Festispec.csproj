@@ -79,10 +79,18 @@
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\QuestionnairesViewModel.cs" />
+    <Compile Include="ViewModel\Questionnaires\QuestionnairesViewModel.cs" />
+    <Compile Include="ViewModel\Questionnaires\QuestionTypeViewModel.cs" />
+    <Compile Include="ViewModel\Questionnaires\QuestionViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\Questionnaires\Open.xaml.cs">
+      <DependentUpon>Open.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Questionnaires\Questionnaires.xaml.cs">
       <DependentUpon>Questionnaires.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\SelectBox.xaml.cs">
+      <DependentUpon>SelectBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Schedule.xaml.cs">
       <DependentUpon>Schedule.xaml</DependentUpon>
@@ -113,7 +121,15 @@
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Questionnaires\Open.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Questionnaires\Questionnaires.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\SelectBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

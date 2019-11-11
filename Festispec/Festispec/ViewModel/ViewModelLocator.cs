@@ -1,4 +1,5 @@
 using CommonServiceLocator;
+using Festispec.ViewModel.Questionnaires;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 
