@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Festispec.ViewModel.Festival_VMs
 {
-    class FestivalManagementVM
+    public class FestivalManagementVM
     {
     }
 }

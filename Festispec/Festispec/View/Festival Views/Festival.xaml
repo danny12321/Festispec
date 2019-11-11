@@ -6,9 +6,12 @@
       xmlns:local="clr-namespace:Festispec.View.Festival_Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Festival">
+       DataContext="{Binding Festival, Source={StaticResource Locator}}"
+       Title="Festival beheer">
 
     <StackPanel>
         <TextBlock>Dit is Festival beheer</TextBlock>
     </StackPanel>
+    
+    
 </Page>

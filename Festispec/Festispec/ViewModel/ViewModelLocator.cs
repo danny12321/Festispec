@@ -1,4 +1,5 @@
 using CommonServiceLocator;
+using Festispec.ViewModel.Festival_VMs;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 
@@ -28,6 +29,14 @@ namespace Festispec.ViewModel
             get
             {
                 return new LoginViewModel();
+            }
+        }
+
+        public FestivalManagementVM festival
+        {
+            get
+            {
+                return new FestivalManagementVM();
             }
         }
 
