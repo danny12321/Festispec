@@ -20,7 +20,6 @@
 
     <StackPanel>
         <Grid>
-
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="600" />
                 <ColumnDefinition Width="50" />
@@ -29,15 +28,14 @@
             <TextBlock Text="Festival" FontSize="28" Grid.Column="0"/>
 
             <Button
-                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Command="{Binding showAddFestival}"
                  ToolTip="MaterialDesignFloatingActionMiniLightButton">
                 <materialDesign:PackIcon
                 Kind="Add"
                 Height="24"
-                Width="24" />       
+                Width="24" />
+                
             </Button>
-
-
         </Grid>
 
         <DataGrid Margin="0 8 0 0" IsReadOnly="True" SelectedItem="{Binding SelectedFestival, Mode=TwoWay}" ItemsSource="{Binding Festivals}" CanUserSortColumns="True" CanUserAddRows="False" >
