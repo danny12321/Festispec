@@ -20,7 +20,6 @@
 
             <TextBlock Text="Voeg een nieuwe klant toe" FontSize="25" Padding="0,10"/>
             
-            
             <TextBlock Text="Klant id:"></TextBlock>
                 <TextBox MaxLength="10" IsReadOnly="True" Text="{Binding Clients.ClientID}"></TextBox>
             <TextBlock Text="Naam:"></TextBlock>
@@ -37,7 +36,7 @@
                 <TextBox MaxLength="50" Text="{Binding Path=Clients.Phone, Mode=TwoWay}"></TextBox>
 
                 <Border Padding="10">
-                    <Button HorizontalAlignment="Right"
+                    <Button HorizontalAlignment="Right" Command="{Binding saveClient}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="100"
                     ToolTip="Resource name: MaterialDesignRaisedButton">        
