@@ -12,12 +12,13 @@ namespace Festispec.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Client
+    public partial class Festivals
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Client()
+        public Festivals()
         {
-            this.Festivals = new HashSet<Festival>();
+            this.Contactpersons = new HashSet<Contactpersons>();
+            this.Inspections = new HashSet<Inspections>();
         }
     
         public int id { get; set; }
@@ -26,11 +27,18 @@ namespace Festispec.Domain
         public string street { get; set; }
         public string housenumber { get; set; }
         public string country { get; set; }
-        public string phone { get; set; }
+        public System.DateTime start_date { get; set; }
+        public System.DateTime end_date { get; set; }
+        public int client_id { get; set; }
+        public int municipality_id { get; set; }
+        public double latitude { get; set; }
+        public double longitude { get; set; }
     
-        public virtual Contactperson Contactperson { get; set; }
+        public virtual Clients Clients { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Festival> Festivals { get; set; }
-        public virtual Quotation Quotation { get; set; }
+        public virtual ICollection<Contactpersons> Contactpersons { get; set; }
+        public virtual Municipalities Municipalities { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Inspections> Inspections { get; set; }
     }
 }

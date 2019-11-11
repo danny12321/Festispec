@@ -17,13 +17,13 @@ namespace Festispec.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Type_questions()
         {
-            this.Questions = new HashSet<Question>();
+            this.Questions = new HashSet<Questions>();
         }
     
         public int id { get; set; }
         public string type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Question> Questions { get; set; }
+        public virtual ICollection<Questions> Questions { get; set; }
     }
 }

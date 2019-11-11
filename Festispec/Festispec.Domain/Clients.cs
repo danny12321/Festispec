@@ -12,31 +12,25 @@ namespace Festispec.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Inspector
+    public partial class Clients
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Inspector()
+        public Clients()
         {
-            this.Inspectors_at_inspection = new HashSet<Inspectors_at_inspection>();
-            this.Inspectors_availability = new HashSet<Inspectors_availability>();
-            this.Users = new HashSet<User>();
+            this.Festivals = new HashSet<Festivals>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
-        public string lastname { get; set; }
-        public System.DateTime birthday { get; set; }
         public string postalcode { get; set; }
         public string street { get; set; }
         public string housenumber { get; set; }
+        public string country { get; set; }
         public string phone { get; set; }
-        public System.DateTime active { get; set; }
     
+        public virtual Contactpersons Contactpersons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inspectors_at_inspection> Inspectors_at_inspection { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inspectors_availability> Inspectors_availability { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Festivals> Festivals { get; set; }
+        public virtual Quotations Quotations { get; set; }
     }
 }

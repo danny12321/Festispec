@@ -12,21 +12,21 @@ namespace Festispec.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Questionnaires
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public Questionnaires()
         {
-            this.Rolls = new HashSet<Roll>();
+            this.Questions = new HashSet<Questions>();
         }
     
         public int id { get; set; }
-        public string email { get; set; }
-        public string password { get; set; }
-        public Nullable<int> inspector_id { get; set; }
+        public string version { get; set; }
+        public int inspector_id { get; set; }
+        public int inspection_id { get; set; }
     
-        public virtual Inspector Inspector { get; set; }
+        public virtual Inspectors_at_inspection Inspectors_at_inspection { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Roll> Rolls { get; set; }
+        public virtual ICollection<Questions> Questions { get; set; }
     }
 }

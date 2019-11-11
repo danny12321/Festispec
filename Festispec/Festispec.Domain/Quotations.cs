@@ -12,14 +12,13 @@ namespace Festispec.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Law
+    public partial class Quotations
     {
         public int id { get; set; }
-        public int municipality_id { get; set; }
-        public string name { get; set; }
-        public string website { get; set; }
-        public string description { get; set; }
+        public Nullable<decimal> price { get; set; }
+        public System.DateTime approved { get; set; }
+        public int client_id { get; set; }
     
-        public virtual Municipality Municipality { get; set; }
+        public virtual Clients Clients { get; set; }
     }
 }

@@ -522,16 +522,16 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FestispecModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Answer">
+        <EntityType Name="Answers">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="answer1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="answer" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="question_id" Type="Int32" />
-          <NavigationProperty Name="Question" Relationship="Self.FK_Answers_Questions" FromRole="Answers" ToRole="Questions" />
+          <NavigationProperty Name="Questions" Relationship="Self.FK_Answers_Questions" FromRole="Answers" ToRole="Questions" />
         </EntityType>
-        <EntityType Name="Client">
+        <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -542,11 +542,11 @@
           <Property Name="housenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Contactperson" Relationship="Self.FK_Contactpersons_Clients" FromRole="Clients" ToRole="Contactpersons" />
+          <NavigationProperty Name="Contactpersons" Relationship="Self.FK_Contactpersons_Clients" FromRole="Clients" ToRole="Contactpersons" />
           <NavigationProperty Name="Festivals" Relationship="Self.FK_Festivals_Clients" FromRole="Clients" ToRole="Festivals" />
-          <NavigationProperty Name="Quotation" Relationship="Self.FK_Quotations_Clients" FromRole="Clients" ToRole="Quotations" />
+          <NavigationProperty Name="Quotations" Relationship="Self.FK_Quotations_Clients" FromRole="Clients" ToRole="Quotations" />
         </EntityType>
-        <EntityType Name="Contactperson">
+        <EntityType Name="Contactpersons">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -558,11 +558,11 @@
           <Property Name="festival_id" Type="Int32" />
           <Property Name="client_id" Type="Int32" />
           <Property Name="type_contact" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Contactpersons_Clients" FromRole="Contactpersons" ToRole="Clients" />
-          <NavigationProperty Name="Festival" Relationship="Self.FK_Contactpersons_Festivals" FromRole="Contactpersons" ToRole="Festivals" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Contactpersons_Clients" FromRole="Contactpersons" ToRole="Clients" />
+          <NavigationProperty Name="Festivals" Relationship="Self.FK_Contactpersons_Festivals" FromRole="Contactpersons" ToRole="Festivals" />
           <NavigationProperty Name="Type_contacts" Relationship="Self.FK_Contactpersons_Type_contacts" FromRole="Contactpersons" ToRole="Type_contacts" />
         </EntityType>
-        <EntityType Name="Festival">
+        <EntityType Name="Festivals">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -578,12 +578,12 @@
           <Property Name="municipality_id" Type="Int32" Nullable="false" />
           <Property Name="latitude" Type="Double" Nullable="false" />
           <Property Name="longitude" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Festivals_Clients" FromRole="Festivals" ToRole="Clients" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Festivals_Clients" FromRole="Festivals" ToRole="Clients" />
           <NavigationProperty Name="Contactpersons" Relationship="Self.FK_Contactpersons_Festivals" FromRole="Festivals" ToRole="Contactpersons" />
-          <NavigationProperty Name="Municipality" Relationship="Self.FK_Festivals_Municipalities" FromRole="Festivals" ToRole="Municipalities" />
+          <NavigationProperty Name="Municipalities" Relationship="Self.FK_Festivals_Municipalities" FromRole="Festivals" ToRole="Municipalities" />
           <NavigationProperty Name="Inspections" Relationship="Self.FK_Inspections_Festivals" FromRole="Festivals" ToRole="Inspections" />
         </EntityType>
-        <EntityType Name="Inspection">
+        <EntityType Name="Inspections">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -593,10 +593,10 @@
           <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="finished" Type="DateTime" Precision="3" />
           <Property Name="festival_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Festival" Relationship="Self.FK_Inspections_Festivals" FromRole="Inspections" ToRole="Festivals" />
+          <NavigationProperty Name="Festivals" Relationship="Self.FK_Inspections_Festivals" FromRole="Inspections" ToRole="Festivals" />
           <NavigationProperty Name="Inspectors_at_inspection" Relationship="Self.FK_Inspectors_at_inspection_Inspections" FromRole="Inspections" ToRole="Inspectors_at_inspection" />
         </EntityType>
-        <EntityType Name="Inspector">
+        <EntityType Name="Inspectors">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -621,8 +621,8 @@
           <Property Name="inpector_id" Type="Int32" Nullable="false" />
           <Property Name="inspection_id" Type="Int32" Nullable="false" />
           <Property Name="absent" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspectors_at_inspection_Inspections" FromRole="Inspectors_at_inspection" ToRole="Inspections" />
-          <NavigationProperty Name="Inspector" Relationship="Self.FK_Inspectors_at_inspection_Inspectors" FromRole="Inspectors_at_inspection" ToRole="Inspectors" />
+          <NavigationProperty Name="Inspections" Relationship="Self.FK_Inspectors_at_inspection_Inspections" FromRole="Inspectors_at_inspection" ToRole="Inspections" />
+          <NavigationProperty Name="Inspectors" Relationship="Self.FK_Inspectors_at_inspection_Inspectors" FromRole="Inspectors_at_inspection" ToRole="Inspectors" />
           <NavigationProperty Name="Questionnaires" Relationship="Self.FK_Questionnaires_Inspectors_at_inspection" FromRole="Inspectors_at_inspection" ToRole="Questionnaires" />
         </EntityType>
         <EntityType Name="Inspectors_availability">
@@ -633,9 +633,9 @@
           <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="inspector_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Inspector" Relationship="Self.FK_Inspectors_availability_Inspectors" FromRole="Inspectors_availability" ToRole="Inspectors" />
+          <NavigationProperty Name="Inspectors" Relationship="Self.FK_Inspectors_availability_Inspectors" FromRole="Inspectors_availability" ToRole="Inspectors" />
         </EntityType>
-        <EntityType Name="Law">
+        <EntityType Name="Laws">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -644,9 +644,9 @@
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="website" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Municipality" Relationship="Self.FK_Laws_Municipalities" FromRole="Laws" ToRole="Municipalities" />
+          <NavigationProperty Name="Municipalities" Relationship="Self.FK_Laws_Municipalities" FromRole="Laws" ToRole="Municipalities" />
         </EntityType>
-        <EntityType Name="Municipality">
+        <EntityType Name="Municipalities">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -662,9 +662,9 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="answer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="question_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Question" Relationship="Self.FK_Possible_answer_Questions" FromRole="Possible_answer" ToRole="Questions" />
+          <NavigationProperty Name="Questions" Relationship="Self.FK_Possible_answer_Questions" FromRole="Possible_answer" ToRole="Questions" />
         </EntityType>
-        <EntityType Name="Questionnaire">
+        <EntityType Name="Questionnaires">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -675,20 +675,20 @@
           <NavigationProperty Name="Inspectors_at_inspection" Relationship="Self.FK_Questionnaires_Inspectors_at_inspection" FromRole="Questionnaires" ToRole="Inspectors_at_inspection" />
           <NavigationProperty Name="Questions" Relationship="Self.FK_Questions_Questionnaires" FromRole="Questionnaires" ToRole="Questions" />
         </EntityType>
-        <EntityType Name="Question">
+        <EntityType Name="Questions">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="question1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="question" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="type_question" Type="Int32" Nullable="false" />
           <Property Name="questionnaire_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Answers" Relationship="Self.FK_Answers_Questions" FromRole="Questions" ToRole="Answers" />
           <NavigationProperty Name="Possible_answer" Relationship="Self.FK_Possible_answer_Questions" FromRole="Questions" ToRole="Possible_answer" />
-          <NavigationProperty Name="Questionnaire" Relationship="Self.FK_Questions_Questionnaires" FromRole="Questions" ToRole="Questionnaires" />
+          <NavigationProperty Name="Questionnaires" Relationship="Self.FK_Questions_Questionnaires" FromRole="Questions" ToRole="Questionnaires" />
           <NavigationProperty Name="Type_questions" Relationship="Self.FK_Questions_Type_questions" FromRole="Questions" ToRole="Type_questions" />
         </EntityType>
-        <EntityType Name="Quotation">
+        <EntityType Name="Quotations">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -696,9 +696,9 @@
           <Property Name="price" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="approved" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="client_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Quotations_Clients" FromRole="Quotations" ToRole="Clients" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Quotations_Clients" FromRole="Quotations" ToRole="Clients" />
         </EntityType>
-        <EntityType Name="Roll">
+        <EntityType Name="Rolls">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -722,7 +722,7 @@
           <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Questions" Relationship="Self.FK_Questions_Type_questions" FromRole="Type_questions" ToRole="Questions" />
         </EntityType>
-        <EntityType Name="User">
+        <EntityType Name="Users">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -730,12 +730,12 @@
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="inspector_id" Type="Int32" />
-          <NavigationProperty Name="Inspector" Relationship="Self.FK_Users_Inspectors" FromRole="Users" ToRole="Inspectors" />
+          <NavigationProperty Name="Inspectors" Relationship="Self.FK_Users_Inspectors" FromRole="Users" ToRole="Inspectors" />
           <NavigationProperty Name="Rolls" Relationship="Self.User_rolls" FromRole="Users" ToRole="Rolls" />
         </EntityType>
         <Association Name="FK_Answers_Questions">
-          <End Role="Questions" Type="Self.Question" Multiplicity="0..1" />
-          <End Role="Answers" Type="Self.Answer" Multiplicity="*" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="0..1" />
+          <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questions">
               <PropertyRef Name="id" />
@@ -746,8 +746,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contactpersons_Clients">
-          <End Role="Clients" Type="Self.Client" Multiplicity="1" />
-          <End Role="Contactpersons" Type="Self.Contactperson" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Clients">
               <PropertyRef Name="id" />
@@ -758,8 +758,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Festivals_Clients">
-          <End Role="Clients" Type="Self.Client" Multiplicity="1" />
-          <End Role="Festivals" Type="Self.Festival" Multiplicity="*" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Festivals" Type="Self.Festivals" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clients">
               <PropertyRef Name="id" />
@@ -770,8 +770,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Quotations_Clients">
-          <End Role="Clients" Type="Self.Client" Multiplicity="1" />
-          <End Role="Quotations" Type="Self.Quotation" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Quotations" Type="Self.Quotations" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Clients">
               <PropertyRef Name="id" />
@@ -782,8 +782,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contactpersons_Festivals">
-          <End Role="Festivals" Type="Self.Festival" Multiplicity="0..1" />
-          <End Role="Contactpersons" Type="Self.Contactperson" Multiplicity="*" />
+          <End Role="Festivals" Type="Self.Festivals" Multiplicity="0..1" />
+          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Festivals">
               <PropertyRef Name="id" />
@@ -795,7 +795,7 @@
         </Association>
         <Association Name="FK_Contactpersons_Type_contacts">
           <End Role="Type_contacts" Type="Self.Type_contacts" Multiplicity="1" />
-          <End Role="Contactpersons" Type="Self.Contactperson" Multiplicity="*" />
+          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Type_contacts">
               <PropertyRef Name="id" />
@@ -806,8 +806,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Festivals_Municipalities">
-          <End Role="Municipalities" Type="Self.Municipality" Multiplicity="1" />
-          <End Role="Festivals" Type="Self.Festival" Multiplicity="*" />
+          <End Role="Municipalities" Type="Self.Municipalities" Multiplicity="1" />
+          <End Role="Festivals" Type="Self.Festivals" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Municipalities">
               <PropertyRef Name="id" />
@@ -818,8 +818,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Inspections_Festivals">
-          <End Role="Festivals" Type="Self.Festival" Multiplicity="1" />
-          <End Role="Inspections" Type="Self.Inspection" Multiplicity="*" />
+          <End Role="Festivals" Type="Self.Festivals" Multiplicity="1" />
+          <End Role="Inspections" Type="Self.Inspections" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Festivals">
               <PropertyRef Name="id" />
@@ -830,7 +830,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Inspectors_at_inspection_Inspections">
-          <End Role="Inspections" Type="Self.Inspection" Multiplicity="1" />
+          <End Role="Inspections" Type="Self.Inspections" Multiplicity="1" />
           <End Role="Inspectors_at_inspection" Type="Self.Inspectors_at_inspection" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inspections">
@@ -842,7 +842,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Inspectors_at_inspection_Inspectors">
-          <End Role="Inspectors" Type="Self.Inspector" Multiplicity="1" />
+          <End Role="Inspectors" Type="Self.Inspectors" Multiplicity="1" />
           <End Role="Inspectors_at_inspection" Type="Self.Inspectors_at_inspection" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inspectors">
@@ -854,7 +854,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Inspectors_availability_Inspectors">
-          <End Role="Inspectors" Type="Self.Inspector" Multiplicity="1">
+          <End Role="Inspectors" Type="Self.Inspectors" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="Inspectors_availability" Type="Self.Inspectors_availability" Multiplicity="*" />
@@ -868,8 +868,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Users_Inspectors">
-          <End Role="Inspectors" Type="Self.Inspector" Multiplicity="0..1" />
-          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <End Role="Inspectors" Type="Self.Inspectors" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inspectors">
               <PropertyRef Name="id" />
@@ -881,7 +881,7 @@
         </Association>
         <Association Name="FK_Questionnaires_Inspectors_at_inspection">
           <End Role="Inspectors_at_inspection" Type="Self.Inspectors_at_inspection" Multiplicity="1" />
-          <End Role="Questionnaires" Type="Self.Questionnaire" Multiplicity="*" />
+          <End Role="Questionnaires" Type="Self.Questionnaires" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inspectors_at_inspection">
               <PropertyRef Name="inpector_id" />
@@ -894,8 +894,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Laws_Municipalities">
-          <End Role="Municipalities" Type="Self.Municipality" Multiplicity="1" />
-          <End Role="Laws" Type="Self.Law" Multiplicity="*" />
+          <End Role="Municipalities" Type="Self.Municipalities" Multiplicity="1" />
+          <End Role="Laws" Type="Self.Laws" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Municipalities">
               <PropertyRef Name="id" />
@@ -906,7 +906,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Possible_answer_Questions">
-          <End Role="Questions" Type="Self.Question" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
           <End Role="Possible_answer" Type="Self.Possible_answer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questions">
@@ -918,8 +918,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Questions_Questionnaires">
-          <End Role="Questionnaires" Type="Self.Questionnaire" Multiplicity="1" />
-          <End Role="Questions" Type="Self.Question" Multiplicity="*" />
+          <End Role="Questionnaires" Type="Self.Questionnaires" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questionnaires">
               <PropertyRef Name="id" />
@@ -931,7 +931,7 @@
         </Association>
         <Association Name="FK_Questions_Type_questions">
           <End Role="Type_questions" Type="Self.Type_questions" Multiplicity="1" />
-          <End Role="Questions" Type="Self.Question" Multiplicity="*" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Type_questions">
               <PropertyRef Name="id" />
@@ -942,28 +942,28 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="User_rolls">
-          <End Role="Rolls" Type="Self.Roll" Multiplicity="*" />
-          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <End Role="Rolls" Type="Self.Rolls" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="FestispecEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Answers" EntityType="Self.Answer" />
-          <EntitySet Name="Clients" EntityType="Self.Client" />
-          <EntitySet Name="Contactpersons" EntityType="Self.Contactperson" />
-          <EntitySet Name="Festivals" EntityType="Self.Festival" />
-          <EntitySet Name="Inspections" EntityType="Self.Inspection" />
-          <EntitySet Name="Inspectors" EntityType="Self.Inspector" />
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Answers" EntityType="Self.Answers" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Contactpersons" EntityType="Self.Contactpersons" />
+          <EntitySet Name="Festivals" EntityType="Self.Festivals" />
+          <EntitySet Name="Inspections" EntityType="Self.Inspections" />
+          <EntitySet Name="Inspectors" EntityType="Self.Inspectors" />
           <EntitySet Name="Inspectors_at_inspection" EntityType="Self.Inspectors_at_inspection" />
           <EntitySet Name="Inspectors_availability" EntityType="Self.Inspectors_availability" />
-          <EntitySet Name="Laws" EntityType="Self.Law" />
-          <EntitySet Name="Municipalities" EntityType="Self.Municipality" />
+          <EntitySet Name="Laws" EntityType="Self.Laws" />
+          <EntitySet Name="Municipalities" EntityType="Self.Municipalities" />
           <EntitySet Name="Possible_answer" EntityType="Self.Possible_answer" />
-          <EntitySet Name="Questionnaires" EntityType="Self.Questionnaire" />
-          <EntitySet Name="Questions" EntityType="Self.Question" />
-          <EntitySet Name="Quotations" EntityType="Self.Quotation" />
-          <EntitySet Name="Rolls" EntityType="Self.Roll" />
+          <EntitySet Name="Questionnaires" EntityType="Self.Questionnaires" />
+          <EntitySet Name="Questions" EntityType="Self.Questions" />
+          <EntitySet Name="Quotations" EntityType="Self.Quotations" />
+          <EntitySet Name="Rolls" EntityType="Self.Rolls" />
           <EntitySet Name="Type_contacts" EntityType="Self.Type_contacts" />
           <EntitySet Name="Type_questions" EntityType="Self.Type_questions" />
-          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
           <AssociationSet Name="FK_Answers_Questions" Association="Self.FK_Answers_Questions">
             <End Role="Questions" EntitySet="Questions" />
             <End Role="Answers" EntitySet="Answers" />
@@ -1042,18 +1042,18 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FestispecModelStoreContainer" CdmEntityContainer="FestispecEntities">
+        <EntityContainerMapping StorageEntityContainer="FestispecModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Answers">
-            <EntityTypeMapping TypeName="FestispecModel.Answer">
+            <EntityTypeMapping TypeName="FestispecModel.Answers">
               <MappingFragment StoreEntitySet="Answers">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="answer1" ColumnName="answer" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
                 <ScalarProperty Name="question_id" ColumnName="question_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Clients">
-            <EntityTypeMapping TypeName="FestispecModel.Client">
+            <EntityTypeMapping TypeName="FestispecModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1066,7 +1066,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Contactpersons">
-            <EntityTypeMapping TypeName="FestispecModel.Contactperson">
+            <EntityTypeMapping TypeName="FestispecModel.Contactpersons">
               <MappingFragment StoreEntitySet="Contactpersons">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1080,7 +1080,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Festivals">
-            <EntityTypeMapping TypeName="FestispecModel.Festival">
+            <EntityTypeMapping TypeName="FestispecModel.Festivals">
               <MappingFragment StoreEntitySet="Festivals">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1098,7 +1098,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Inspections">
-            <EntityTypeMapping TypeName="FestispecModel.Inspection">
+            <EntityTypeMapping TypeName="FestispecModel.Inspections">
               <MappingFragment StoreEntitySet="Inspections">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="description" ColumnName="description" />
@@ -1110,7 +1110,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Inspectors">
-            <EntityTypeMapping TypeName="FestispecModel.Inspector">
+            <EntityTypeMapping TypeName="FestispecModel.Inspectors">
               <MappingFragment StoreEntitySet="Inspectors">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1144,7 +1144,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Laws">
-            <EntityTypeMapping TypeName="FestispecModel.Law">
+            <EntityTypeMapping TypeName="FestispecModel.Laws">
               <MappingFragment StoreEntitySet="Laws">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="municipality_id" ColumnName="municipality_id" />
@@ -1155,7 +1155,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Municipalities">
-            <EntityTypeMapping TypeName="FestispecModel.Municipality">
+            <EntityTypeMapping TypeName="FestispecModel.Municipalities">
               <MappingFragment StoreEntitySet="Municipalities">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1172,7 +1172,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Questionnaires">
-            <EntityTypeMapping TypeName="FestispecModel.Questionnaire">
+            <EntityTypeMapping TypeName="FestispecModel.Questionnaires">
               <MappingFragment StoreEntitySet="Questionnaires">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="version" ColumnName="version" />
@@ -1182,17 +1182,17 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Questions">
-            <EntityTypeMapping TypeName="FestispecModel.Question">
+            <EntityTypeMapping TypeName="FestispecModel.Questions">
               <MappingFragment StoreEntitySet="Questions">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="question1" ColumnName="question" />
+                <ScalarProperty Name="question" ColumnName="question" />
                 <ScalarProperty Name="type_question" ColumnName="type_question" />
                 <ScalarProperty Name="questionnaire_id" ColumnName="questionnaire_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Quotations">
-            <EntityTypeMapping TypeName="FestispecModel.Quotation">
+            <EntityTypeMapping TypeName="FestispecModel.Quotations">
               <MappingFragment StoreEntitySet="Quotations">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="price" ColumnName="price" />
@@ -1202,7 +1202,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rolls">
-            <EntityTypeMapping TypeName="FestispecModel.Roll">
+            <EntityTypeMapping TypeName="FestispecModel.Rolls">
               <MappingFragment StoreEntitySet="Rolls">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="role" ColumnName="role" />
@@ -1226,7 +1226,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="FestispecModel.User">
+            <EntityTypeMapping TypeName="FestispecModel.Users">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="email" ColumnName="email" />
@@ -1257,7 +1257,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
