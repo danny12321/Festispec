@@ -78,6 +78,7 @@
     </ApplicationDefinition>
     <Compile Include="ViewModel\Festival VMs\AddFestivalVM.cs" />
     <Compile Include="ViewModel\Festival VMs\FestivalManagementVM.cs" />
+    <Compile Include="ViewModel\Festival VMs\FestivalVM.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
