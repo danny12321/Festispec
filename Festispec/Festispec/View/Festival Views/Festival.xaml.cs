@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Festispec.View.Festival_Views
 {
     /// <summary>
-    /// Interaction logic for FestivalBeheer.xaml
+    /// Interaction logic for Festival.xaml
     /// </summary>
-    public partial class FestivalBeheer : Page
+    public partial class Festival : Page
     {
-        public FestivalBeheer()
+        public Festival()
         {
             InitializeComponent();
         }

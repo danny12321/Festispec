@@ -1,4 +1,5 @@
 using Festispec.View;
+using Festispec.View.Festival_Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Windows.Controls;
@@ -53,6 +54,10 @@ namespace Festispec.ViewModel
                 case "Schedule":
                     FrameContent = new Schedule();
                     PageTitle = "Planning";
+                    break;
+                case "Festival":
+                    FrameContent = new Festival();
+                    PageTitle = "Festival beheer";
                     break;
                 default:
                     FrameContent = new Home();
