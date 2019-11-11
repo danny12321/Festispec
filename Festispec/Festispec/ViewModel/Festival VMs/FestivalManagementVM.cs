@@ -60,7 +60,7 @@ namespace Festispec.ViewModel.Festival_VMs
                     break;
                     */
                 default:
-                    FrameContent = new Festival();
+                    FrameContent = new Festivals();
                     PageTitle = "Festival beheer";
                     break;
             }

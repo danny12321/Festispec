@@ -99,8 +99,8 @@
     <Compile Include="View\Festival Views\AddFestival.xaml.cs">
       <DependentUpon>AddFestival.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Festival Views\Festival.xaml.cs">
-      <DependentUpon>Festival.xaml</DependentUpon>
+    <Compile Include="View\Festival Views\Festivals.xaml.cs">
+      <DependentUpon>Festivals.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Questionnaires\Open.xaml.cs">
       <DependentUpon>Open.xaml</DependentUpon>
@@ -122,7 +122,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Festival Views\Festival.xaml">
+    <Page Include="View\Festival Views\Festivals.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

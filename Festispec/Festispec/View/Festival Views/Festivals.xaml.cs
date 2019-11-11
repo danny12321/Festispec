@@ -18,9 +18,9 @@ namespace Festispec.View.Festival_Views
     /// <summary>
     /// Interaction logic for Festival.xaml
     /// </summary>
-    public partial class Festival : Page
+    public partial class Festivals : Page
     {
-        public Festival()
+        public Festivals()
         {
             InitializeComponent();
         }

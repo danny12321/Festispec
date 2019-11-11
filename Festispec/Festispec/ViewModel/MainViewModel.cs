@@ -59,7 +59,7 @@ namespace Festispec.ViewModel
                     PageTitle = "Planning";
                     break;
                 case "Festival":
-                    FrameContent = new Festival();
+                    FrameContent = new Festivals();
                     PageTitle = "Festival beheer";
                     break;
                 case "Vragenlijsten TEMP":
