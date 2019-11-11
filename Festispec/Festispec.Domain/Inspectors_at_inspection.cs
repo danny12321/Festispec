@@ -17,16 +17,16 @@ namespace Festispec.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Inspectors_at_inspection()
         {
-            this.Questionnaires = new HashSet<Questionnaire>();
+            this.Questionnaires = new HashSet<Questionnaires>();
         }
     
         public int inpector_id { get; set; }
         public int inspection_id { get; set; }
         public System.DateTime absent { get; set; }
     
-        public virtual Inspection Inspection { get; set; }
-        public virtual Inspector Inspector { get; set; }
+        public virtual Inspections Inspections { get; set; }
+        public virtual Inspectors Inspectors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Questionnaire> Questionnaires { get; set; }
+        public virtual ICollection<Questionnaires> Questionnaires { get; set; }
     }
 }
