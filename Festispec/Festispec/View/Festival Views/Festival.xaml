@@ -7,11 +7,25 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
        DataContext="{Binding Festival, Source={StaticResource Locator}}"
-       Title="Festival beheer">
+       Title="Festival beheer"
+      
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
 
-    <StackPanel>
-        <TextBlock>Dit is Festival beheer</TextBlock>
-    </StackPanel>
-    
-    
+    <Grid>
+        <Button
+    Style="{StaticResource MaterialDesignRaisedButton}"
+    Width="100"
+    ToolTip="Resource name: MaterialDesignRaisedButton">
+            Festival toevoegen
+        </Button>
+    </Grid>
+
+
 </Page>
