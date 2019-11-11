@@ -25,7 +25,7 @@ namespace Festispec.ViewModel.ClientVM
         {
             _main = main;
 
-            using (var context = new Entities())
+            using (var context = new FestispecEntities())
             {
                 var clients = context.Clients.ToList()
                              .Select(client => new ClientsVM(client));
