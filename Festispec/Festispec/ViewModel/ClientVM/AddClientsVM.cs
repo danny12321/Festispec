@@ -25,32 +25,18 @@ namespace Festispec.ViewModel.ClientVM
             this.Client = new ClientsVM();
 
             AddClientCommand = new RelayCommand(AddClientMethod, CanAddClient);
-
         }
 
         private void AddClientMethod()
         {
-            try
-            {
-                _clients.Clients.Add(Client);
+            _clients.Clients.Add(Client);
 
-                using (var context = new FestispecEntities())
-                {
-                    context.Clients.Add(Client.ToModel());
-                    context.SaveChanges();
-                }
-                _clients.ShowClientPage();
-            }
-            catch (DbEntityValidationException ex)
+            using (var context = new FestispecEntities())
             {
-                foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                {
-                    foreach (var validationError in entityValidationErrors.ValidationErrors)
-                    {
-                        Console.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
-                    }
-                }
+                context.Clients.Add(Client.ToModel());
+                context.SaveChanges();
             }
+            _clients.ShowClientPage();
 
         }
 

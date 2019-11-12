@@ -38,7 +38,7 @@
         </Grid>
 
         <!--<DataGrid Margin="0 8 0 0" IsReadOnly="True" SelectedItem="{Binding selectedClients, Mode=TwoWay}" ItemsSource="{Binding Clients}" CanUserSortColumns="True" CanUserAddRows="False" >
-            <DataGridTextColumn Header="Festival" Binding="{Binding Path=ClientName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+            <DataGridTextColumn Header="Festival" Binding="{Binding Clients.ClientName}" Width="*"/>
             <DataGridTemplateColumn Width="50">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>

@@ -22,17 +22,17 @@
                 <TextBlock Text="Voeg een nieuwe klant toe" FontSize="25" Padding="0,10"/>
 
                 <TextBlock Text="Naam:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Clients.ClientName, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="50" Text="{Binding Client.ClientName, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Postcode:"></TextBlock>
-                <TextBox MaxLength="6" Text="{Binding Clients.PostalCode, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="6" Text="{Binding Client.PostalCode, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Straat:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Clients.Street, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="50" Text="{Binding Client.Street, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Huisnummer:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Clients.Housenumber, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="50" Text="{Binding Client.Housenumber, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Land:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Clients.Country, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="50" Text="{Binding Client.Country, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Telefoon nummer(*):"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Clients.Phone, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="50" Text="{Binding Client.Phone, Mode=TwoWay}"></TextBox>
 
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding AddClientCommand}" CommandParameter="{Binding AddClientCommand}"
