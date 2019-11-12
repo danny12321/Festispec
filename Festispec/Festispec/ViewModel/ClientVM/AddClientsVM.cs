@@ -29,9 +29,10 @@ namespace Festispec.ViewModel.ClientVM
 
         private void AddClientMethod()
         {
-            _clients.Clients.Add(Client);
             if (IsMatch())
             {
+                _clients.Clients.Add(Client);
+
                 using (var context = new FestispecEntities())
                 {
                     context.Clients.Add(Client.ToModel());
