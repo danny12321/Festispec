@@ -12,18 +12,14 @@ namespace Festispec.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Roll
+    public partial class Laws
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Roll()
-        {
-            this.Users = new HashSet<User>();
-        }
-    
         public int id { get; set; }
-        public string role { get; set; }
+        public int municipality_id { get; set; }
+        public string name { get; set; }
+        public string website { get; set; }
+        public string description { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
+        public virtual Municipalities Municipalities { get; set; }
     }
 }

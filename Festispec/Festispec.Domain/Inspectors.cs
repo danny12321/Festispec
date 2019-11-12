@@ -12,33 +12,31 @@ namespace Festispec.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Festival
+    public partial class Inspectors
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Festival()
+        public Inspectors()
         {
-            this.Contactpersons = new HashSet<Contactperson>();
-            this.Inspections = new HashSet<Inspection>();
+            this.Inspectors_at_inspection = new HashSet<Inspectors_at_inspection>();
+            this.Inspectors_availability = new HashSet<Inspectors_availability>();
+            this.Users = new HashSet<Users>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
+        public string lastname { get; set; }
+        public System.DateTime birthday { get; set; }
         public string postalcode { get; set; }
         public string street { get; set; }
         public string housenumber { get; set; }
-        public string country { get; set; }
-        public System.DateTime start_date { get; set; }
-        public System.DateTime end_date { get; set; }
-        public int client_id { get; set; }
-        public int municipality_id { get; set; }
-        public double latitude { get; set; }
-        public double longitude { get; set; }
+        public string phone { get; set; }
+        public System.DateTime active { get; set; }
     
-        public virtual Client Client { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contactperson> Contactpersons { get; set; }
-        public virtual Municipality Municipality { get; set; }
+        public virtual ICollection<Inspectors_at_inspection> Inspectors_at_inspection { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inspection> Inspections { get; set; }
+        public virtual ICollection<Inspectors_availability> Inspectors_availability { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Users> Users { get; set; }
     }
 }

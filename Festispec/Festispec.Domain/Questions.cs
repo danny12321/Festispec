@@ -12,23 +12,25 @@ namespace Festispec.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Inspection
+    public partial class Questions
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Inspection()
+        public Questions()
         {
-            this.Inspectors_at_inspection = new HashSet<Inspectors_at_inspection>();
+            this.Answers = new HashSet<Answers>();
+            this.Possible_answer = new HashSet<Possible_answer>();
         }
     
         public int id { get; set; }
-        public string description { get; set; }
-        public System.DateTime start_date { get; set; }
-        public System.DateTime end_date { get; set; }
-        public Nullable<System.DateTime> finished { get; set; }
-        public int festival_id { get; set; }
+        public string question { get; set; }
+        public int type_question { get; set; }
+        public int questionnaire_id { get; set; }
     
-        public virtual Festival Festival { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inspectors_at_inspection> Inspectors_at_inspection { get; set; }
+        public virtual ICollection<Answers> Answers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Possible_answer> Possible_answer { get; set; }
+        public virtual Questionnaires Questionnaires { get; set; }
+        public virtual Type_questions Type_questions { get; set; }
     }
 }

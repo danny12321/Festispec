@@ -12,13 +12,12 @@ namespace Festispec.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Quotation
+    public partial class Answers
     {
         public int id { get; set; }
-        public Nullable<decimal> price { get; set; }
-        public System.DateTime approved { get; set; }
-        public int client_id { get; set; }
+        public string answer { get; set; }
+        public Nullable<int> question_id { get; set; }
     
-        public virtual Client Client { get; set; }
+        public virtual Questions Questions { get; set; }
     }
 }

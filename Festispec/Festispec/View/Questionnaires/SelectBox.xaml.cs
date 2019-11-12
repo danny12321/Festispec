@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec
+namespace Festispec.View.Questionnaires
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SelectBox.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SelectBox : Page
     {
-        public MainWindow()
+        public SelectBox()
         {
             InitializeComponent();
         }

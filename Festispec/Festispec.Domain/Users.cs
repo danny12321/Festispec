@@ -12,21 +12,21 @@ namespace Festispec.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Municipality
+    public partial class Users
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Municipality()
+        public Users()
         {
-            this.Festivals = new HashSet<Festival>();
-            this.Laws = new HashSet<Law>();
+            this.Rolls = new HashSet<Rolls>();
         }
     
         public int id { get; set; }
-        public string name { get; set; }
+        public string email { get; set; }
+        public string password { get; set; }
+        public Nullable<int> inspector_id { get; set; }
     
+        public virtual Inspectors Inspectors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Festival> Festivals { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Law> Laws { get; set; }
+        public virtual ICollection<Rolls> Rolls { get; set; }
     }
 }

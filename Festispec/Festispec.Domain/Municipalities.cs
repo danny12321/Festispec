@@ -12,25 +12,21 @@ namespace Festispec.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Question
+    public partial class Municipalities
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Question()
+        public Municipalities()
         {
-            this.Answers = new HashSet<Answer>();
-            this.Possible_answer = new HashSet<Possible_answer>();
+            this.Festivals = new HashSet<Festivals>();
+            this.Laws = new HashSet<Laws>();
         }
     
         public int id { get; set; }
-        public string question1 { get; set; }
-        public int type_question { get; set; }
-        public int questionnaire_id { get; set; }
+        public string name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Answer> Answers { get; set; }
+        public virtual ICollection<Festivals> Festivals { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Possible_answer> Possible_answer { get; set; }
-        public virtual Questionnaire Questionnaire { get; set; }
-        public virtual Type_questions Type_questions { get; set; }
+        public virtual ICollection<Laws> Laws { get; set; }
     }
 }
