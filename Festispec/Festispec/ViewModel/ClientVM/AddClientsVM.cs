@@ -30,20 +30,74 @@ namespace Festispec.ViewModel.ClientVM
         private void AddClientMethod()
         {
             _clients.Clients.Add(Client);
-
-            using (var context = new FestispecEntities())
+            if (IsMatch())
             {
-                context.Clients.Add(Client.ToModel());
-                context.SaveChanges();
+                using (var context = new FestispecEntities())
+                {
+                    context.Clients.Add(Client.ToModel());
+                    context.SaveChanges();
+                }
+                _clients.ShowClientPage();
             }
-            _clients.ShowClientPage();
-
         }
 
         public bool CanAddClient()
         {
             return true;
         }
+        
+        private bool IsMatch()
+        {
+            if (IsLetter(Client.ClientName) && IsLetterNumber(Client.PostalCode) && IsLetter(Client.Street) && IsNumber(Client.Housenumber) && IsLetter(Client.Country) && IsNumber(Client.Phone))
+            {
+                return true;
+            }
+            return false;
+        }
 
+        private bool IsLetter(string input)
+        {
+            if (!IsEmptyField(input))
+            {
+                if (Regex.IsMatch(input, @"^^(?! )[A-Za-z\s]+$"))
+                {
+                    return true;
+                }
+            }         
+            return false;
+        }
+        
+        private bool IsNumber(string input)
+        {
+            if (!IsEmptyField(input))
+            {
+                if (Regex.IsMatch(input, @"^^(?! )[0-9\s]+$"))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool IsLetterNumber(string input)
+        {
+            if (!IsEmptyField(input))
+            {
+                if (Regex.IsMatch(input, @"^^(?! )[A-Za-z0-9\s]+$"))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool IsEmptyField(string input)
+        {
+            if(string.IsNullOrEmpty(input))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
