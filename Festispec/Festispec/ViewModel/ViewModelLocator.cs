@@ -10,6 +10,8 @@ namespace Festispec.ViewModel
 
     public class ViewModelLocator
     {
+        private ClientManageVM _clientManageVM;
+
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
@@ -46,7 +48,20 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new ClientManageVM(Main);
+                if(_clientManageVM == null)
+                {
+                    _clientManageVM = new ClientManageVM(Main);
+                }
+
+                return _clientManageVM;
+            }
+        }
+
+        public AddClientsVM addclient
+        {
+            get
+            {
+                return new AddClientsVM(client);
             }
         }
         

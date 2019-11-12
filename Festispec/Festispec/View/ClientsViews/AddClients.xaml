@@ -7,7 +7,8 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddClients"
-      Background="White">
+      Background="White"
+      DataContext="{Binding addclient, Source={StaticResource Locator}}">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,29 +21,27 @@
 
                 <TextBlock Text="Voeg een nieuwe klant toe" FontSize="25" Padding="0,10"/>
 
-                <TextBlock Text="Klant id:"></TextBlock>
-                <TextBox MaxLength="10" IsReadOnly="True" Text="{Binding Clients.ClientID}"></TextBox>
                 <TextBlock Text="Naam:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Path=Clients.ClientName, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="50" Text="{Binding Clients.ClientName, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Postcode:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Path=Clients.PostalCode, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="6" Text="{Binding Clients.PostalCode, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Straat:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Path=Clients.Street, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="50" Text="{Binding Clients.Street, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Huisnummer:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Path=Clients.Housenumber, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="50" Text="{Binding Clients.Housenumber, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Land:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Path=Clients.Country, Mode=TwoWay}"></TextBox>
-                <TextBlock Text="Telefoon nummer:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Path=Clients.Phone, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="50" Text="{Binding Clients.Country, Mode=TwoWay}"></TextBox>
+                <TextBlock Text="Telefoon nummer(*):"></TextBlock>
+                <TextBox MaxLength="50" Text="{Binding Clients.Phone, Mode=TwoWay}"></TextBox>
 
                 <Border Padding="10">
-                    <Button HorizontalAlignment="Right" Command="{Binding saveClient}"
+                    <Button HorizontalAlignment="Right" Command="{Binding AddClientCommand}" CommandParameter="{Binding AddClientCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="100"
                     ToolTip="Resource name: MaterialDesignRaisedButton">
                         Save
                     </Button>
-                </Border>
+                </Border>   
 
             </StackPanel>
         </Border>

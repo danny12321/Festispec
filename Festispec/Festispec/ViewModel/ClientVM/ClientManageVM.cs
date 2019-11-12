@@ -40,5 +40,10 @@ namespace Festispec.ViewModel.ClientVM
         {
             _main.SetPage("AddClient");
         }
+
+        public void ShowClientPage()
+        {
+            _main.SetPage("Clients");
+        }
     }
 }

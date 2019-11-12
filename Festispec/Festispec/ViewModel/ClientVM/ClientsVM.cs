@@ -16,6 +16,11 @@ namespace Festispec.ViewModel.ClientVM
             this._client = client;
         }
 
+        public ClientsVM()
+        {
+            this._client = new Clients();
+        }
+
         public int ClientId
         {
             get { return _client.id; }
