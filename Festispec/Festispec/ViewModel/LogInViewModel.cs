@@ -1,4 +1,5 @@
-﻿using Festispec.View;
+﻿using Festispec.Domain;
+using Festispec.View;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,15 @@ namespace Festispec.ViewModel
         public LoginViewModel()
         {
             LoginCommand = new RelayCommand<Window>(Login);
+
+
+            using (var context = new FestispecEntities())
+            {
+                // Cheating for performance
+                // Startup is slow now..
+                context.Questions.ToList();
+                context.Type_questions.ToList();
+            }
         }
 
         private void Login(Window window)

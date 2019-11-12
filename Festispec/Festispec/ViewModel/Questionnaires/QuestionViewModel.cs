@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Festispec.Domain;
+using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace Festispec.ViewModel.Questionnaires
     {
         private QuestionnairesViewModel Questionnaires;
 
+        private Questions _question;
+
         public int Id { get; private set; }
 
         private string _type;
@@ -21,16 +24,38 @@ namespace Festispec.ViewModel.Questionnaires
             set
             {
                 _type = value;
-
-                if (Questionnaires.SelectedQuestion?.Id == Id)
-                    Questionnaires.SetQuestionContent();
+                Questionnaires.SetQuestionContent();
             }
+        }
+
+        public string Question
+        {
+            get
+            {
+                return _question.question;
+            }
+            set
+            {
+                _question.question = value;
+            }
+        }
+
+        public QuestionViewModel(QuestionnairesViewModel questionnaires, Questions q)
+        {
+            Questionnaires = questionnaires;
+            _question = q;
+
         }
 
         public QuestionViewModel(QuestionnairesViewModel questionnaires)
         {
             Questionnaires = questionnaires;
-            Type = "Open";
+            _question = new Questions() { question = "Nieuwe vraag", type_question = 1 };
+        }
+
+        internal Questions ToModel()
+        {
+            return _question;
         }
     }
 }

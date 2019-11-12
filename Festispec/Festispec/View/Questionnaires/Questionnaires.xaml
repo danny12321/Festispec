@@ -42,15 +42,15 @@
 
         <!-- Selected Question -->
         <Border Grid.Column="1" Padding="20">
-            <StackPanel Grid.Column="1">
-                <TextBox FontSize="25">Hoe schoon is het Terein</TextBox>
+            <StackPanel Grid.Column="1" Visibility="{Binding GetVisibility}">
+                <TextBox FontSize="25" Text="{Binding SelectedQuestion.Question}"></TextBox>
 
                 <TextBlock>Type vraag</TextBlock>
 
-                <ComboBox ItemsSource="{Binding Path=QuestionTypes}"
+                <ComboBox ItemsSource="{Binding QuestionTypes}"
                   DisplayMemberPath="Type"
                   SelectedValuePath="Type"
-                  SelectedValue="{Binding Path=SelectedQuestion.Type}" />
+                  SelectedValue="{Binding SelectedQuestion.Type}" />
 
                 <Frame Content="{Binding QuestionContent}" NavigationUIVisibility="Hidden"></Frame>
 

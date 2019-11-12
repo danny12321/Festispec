@@ -1,4 +1,5 @@
-﻿using Festispec.View.Questionnaires;
+﻿using Festispec.Domain;
+using Festispec.View.Questionnaires;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -30,7 +31,27 @@ namespace Festispec.ViewModel.Questionnaires
             }
         }
 
-        public QuestionViewModel SelectedQuestion { get; set; }
+        private QuestionViewModel _selectedQuestion;
+
+        public QuestionViewModel SelectedQuestion
+        {
+            get { return _selectedQuestion; }
+            set
+            {
+                _selectedQuestion = value;
+                RaisePropertyChanged("SelectedQuestion");
+                RaisePropertyChanged("GetVisibility");
+            }
+        }
+
+        public string GetVisibility
+        {
+            get
+            {
+                if (SelectedQuestion == null) return "Hidden";
+                else return "Visible";
+            }
+        }
 
         public ICommand SelectQuestionCommand { get; set; }
 
@@ -41,18 +62,18 @@ namespace Festispec.ViewModel.Questionnaires
             SelectQuestionCommand = new RelayCommand<int>(SelectQuestion);
             AddQuestionCommand = new RelayCommand(AddQuestion);
 
+            using (var context = new FestispecEntities())
+            {
+                var questions = context.Questions.ToList()
+                    .Select(q => new QuestionViewModel(this, q));
 
-            Questions = new ObservableCollection<QuestionViewModel>();
+                Questions = new ObservableCollection<QuestionViewModel>(questions);
 
-            Questions.Add(new QuestionViewModel(this));
-            Questions.Add(new QuestionViewModel(this));
-            Questions.Add(new QuestionViewModel(this));
+                var questionTypes = context.Type_questions.ToList()
+                    .Select(qt => new QuestionTypeViewModel(qt));
 
-
-            QuestionTypes = new ObservableCollection<QuestionTypeViewModel>();
-
-            QuestionTypes.Add(new QuestionTypeViewModel() { Type = "ComboBox" });
-            QuestionTypes.Add(new QuestionTypeViewModel() { Type = "Open" });
+                QuestionTypes = new ObservableCollection<QuestionTypeViewModel>(questionTypes);
+            }
         }
 
         private void SelectQuestion(int id)
@@ -69,11 +90,11 @@ namespace Festispec.ViewModel.Questionnaires
         private void AddQuestion()
         {
             SelectedQuestion = new QuestionViewModel(this);
+            SetQuestionContent();
         }
 
         public void SetQuestionContent()
         {
-            Console.WriteLine("Set content");
 
             switch (SelectedQuestion.Type)
             {
