@@ -61,6 +61,10 @@ namespace Festispec.ViewModel
                     FrameContent = new View.Questionnaires.Questionnaires();
                     PageTitle = "Vragenlijsten";
                     break;
+                case "Gemeente":
+                    FrameContent = new View.Municipality.Municipality();
+                    PageTitle = "Gemeenten Wetten";
+                    break;
                 default:
                     FrameContent = new Home();
                     PageTitle = "Home";

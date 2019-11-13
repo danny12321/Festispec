@@ -92,10 +92,18 @@
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\Municipality\MunicipalityViewModel.cs" />
+    <Compile Include="ViewModel\PopUpViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionnairesViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionTypeViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\Municipality\Municipality.xaml.cs">
+      <DependentUpon>Municipality.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PopUpWindow.xaml.cs">
+      <DependentUpon>PopUpWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Questionnaires\Open.xaml.cs">
       <DependentUpon>Open.xaml</DependentUpon>
     </Compile>
@@ -134,6 +142,14 @@
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Municipality\Municipality.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PopUpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Questionnaires\Open.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,9 +185,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Content Include="connections.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

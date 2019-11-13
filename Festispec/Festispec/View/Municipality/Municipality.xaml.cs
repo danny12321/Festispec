@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec.View
+namespace Festispec.View.Municipality
 {
     /// <summary>
-    /// Interaction logic for PopUp.xaml
+    /// Interaction logic for Municipality.xaml
     /// </summary>
-    public partial class PopUpWindow : Window
+    public partial class Municipality : Page
     {
-        public PopUpWindow()
+        public Municipality()
         {
             InitializeComponent();
         }

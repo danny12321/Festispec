@@ -8,6 +8,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Festispec.ViewModel
@@ -44,7 +46,7 @@ namespace Festispec.ViewModel
 
         public LoginViewModel()
         {
-            LoginCommand = new RelayCommand<Window>(Login);
+            LoginCommand = new RelayCommand<object>(Login);
         }
 
         /*
@@ -52,34 +54,33 @@ namespace Festispec.ViewModel
          *  Inlog email checken DB
          *  Password checken DB
          *  Standard User by _isChecked == true
-            */
-        private void Login(Window window)
+        */
+
+        private void Login(object obj)
         {
-            
+            PasswordBox pwBox = obj as PasswordBox;
+            Console.WriteLine(pwBox.Password.ToString());
+
             if (_isChecked == false)
             {
                 if (String.IsNullOrEmpty(Email) == false)
                 {
-                    Console.WriteLine($"Login {Email} {Password}");
+                    //Console.WriteLine($"Login {Email} {Password}");
                     new BaseWindow().Show();
-                    if (window != null)
-                        window.Close();
+                    Application.Current.Windows[0].Close();
                 }
 
                 else
                 {
-                    Console.WriteLine("else");
                     new PopUpWindow().Show();
                 }
             }
             else
             {
                 new BaseWindow().Show();
-                if (window != null)
-                    window.Close();
+                Application.Current.Windows[0].Close();
             }
   
         }
-
     }
 }

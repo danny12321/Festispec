@@ -36,7 +36,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<PopUpViewModel>();
+                return new PopUpViewModel();
             }
         }
 
