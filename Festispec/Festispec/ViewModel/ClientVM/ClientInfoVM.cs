@@ -15,6 +15,7 @@ namespace Festispec.ViewModel.ClientVM
     public class ClientInfoVM
     {
         private IDataService _service;
+        private ClientManageVM _clients;
 
         public ICommand EditClientCommand { get; set; }
 
@@ -23,9 +24,10 @@ namespace Festispec.ViewModel.ClientVM
             get { return _service.SelectedClient; }
         }
 
-        public ClientInfoVM(IDataService service)
+        public ClientInfoVM(IDataService service, ClientManageVM clients)
         {
             _service = service;
+            this._clients = clients;
             EditClientCommand = new RelayCommand(SaveClient, CanSaveClient);
         }
 
@@ -45,6 +47,7 @@ namespace Festispec.ViewModel.ClientVM
                 context.Entry(SelectedClient.ToModel()).State = EntityState.Modified;
                 context.SaveChanges();
             }
+            _clients.ShowClientPage();
         }
 
         private bool IsMatch()

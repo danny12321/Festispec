@@ -71,7 +71,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new ClientInfoVM(ServiceLocator.Current.GetInstance<IDataService>());
+                return new ClientInfoVM(ServiceLocator.Current.GetInstance<IDataService>(), _clientManageVM);
             }
         }
         
