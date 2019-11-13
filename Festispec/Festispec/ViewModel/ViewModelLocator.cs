@@ -8,10 +8,11 @@ namespace Festispec.ViewModel
 
     public class ViewModelLocator
     {
+        private InspectorsVM.InspectorListViewModel _inspectors;
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
+            _inspectors = new InspectorsVM.InspectorListViewModel();
 
             SimpleIoc.Default.Register<MainViewModel>();
         }
@@ -39,11 +40,11 @@ namespace Festispec.ViewModel
                 return new QuestionnairesViewModel();
             }
         }
-        public InspectorsVM.InspectorListViewModel Inspectors
+        public InspectorsVM.InspectorListViewModel InspectorsVM
         {
             get
             {
-                return new InspectorsVM.InspectorListViewModel();
+                return _inspectors;
             }
         }
         public static void Cleanup()

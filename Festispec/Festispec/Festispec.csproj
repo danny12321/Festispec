@@ -87,15 +87,24 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\HomeViewModel.cs" />
-    <Compile Include="ViewModel\Inspectors\InspectorViewModel.cs" />
+    <Compile Include="ViewModel\InspectorsVM\AddInspectorViewModel.cs" />
+    <Compile Include="ViewModel\InspectorsVM\EditInspectorViewModel.cs" />
+    <Compile Include="ViewModel\InspectorsVM\InspectorListViewModel.cs" />
+    <Compile Include="ViewModel\InspectorsVM\InspectorviewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionnairesViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionTypeViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="View\Inspector.xaml.cs">
-      <DependentUpon>Inspector.xaml</DependentUpon>
+    <Compile Include="View\Inspectors\AddInspector.xaml.cs">
+      <DependentUpon>AddInspector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Inspectors\EditInspector.xaml.cs">
+      <DependentUpon>EditInspector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Inspectors\Inspectors.xaml.cs">
+      <DependentUpon>Inspectors.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Questionnaires\Open.xaml.cs">
       <DependentUpon>Open.xaml</DependentUpon>
@@ -117,7 +126,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Inspector.xaml">
+    <Page Include="View\Inspectors\AddInspector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspectors\EditInspector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspectors\Inspectors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -174,7 +191,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="connections.config" />
+    <Content Include="connections.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -190,6 +209,7 @@
       <Name>Festispec.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
