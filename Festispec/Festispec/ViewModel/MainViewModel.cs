@@ -74,6 +74,18 @@ namespace Festispec.ViewModel
                     FrameContent = new View.ClientsViews.AddClients();
                     PageTitle = "Klanten toevoegen";
                     break;
+                case "Inspectors":
+                    FrameContent = new View.Inspectors.Inspectors();
+                    PageTitle = "Inspecteurs beheer";
+                    break;
+                case "AddInspector":
+                    FrameContent = new View.Inspectors.AddInspector();
+                    PageTitle = "Inspecteur Toevoegen";
+                    break;
+                case "EditInspector":
+                    FrameContent = new View.Inspectors.EditInspector();
+                    PageTitle = "Inspecteur bewerken";
+                    break;
                 default:
                     FrameContent = new Home();
                     PageTitle = "Home";

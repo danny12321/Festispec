@@ -14,7 +14,7 @@ namespace Festispec.ViewModel
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-            _inspectors = new InspectorsVM.InspectorListViewModel();
+            
 
             SimpleIoc.Default.Register<MainViewModel>();
         }
@@ -43,26 +43,7 @@ namespace Festispec.ViewModel
             }
         }
 
-        public ClientManageVM client
-        {
-            get
-            {
-                if(_clientManageVM == null)
-                {
-                    _clientManageVM = new ClientManageVM(Main);
-                }
 
-                return _clientManageVM;
-            }
-        }
-
-        public AddClientsVM addclient
-        {
-            get
-            {
-                return new AddClientsVM(_clientManageVM);
-            }
-        }
         
         public QuestionnairesViewModel Questionnaires
         {
@@ -75,7 +56,24 @@ namespace Festispec.ViewModel
         {
             get
             {
+                _inspectors = new InspectorsVM.InspectorListViewModel(Main);
                 return _inspectors;
+            }
+        }
+        public InspectorsVM.AddInspectorViewModel AddInspector
+        {
+            get
+            {
+                
+                return new ViewModel.InspectorsVM.AddInspectorViewModel(_inspectors);
+            }
+        }
+        public InspectorsVM.EditInspectorViewModel EditInspector
+        {
+            get
+            {
+
+                return new ViewModel.InspectorsVM.EditInspectorViewModel(_inspectors);
             }
         }
         public static void Cleanup()

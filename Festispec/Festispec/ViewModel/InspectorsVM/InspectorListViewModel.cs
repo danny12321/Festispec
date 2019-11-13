@@ -1,11 +1,13 @@
 ﻿using Festispec.Domain;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Festispec.ViewModel.InspectorsVM
 {
@@ -13,6 +15,10 @@ namespace Festispec.ViewModel.InspectorsVM
     {
         public ObservableCollection<InspectorviewModel> Inspectors { get; set; }
         private InspectorviewModel _selectedInspector;
+        private MainViewModel _mainViewModel;
+        public ICommand ShowAddInspector { get; set; }
+        public ICommand ShowEditInspector { get; set; }
+
         public InspectorviewModel SelectedInspector
         {
             get
@@ -25,8 +31,11 @@ namespace Festispec.ViewModel.InspectorsVM
                 base.RaisePropertyChanged();
             }
         }
-        public InspectorListViewModel()
+        public InspectorListViewModel(MainViewModel main)
         {
+            _mainViewModel = main;
+            ShowAddInspector = new RelayCommand(AddInspector);
+            ShowEditInspector = new RelayCommand(EditInspector);
             using (var context = new FestispecEntities())
             {
 
@@ -38,5 +47,18 @@ namespace Festispec.ViewModel.InspectorsVM
 
             }
         }
+        public void ShowInspectorPage()
+        {
+            _mainViewModel.SetPage("Inspectors");
+        }
+        public void AddInspector()
+        {
+            _mainViewModel.SetPage("AddInspector");
+        }
+        public void EditInspector()
+        {
+            _mainViewModel.SetPage("EditInspector");
+        }
+
     }
 }
