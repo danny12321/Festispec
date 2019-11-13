@@ -49,7 +49,7 @@ namespace Festispec.ViewModel.ClientVM
         
         private bool IsMatch()
         {
-            if (IsLetter(Client.ClientName) && IsLetterNumber(Client.PostalCode) && IsLetter(Client.Street) && IsNumber(Client.Housenumber) && IsLetter(Client.Country) && IsNumber(Client.Phone))
+            if (IsLetter(Client.ClientName) && IsLetterNumber(Client.PostalCode) && IsLetter(Client.Street) && IsNumber(Client.Housenumber) && IsLetter(Client.Country) && IsPhoneNumber(Client.Phone))
             {
                 return true;
             }
@@ -94,7 +94,20 @@ namespace Festispec.ViewModel.ClientVM
 
         private bool IsEmptyField(string input)
         {
-            if(string.IsNullOrEmpty(input))
+            if (string.IsNullOrEmpty(input))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool IsPhoneNumber(string input)
+        {
+            if(input == null)
+            {
+                return true;
+            }
+            else if (Regex.IsMatch(input, @"^^(?! )[0-9\s]+$"))
             {
                 return true;
             }
