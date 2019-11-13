@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -30,7 +31,11 @@ namespace Festispec.ViewModel.ClientVM
 
         private bool CanSaveClient()
         {
-            return true;
+            if (IsMatch())
+            {
+                return true;
+            }
+            return false;
         }
 
         private void SaveClient()
@@ -40,6 +45,73 @@ namespace Festispec.ViewModel.ClientVM
                 context.Entry(SelectedClient.ToModel()).State = EntityState.Modified;
                 context.SaveChanges();
             }
+        }
+
+        private bool IsMatch()
+        {
+            if (IsLetter(SelectedClient.ClientName) && IsLetterNumber(SelectedClient.PostalCode) && IsLetter(SelectedClient.Street) && IsNumber(SelectedClient.Housenumber) && IsLetter(SelectedClient.Country) && IsPhoneNumber(SelectedClient.Phone))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool IsLetter(string input)
+        {
+            if (!IsEmptyField(input))
+            {
+                if (Regex.IsMatch(input, @"^^(?! )[A-Za-z\s]+$"))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool IsNumber(string input)
+        {
+            if (!IsEmptyField(input))
+            {
+                if (Regex.IsMatch(input, @"^^(?! )[0-9\s]+$"))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool IsLetterNumber(string input)
+        {
+            if (!IsEmptyField(input))
+            {
+                if (Regex.IsMatch(input, @"^^(?! )[A-Za-z0-9\s]+$"))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool IsEmptyField(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool IsPhoneNumber(string input)
+        {
+            if (input == null)
+            {
+                return true;
+            }
+            else if (Regex.IsMatch(input, @"^^(?! )[0-9\s]+$"))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

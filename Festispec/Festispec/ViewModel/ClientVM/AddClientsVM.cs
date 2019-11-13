@@ -29,22 +29,23 @@ namespace Festispec.ViewModel.ClientVM
 
         private void AddClientMethod()
         {
-            if (IsMatch())
-            {
-                _clients.Clients.Add(Client);
+            _clients.Clients.Add(Client);
 
-                using (var context = new FestispecEntities())
-                {
-                    context.Clients.Add(Client.ToModel());
-                    context.SaveChanges();
-                }
-                _clients.ShowClientPage();
+            using (var context = new FestispecEntities())
+            {
+                context.Clients.Add(Client.ToModel());
+                context.SaveChanges();
             }
+            _clients.ShowClientPage();
         }
 
         public bool CanAddClient()
         {
-            return true;
+            if(IsMatch())
+            {
+                return true;
+            }
+            return false;
         }
         
         private bool IsMatch()
