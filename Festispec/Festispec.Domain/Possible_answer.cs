@@ -18,6 +18,6 @@ namespace Festispec.Domain
         public string answer { get; set; }
         public int question_id { get; set; }
     
-        public virtual Question Question { get; set; }
+        public virtual Questions Questions { get; set; }
     }
 }

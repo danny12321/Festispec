@@ -12,7 +12,7 @@ namespace Festispec.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Contactperson
+    public partial class Contactpersons
     {
         public int id { get; set; }
         public string name { get; set; }
@@ -23,8 +23,8 @@ namespace Festispec.Domain
         public Nullable<int> client_id { get; set; }
         public int type_contact { get; set; }
     
-        public virtual Client Client { get; set; }
-        public virtual Festival Festival { get; set; }
+        public virtual Clients Clients { get; set; }
+        public virtual Festivals Festivals { get; set; }
         public virtual Type_contacts Type_contacts { get; set; }
     }
 }

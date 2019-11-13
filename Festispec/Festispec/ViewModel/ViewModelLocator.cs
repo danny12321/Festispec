@@ -1,4 +1,5 @@
 using CommonServiceLocator;
+using Festispec.ViewModel.Questionnaires;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 
@@ -30,11 +31,21 @@ namespace Festispec.ViewModel
             }
         }
 
+
         public PopUpViewModel PopUpWindow
         {
             get
             {
                 return ServiceLocator.Current.GetInstance<PopUpViewModel>();
+            }
+        }
+
+        public QuestionnairesViewModel Questionnaires
+        {
+            get
+            {
+                return new QuestionnairesViewModel();
+
             }
         }
 
