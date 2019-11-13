@@ -36,8 +36,8 @@
                 Width="24" />
             </Button>
         </Grid>
-        
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding selectedClients, Mode=TwoWay}" ItemsSource="{Binding Clients}" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedClient, Mode=TwoWay}" ItemsSource="{Binding Clients}" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding ClientName}" Foreground="#FF1D1616" />
                 <DataGridTemplateColumn Width="100">

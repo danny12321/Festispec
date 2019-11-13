@@ -87,8 +87,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\ClientVM\AddClientsVM.cs" />
+    <Compile Include="ViewModel\ClientVM\ClientInfoVM.cs" />
     <Compile Include="ViewModel\ClientVM\ClientManageVM.cs" />
     <Compile Include="ViewModel\ClientVM\ClientsVM.cs" />
+    <Compile Include="ViewModel\DataService\DataService.cs" />
+    <Compile Include="ViewModel\DataService\IDataService.cs" />
     <Compile Include="ViewModel\FestivalVM\AddFestivalVM.cs" />
     <Compile Include="ViewModel\FestivalVM\FestivalManagementVM.cs" />
     <Compile Include="ViewModel\FestivalVM\FestivalVM.cs" />

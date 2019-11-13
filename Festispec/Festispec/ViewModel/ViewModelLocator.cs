@@ -1,5 +1,6 @@
 using CommonServiceLocator;
 using Festispec.ViewModel.ClientVM;
+using Festispec.ViewModel.DataService;
 using Festispec.ViewModel.Festival_VMs;
 using Festispec.ViewModel.Questionnaires;
 using GalaSoft.MvvmLight;
@@ -18,6 +19,7 @@ namespace Festispec.ViewModel
 
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<IDataService, DataService.DataService>();
         }
 
         public MainViewModel Main
@@ -50,7 +52,7 @@ namespace Festispec.ViewModel
             {
                 if(_clientManageVM == null)
                 {
-                    _clientManageVM = new ClientManageVM(Main);
+                    _clientManageVM = new ClientManageVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
                 }
 
                 return _clientManageVM;
@@ -62,6 +64,14 @@ namespace Festispec.ViewModel
             get
             {
                 return new AddClientsVM(_clientManageVM);
+            }
+        }
+
+        public ClientInfoVM clientinfo
+        {
+            get
+            {
+                return new ClientInfoVM(ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
         

@@ -6,9 +6,10 @@
       xmlns:local="clr-namespace:Festispec.View.ClientsViews"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      DataContext="{Binding clientinfo, Source={StaticResource Locator}}"
       Title="ClientInfo">
 
     <Grid>
-        <TextBlock Text="Hallo"></TextBlock>
+        <TextBlock Text="{Binding SelectedClient.ClientName}"></TextBlock> 
     </Grid>
 </Page>
