@@ -35,11 +35,11 @@
                 <TextBox MaxLength="50" Text="{Binding SelectedClient.Phone, Mode=TwoWay}"></TextBox>
 
                 <Border Padding="10">
-                    <Button HorizontalAlignment="Right" Command="{Binding AddClientCommand}" CommandParameter="{Binding AddClientCommand}"
+                    <Button HorizontalAlignment="Right" Command="{Binding EditClientCommand}" CommandParameter="{Binding EditClientCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="100"
                     ToolTip="Resource name: MaterialDesignRaisedButton">
-                        Save
+                        Save changes
                     </Button>
                 </Border>
 
