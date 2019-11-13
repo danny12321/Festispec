@@ -43,8 +43,8 @@
                 <DataGridTemplateColumn Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button
-                                  Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Command=""
+                            <Button Command="{Binding DataContext.ShowClientInfo, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                  Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
                                   ToolTip="MaterialDesignFloatingActionMiniLightButton">
                                   <materialDesign:PackIcon
                                     Kind="About"

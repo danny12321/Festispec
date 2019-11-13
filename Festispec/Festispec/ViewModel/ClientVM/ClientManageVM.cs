@@ -20,6 +20,7 @@ namespace Festispec.ViewModel.ClientVM
         public ObservableCollection<ClientsVM> Clients { get; set; }
 
         public ICommand showAddClient { get; set; }
+        public ICommand ShowClientInfo { get; set; }
 
         public ClientManageVM(MainViewModel main)
         {
@@ -34,6 +35,12 @@ namespace Festispec.ViewModel.ClientVM
             }
 
             showAddClient = new RelayCommand(ShowAddPage);
+            ShowClientInfo = new RelayCommand(showClient);
+        }
+
+        private void showClient()
+        {
+            _main.SetPage("ClientInfo");
         }
 
         private void ShowAddPage()
