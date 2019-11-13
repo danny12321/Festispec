@@ -37,7 +37,7 @@
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding EditClientCommand}" CommandParameter="{Binding EditClientCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
-                    Width="100"
+                    Width="150"
                     ToolTip="Resource name: MaterialDesignRaisedButton">
                         Save changes
                     </Button>
