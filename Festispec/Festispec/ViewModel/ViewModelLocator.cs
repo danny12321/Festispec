@@ -1,4 +1,6 @@
 using CommonServiceLocator;
+using Festispec.ViewModel.ClientVM;
+using Festispec.ViewModel.Festival_VMs;
 using Festispec.ViewModel.Questionnaires;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -33,6 +35,35 @@ namespace Festispec.ViewModel
             }
         }
 
+        public FestivalManagementVM festival
+        {
+            get
+            {
+                return new FestivalManagementVM();
+            }
+        }
+
+        public ClientManageVM client
+        {
+            get
+            {
+                if(_clientManageVM == null)
+                {
+                    _clientManageVM = new ClientManageVM(Main);
+                }
+
+                return _clientManageVM;
+            }
+        }
+
+        public AddClientsVM addclient
+        {
+            get
+            {
+                return new AddClientsVM(_clientManageVM);
+            }
+        }
+        
         public QuestionnairesViewModel Questionnaires
         {
             get

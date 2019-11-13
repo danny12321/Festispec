@@ -86,6 +86,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\ClientVM\AddClientsVM.cs" />
+    <Compile Include="ViewModel\ClientVM\ClientManageVM.cs" />
+    <Compile Include="ViewModel\ClientVM\ClientsVM.cs" />
+    <Compile Include="ViewModel\FestivalVM\AddFestivalVM.cs" />
+    <Compile Include="ViewModel\FestivalVM\FestivalManagementVM.cs" />
+    <Compile Include="ViewModel\FestivalVM\FestivalVM.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\InspectorsVM\AddInspectorViewModel.cs" />
     <Compile Include="ViewModel\InspectorsVM\EditInspectorViewModel.cs" />
@@ -119,6 +125,22 @@
       <DependentUpon>Schedule.xaml</DependentUpon>
     </Compile>
     <Page Include="View\BaseWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClientsViews\AddClients.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClientsViews\Client.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Festival Views\AddFestival.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Festival Views\Festivals.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
