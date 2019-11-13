@@ -39,7 +39,13 @@ namespace Festispec.ViewModel
                 return new QuestionnairesViewModel();
             }
         }
-
+        public InspectorsVM.InspectorListViewModel Inspectors
+        {
+            get
+            {
+                return new InspectorsVM.InspectorListViewModel();
+            }
+        }
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
