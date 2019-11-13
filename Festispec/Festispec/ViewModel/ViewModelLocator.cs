@@ -10,9 +10,8 @@ namespace Festispec.ViewModel
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
-
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<PopUpViewModel>();
         }
 
         public MainViewModel Main
@@ -28,6 +27,14 @@ namespace Festispec.ViewModel
             get
             {
                 return new LoginViewModel();
+            }
+        }
+
+        public PopUpViewModel PopUpWindow
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<PopUpViewModel>();
             }
         }
 

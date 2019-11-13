@@ -44,7 +44,7 @@
                 <StackPanel.Effect>
                     <DropShadowEffect Color="#FF6C6C6C" Opacity="0.795" ShadowDepth="3"/>
                 </StackPanel.Effect>
-
+                <CheckBox Content="No Login information required" IsChecked="{Binding Path=IsChecked, Mode=TwoWay}"/>
                 <Label Content="Festispec" HorizontalAlignment="Left" FontSize="40" Width="280" Margin="14,20,0,10" Background="{x:Null}"/>
 
                 <TextBox Margin="20,0,20,20" materialDesign:HintAssist.Hint="Email" Text="{Binding Email, Mode=TwoWay}" Cursor="IBeam"/>
@@ -55,7 +55,7 @@
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Width="100"
                     ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                     Command="{Binding LoginCommand}"
+                    Command="{Binding LoginCommand}"
                     CommandParameter="{Binding ElementName=LoginWindowName}" Content="Log in" HorizontalAlignment="Left"/>
 
             </StackPanel>
