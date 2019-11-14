@@ -89,6 +89,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\AccountsVM\UsersRollsVM.cs" />
+    <Compile Include="ViewModel\AccountsVM\UsersVM.cs" />
     <Compile Include="ViewModel\ClientVM\AddClientsVM.cs" />
     <Compile Include="ViewModel\ClientVM\ClientManageVM.cs" />
     <Compile Include="ViewModel\ClientVM\ClientsVM.cs" />
@@ -108,7 +110,6 @@
     <Compile Include="ViewModel\Questionnaires\QuestionTypeViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-
     <Compile Include="View\Municipality\Municipality.xaml.cs">
       <DependentUpon>Municipality.xaml</DependentUpon>
     </Compile>
@@ -123,7 +124,6 @@
     </Compile>
     <Compile Include="View\Inspectors\Inspectors.xaml.cs">
       <DependentUpon>Inspectors.xaml</DependentUpon>
-
     </Compile>
     <Compile Include="View\Questionnaires\Open.xaml.cs">
       <DependentUpon>Open.xaml</DependentUpon>
@@ -234,6 +234,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="connections.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -249,7 +252,6 @@
       <Name>Festispec.Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

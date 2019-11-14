@@ -73,6 +73,7 @@ namespace Festispec.ViewModel
                 case "Gemeente":
                     FrameContent = new View.Municipality.Municipality();
                     PageTitle = "Gemeenten Wetten";
+                    break;
                 case "AddClient":
                     FrameContent = new View.ClientsViews.AddClients();
                     PageTitle = "Klanten toevoegen";
