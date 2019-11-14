@@ -38,7 +38,7 @@ namespace Festispec.ViewModel.ClientVM
             using (var context = new FestispecEntities())
             {
                 var festival = context.Festivals.ToList()
-                             .Select(e => new FestivalVM.FestivalVM(e)); //where client id == selected client id
+                             .Select(e => new FestivalVM.FestivalVM(e)).Where(e => e.ClientId.Equals(SelectedClient.ClientId));
 
                 Festivals = new ObservableCollection<FestivalVM.FestivalVM>(festival);
             }

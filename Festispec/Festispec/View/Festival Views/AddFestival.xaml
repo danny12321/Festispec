@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Festispec.View.Festival_Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddFestival">
+      Title="AddFestival"
+      DataContext="{Binding Festival, Source={StaticResource Locator}}">
 
     <Grid>
         <TextBlock Text="Hallo"/>
