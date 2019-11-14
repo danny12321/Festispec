@@ -46,6 +46,14 @@ namespace Festispec.ViewModel
             }
         }
 
+        public AddFestivalVM addFestival
+        {
+            get
+            {
+                return new AddFestivalVM();
+            }
+        }
+
         public ClientManageVM client
         {
             get
@@ -71,7 +79,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new ClientInfoVM(ServiceLocator.Current.GetInstance<IDataService>(), _clientManageVM);
+                return new ClientInfoVM(Main, ServiceLocator.Current.GetInstance<IDataService>(), _clientManageVM);
             }
         }
         

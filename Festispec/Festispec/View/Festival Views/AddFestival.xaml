@@ -9,6 +9,6 @@
       Title="AddFestival">
 
     <Grid>
-        
+        <TextBlock Text="Hallo"/>
     </Grid>
 </Page>

@@ -3,6 +3,7 @@ using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -16,19 +17,39 @@ namespace Festispec.ViewModel.ClientVM
     {
         private IDataService _service;
         private ClientManageVM _clients;
+        private MainViewModel _main;
+
+        public ObservableCollection<FestivalVM.FestivalVM> Festivals { get; set; }
 
         public ICommand EditClientCommand { get; set; }
+        public ICommand AddFestivalCommand { get; set; }
 
         public ClientsVM SelectedClient
         {
             get { return _service.SelectedClient; }
         }
 
-        public ClientInfoVM(IDataService service, ClientManageVM clients)
+        public ClientInfoVM(MainViewModel main, IDataService service, ClientManageVM clients)
         {
+            this._main = main;
             _service = service;
             this._clients = clients;
+
+            using (var context = new FestispecEntities())
+            {
+                var festival = context.Festivals.ToList()
+                             .Select(e => new FestivalVM.FestivalVM(e)).Where(); //where client id == selected client id
+
+                Festivals = new ObservableCollection<FestivalVM.FestivalVM>(festival);
+            }
+
             EditClientCommand = new RelayCommand(SaveClient, CanSaveClient);
+            AddFestivalCommand = new RelayCommand(ShowAddFestival);
+        }
+
+        private void ShowAddFestival()
+        {
+            _main.SetPage("addFestival");
         }
 
         private bool CanSaveClient()

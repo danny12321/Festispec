@@ -8,5 +8,7 @@ namespace Festispec.ViewModel.Festival_VMs
 {
     public class AddFestivalVM
     {
+
+
     }
 }
