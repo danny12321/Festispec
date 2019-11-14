@@ -29,7 +29,7 @@
 
             <Button Command="{Binding showAddClient}"
                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
-                 ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                 ToolTip="Klant toevoegen">
                 <materialDesign:PackIcon
                 Kind="Add"
                 Height="24"
@@ -39,13 +39,18 @@
 
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedClient, Mode=TwoWay}" ItemsSource="{Binding Clients}" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Naam" Binding="{Binding ClientName}" Foreground="#FF1D1616" Width="250"/>
+                <DataGridTextColumn Header="Naam" Binding="{Binding ClientName}" Foreground="#FF1D1616" Width="200"/>
+                <DataGridTextColumn Header="Postcode" Binding="{Binding PostalCode}" Foreground="#FF1D1616" Width="150"/>
+                <DataGridTextColumn Header="Straat" Binding="{Binding Street}" Foreground="#FF1D1616" Width="200"/>
+                <DataGridTextColumn Header="Huisnummer" Binding="{Binding HouseNumber}" Foreground="#FF1D1616" Width="150"/>
+                <DataGridTextColumn Header="Land" Binding="{Binding Country}" Foreground="#FF1D1616" Width="150"/>
+                <DataGridTextColumn Header="Telefoonnummer" Binding="{Binding Phone}" Foreground="#FF1D1616" Width="150"/>
                 <DataGridTemplateColumn Width="75">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Command="{Binding DataContext.ShowEditClient, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
-                                  ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                                  ToolTip="Klant wijzigen">
                                   <materialDesign:PackIcon
                                     Kind="Pen"
                                     Height="20"
@@ -59,7 +64,7 @@
                         <DataTemplate>
                             <Button Command="{Binding DataContext.ShowClientInfo, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
-                                  ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                                  ToolTip="Klant tonen">
                                 <materialDesign:PackIcon
                                     Kind="About"
                                     Height="20"
