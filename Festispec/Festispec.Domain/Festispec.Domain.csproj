@@ -133,6 +133,7 @@
       <DependentUpon>ado.edmx</DependentUpon>
     </None>
     <None Include="App.Config" />
+    <None Include="connections.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,6 @@
 using CommonServiceLocator;
+using Festispec.ViewModel.ClientVM;
+using Festispec.ViewModel.Festival_VMs;
 using Festispec.ViewModel.Questionnaires;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -8,6 +10,7 @@ namespace Festispec.ViewModel
 
     public class ViewModelLocator
     {
+        private InspectorsVM.InspectorListViewModel _inspectors;
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
@@ -31,12 +34,19 @@ namespace Festispec.ViewModel
             }
         }
 
-
         public PopUpViewModel PopUpWindow
         {
             get
             {
                 return new PopUpViewModel();
+            }
+        }
+
+        public FestivalManagementVM festival
+        {
+            get
+            {
+                return new FestivalManagementVM();
             }
         }
 
@@ -48,7 +58,30 @@ namespace Festispec.ViewModel
 
             }
         }
+        public InspectorsVM.InspectorListViewModel InspectorsVM
+        {
+            get
+            {
+                _inspectors = new InspectorsVM.InspectorListViewModel(Main);
+                return _inspectors;
+            }
+        }
+        public InspectorsVM.AddInspectorViewModel AddInspector
+        {
+            get
+            {
+                
+                return new ViewModel.InspectorsVM.AddInspectorViewModel(_inspectors);
+            }
+        }
+        public InspectorsVM.EditInspectorViewModel EditInspector
+        {
+            get
+            {
 
+                return new ViewModel.InspectorsVM.EditInspectorViewModel(_inspectors);
+            }
+        }
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
