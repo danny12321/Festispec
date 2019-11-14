@@ -19,26 +19,37 @@
         <Border Padding="20">
             <StackPanel>
 
-                <TextBlock Text="Voeg een nieuwe klant toe" FontSize="25" Padding="0,10"/>
+                <TextBlock Text="Voeg een nieuw Festival toe" FontSize="25" Padding="0,10"/>
 
                 <TextBlock Text="Festival naam:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Client.ClientName, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="50" Text="{Binding Festival.FestivalName, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Postcode:"></TextBlock>
-                <TextBox MaxLength="6" Text="{Binding Client.PostalCode, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="6" Text="{Binding Festival.PostalCode, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Straat:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Client.Street, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="50" Text="{Binding Festival.Street, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Huisnummer:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Client.Housenumber, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="50" Text="{Binding Festival.HouseNumber, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Land:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Client.Country, Mode=TwoWay}"></TextBox>
-                <TextBlock Text="Telefoon nummer(*):"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Client.Phone, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="50" Text="{Binding Festival.Country, Mode=TwoWay}"></TextBox>
+                <TextBlock Text="Begin datum:"></TextBlock>
+                <TextBox MaxLength="50" Text="{Binding Festival.StartDate, Mode=TwoWay}"></TextBox>
+                <TextBlock Text="Eind datum:"></TextBlock>
+                <TextBox MaxLength="50" Text="{Binding Festival.EndDate, Mode=TwoWay}"></TextBox>
+                <TextBlock Text="Klant id:"></TextBlock>
+                <TextBox MaxLength="50" Text="{Binding Festival.ClientId, Mode=TwoWay}"></TextBox>
+                <TextBlock Text="Gemeente id:"></TextBlock>
+                <TextBox MaxLength="50" Text="{Binding Festival.MunicipalityId, Mode=TwoWay}"></TextBox>
+                <TextBlock Text="Breedtegraad:"></TextBlock>
+                <TextBox MaxLength="50" Text="{Binding Festival.Latitude, Mode=TwoWay}"></TextBox>
+                <TextBlock Text="Hoogtegraad"></TextBlock>
+                <TextBox MaxLength="50" Text="{Binding Festival.Longitude, Mode=TwoWay}"></TextBox>
+                
 
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding AddClientCommand}" CommandParameter="{Binding AddClientCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="100"
-                    ToolTip="Resource name: MaterialDesignRaisedButton">
+                    ToolTip="Festival opslaan">
                         Save
                     </Button>
                 </Border>

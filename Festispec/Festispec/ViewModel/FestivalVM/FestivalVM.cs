@@ -17,6 +17,11 @@ namespace Festispec.ViewModel.FestivalVM
             this._festival = festivals;
         }
 
+        public FestivalVM()
+        {
+            _festival = new Festivals();
+        }
+
         public int FestivalId
         {
             get { return _festival.id; }

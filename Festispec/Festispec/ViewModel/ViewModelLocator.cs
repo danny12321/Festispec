@@ -12,6 +12,7 @@ namespace Festispec.ViewModel
     public class ViewModelLocator
     {
         private ClientManageVM _clientManageVM;
+        private ClientInfoVM _clientInfoVM;
 
         public ViewModelLocator()
         {
@@ -50,7 +51,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new AddFestivalVM();
+                return new AddFestivalVM(_clientInfoVM);
             }
         }
 
@@ -79,7 +80,11 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new ClientInfoVM(Main, ServiceLocator.Current.GetInstance<IDataService>(), _clientManageVM);
+                if(_clientInfoVM == null)
+                {
+                    new ClientInfoVM(Main, ServiceLocator.Current.GetInstance<IDataService>(), _clientManageVM);
+                }
+                return _clientInfoVM;
             }
         }
 

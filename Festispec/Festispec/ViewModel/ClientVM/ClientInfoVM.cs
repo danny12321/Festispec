@@ -50,6 +50,11 @@ namespace Festispec.ViewModel.ClientVM
             _main.SetPage("addFestival");
         }
 
+        public void ShowClientPage()
+        {
+            _main.SetPage("ClientInfo");
+        }
+
 
         private bool IsMatch()
         {

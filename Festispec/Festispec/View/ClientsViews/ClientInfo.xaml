@@ -51,7 +51,7 @@
 
                     <Button Grid.Column="1" Command="{Binding AddFestivalCommand}"
                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
-                        ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                        ToolTip="Festival toevoegen">
                         <materialDesign:PackIcon
                             Kind="Add"
                             Height="20"
