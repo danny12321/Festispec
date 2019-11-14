@@ -47,7 +47,7 @@
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
                                   ToolTip="MaterialDesignFloatingActionMiniLightButton">
                                   <materialDesign:PackIcon
-                                    Kind="About"
+                                    Kind="Pen"
                                     Height="20"
                                     Width="20" />
                             </Button>
