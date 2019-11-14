@@ -24,6 +24,8 @@ namespace Festispec.ViewModel.Festival_VMs
             Festival = new FestivalVM.FestivalVM();
 
             AddFestivalCommand = new RelayCommand(AddFestivalMethod, CanAddFestival);
+
+            Festival.ClientId = _clients.SelectedClient.ClientId;
         }
 
         private bool CanAddFestival()

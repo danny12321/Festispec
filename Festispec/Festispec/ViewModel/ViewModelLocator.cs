@@ -80,10 +80,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                if(_clientInfoVM == null)
-                {
-                    new ClientInfoVM(Main, ServiceLocator.Current.GetInstance<IDataService>(), _clientManageVM);
-                }
+                _clientInfoVM = new ClientInfoVM(Main, ServiceLocator.Current.GetInstance<IDataService>(), _clientManageVM);
                 return _clientInfoVM;
             }
         }

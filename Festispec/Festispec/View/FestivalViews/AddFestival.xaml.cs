@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec.View.Festival_Views
+namespace Festispec.View.FestivalViews
 {
     /// <summary>
     /// Interaction logic for AddFestival.xaml

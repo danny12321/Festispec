@@ -45,33 +45,15 @@ namespace Festispec.ViewModel.ClientVM
             AddFestivalCommand = new RelayCommand(ShowAddFestival);
         }
 
-        private void ShowAddFestival()
+        public void ShowAddFestival()
         {
+            Console.WriteLine("YEEEEEEEEEEEEEEEEEEEEEEET");
             _main.SetPage("addFestival");
         }
 
         public void ShowClientPage()
         {
             _main.SetPage("ClientInfo");
-        }
-
-
-        private bool IsMatch()
-        {
-            if (!IsEmptyField(SelectedClient.ClientName) && !IsEmptyField(SelectedClient.PostalCode) && !IsEmptyField(SelectedClient.Street) && !IsEmptyField(SelectedClient.Housenumber) && !IsEmptyField(SelectedClient.Country))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        private bool IsEmptyField(string input)
-        {
-            if (string.IsNullOrEmpty(input))
-            {
-                return true;
-            }
-            return false;
         }
 
     }

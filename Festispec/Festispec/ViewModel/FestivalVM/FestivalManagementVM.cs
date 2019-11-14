@@ -1,4 +1,4 @@
-﻿using Festispec.View.Festival_Views;
+﻿using Festispec.View.FestivalViews;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;

@@ -115,10 +115,10 @@
     <Compile Include="View\ClientsViews\EditClient.xaml.cs">
       <DependentUpon>EditClient.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Festival Views\AddFestival.xaml.cs">
+    <Compile Include="View\FestivalViews\AddFestival.xaml.cs">
       <DependentUpon>AddFestival.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Festival Views\Festivals.xaml.cs">
+    <Compile Include="View\FestivalViews\Festivals.xaml.cs">
       <DependentUpon>Festivals.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Questionnaires\Open.xaml.cs">
@@ -153,11 +153,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Festival Views\AddFestival.xaml">
+    <Page Include="View\FestivalViews\AddFestival.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Festival Views\Festivals.xaml">
+    <Page Include="View\FestivalViews\Festivals.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
