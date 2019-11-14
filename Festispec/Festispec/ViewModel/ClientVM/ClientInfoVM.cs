@@ -73,45 +73,9 @@ namespace Festispec.ViewModel.ClientVM
 
         private bool IsMatch()
         {
-            if (IsLetter(SelectedClient.ClientName) && IsLetterNumber(SelectedClient.PostalCode) && IsLetter(SelectedClient.Street) && IsNumber(SelectedClient.Housenumber) && IsLetter(SelectedClient.Country) && IsPhoneNumber(SelectedClient.Phone))
+            if (!IsEmptyField(SelectedClient.ClientName) && !IsEmptyField(SelectedClient.PostalCode) && !IsEmptyField(SelectedClient.Street) && !IsEmptyField(SelectedClient.Housenumber) && !IsEmptyField(SelectedClient.Country))
             {
                 return true;
-            }
-            return false;
-        }
-
-        private bool IsLetter(string input)
-        {
-            if (!IsEmptyField(input))
-            {
-                if (Regex.IsMatch(input, @"^^(?! )[A-Za-z\s]+$"))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private bool IsNumber(string input)
-        {
-            if (!IsEmptyField(input))
-            {
-                if (Regex.IsMatch(input, @"^^(?! )[0-9\s]+$"))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private bool IsLetterNumber(string input)
-        {
-            if (!IsEmptyField(input))
-            {
-                if (Regex.IsMatch(input, @"^^(?! )[A-Za-z0-9\s]+$"))
-                {
-                    return true;
-                }
             }
             return false;
         }
@@ -125,17 +89,5 @@ namespace Festispec.ViewModel.ClientVM
             return false;
         }
 
-        private bool IsPhoneNumber(string input)
-        {
-            if (input == null)
-            {
-                return true;
-            }
-            else if (Regex.IsMatch(input, @"^^(?! )[0-9\s]+$"))
-            {
-                return true;
-            }
-            return false;
-        }
     }
 }
