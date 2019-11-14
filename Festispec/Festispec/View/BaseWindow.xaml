@@ -27,13 +27,17 @@
                 <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="FileDocument" VerticalAlignment="Center"/>Offerte overzicht</Hyperlink></TextBlock>
                 <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="MonitorDashboard" VerticalAlignment="Center"/>Dahboard</Hyperlink></TextBlock>
                 <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Vragenlijsten TEMP" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="MonitorDashboard" VerticalAlignment="Center"/>Vragenlijsten TEMP</Hyperlink></TextBlock>
+                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Inspections" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="MonitorDashboard" VerticalAlignment="Center"/>Inspections</Hyperlink></TextBlock>
                  </ListBox>
             </Border>
         <StackPanel Grid.Column="1">
             <Border Background="LightGray" Height="100">
-                <TextBlock Text="{Binding PageTitle}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="20"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Margin="10,0,0,0" Command="{Binding BackCommand}">Terug</Button>
+                    <TextBlock Text="{Binding PageTitle}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="20"/>
+                </StackPanel>
             </Border>
-            <Frame Content="{Binding FrameContent}" NavigationUIVisibility="Hidden"></Frame>
+            <Frame x:Name="ContentFrame" Content="{Binding FrameContent}" NavigationUIVisibility="Hidden"></Frame>
         </StackPanel>
 
     </Grid>

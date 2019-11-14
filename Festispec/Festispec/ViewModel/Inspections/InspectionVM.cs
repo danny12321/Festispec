@@ -8,7 +8,6 @@ namespace Festispec.ViewModel.Inspections
 {
     public class InspectionVM
     {
-
         private Festispec.Domain.Inspections _inspection;
 
         public int Id
