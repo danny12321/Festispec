@@ -31,7 +31,7 @@
                 <TextBox MaxLength="50" Text="{Binding Client.Housenumber, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Land:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding Client.Country, Mode=TwoWay}"></TextBox>
-                <TextBlock Text="Telefoon nummer(*):"></TextBlock>
+                <TextBlock Text="Telefoon nummer(Optioneel):"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding Client.Phone, Mode=TwoWay}"></TextBox>
 
                 <Border Padding="10">

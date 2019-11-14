@@ -78,6 +78,10 @@ namespace Festispec.ViewModel
                     FrameContent = new View.ClientsViews.AddClients();
                     PageTitle = "Klanten toevoegen";
                     break;
+                case "EditClient":
+                    FrameContent = new View.ClientsViews.EditClient();
+                    PageTitle = "Klanten wijzigen";
+                    break;
                 case "addFestival":
                     FrameContent = new View.Festival_Views.AddFestival();
                     PageTitle = "Festival toevoegen";

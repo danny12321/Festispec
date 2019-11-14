@@ -40,14 +40,28 @@
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedClient, Mode=TwoWay}" ItemsSource="{Binding Clients}" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naam" Binding="{Binding ClientName}" Foreground="#FF1D1616" Width="250"/>
-                <DataGridTemplateColumn Width="100">
+                <DataGridTemplateColumn Width="75">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding DataContext.ShowEditClient, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                  Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
+                                  ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                                  <materialDesign:PackIcon
+                                    Kind="Pen"
+                                    Height="20"
+                                    Width="20" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="75">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Command="{Binding DataContext.ShowClientInfo, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
                                   ToolTip="MaterialDesignFloatingActionMiniLightButton">
-                                  <materialDesign:PackIcon
-                                    Kind="Pen"
+                                <materialDesign:PackIcon
+                                    Kind="About"
                                     Height="20"
                                     Width="20" />
                             </Button>

@@ -20,29 +20,20 @@
         <Border Grid.Column="0" Padding="20">
             <StackPanel>
 
-                <TextBlock Text="Klant gegevens wijzigen" FontSize="25" Padding="0,10"/>
+                <TextBlock Text="Klant gegevens" FontSize="25" Padding="0,10"/>
 
                 <TextBlock Text="Bedrijf naam:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding SelectedClient.ClientName, Mode=TwoWay}"></TextBox>
+                <TextBox Text="{Binding SelectedClient.ClientName}" IsReadOnly="True"></TextBox>
                 <TextBlock Text="Postcode:"></TextBlock>
-                <TextBox MaxLength="6" Text="{Binding SelectedClient.PostalCode, Mode=TwoWay}"></TextBox>
+                <TextBox Text="{Binding SelectedClient.PostalCode}" IsReadOnly="True"></TextBox>
                 <TextBlock Text="Straat:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding SelectedClient.Street, Mode=TwoWay}"></TextBox>
+                <TextBox Text="{Binding SelectedClient.Street}" IsReadOnly="True"></TextBox>
                 <TextBlock Text="Huisnummer:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding SelectedClient.Housenumber, Mode=TwoWay}"></TextBox>
+                <TextBox Text="{Binding SelectedClient.Housenumber}" IsReadOnly="True"></TextBox>
                 <TextBlock Text="Land:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding SelectedClient.Country, Mode=TwoWay}"></TextBox>
-                <TextBlock Text="Telefoon nummer(*):"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding SelectedClient.Phone, Mode=TwoWay}"></TextBox>
-
-                <Border Padding="10">
-                    <Button HorizontalAlignment="Right" Command="{Binding EditClientCommand}" CommandParameter="{Binding EditClientCommand}"
-                    Style="{StaticResource MaterialDesignRaisedButton}"
-                    Width="150"
-                    ToolTip="Resource name: MaterialDesignRaisedButton">
-                        Save changes
-                    </Button>
-                </Border>
+                <TextBox Text="{Binding SelectedClient.Country}" IsReadOnly="True"></TextBox>
+                <TextBlock Text="Telefoon nummer:"></TextBlock>
+                <TextBox Text="{Binding SelectedClient.Phone}" IsReadOnly="True"></TextBox>
 
             </StackPanel>
         </Border>
@@ -58,7 +49,7 @@
 
                     <TextBlock Text="Festivallen" FontSize="28" Grid.Column="0" Padding="10"/>
 
-                    <Button Grid.Column="1" Command="{Binding showAddClient}"
+                    <Button Grid.Column="1" Command="{Binding AddFestivalCommand}"
                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
                         ToolTip="MaterialDesignFloatingActionMiniLightButton">
                         <materialDesign:PackIcon

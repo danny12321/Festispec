@@ -90,6 +90,7 @@
     <Compile Include="ViewModel\ClientVM\ClientInfoVM.cs" />
     <Compile Include="ViewModel\ClientVM\ClientManageVM.cs" />
     <Compile Include="ViewModel\ClientVM\ClientsVM.cs" />
+    <Compile Include="ViewModel\ClientVM\EditClientVM.cs" />
     <Compile Include="ViewModel\DataService\DataService.cs" />
     <Compile Include="ViewModel\DataService\IDataService.cs" />
     <Compile Include="ViewModel\FestivalVM\AddFestivalVM.cs" />
@@ -110,6 +111,9 @@
     </Compile>
     <Compile Include="View\ClientsViews\ClientInfo.xaml.cs">
       <DependentUpon>ClientInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientsViews\EditClient.xaml.cs">
+      <DependentUpon>EditClient.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Festival Views\AddFestival.xaml.cs">
       <DependentUpon>AddFestival.xaml</DependentUpon>
@@ -142,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ClientsViews\ClientInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClientsViews\EditClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -23,6 +23,7 @@ namespace Festispec.ViewModel.ClientVM
 
         public ICommand showAddClient { get; set; }
         public ICommand ShowClientInfo { get; set; }
+        public ICommand ShowEditClient { get; set; }
 
         public ClientsVM SelectedClient
         {
@@ -49,6 +50,12 @@ namespace Festispec.ViewModel.ClientVM
 
             showAddClient = new RelayCommand(ShowAddPage);
             ShowClientInfo = new RelayCommand(showClient);
+            ShowEditClient = new RelayCommand(ShowEditPage);
+        }
+
+        private void ShowEditPage()
+        {
+            _main.SetPage("EditClient");
         }
 
         private void showClient()

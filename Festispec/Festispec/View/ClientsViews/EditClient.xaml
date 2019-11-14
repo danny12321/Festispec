@@ -1,14 +1,14 @@
-﻿<Page x:Class="Festispec.View.Festival_Views.AddFestival"
+﻿<Page x:Class="Festispec.View.ClientsViews.EditClient"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Festispec.View.Festival_Views"
+      xmlns:local="clr-namespace:Festispec.View.ClientsViews"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddFestival"
       Background="White"
-      DataContext="{Binding addFestival, Source={StaticResource Locator}}">
+      Title="EditClient"
+      DataContext="{Binding editClient, Source={StaticResource Locator}}">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -16,30 +16,30 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Border Padding="20">
+        <Border Grid.Column="0" Padding="20">
             <StackPanel>
 
-                <TextBlock Text="Voeg een nieuwe klant toe" FontSize="25" Padding="0,10"/>
+                <TextBlock Text="Klant gegevens wijzigen" FontSize="25" Padding="0,10"/>
 
                 <TextBlock Text="Bedrijf naam:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Client.ClientName, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="50" Text="{Binding SelectedClient.ClientName, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Postcode:"></TextBlock>
-                <TextBox MaxLength="6" Text="{Binding Client.PostalCode, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="6" Text="{Binding SelectedClient.PostalCode, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Straat:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Client.Street, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="50" Text="{Binding SelectedClient.Street, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Huisnummer:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Client.Housenumber, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="50" Text="{Binding SelectedClient.Housenumber, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Land:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Client.Country, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="50" Text="{Binding SelectedClient.Country, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Telefoon nummer(*):"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Client.Phone, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="50" Text="{Binding SelectedClient.Phone, Mode=TwoWay}"></TextBox>
 
                 <Border Padding="10">
-                    <Button HorizontalAlignment="Right" Command="{Binding AddClientCommand}" CommandParameter="{Binding AddClientCommand}"
+                    <Button HorizontalAlignment="Right" Command="{Binding EditClientCommand}" CommandParameter="{Binding EditClientCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
-                    Width="100"
+                    Width="150"
                     ToolTip="Resource name: MaterialDesignRaisedButton">
-                        Save
+                        Save changes
                     </Button>
                 </Border>
 

@@ -82,6 +82,14 @@ namespace Festispec.ViewModel
                 return new ClientInfoVM(Main, ServiceLocator.Current.GetInstance<IDataService>(), _clientManageVM);
             }
         }
+
+        public EditClientVM editClient
+        {
+            get
+            {
+                return new EditClientVM(Main, ServiceLocator.Current.GetInstance<IDataService>(), _clientManageVM);
+            }
+        }
         
         public QuestionnairesViewModel Questionnaires
         {
