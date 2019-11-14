@@ -87,12 +87,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\HomeViewModel.cs" />
+    <Compile Include="ViewModel\Inspections\InspectionsViewModel.cs" />
+    <Compile Include="ViewModel\Inspections\InspectionVM.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionnairesViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionTypeViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\Inspections\Inspections.xaml.cs">
+      <DependentUpon>Inspections.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Questionnaires\Open.xaml.cs">
       <DependentUpon>Open.xaml</DependentUpon>
     </Compile>
@@ -110,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspections\Inspections.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

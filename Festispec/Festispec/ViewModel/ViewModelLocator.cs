@@ -1,4 +1,5 @@
 using CommonServiceLocator;
+using Festispec.ViewModel.Inspections;
 using Festispec.ViewModel.Questionnaires;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -37,6 +38,14 @@ namespace Festispec.ViewModel
             get
             {
                 return new QuestionnairesViewModel();
+            }
+        }
+
+        public InspectionsViewModel Inspections
+        {
+            get
+            {
+                return new InspectionsViewModel();
             }
         }
 
