@@ -1,7 +1,7 @@
 ﻿using Festispec.Domain;
 using Festispec.View.Questionnaires;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,18 +19,6 @@ namespace Festispec.ViewModel.Questionnaires
 
         public ObservableCollection<QuestionViewModel> Questions { get; set; }
 
-        private Page _questionContent;
-
-        public Page QuestionContent
-        {
-            get { return _questionContent; }
-            set
-            {
-                _questionContent = value;
-                RaisePropertyChanged("QuestionContent");
-            }
-        }
-
         private QuestionViewModel _selectedQuestion;
 
         public QuestionViewModel SelectedQuestion
@@ -41,6 +29,7 @@ namespace Festispec.ViewModel.Questionnaires
                 _selectedQuestion = value;
                 RaisePropertyChanged("SelectedQuestion");
                 RaisePropertyChanged("GetVisibility");
+                RaisePropertyChanged("GetAnswerRowsVisibility");
             }
         }
 
@@ -53,19 +42,34 @@ namespace Festispec.ViewModel.Questionnaires
             }
         }
 
-        public ICommand SelectQuestionCommand { get; set; }
+        public string GetAnswerRowsVisibility
+        {
+            get
+            {
+                switch (SelectedQuestion?.Type?.type)
+                {
+                    case "ComboBox":
+                        return "Visible";
+                    default:
+                        return "Hidden";
+                }
+            }
+        }
 
         public ICommand AddQuestionCommand { get; set; }
 
+        public ICommand AddAnswerRowCommand { get; set; }
+
         public QuestionnairesViewModel()
         {
-            SelectQuestionCommand = new RelayCommand<int>(SelectQuestion);
             AddQuestionCommand = new RelayCommand(AddQuestion);
+            AddAnswerRowCommand = new RelayCommand(AddAnswerRow);
 
             using (var context = new FestispecEntities())
             {
                 var questions = context.Questions.ToList()
                     .Select(q => new QuestionViewModel(this, q));
+
 
                 Questions = new ObservableCollection<QuestionViewModel>(questions);
 
@@ -76,40 +80,16 @@ namespace Festispec.ViewModel.Questionnaires
             }
         }
 
-        private void SelectQuestion(int id)
-        {
-            var question = Questions.Where(e => e.Id == id).First();
-
-            if (question != null)
-            {
-                SelectedQuestion = question;
-                SetQuestionContent();
-            }
-        }
-
         private void AddQuestion()
         {
-            SelectedQuestion = new QuestionViewModel(this);
-            SetQuestionContent();
+            var newQuestion = new QuestionViewModel(this);
+            SelectedQuestion = newQuestion;
+            Questions.Add(SelectedQuestion);
         }
 
-        public void SetQuestionContent()
+        private void AddAnswerRow()
         {
-
-            switch (SelectedQuestion.Type)
-            {
-                case "ComboBox":
-                    QuestionContent = new SelectBox();
-                    break;
-
-                case "Open":
-                    QuestionContent = new Open();
-                    break;
-
-                default:
-                    QuestionContent = null;
-                    break;
-            }
+            SelectedQuestion?.AddAnswerRow();
         }
     }
 }

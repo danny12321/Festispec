@@ -55,7 +55,7 @@
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Width="100"
                     ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                     Command="{Binding LoginCommand}"
+                    Command="{Binding LoginCommand}"
                     CommandParameter="{Binding ElementName=LoginWindowName}" Content="Log in" HorizontalAlignment="Left"/>
 
             </StackPanel>

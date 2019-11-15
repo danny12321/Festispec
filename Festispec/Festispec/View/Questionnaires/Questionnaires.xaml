@@ -20,39 +20,82 @@
         <Border Grid.Column="0" Padding="20">
             <StackPanel>
 
-                <TextBlock FontSize="30">Vragen</TextBlock>
-                <Border Padding="0,10">
-                    <StackPanel>
-                        <TextBlock>
-                            <materialDesign:PackIcon Kind="ModeEdit" />
-                            Dit is een vraag
-                        </TextBlock>
-                        <TextBlock>Open vraag</TextBlock>
-                    </StackPanel>
-                </Border>
-
-
-                <Button HorizontalAlignment="Right" Command="{Binding AddQuestionCommand}">
-                    <Border CornerRadius="8" BorderThickness="1" BorderBrush="Black">
+                <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+                    <TextBlock FontSize="30">Vragen</TextBlock>
+                    <Button HorizontalAlignment="Right" Command="{Binding AddQuestionCommand}">
                         <materialDesign:PackIcon Kind="Add"/>
-                    </Border>
-                </Button>
+                    </Button>
+                </DockPanel>
+
+                <ListBox
+                    ItemsSource="{Binding Questions}"
+                    SelectedItem="{Binding SelectedQuestion}"
+                    VerticalContentAlignment="Top"  
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    ScrollViewer.CanContentScroll="False"
+                    MaxHeight="800">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate >
+                            <StackPanel>
+
+                                <TextBox IsReadOnly="True" Text="{Binding Question}" materialDesign:HintAssist.Hint="(Selecteer vraag)" FontSize="25" HorizontalAlignment="Stretch"></TextBox>
+                                <TextBlock>Voorbeeld</TextBlock>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </StackPanel>
         </Border>
 
         <!-- Selected Question -->
         <Border Grid.Column="1" Padding="20">
             <StackPanel Grid.Column="1" Visibility="{Binding GetVisibility}">
-                <TextBox FontSize="25" Text="{Binding SelectedQuestion.Question}"></TextBox>
+                <TextBox 
+                    materialDesign:HintAssist.Hint="Vraag"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    FontSize="25"
+                    Text="{Binding SelectedQuestion.Question, UpdateSourceTrigger=PropertyChanged}"
+                />
 
-                <TextBlock>Type vraag</TextBlock>
+                <Grid Margin="0, 30">
+                    <ComboBox 
+                        ItemsSource="{Binding QuestionTypes}"   
+                        DisplayMemberPath="Type"
+                        SelectedValuePath="Id"
+                        SelectedValue="{Binding SelectedQuestion.StringType}"
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                        materialDesign:HintAssist.Hint="Type vraag"
+                    />
+                </Grid>
 
-                <ComboBox ItemsSource="{Binding QuestionTypes}"
-                  DisplayMemberPath="Type"
-                  SelectedValuePath="Type"
-                  SelectedValue="{Binding SelectedQuestion.Type}" />
+                <StackPanel Visibility="{Binding GetAnswerRowsVisibility}">
+                    <TextBlock FontSize="25">Mogelijke antwoorden</TextBlock>
+                    <ListView 
+                        ItemsSource="{Binding SelectedQuestion.Possible_answers}"
+                        VerticalContentAlignment="Top"  
+                        ScrollViewer.VerticalScrollBarVisibility="Visible"
+                        ScrollViewer.CanContentScroll="False"
+                        Height="500"
+                    >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBox 
+                                        Text="{Binding Answer}" 
+                                        Width="300" 
+                                        materialDesign:HintAssist.Hint="Vraag"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
-                <Frame Content="{Binding QuestionContent}" NavigationUIVisibility="Hidden"></Frame>
+                    <Button Command="{Binding AddAnswerRowCommand}">Voeg regel toe</Button>
+                </StackPanel>
+
+                <StackPanel Margin="0, 50" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Margin="10, 0"  Command="{Binding DeleteQuestionCommand}" ToolTip="Dit kan niet teruggedraaid worden">Verwijder vraag</Button>
+                </StackPanel>
 
             </StackPanel>
         </Border>
