@@ -1,5 +1,6 @@
 ﻿using Festispec.Domain;
 using Festispec.ViewModel.DataService;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Windows.Input;
 
 namespace Festispec.ViewModel.ClientVM
 {
-    public class EditClientVM
+    public class EditClientVM : ViewModelBase
     {
         private IDataService _service;
         private MainViewModel _main;
