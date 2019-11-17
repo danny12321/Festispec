@@ -51,6 +51,15 @@
         <!-- Selected Question -->
         <Border Grid.Column="1" Padding="20">
             <StackPanel Grid.Column="1" Visibility="{Binding GetVisibility}">
+
+                <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+                    <TextBlock Text="Geselecteerde vraag" FontSize="30" />
+
+                    <Button HorizontalAlignment="Right" Command="{Binding AddQuestionCommand}">
+                        <materialDesign:PackIcon Kind="TrashCanOutline" Height="25" Width="25" />
+                    </Button>
+                </DockPanel>
+
                 <TextBox 
                     materialDesign:HintAssist.Hint="Vraag"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
