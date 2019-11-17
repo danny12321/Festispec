@@ -42,7 +42,7 @@
                 <DataGridTextColumn Header="Naam" Binding="{Binding ClientName}" Foreground="#FF1D1616" Width="200"/>
                 <DataGridTextColumn Header="Postcode" Binding="{Binding PostalCode}" Foreground="#FF1D1616" Width="150"/>
                 <DataGridTextColumn Header="Straat" Binding="{Binding Street}" Foreground="#FF1D1616" Width="200"/>
-                <DataGridTextColumn Header="Huisnummer" Binding="{Binding HouseNumber}" Foreground="#FF1D1616" Width="150"/>
+                <DataGridTextColumn Header="Huisnummer" Binding="{Binding Housenumber}" Foreground="#FF1D1616" Width="150"/>
                 <DataGridTextColumn Header="Land" Binding="{Binding Country}" Foreground="#FF1D1616" Width="150"/>
                 <DataGridTextColumn Header="Telefoonnummer" Binding="{Binding Phone}" Foreground="#FF1D1616" Width="150"/>
                 <DataGridTemplateColumn Width="75">

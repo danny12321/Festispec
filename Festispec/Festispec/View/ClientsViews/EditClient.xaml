@@ -38,7 +38,7 @@
                     <Button HorizontalAlignment="Right" Command="{Binding EditClientCommand}" CommandParameter="{Binding EditClientCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="150"
-                    ToolTip="Resource name: MaterialDesignRaisedButton">
+                    ToolTip="Wijzigingen opslaan">
                         Save changes
                     </Button>
                 </Border>
