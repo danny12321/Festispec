@@ -59,7 +59,7 @@
                     </Button>
                 </Grid>
 
-                <!--<DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedClient, Mode=TwoWay}" ItemsSource="{Binding Festivals}" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+                <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedClient, Mode=OneWay}" ItemsSource="{Binding Festivals}" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Naam" Binding="{Binding FestivalName}" Foreground="#FF1D1616" Width="250"/>
                         <DataGridTemplateColumn Width="100">
@@ -77,7 +77,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
-                </DataGrid>-->
+                </DataGrid>
 
             </StackPanel>
         </Border>
