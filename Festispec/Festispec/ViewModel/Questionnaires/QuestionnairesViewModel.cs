@@ -1,5 +1,6 @@
 ﻿using Festispec.Domain;
 using Festispec.View.Questionnaires;
+using Festispec.ViewModel.Questionnaires.Types;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
@@ -27,9 +28,11 @@ namespace Festispec.ViewModel.Questionnaires
             set
             {
                 _selectedQuestion = value;
-                RaisePropertyChanged("SelectedQuestion");
+                EditPage = _selectedQuestion?.GetEditPage;
+                RaisePropertyChanged("EditPage");
                 RaisePropertyChanged("GetVisibility");
-                RaisePropertyChanged("GetAnswerRowsVisibility");
+                RaisePropertyChanged("SelectedQuestion");
+                RaisePropertyChanged("SelectedQuestion.StringType");
             }
         }
 
@@ -42,33 +45,41 @@ namespace Festispec.ViewModel.Questionnaires
             }
         }
 
-        public string GetAnswerRowsVisibility
+        public void ChangeType(QuestionViewModel question, Type_questions value)
         {
-            get
+            int index = Questions.IndexOf(question);
+            Console.WriteLine(question.Type.type);
+            Questions[index] = GetQuestionClass(question.ToModel());
+            RaisePropertyChanged("EditPage");
+
+            Console.WriteLine("Type changed");
+        }
+
+        private Page _editPage;
+
+        public Page EditPage
+        {
+            get { return _editPage; }
+            set
             {
-                switch (SelectedQuestion?.Type?.type)
-                {
-                    case "ComboBox":
-                        return "Visible";
-                    default:
-                        return "Hidden";
-                }
+                _editPage = value;
+                RaisePropertyChanged("EditPage");
             }
         }
 
         public ICommand AddQuestionCommand { get; set; }
 
-        public ICommand AddAnswerRowCommand { get; set; }
+        public ICommand DeleteQuestionCommand { get; set; }
 
         public QuestionnairesViewModel()
         {
             AddQuestionCommand = new RelayCommand(AddQuestion);
-            AddAnswerRowCommand = new RelayCommand(AddAnswerRow);
+            DeleteQuestionCommand = new RelayCommand(DeleteQuestion);
 
             using (var context = new FestispecEntities())
             {
                 var questions = context.Questions.ToList()
-                    .Select(q => new QuestionViewModel(this, q));
+                    .Select(q => GetQuestionClass(q));
 
 
                 Questions = new ObservableCollection<QuestionViewModel>(questions);
@@ -80,16 +91,51 @@ namespace Festispec.ViewModel.Questionnaires
             }
         }
 
-        private void AddQuestion()
+        private QuestionViewModel GetQuestionClass(Questions q)
         {
-            var newQuestion = new QuestionViewModel(this);
-            SelectedQuestion = newQuestion;
-            Questions.Add(SelectedQuestion);
+            switch (q.type_question)
+            {
+                case 1:
+                    return new OpenQuestion(this, q);
+
+                case 2:
+                    return new MultipleChoiseQuestion(this, q);
+
+                case 3:
+                    return new SelectQuestion(this, q);
+
+                default:
+                    return null;
+            }
         }
 
-        private void AddAnswerRow()
+        private void AddQuestion()
         {
-            SelectedQuestion?.AddAnswerRow();
+            var question = new Questions() { question = "New question", type_question = 2 };
+
+            using (var context = new FestispecEntities())
+            {
+                context.Questions.Add(question);
+                question.Type_questions = context.Type_questions.First(tq => tq.id == question.type_question);
+                context.SaveChanges();
+            }
+
+            var newQuestion = GetQuestionClass(question);
+            SelectedQuestion = newQuestion;
+            Questions.Add(newQuestion);
+        }
+
+        private void DeleteQuestion()
+        {
+            using (var context = new FestispecEntities())
+            {
+                context.Questions.Attach(SelectedQuestion.ToModel());
+                context.Questions.Remove(SelectedQuestion.ToModel());
+                context.SaveChanges();
+            }
+
+            Questions.Remove(SelectedQuestion);
+            SelectedQuestion = null;
         }
     }
 }

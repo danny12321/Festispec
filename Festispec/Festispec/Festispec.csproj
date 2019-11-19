@@ -89,13 +89,35 @@
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\Questionnaires\IQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Possible_answerVM.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionnairesViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionTypeViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionViewModel.cs" />
+    <Compile Include="ViewModel\Questionnaires\Types\MultipleChoiseQuestion.cs" />
+    <Compile Include="ViewModel\Questionnaires\Types\OpenQuestion.cs" />
+    <Compile Include="ViewModel\Questionnaires\Types\SelectQuestion.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\Questionnaires\Questionnaires.xaml.cs">
       <DependentUpon>Questionnaires.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\MultipleChoiseEdit.xaml.cs">
+      <DependentUpon>MultipleChoiseEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\MultipleChoisePreview.xaml.cs">
+      <DependentUpon>MultipleChoisePreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\OpenEdit.xaml.cs">
+      <DependentUpon>OpenEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\OpenPreview.xaml.cs">
+      <DependentUpon>OpenPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\SelectEdit.xaml.cs">
+      <DependentUpon>SelectEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\SelectPreview.xaml.cs">
+      <DependentUpon>SelectPreview.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Schedule.xaml.cs">
       <DependentUpon>Schedule.xaml</DependentUpon>
@@ -127,6 +149,30 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\Questionnaires\Questionnaires.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\MultipleChoiseEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\MultipleChoisePreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\OpenEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\OpenPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\SelectEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\SelectPreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

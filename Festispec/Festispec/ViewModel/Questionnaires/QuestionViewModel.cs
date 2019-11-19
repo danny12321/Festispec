@@ -7,11 +7,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Festispec.ViewModel.Questionnaires
 {
-    public class QuestionViewModel
+    public abstract class QuestionViewModel : IQuestion
     {
         private QuestionnairesViewModel Questionnaires;
 
@@ -19,16 +20,16 @@ namespace Festispec.ViewModel.Questionnaires
 
         public int Id { get; private set; }
 
-        public string StringType
+        public QuestionTypeViewModel StringType
         {
             get
             {
-                return _question.Type_questions?.type;
+                return new QuestionTypeViewModel(_question.Type_questions);
             }
             set
             {
-                Type = Questionnaires.QuestionTypes.ToList().Where(t => t.Id == int.Parse(value)).First().ToModel();
-                Questionnaires.RaisePropertyChanged("GetAnswerRowsVisibility");
+                Console.WriteLine(value);
+                _question.Type_questions = value.ToModel();
             }
         }
 
@@ -40,8 +41,9 @@ namespace Festispec.ViewModel.Questionnaires
             }
             set
             {
-                _question.Type_questions = value;
-                _question.type_question = value.id;
+                //_question.Type_questions = value;
+                //_question.type_question = value.id;
+                Questionnaires.ChangeType(this, value);
             }
         }
 
@@ -54,12 +56,17 @@ namespace Festispec.ViewModel.Questionnaires
             set
             {
                 _question.question = value;
+                SaveChanges();
             }
         }
 
         public ObservableCollection<Possible_answerVM> Possible_answers { get; set; }
 
         public ICommand AddAnswerRowCommand { get; set; }
+
+        public virtual Page GetPreviewPage { get => null; }
+
+        public virtual Page GetEditPage { get => null; }
 
         public QuestionViewModel(QuestionnairesViewModel questionnaires, Questions q)
         {
@@ -72,21 +79,23 @@ namespace Festispec.ViewModel.Questionnaires
             Possible_answers = new ObservableCollection<Possible_answerVM>(possible_answers);
 
             AddAnswerRowCommand = new RelayCommand(AddAnswerRow);
-        }
 
-        public QuestionViewModel(QuestionnairesViewModel questionnaires)
-        {
-            Questionnaires = questionnaires;
-            _question = new Questions() { type_question = 1 };
-
-            Possible_answers = new ObservableCollection<Possible_answerVM>();
-
-            AddAnswerRowCommand = new RelayCommand(AddAnswerRow);
+            
         }
 
         public void AddAnswerRow()
         {
             Possible_answers.Add(new Possible_answerVM());
+        }
+
+        public void SaveChanges()
+        {
+            using (var context = new FestispecEntities())
+            {
+                var question = context.Questions.First(q => q.id == _question.id);
+                question.question = Question;
+                context.SaveChanges();
+            }
         }
 
         internal Questions ToModel()
