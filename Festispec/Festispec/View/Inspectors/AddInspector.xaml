@@ -7,7 +7,15 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       DataContext="{Binding AddInspector, Source={StaticResource Locator}}"
-      Title="AddInspector">
+      Title="AddInspector"
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -25,15 +33,15 @@
                 <TextBlock Text="Achternaam:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding Inspector.InspectorLastName, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Geboorte Datum:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Inspector.Birthday, Mode=TwoWay}"></TextBox>
+                <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding Inspector.Birthday,Mode=OneWayToSource}" DisplayDate="2019-11-19"/>
                 <TextBlock Text="Postcode:"></TextBlock>
                 <TextBox MaxLength="6" Text="{Binding Inspector.PostalCode, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Straat:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Inspector.Street, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="25" Text="{Binding Inspector.Street, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Huisnummer:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Inspector.Housenumber, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="5" Text="{Binding Inspector.Housenumber, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="TelefoonNummer:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Inspector.Phone, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="10" Text="{Binding Inspector.Phone, Mode=TwoWay}"></TextBox>
                 
 
                 <Border Padding="10">
