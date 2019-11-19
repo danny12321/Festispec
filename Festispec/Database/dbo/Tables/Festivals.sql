@@ -9,8 +9,8 @@
     [end_date]        DATETIME      NOT NULL,
     [client_id]       INT           NOT NULL,
     [municipality_id] INT           NOT NULL,
-    [latitude]        FLOAT (53)    NOT NULL,
-    [longitude]       FLOAT (53)    NOT NULL,
+    [latitude]        NVARCHAR(50)    NOT NULL,
+    [longitude]       NVARCHAR(50)    NOT NULL,
     CONSTRAINT [PK_Festivals] PRIMARY KEY CLUSTERED ([id] ASC),
     CONSTRAINT [FK_Festivals_Clients] FOREIGN KEY ([client_id]) REFERENCES [dbo].[Clients] ([id]),
     CONSTRAINT [FK_Festivals_Municipalities] FOREIGN KEY ([municipality_id]) REFERENCES [dbo].[Municipalities] ([id])

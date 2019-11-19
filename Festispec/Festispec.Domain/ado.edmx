@@ -52,8 +52,8 @@
           <Property Name="end_date" Type="datetime" Nullable="false" />
           <Property Name="client_id" Type="int" Nullable="false" />
           <Property Name="municipality_id" Type="int" Nullable="false" />
-          <Property Name="latitude" Type="float" Nullable="false" />
-          <Property Name="longitude" Type="float" Nullable="false" />
+          <Property Name="latitude" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="longitude" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Inspections">
           <Key>
@@ -78,7 +78,9 @@
           <Property Name="street" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="housenumber" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="phone" Type="nvarchar" MaxLength="50" />
-          <Property Name="active" Type="datetime" Nullable="false" />
+          <Property Name="active" Type="datetime" />
+          <Property Name="latitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="longitude" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Inspectors_at_inspection">
           <Key>
@@ -137,7 +139,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="question" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="question" Type="nvarchar" MaxLength="500" />
           <Property Name="type_question" Type="int" Nullable="false" />
           <Property Name="questionnaire_id" Type="int" Nullable="false" />
         </EntityType>
@@ -576,8 +578,8 @@
           <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="client_id" Type="Int32" Nullable="false" />
           <Property Name="municipality_id" Type="Int32" Nullable="false" />
-          <Property Name="latitude" Type="Double" Nullable="false" />
-          <Property Name="longitude" Type="Double" Nullable="false" />
+          <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_Festivals_Clients" FromRole="Festivals" ToRole="Clients" />
           <NavigationProperty Name="Contactpersons" Relationship="Self.FK_Contactpersons_Festivals" FromRole="Festivals" ToRole="Contactpersons" />
           <NavigationProperty Name="Municipalities" Relationship="Self.FK_Festivals_Municipalities" FromRole="Festivals" ToRole="Municipalities" />
@@ -608,7 +610,9 @@
           <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="housenumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="active" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="active" Type="DateTime" Precision="3" />
+          <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Inspectors_at_inspection" Relationship="Self.FK_Inspectors_at_inspection_Inspectors" FromRole="Inspectors" ToRole="Inspectors_at_inspection" />
           <NavigationProperty Name="Inspectors_availability" Relationship="Self.FK_Inspectors_availability_Inspectors" FromRole="Inspectors" ToRole="Inspectors_availability" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_Inspectors" FromRole="Inspectors" ToRole="Users" />
@@ -680,7 +684,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="question" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="question" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="type_question" Type="Int32" Nullable="false" />
           <Property Name="questionnaire_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Answers" Relationship="Self.FK_Answers_Questions" FromRole="Questions" ToRole="Answers" />
@@ -1121,6 +1125,8 @@
                 <ScalarProperty Name="housenumber" ColumnName="housenumber" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

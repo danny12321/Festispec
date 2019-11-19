@@ -62,6 +62,9 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.6.0.325, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.6.0\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Maps.MapControl.WPF">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Bing Maps WPF Control\V1\Libraries\Microsoft.Maps.MapControl.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -87,6 +90,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\HomeViewModel.cs" />
+    <Compile Include="ViewModel\Inspections\FestivalVM.cs" />
     <Compile Include="ViewModel\Inspections\InspectionAddViewModel.cs" />
     <Compile Include="ViewModel\Inspections\InspectionsViewModel.cs" />
     <Compile Include="ViewModel\Inspections\InspectionVM.cs" />

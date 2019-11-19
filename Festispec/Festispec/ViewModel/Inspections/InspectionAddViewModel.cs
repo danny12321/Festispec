@@ -8,14 +8,26 @@ using System.Windows.Input;
 using Festispec.Domain;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Microsoft.Maps.MapControl.WPF;
 
 namespace Festispec.ViewModel.Inspections
 {
     public class InspectionAddViewModel : ViewModelBase
     {
+        //TODO Make this dynamic
+        private int _festivalId = 1;
+
+
         public ObservableCollection<InspectorsVM> Inspectors { get; set; }
 
+        public InspectorsVM SelectedInspector { get; set; }
+
         public ObservableCollection<InspectorAtInspectionVM> InspectorsAtInspection { get; set; }
+
+        public ObservableCollection<InspectorsVM> SelectedInspectors { get; set; }
+
+
+        public FestivalVM Festival { get; set; }
 
         public InspectionVM Inspection { get; set; }
 
@@ -39,6 +51,7 @@ namespace Festispec.ViewModel.Inspections
 
         public ICommand TestButton { get; set; }
         public ICommand AddInspectionCommand { get; set; }
+        public ICommand SetViewToSelectedPersonCommand { get; set; }
 
         public InspectionAddViewModel()
         {
@@ -52,13 +65,17 @@ namespace Festispec.ViewModel.Inspections
 
             TestButton = new RelayCommand(Debug);
             AddInspectionCommand = new RelayCommand(AddInspection);
+            SetViewToSelectedPersonCommand = new RelayCommand<Map>(SetViewToSelectedPerson);
 
             using (var context = new FestispecEntities())
             {
+                //Get inspectors
                 var inspectors = context.Inspectors.ToList()
                     .Select(i => new InspectorsVM(i));
 
                 Inspectors = new ObservableCollection<InspectorsVM>(inspectors);
+
+                Festival = new FestivalVM(context.Festivals.ToList().First(f => f.id == _festivalId));
             }
         }
 
@@ -69,7 +86,7 @@ namespace Festispec.ViewModel.Inspections
             Inspection.End_date = EndDateTimeCombined;
 
             // TODO Make festival id dynamic
-            Inspection.Festival_id = 1;
+            Inspection.Festival_id = _festivalId;
 
             if (ValidateInput(Inspection))
             {
@@ -121,6 +138,13 @@ namespace Festispec.ViewModel.Inspections
         private bool IsEndDateAfterTheStartDate(DateTime startDate, DateTime endDate)
         {
             return endDate > startDate;
+        }
+
+        private void SetViewToSelectedPerson(Map map)
+        {
+            var longitude = Convert.ToDouble(SelectedInspector.Inspector.longitude);
+            var latitude = Convert.ToDouble(SelectedInspector.Inspector.latitude);
+            map.SetView(latitude, longitude);
         }
 
         private void Debug()

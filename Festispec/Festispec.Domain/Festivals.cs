@@ -31,8 +31,8 @@ namespace Festispec.Domain
         public System.DateTime end_date { get; set; }
         public int client_id { get; set; }
         public int municipality_id { get; set; }
-        public double latitude { get; set; }
-        public double longitude { get; set; }
+        public string latitude { get; set; }
+        public string longitude { get; set; }
     
         public virtual Clients Clients { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

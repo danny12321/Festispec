@@ -9,36 +9,65 @@
       Title="AddInspection"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:System="clr-namespace:System;assembly=mscorlib"
+      xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
       DataContext="{Binding InspectionAdd, Source={StaticResource Locator}}">
 
-    <StackPanel Orientation="Horizontal">
-        
-        <StackPanel Width="300">
+    <Page.Resources>
+        <DataTemplate x:Key="LogoTemplate">
+
+            <Canvas
+                m:MapLayer.Position="{Binding Pos}"
+                m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30"
+               >
+                <Button Command="{Binding SelectCommand}"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        BorderThickness="0" 
+                        Padding="0"
+                        >
+                    <materialDesign:PackIcon Kind="Location" Width="30" Height="30" Foreground="#FF3C3C3C"/>
+                </Button>
+            </Canvas>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Width="300" Grid.Column="0" Grid.Row="0" Height="500">
             <Border BorderThickness="10">
                 <TextBox TextWrapping="Wrap"
-                        VerticalAlignment="Stretch"
-                        MinWidth="280"
-                        AcceptsReturn="True"
-                        VerticalScrollBarVisibility="Auto"
-                        SpellCheck.IsEnabled="True"
-                        materialDesign:HintAssist.Hint="Beschrijving"
-                        Height="80"
-                        Text="{Binding Inspection.Description}"></TextBox>
+                            VerticalAlignment="Stretch"
+                            MinWidth="280"
+                            AcceptsReturn="True"
+                            VerticalScrollBarVisibility="Auto"
+                            SpellCheck.IsEnabled="True"
+                            materialDesign:HintAssist.Hint="Beschrijving"
+                            Height="80"
+                            Text="{Binding Inspection.Description}"></TextBox>
             </Border>
             <!--Begin time-->
             <Border BorderThickness="10">
                 <StackPanel>
                     <TextBlock>Start datum en tijd</TextBlock>
-                
+
                     <StackPanel Orientation="Horizontal">
                         <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding StartDate}"/>
                         <materialDesign:TimePicker
-                          Is24Hours="True"
-                          Margin="10,0,0,0"
-                          x:Name="PresetBeginTimePicker"
-                          Width="100"
-                          Text="{Binding StartTime}"
-                           />
+                              Is24Hours="True"
+                              Margin="10,0,0,0"
+                              x:Name="PresetBeginTimePicker"
+                              Width="100"
+                              Text="{Binding StartTime}"
+                               />
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -49,12 +78,12 @@
                     <StackPanel Orientation="Horizontal">
                         <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding EndDate}"/>
                         <materialDesign:TimePicker
-                          Is24Hours="True"
-                          Margin="10,0,0,0"
-                          x:Name="PresetEindTimePicker"
-                          Width="100"
-                          Text="{Binding EndTime}"
-                           />
+                              Is24Hours="True"
+                              Margin="10,0,0,0"
+                              x:Name="PresetEindTimePicker"
+                              Width="100"
+                              Text="{Binding EndTime}"
+                               />
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -62,7 +91,49 @@
             <Button Command="{Binding AddInspectionCommand}">Maak aan</Button>
 
         </StackPanel>
-        <TextBlock>Hier moet de mooie map van danny</TextBlock>
-        <Button Command="{Binding TestButton}"></Button>
-    </StackPanel>
+
+        <Border Grid.Column="1" Grid.Row="0">
+            <ListBox
+                    ItemsSource="{Binding Inspectors}"
+                    SelectedItem="{Binding SelectedInspector}"
+                    VerticalContentAlignment="Top"  
+                    Width="300"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    ScrollViewer.CanContentScroll="False"
+                    MaxHeight="800">
+                <ListBox.ItemTemplate>
+                    <DataTemplate >
+                        <StackPanel>
+                            <TextBlock Text="{Binding Fullname}"></TextBlock>
+                            <Button Command="{Binding SetViewToSelectedPersonCommand}" CommandParameter="{Binding ElementName=MijnMap}">Icoon</Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+        <m:Map Grid.Column="2" Grid.Row="0" x:Name="MijnMap" CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo" Mode="Road" ZoomLevel="6" Center="52.0753513,5.7688085">
+            <m:Map.Children>
+
+                <m:MapItemsControl ItemTemplate="{StaticResource LogoTemplate}" ItemsSource="{Binding Inspectors}" >
+                </m:MapItemsControl>
+
+                <!--Het festival-->
+                <Canvas
+                    m:MapLayer.Position="{Binding Festival.Pos}"
+                    m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30"
+                    >
+                    <Button Command="{Binding SelectCommand}"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        BorderThickness="0" 
+                        Padding="0"
+                        >
+                        <materialDesign:PackIcon Kind="Location" Width="30" Height="30" Foreground="#02e840"/>
+                    </Button>
+                </Canvas>
+
+            </m:Map.Children>
+        </m:Map>
+    </Grid>
+
 </Page>

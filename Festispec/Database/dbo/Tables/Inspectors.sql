@@ -7,7 +7,9 @@
     [street]      NVARCHAR (50) NOT NULL,
     [housenumber] NVARCHAR (10) NOT NULL,
     [phone]       NVARCHAR (50) NULL,
-    [active]      DATETIME      NOT NULL,
+    [active]      DATETIME      NULL,
+    [latitude] NVARCHAR(50) NULL, 
+    [longitude] NVARCHAR(50) NULL, 
     CONSTRAINT [PK_Inspectors] PRIMARY KEY CLUSTERED ([id] ASC)
 );
 
