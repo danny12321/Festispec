@@ -19,7 +19,7 @@ namespace Festispec.ViewModel.FestivalVM
         private IDataService _service;
         private MainViewModel _main;
 
-        private ClientManageVM _clients;
+        private ClientInfoVM _clients;
 
         public ICommand EditFestivalCommand { get; set; }
 
@@ -28,7 +28,7 @@ namespace Festispec.ViewModel.FestivalVM
             get { return _service.SelectedFestival; }
         }
 
-        public EditFestivalVM(MainViewModel main, IDataService service, ClientManageVM clients)
+        public EditFestivalVM(MainViewModel main, IDataService service, ClientInfoVM clients)
         {
             this._main = main;
             this._service = service;
