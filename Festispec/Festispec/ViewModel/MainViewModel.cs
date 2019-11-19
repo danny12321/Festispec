@@ -61,13 +61,17 @@ namespace Festispec.ViewModel
                     FrameContent = new View.FestivalViews.Festivals();
                     PageTitle = "Festival beheer";
                     break;
+                case "FestivalInfo":
+                    FrameContent = new View.FestivalViews.FestivalInfo();
+                    PageTitle = "Festival info";
+                    break;
                 case "Clients":
                     FrameContent = new View.ClientsViews.Client();
                     PageTitle = "Klanten beheer";
                     break;
                 case "ClientInfo":
                     FrameContent = new View.ClientsViews.ClientInfo();
-                    PageTitle = "Klanten beheer";
+                    PageTitle = "Klanten info";
                     break;
                 case "Vragenlijsten TEMP":
                     FrameContent = new View.Questionnaires.Questionnaires();

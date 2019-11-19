@@ -24,6 +24,7 @@ namespace Festispec.ViewModel.ClientVM
 
         public ICommand AddFestivalCommand { get; set; }
         public ICommand ShowEditCommand { get; set; }
+        public ICommand ShowFestivalCommand { get; set; }
 
         public ClientsVM SelectedClient
         {
@@ -56,16 +57,20 @@ namespace Festispec.ViewModel.ClientVM
 
             AddFestivalCommand = new RelayCommand(ShowAddFestival);
             ShowEditCommand = new RelayCommand(ShowEditFestival);
+            ShowFestivalCommand = new RelayCommand(ShowFestivalInfo);
         }
 
         private void ShowEditFestival()
         {
             _main.SetPage("EditFestival");
         }
-
         public void ShowAddFestival()
         {
             _main.SetPage("addFestival");
+        }
+        public void ShowFestivalInfo()
+        {
+            _main.SetPage("FestivalInfo");
         }
 
         public void ShowClientPage()

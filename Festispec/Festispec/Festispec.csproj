@@ -95,6 +95,7 @@
     <Compile Include="ViewModel\DataService\IDataService.cs" />
     <Compile Include="ViewModel\FestivalVM\AddFestivalVM.cs" />
     <Compile Include="ViewModel\FestivalVM\EditFestivalVM.cs" />
+    <Compile Include="ViewModel\FestivalVM\FestivalInfoVM.cs" />
     <Compile Include="ViewModel\FestivalVM\FestivalManagementVM.cs" />
     <Compile Include="ViewModel\FestivalVM\FestivalVM.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
@@ -121,6 +122,9 @@
     </Compile>
     <Compile Include="View\FestivalViews\EditFestival.xaml.cs">
       <DependentUpon>EditFestival.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FestivalViews\FestivalInfo.xaml.cs">
+      <DependentUpon>FestivalInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FestivalViews\Festivals.xaml.cs">
       <DependentUpon>Festivals.xaml</DependentUpon>
@@ -162,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FestivalViews\EditFestival.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FestivalViews\FestivalInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

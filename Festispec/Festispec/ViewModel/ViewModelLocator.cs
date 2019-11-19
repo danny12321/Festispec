@@ -16,6 +16,7 @@ namespace Festispec.ViewModel
         private ClientManageVM _clientManageVM;
         private ClientInfoVM _clientInfoVM;
         private FestivalManagementVM _festivalManagementVM;
+        private FestivalInfoVM _festivalInfoVM;
 
         public ViewModelLocator()
         {
@@ -51,6 +52,15 @@ namespace Festispec.ViewModel
                     _festivalManagementVM = new FestivalManagementVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
                 }
                 return _festivalManagementVM;
+            }
+        }
+
+        public FestivalInfoVM festivalinfo
+        {
+            get
+            {
+                _festivalInfoVM = new FestivalInfoVM(Main, ServiceLocator.Current.GetInstance<IDataService>(), _festivalManagementVM);
+                return _festivalInfoVM;
             }
         }
 
