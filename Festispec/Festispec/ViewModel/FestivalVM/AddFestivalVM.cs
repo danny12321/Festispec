@@ -61,7 +61,11 @@ namespace Festispec.ViewModel.Festival_VMs
 
         private bool CanAddFestival()
         {
-            return true;
+            if (IsMatch())
+            {
+                return true;
+            }
+            return false;
         }
 
         private void AddFestivalMethod()
@@ -76,6 +80,24 @@ namespace Festispec.ViewModel.Festival_VMs
                 context.SaveChanges();
             }
             _clients.ShowClientPage();
+        }
+
+        private bool IsMatch()
+        {
+            if (!IsEmptyField(Festival.FestivalName) && !IsEmptyField(Festival.PostalCode) && !IsEmptyField(Festival.Street) && !IsEmptyField(Festival.HouseNumber) && !IsEmptyField(Festival.Country) && !IsEmptyField(Festival.Longitude.ToString()) && !IsEmptyField(Festival.Latitude.ToString()))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool IsEmptyField(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
