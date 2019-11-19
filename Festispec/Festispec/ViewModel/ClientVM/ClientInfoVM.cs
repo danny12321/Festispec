@@ -1,5 +1,6 @@
 ﻿using Festispec.Domain;
 using Festispec.ViewModel.DataService;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ using System.Windows.Input;
 
 namespace Festispec.ViewModel.ClientVM
 {
-    public class ClientInfoVM
+    public class ClientInfoVM : ViewModelBase
     {
         private IDataService _service;
         private ClientManageVM _clients;
@@ -27,6 +28,16 @@ namespace Festispec.ViewModel.ClientVM
         public ClientsVM SelectedClient
         {
             get { return _service.SelectedClient; }
+        }
+
+        public FestivalVM.FestivalVM SelectedFestival
+        {
+            get { return _service.SelectedFestival; }
+            set
+            {
+                _service.SelectedFestival = value;
+                RaisePropertyChanged();
+            }
         }
 
         public ClientInfoVM(MainViewModel main, IDataService service, ClientManageVM clients)
