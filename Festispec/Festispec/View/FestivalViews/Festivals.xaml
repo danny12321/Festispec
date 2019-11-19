@@ -21,7 +21,7 @@
             <TextBlock Text="Festival" FontSize="28" Grid.Column="0" Padding="20"/>
         </Grid>
 
-        <DataGrid Margin="0 8 0 0" IsReadOnly="True" SelectedItem="{Binding SelectedFestival, Mode=OneWay}" ItemsSource="{Binding FestivalList}" CanUserSortColumns="True" CanUserAddRows="False" >
+        <DataGrid Margin="0 8 0 0" IsReadOnly="True" SelectedItem="{Binding SelectedFestival, Mode=TwoWay}" ItemsSource="{Binding FestivalList}" CanUserSortColumns="True" CanUserAddRows="False" >
             <DataGridTextColumn Header="Naam" Binding="{Binding FestivalName}" Foreground="#FF1D1616" Width="250"/>
             <DataGridTextColumn Header="Startdatum" Binding="{Binding StartDate}" Foreground="#FF1D1616" Width="250"/>
             <DataGridTextColumn Header="Einddatum" Binding="{Binding EndDate}" Foreground="#FF1D1616" Width="250"/>

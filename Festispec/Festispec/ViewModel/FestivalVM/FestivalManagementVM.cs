@@ -18,14 +18,18 @@ namespace Festispec.ViewModel.FestivalVMs
     {
         private IDataService _service;
         private MainViewModel _main;
-        public ObservableCollection<FestivalVM.FestivalVM> FestivalList;
-
+        public ObservableCollection<FestivalVM.FestivalVM> FestivalList { get; set; }
         public ICommand ShowFestival;
         public ICommand ShowAddInspection;
 
         public FestivalVM.FestivalVM SelectedFestival
         {
             get { return _service.SelectedFestival; }
+            set
+            {
+                _service.SelectedFestival = value;
+                RaisePropertyChanged();
+            }
         }
 
         public FestivalManagementVM(MainViewModel main, IDataService service)
