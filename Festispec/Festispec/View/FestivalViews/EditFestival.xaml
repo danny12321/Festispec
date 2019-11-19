@@ -45,7 +45,7 @@
                 <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.Longitude, Mode=TwoWay}"></TextBox>
 
                 <Border Padding="10">
-                    <Button HorizontalAlignment="Right" Command="{Binding EditClientCommand}" CommandParameter="{Binding EditFestivalCommand}"
+                    <Button HorizontalAlignment="Right" Command="{Binding EditFestivalCommand}" CommandParameter="{Binding EditFestivalCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="150"
                     ToolTip="Wijzigingen opslaan">

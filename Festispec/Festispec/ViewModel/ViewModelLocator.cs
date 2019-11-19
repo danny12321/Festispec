@@ -66,7 +66,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new EditFestivalVM(Main, ServiceLocator.Current.GetInstance<IDataService>(), _clientManageVM);
+                return new EditFestivalVM(Main, ServiceLocator.Current.GetInstance<IDataService>(), _clientInfoVM);
             }
         }
 
