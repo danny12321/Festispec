@@ -1,4 +1,5 @@
 ﻿using Festispec.ViewModel.ClientVM;
+using Festispec.ViewModel.FestivalVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace Festispec.ViewModel.DataService
     public interface IDataService
     {
         ClientsVM SelectedClient { get; set; }
+
+        FestivalVM.FestivalVM SelectedFestival { get; set; }
     }
 }

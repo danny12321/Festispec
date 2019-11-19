@@ -6,9 +6,44 @@
       xmlns:local="clr-namespace:Festispec.View.FestivalViews"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="EditFestival">
+      Title="EditFestival"
+      DataContext="{Binding editFestival, Source={StaticResource Locator}}">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Padding="20">
+            <StackPanel>
+                <TextBlock Text="Festival gegevens wijzigen" FontSize="25" Padding="0,10"/>
+
+                <TextBlock FontSize="20" Text="Festival naam:"></TextBlock>
+                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.FestivalName, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="20" Text="Postcode:"></TextBlock>
+                <TextBox FontSize="16" MaxLength="6" Text="{Binding SelectedFestival.PostalCode, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="20" Text="Straat:"></TextBlock>
+                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.Street, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="20" Text="Huisnummer:"></TextBlock>
+                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.HouseNumber, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="20" Text="Land:"></TextBlock>
+                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.Country, Mode=TwoWay}"></TextBox>
+
+                <TextBlock FontSize="20" Text="Begin datum:"></TextBlock>
+
+                <TextBlock FontSize="20" Text="Eind datum:"></TextBlock>
+
+                <TextBlock FontSize="20" Text="Klant id:"></TextBlock>
+                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.ClientId}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="20" Text="Gemeente id:"></TextBlock>
+                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.MunicipalityId}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="20" Text="Breedtegraad:"></TextBlock>
+                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.Latitude, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="20" Text="Hoogtegraad:"></TextBlock>
+                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.Longitude, Mode=TwoWay}"></TextBox>
+
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>
