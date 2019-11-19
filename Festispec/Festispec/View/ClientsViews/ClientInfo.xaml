@@ -22,18 +22,18 @@
 
                 <TextBlock Text="Klant gegevens" FontSize="25" Padding="0,10"/>
 
-                <TextBlock Text="Bedrijf naam:"></TextBlock>
-                <TextBox Text="{Binding SelectedClient.ClientName}" IsReadOnly="True"></TextBox>
-                <TextBlock Text="Postcode:"></TextBlock>
-                <TextBox Text="{Binding SelectedClient.PostalCode}" IsReadOnly="True"></TextBox>
-                <TextBlock Text="Straat:"></TextBlock>
-                <TextBox Text="{Binding SelectedClient.Street}" IsReadOnly="True"></TextBox>
-                <TextBlock Text="Huisnummer:"></TextBlock>
-                <TextBox Text="{Binding SelectedClient.Housenumber}" IsReadOnly="True"></TextBox>
-                <TextBlock Text="Land:"></TextBlock>
-                <TextBox Text="{Binding SelectedClient.Country}" IsReadOnly="True"></TextBox>
-                <TextBlock Text="Telefoon nummer:"></TextBlock>
-                <TextBox Text="{Binding SelectedClient.Phone}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="20" Text="Bedrijf naam:"></TextBlock>
+                <TextBox FontSize="16" Text="{Binding SelectedClient.ClientName}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="20" Text="Postcode:"></TextBlock>
+                <TextBox FontSize="16"  Text="{Binding SelectedClient.PostalCode}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="20" Text="Straat:"></TextBlock>
+                <TextBox FontSize="16"  Text="{Binding SelectedClient.Street}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="20" Text="Huisnummer:"></TextBlock>
+                <TextBox FontSize="16"  Text="{Binding SelectedClient.Housenumber}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="20" Text="Land:"></TextBlock>
+                <TextBox FontSize="16"  Text="{Binding SelectedClient.Country}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="20" Text="Telefoon nummer:"></TextBlock>
+                <TextBox FontSize="16"  Text="{Binding SelectedClient.Phone}" IsReadOnly="True"></TextBox>
 
             </StackPanel>
         </Border>
@@ -62,6 +62,8 @@
                 <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedClient, Mode=OneWay}" ItemsSource="{Binding Festivals}" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Naam" Binding="{Binding FestivalName}" Foreground="#FF1D1616" Width="250"/>
+                        <DataGridTextColumn Header="Startdatum" Binding="{Binding StartDate}" Foreground="#FF1D1616" Width="250"/>
+                        <DataGridTextColumn Header="Einddatum" Binding="{Binding EndDate}" Foreground="#FF1D1616" Width="250"/>
                         <DataGridTemplateColumn Width="100">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

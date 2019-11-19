@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec.View.ClientsViews"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Background="White"
@@ -21,18 +22,28 @@
 
                 <TextBlock Text="Klant gegevens wijzigen" FontSize="25" Padding="0,10"/>
 
-                <TextBlock Text="Bedrijf naam:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding SelectedClient.ClientName, Mode=TwoWay}"></TextBox>
-                <TextBlock Text="Postcode:"></TextBlock>
-                <TextBox MaxLength="6" Text="{Binding SelectedClient.PostalCode, Mode=TwoWay}"></TextBox>
-                <TextBlock Text="Straat:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding SelectedClient.Street, Mode=TwoWay}"></TextBox>
-                <TextBlock Text="Huisnummer:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding SelectedClient.Housenumber, Mode=TwoWay}"></TextBox>
-                <TextBlock Text="Land:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding SelectedClient.Country, Mode=TwoWay}"></TextBox>
-                <TextBlock Text="Telefoon nummer(Optioneel):"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding SelectedClient.Phone, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="20" Text="Bedrijf naam:"></TextBlock>
+                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedClient.ClientName, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="20" Text="Postcode:"></TextBlock>
+                <TextBox FontSize="16" MaxLength="6" Text="{Binding SelectedClient.PostalCode, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="20" Text="Straat:"></TextBlock>
+                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedClient.Street, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="20" Text="Huisnummer:"></TextBlock>
+                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedClient.Housenumber, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="20" Text="Land:"></TextBlock>
+                <ComboBox
+                        SelectedValue="{Binding Path=SelectedClient.Country}"
+                        Margin="0 8 0 8"
+                        HorizontalAlignment="Left">
+                    <ComboBoxItem>
+                        Nederland
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        België
+                    </ComboBoxItem>
+                </ComboBox>
+                <TextBlock FontSize="20" Text="Telefoon nummer(Optioneel):"></TextBlock>
+                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedClient.Phone, Mode=TwoWay}"></TextBox>
 
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding EditClientCommand}" CommandParameter="{Binding EditClientCommand}"
