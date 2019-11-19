@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec.View.FestivalViews"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddFestival"
@@ -16,6 +17,7 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
+        
         <Border Padding="20">
             <StackPanel>
 
@@ -32,7 +34,37 @@
                 <TextBlock Text="Land:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding Festival.Country, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Begin datum:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Festival.StartDate, Mode=TwoWay}"></TextBox>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Festival.StartDate, Mode=TwoWay, StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" VerticalAlignment="Center" FontSize="24" />
+                    <Button Margin="8 0 0 0" Content="..." Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
+                            materialDesign:DialogHost.DialogOpenedAttached="CombinedDialogOpenedEventHandler"
+                            materialDesign:DialogHost.DialogClosingAttached="CombinedDialogClosingEventHandler">
+                        <Button.CommandParameter>
+                            <Grid Margin="-1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <Calendar x:Name="CombinedCalendar" Margin="-1 -4 -1 0" />
+                                    <materialDesign:Clock x:Name="CombinedClock" DisplayAutomation="CycleWithSeconds" Is24Hours="True" />
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Margin="8" HorizontalAlignment="Right" Orientation="Horizontal">
+                                    <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" CommandParameter="0"
+                                            materialDesign:DialogHost.DialogClosingAttached="CombinedDialogClosingEventHandler"
+                                            Style="{DynamicResource MaterialDesignFlatButton}">
+                                        CANCEL
+                                    </Button>
+                                    <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" CommandParameter="1"
+                                            materialDesign:DialogHost.DialogClosingAttached="CombinedDialogClosingEventHandler"
+                                            Style="{DynamicResource MaterialDesignFlatButton}">
+                                        OK
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Button.CommandParameter>
+                    </Button>
+                </StackPanel>
                 <TextBlock Text="Eind datum:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding Festival.EndDate, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Klant id:"></TextBlock>
@@ -43,61 +75,6 @@
                 <TextBox MaxLength="50" Text="{Binding Festival.Latitude, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Hoogtegraad:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding Festival.Longitude, Mode=TwoWay}"></TextBox>
-
-                <StackPanel
-                        Orientation="Horizontal">
-                    <TextBlock
-                        Text="{Binding Date, StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}"
-                        VerticalAlignment="Center"
-                        FontSize="24" />
-                    <Button
-                        Margin="8 0 0 0"
-                        Content="..."
-                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                        materialDesign:DialogHost.DialogOpenedAttached="CombinedDialogOpenedEventHandler"
-                        materialDesign:DialogHost.DialogClosingAttached="CombinedDialogClosingEventHandler">        
-                        <Button.CommandParameter>
-                            <Grid
-                                Margin="-1">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition
-                                        Height="*" />
-                                    <RowDefinition
-                                    Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <StackPanel
-                                  Grid.Row="0"
-                                  Orientation="Horizontal">
-                                    <Calendar
-                                    x:Name="CombinedCalendar"
-                                    Margin="-1 -4 -1 0" />
-                                    <materialDesign:Clock
-                                    x:Name="CombinedClock"
-                                    DisplayAutomation="CycleWithSeconds"
-                                    Is24Hours="True" />
-                                </StackPanel>
-                                <StackPanel
-                                  Grid.Row="1"
-                                  Margin="8"
-                                  HorizontalAlignment="Right"
-                                  Orientation="Horizontal">
-                                    <Button
-                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                    CommandParameter="0"
-                                    Style="{DynamicResource MaterialDesignFlatButton}">
-                                        CANCEL
-                                    </Button>
-                                    <Button
-                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                    CommandParameter="1"
-                                    Style="{DynamicResource MaterialDesignFlatButton}">
-                                        OK
-                                    </Button>
-                                </StackPanel>
-                            </Grid>
-                        </Button.CommandParameter>
-                    </Button>
-                </StackPanel>
 
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding AddFestivalCommand}" CommandParameter="{Binding AddFestivalCommand}"
