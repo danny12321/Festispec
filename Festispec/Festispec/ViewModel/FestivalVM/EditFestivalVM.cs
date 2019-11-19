@@ -28,6 +28,7 @@ namespace Festispec.ViewModel.FestivalVM
             get { return _service.SelectedFestival; }
         }
 
+
         public EditFestivalVM(MainViewModel main, IDataService service, ClientInfoVM clients)
         {
             this._main = main;

@@ -71,6 +71,11 @@ namespace Festispec.ViewModel.FestivalVM
             set { _festival.end_date = value; }
         }
 
+        public int Year
+        {
+            get { return _festival.start_date.Year; }
+        }
+
         public int ClientId
         {
             get { return _festival.client_id; }
