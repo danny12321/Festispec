@@ -90,6 +90,8 @@
     <Compile Include="ViewModel\Inspections\InspectionAddViewModel.cs" />
     <Compile Include="ViewModel\Inspections\InspectionsViewModel.cs" />
     <Compile Include="ViewModel\Inspections\InspectionVM.cs" />
+    <Compile Include="ViewModel\Inspections\InspectorAtInspectionVM.cs" />
+    <Compile Include="ViewModel\Inspections\InspectorsVM.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionnairesViewModel.cs" />

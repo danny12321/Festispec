@@ -41,5 +41,15 @@ namespace Festispec.ViewModel.Inspections
         {
             _inspection = inspection;
         }
+
+        public InspectionVM()
+        {
+            _inspection = new Festispec.Domain.Inspections();
+        }
+
+        public Festispec.Domain.Inspections ToModel()
+        {
+            return _inspection;
+        }
     }
 }

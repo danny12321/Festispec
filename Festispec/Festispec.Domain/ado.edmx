@@ -87,7 +87,7 @@
           </Key>
           <Property Name="inpector_id" Type="int" Nullable="false" />
           <Property Name="inspection_id" Type="int" Nullable="false" />
-          <Property Name="absent" Type="datetime" Nullable="false" />
+          <Property Name="absent" Type="datetime" />
         </EntityType>
         <EntityType Name="Inspectors_availability">
           <Key>
@@ -620,7 +620,7 @@
           </Key>
           <Property Name="inpector_id" Type="Int32" Nullable="false" />
           <Property Name="inspection_id" Type="Int32" Nullable="false" />
-          <Property Name="absent" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="absent" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Inspections" Relationship="Self.FK_Inspectors_at_inspection_Inspections" FromRole="Inspectors_at_inspection" ToRole="Inspections" />
           <NavigationProperty Name="Inspectors" Relationship="Self.FK_Inspectors_at_inspection_Inspectors" FromRole="Inspectors_at_inspection" ToRole="Inspectors" />
           <NavigationProperty Name="Questionnaires" Relationship="Self.FK_Questionnaires_Inspectors_at_inspection" FromRole="Inspectors_at_inspection" ToRole="Questionnaires" />
