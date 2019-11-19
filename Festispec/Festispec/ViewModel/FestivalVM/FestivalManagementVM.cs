@@ -1,5 +1,6 @@
 ﻿using Festispec.Domain;
 using Festispec.View.FestivalViews;
+using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
@@ -11,18 +12,27 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Festispec.ViewModel.Festival_VMs
+namespace Festispec.ViewModel.FestivalVMs
 {
     public class FestivalManagementVM : ViewModelBase
     {
-
+        private IDataService _service;
+        private MainViewModel _main;
         public ObservableCollection<FestivalVM.FestivalVM> FestivalList;
 
         public ICommand ShowFestival;
         public ICommand ShowAddInspection;
 
-        public FestivalManagementVM()
+        public FestivalVM.FestivalVM SelectedFestival
         {
+            get { return _service.SelectedFestival; }
+        }
+
+        public FestivalManagementVM(MainViewModel main, IDataService service)
+        {
+            this._main = main;
+            this._service = service;
+
             using (var context = new FestispecEntities())
             {
                 var festival = context.Festivals.ToList()

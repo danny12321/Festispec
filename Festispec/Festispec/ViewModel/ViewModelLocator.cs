@@ -3,6 +3,7 @@ using Festispec.ViewModel.ClientVM;
 using Festispec.ViewModel.DataService;
 using Festispec.ViewModel.Festival_VMs;
 using Festispec.ViewModel.FestivalVM;
+using Festispec.ViewModel.FestivalVMs;
 using Festispec.ViewModel.Questionnaires;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -14,6 +15,7 @@ namespace Festispec.ViewModel
     {
         private ClientManageVM _clientManageVM;
         private ClientInfoVM _clientInfoVM;
+        private FestivalManagementVM _festivalManagementVM;
 
         public ViewModelLocator()
         {
@@ -44,7 +46,11 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new FestivalManagementVM();
+                if (_festivalManagementVM == null)
+                {
+                    _festivalManagementVM = new FestivalManagementVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
+                }
+                return _festivalManagementVM;
             }
         }
 
