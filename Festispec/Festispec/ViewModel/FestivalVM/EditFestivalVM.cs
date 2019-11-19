@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,9 +62,9 @@ namespace Festispec.ViewModel.FestivalVM
             EditFestivalCommand = new RelayCommand(SaveClient, CanSaveClient);
 
             StartDateBegin = SelectedFestival.StartDate.Date;
-            StartTime = TimeSpan.Parse(SelectedFestival.StartDate.ToString("hh:mm tt"));
+            StartTime = SelectedFestival.StartDate.TimeOfDay;
             EndDateEnd = SelectedFestival.EndDate.Date;
-            EndTime = TimeSpan.Parse(SelectedFestival.EndDate.ToString("hh:mm tt"));
+            EndTime = SelectedFestival.EndDate.TimeOfDay;
         }
 
         private bool CanSaveClient()
