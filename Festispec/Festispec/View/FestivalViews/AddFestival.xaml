@@ -34,20 +34,20 @@
                 <TextBlock Text="Land:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding Festival.Country, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Begin datum:"></TextBlock>
-                <DatePicker Width="100" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="Locale Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDate="{Binding Festival.StartDate}" Text="{Binding Festival.StartDateBegin}"/>
-                <materialDesign:TimePicker materialDesign:HintAssist.Hint="Selecteer tijd" Is24Hours="True" SelectedTime="{Binding Festival.StartDate}"
+                <DatePicker Width="100" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="Locale Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDate="{Binding StartDateBegin}" Text="{Binding StartDateBegin}"/>
+                <materialDesign:TimePicker materialDesign:HintAssist.Hint="Selecteer tijd" Is24Hours="True" SelectedTime="{Binding StartTime}"
                       x:Name="WithSecondsTimePicker"
                       WithSeconds="True"
                       HorizontalAlignment="Left"
-                      Text="{Binding Festival.StartTime}"
+                      Text="{Binding StartTime}"
                       Width="100" />
                 <TextBlock Text="Eind datum:"></TextBlock>
-                <DatePicker Width="100" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="Selecteer datum" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDate="{Binding Festival.EndDate}" Text="{Binding Festival.EndDateEnd}"/>
-                <materialDesign:TimePicker materialDesign:HintAssist.Hint="Selecteer tijd" Is24Hours="True" SelectedTime="{Binding Festival.EndDate}"
+                <DatePicker Width="100" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="Selecteer datum" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDate="{Binding EndDateEnd}" Text="{Binding EndDateEnd}"/>
+                <materialDesign:TimePicker materialDesign:HintAssist.Hint="Selecteer tijd" Is24Hours="True" SelectedTime="{Binding EndTime}"
                       x:Name="WithSecondsTimePicker2"
                       WithSeconds="True"
                       HorizontalAlignment="Left"
-                      Text="{Binding Festival.EndTime}"
+                      Text="{Binding EndTime}"
                       Width="100" />
                 <TextBlock Text="Klant id:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding Festival.ClientId}" IsReadOnly="True"></TextBox>

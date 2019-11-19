@@ -1,5 +1,6 @@
 ﻿using Festispec.Domain;
 using Festispec.ViewModel.ClientVM;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,37 @@ using System.Windows.Input;
 
 namespace Festispec.ViewModel.Festival_VMs
 {
-    public class AddFestivalVM
+    public class AddFestivalVM : ViewModelBase
     {
         private ClientInfoVM _clients;
+        private TimeSpan _StartTime;
+        private DateTime _StartDateBegin;
+        private TimeSpan _EndTime;
+        private DateTime _EndDateEnd;
+
+        public TimeSpan StartTime
+        {
+            get { return _StartTime; }
+            set { _StartTime = value; }
+        }
+
+        public DateTime StartDateBegin
+        {
+            get { return _StartDateBegin; }
+            set { _StartDateBegin = value; }
+        }
+
+        public TimeSpan EndTime
+        {
+            get { return _EndTime; }
+            set { _EndTime = value; }
+        }
+
+        public DateTime EndDateEnd
+        {
+            get { return _EndDateEnd; }
+            set { _EndDateEnd = value; }
+        }
 
         public ICommand AddFestivalCommand { get; set; }
 
@@ -27,10 +56,10 @@ namespace Festispec.ViewModel.Festival_VMs
 
             Festival.ClientId = _clients.SelectedClient.ClientId;
             Festival.MunicipalityId = 1;
-            Festival.StartDateBegin = DateTime.Now;
-            Festival.StartTime = DateTime.Now.TimeOfDay;
-            Festival.EndDateEnd = DateTime.Now;
-            Festival.EndTime = DateTime.Now.TimeOfDay;
+            _StartDateBegin = DateTime.Now;
+            _StartTime = DateTime.Now.TimeOfDay;
+            _EndDateEnd = DateTime.Now;
+            _EndTime = DateTime.Now.TimeOfDay;
         }
 
         private bool CanAddFestival()
@@ -40,6 +69,8 @@ namespace Festispec.ViewModel.Festival_VMs
 
         private void AddFestivalMethod()
         {
+            Festival.StartDate = (StartDateBegin + StartTime);
+            Festival.EndDate = (EndDateEnd + EndTime);
             _clients.Festivals.Add(Festival);
 
             using (var context = new FestispecEntities())

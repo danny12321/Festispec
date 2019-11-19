@@ -11,10 +11,7 @@ namespace Festispec.ViewModel.FestivalVM
     public class FestivalVM : ViewModelBase
     {
         private Festivals _festival;
-        private TimeSpan _StartTime;
-        private DateTime _StrartDateBegin;
-        private TimeSpan _EndTime;
-        private DateTime _EndDateEnd;
+
 
         public FestivalVM(Festivals festivals)
         {
@@ -62,40 +59,16 @@ namespace Festispec.ViewModel.FestivalVM
             set { _festival.country = value; }
         }
 
-        public TimeSpan StartTime
-        {
-            get { return _StartTime; }
-            set { _StartTime = value; RaisePropertyChanged(); }
-        }
-
-        public DateTime StartDateBegin
-        {
-            get { return _StrartDateBegin; }
-            set { _StrartDateBegin = value; RaisePropertyChanged(); }
-        }
-
         public DateTime StartDate
         {
             get { return _festival.start_date; }
-            set { _festival.start_date = (_StrartDateBegin + _StartTime); RaisePropertyChanged(); }
-        }
-
-        public TimeSpan EndTime
-        {
-            get { return _EndTime; }
-            set { _EndTime = value; RaisePropertyChanged(); }
-        }
-
-        public DateTime EndDateEnd
-        {
-            get { return _EndDateEnd; }
-            set { _EndDateEnd = value; RaisePropertyChanged(); }
+            set { _festival.start_date = value; }
         }
 
         public DateTime EndDate
         {
             get { return _festival.end_date; }
-            set { _festival.end_date = (_EndDateEnd + _EndTime); RaisePropertyChanged(); }
+            set { _festival.end_date = value; }
         }
 
         public int ClientId
