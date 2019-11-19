@@ -26,6 +26,11 @@ namespace Festispec.ViewModel.Festival_VMs
             AddFestivalCommand = new RelayCommand(AddFestivalMethod, CanAddFestival);
 
             Festival.ClientId = _clients.SelectedClient.ClientId;
+            Festival.MunicipalityId = 1;
+            Festival.StartDateBegin = DateTime.Now;
+            Festival.StartTime = DateTime.Now.TimeOfDay;
+            Festival.EndDateEnd = DateTime.Now;
+            Festival.EndTime = DateTime.Now.TimeOfDay;
         }
 
         private bool CanAddFestival()

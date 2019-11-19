@@ -17,7 +17,7 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        
+
         <Border Padding="20">
             <StackPanel>
 
@@ -34,43 +34,25 @@
                 <TextBlock Text="Land:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding Festival.Country, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Begin datum:"></TextBlock>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Festival.StartDate, Mode=TwoWay, StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" VerticalAlignment="Center" FontSize="24" />
-                    <Button Margin="8 0 0 0" Content="..." Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
-                            materialDesign:DialogHost.DialogOpenedAttached="CombinedDialogOpenedEventHandler"
-                            materialDesign:DialogHost.DialogClosingAttached="CombinedDialogClosingEventHandler">
-                        <Button.CommandParameter>
-                            <Grid Margin="-1">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <Calendar x:Name="CombinedCalendar" Margin="-1 -4 -1 0" />
-                                    <materialDesign:Clock x:Name="CombinedClock" DisplayAutomation="CycleWithSeconds" Is24Hours="True" />
-                                </StackPanel>
-                                <StackPanel Grid.Row="1" Margin="8" HorizontalAlignment="Right" Orientation="Horizontal">
-                                    <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" CommandParameter="0"
-                                            materialDesign:DialogHost.DialogClosingAttached="CombinedDialogClosingEventHandler"
-                                            Style="{DynamicResource MaterialDesignFlatButton}">
-                                        CANCEL
-                                    </Button>
-                                    <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" CommandParameter="1"
-                                            materialDesign:DialogHost.DialogClosingAttached="CombinedDialogClosingEventHandler"
-                                            Style="{DynamicResource MaterialDesignFlatButton}">
-                                        OK
-                                    </Button>
-                                </StackPanel>
-                            </Grid>
-                        </Button.CommandParameter>
-                    </Button>
-                </StackPanel>
+                <DatePicker Width="100" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="Locale Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDate="{Binding Festival.StartDate}" Text="{Binding Festival.StartDateBegin}"/>
+                <materialDesign:TimePicker materialDesign:HintAssist.Hint="Selecteer tijd" Is24Hours="True" SelectedTime="{Binding Festival.StartDate}"
+                      x:Name="WithSecondsTimePicker"
+                      WithSeconds="True"
+                      HorizontalAlignment="Left"
+                      Text="{Binding Festival.StartTime}"
+                      Width="100" />
                 <TextBlock Text="Eind datum:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Festival.EndDate, Mode=TwoWay}"></TextBox>
+                <DatePicker Width="100" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="Selecteer datum" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDate="{Binding Festival.EndDate}" Text="{Binding Festival.EndDateEnd}"/>
+                <materialDesign:TimePicker materialDesign:HintAssist.Hint="Selecteer tijd" Is24Hours="True" SelectedTime="{Binding Festival.EndDate}"
+                      x:Name="WithSecondsTimePicker2"
+                      WithSeconds="True"
+                      HorizontalAlignment="Left"
+                      Text="{Binding Festival.EndTime}"
+                      Width="100" />
                 <TextBlock Text="Klant id:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding Festival.ClientId}" IsReadOnly="True"></TextBox>
                 <TextBlock Text="Gemeente id:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Festival.MunicipalityId, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="50" Text="{Binding Festival.MunicipalityId}" IsReadOnly="True"></TextBox>
                 <TextBlock Text="Breedtegraad:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding Festival.Latitude, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Hoogtegraad:"></TextBlock>
