@@ -1,8 +1,10 @@
-﻿using Festispec.View.FestivalViews;
+﻿using Festispec.Domain;
+using Festispec.View.FestivalViews;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,57 +15,22 @@ namespace Festispec.ViewModel.Festival_VMs
 {
     public class FestivalManagementVM : ViewModelBase
     {
-        private Page _frameContent;
 
-        public Page FrameContent
-        {
-            get { return _frameContent; }
-            set
-            {
-                _frameContent = value;
-                RaisePropertyChanged("FrameContent");
-            }
-        }
+        public ObservableCollection<FestivalVM.FestivalVM> FestivalList;
 
-        private string _pageTitle;
-
-        public string PageTitle
-        {
-            get { return _pageTitle; }
-            set
-            {
-                _pageTitle = value;
-                RaisePropertyChanged("PageTitle");
-            }
-        }
-
-
-        public ICommand SetPageCommand { get; set; }
+        public ICommand ShowFestival;
+        public ICommand ShowAddInspection;
 
         public FestivalManagementVM()
         {
-            SetPageCommand = new RelayCommand<string>(SetPage);
-        }
-
-        public void SetPage(string page)
-        {
-            switch (page)
+            using (var context = new FestispecEntities())
             {
-                case "AddFestival":
-                    FrameContent = new AddFestival();
-                    PageTitle = "Festival toevoegen";
-                    break;
-                    /*
-                case "EditFestival":
-                    FrameContent = new EditFestival();
-                    PageTitle = "Planning";
-                    break;
-                    */
-                default:
-                    FrameContent = new Festivals();
-                    PageTitle = "Festival beheer";
-                    break;
+                var festival = context.Festivals.ToList()
+                             .Select(e => new FestivalVM.FestivalVM(e));
+
+                FestivalList = new ObservableCollection<FestivalVM.FestivalVM>(festival);
             }
         }
+
     }
 }

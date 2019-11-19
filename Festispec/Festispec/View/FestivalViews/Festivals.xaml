@@ -4,19 +4,12 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec.View.FestivalViews"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-       DataContext="{Binding Festival, Source={StaticResource Locator}}"
-       Title="Festival beheer"
-      
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-     TextElement.FontWeight="Regular"
-     TextElement.FontSize="13"
-     TextOptions.TextFormattingMode="Ideal"
-     TextOptions.TextRenderingMode="Auto"
-     Background="{DynamicResource MaterialDesignPaper}"
-     FontFamily="{DynamicResource MaterialDesignFont}">
+      DataContext="{Binding festival, Source={StaticResource Locator}}"
+      Title="Festival beheer"
+      Background="White">
 
     <StackPanel>
         <Grid >
@@ -26,20 +19,12 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Festival" FontSize="28" Grid.Column="0" Padding="20"/>
-
-            <Button 
-                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Command="{Binding showAddFestival}"
-                 ToolTip="MaterialDesignFloatingActionMiniLightButton">
-                <materialDesign:PackIcon
-                Kind="Add"
-                Height="24"
-                Width="24" />
-                
-            </Button>
         </Grid>
 
-        <DataGrid Margin="0 8 0 0" IsReadOnly="True" SelectedItem="{Binding SelectedFestival, Mode=TwoWay}" ItemsSource="{Binding Festivals}" CanUserSortColumns="True" CanUserAddRows="False" >
-            <DataGridTextColumn Header="Festival" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+        <DataGrid Margin="0 8 0 0" IsReadOnly="True" SelectedItem="{Binding SelectedFestival, Mode=TwoWay}" ItemsSource="{Binding FestivalList}" CanUserSortColumns="True" CanUserAddRows="False" >
+            <DataGridTextColumn Header="Naam" Binding="{Binding FestivalName}" Foreground="#FF1D1616" Width="250"/>
+            <DataGridTextColumn Header="Startdatum" Binding="{Binding StartDate}" Foreground="#FF1D1616" Width="250"/>
+            <DataGridTextColumn Header="Einddatum" Binding="{Binding EndDate}" Foreground="#FF1D1616" Width="250"/>
             <DataGridTemplateColumn Width="50">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
