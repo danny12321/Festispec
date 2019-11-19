@@ -18,7 +18,9 @@ namespace Festispec.ViewModel.FestivalVMs
     {
         private IDataService _service;
         private MainViewModel _main;
+
         public ObservableCollection<FestivalVM.FestivalVM> FestivalList { get; set; }
+
         public ICommand ShowFestival;
         public ICommand ShowAddInspection;
 
