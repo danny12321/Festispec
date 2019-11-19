@@ -14,33 +14,29 @@ namespace Festispec.ViewModel.Festival_VMs
     public class AddFestivalVM : ViewModelBase
     {
         private ClientInfoVM _clients;
-        private TimeSpan _StartTime;
-        private DateTime _StartDateBegin;
-        private TimeSpan _EndTime;
-        private DateTime _EndDateEnd;
 
         public TimeSpan StartTime
         {
-            get { return _StartTime; }
-            set { _StartTime = value; }
+            get { return Festival.StartTime; }
+            set { Festival.StartTime = value; }
         }
 
         public DateTime StartDateBegin
         {
-            get { return _StartDateBegin; }
-            set { _StartDateBegin = value; }
+            get { return Festival.StartDateBegin; }
+            set { Festival.StartDateBegin = value; }
         }
 
         public TimeSpan EndTime
         {
-            get { return _EndTime; }
-            set { _EndTime = value; }
+            get { return Festival.EndTime; }
+            set { Festival.EndTime = value; }
         }
 
         public DateTime EndDateEnd
         {
-            get { return _EndDateEnd; }
-            set { _EndDateEnd = value; }
+            get { return Festival.EndDateEnd; }
+            set { Festival.EndDateEnd = value; }
         }
 
         public ICommand AddFestivalCommand { get; set; }
@@ -56,10 +52,11 @@ namespace Festispec.ViewModel.Festival_VMs
 
             Festival.ClientId = _clients.SelectedClient.ClientId;
             Festival.MunicipalityId = 1;
-            _StartDateBegin = DateTime.Now;
-            _StartTime = DateTime.Now.TimeOfDay;
-            _EndDateEnd = DateTime.Now;
-            _EndTime = DateTime.Now.TimeOfDay;
+
+            StartDateBegin = DateTime.Now;
+            StartTime = DateTime.Now.TimeOfDay;
+            EndDateEnd = DateTime.Now;
+            EndTime = DateTime.Now.TimeOfDay;
         }
 
         private bool CanAddFestival()

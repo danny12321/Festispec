@@ -58,6 +58,7 @@ namespace Festispec.ViewModel.ClientVM
             AddFestivalCommand = new RelayCommand(ShowAddFestival);
             ShowEditCommand = new RelayCommand(ShowEditFestival);
             ShowFestivalCommand = new RelayCommand(ShowFestivalInfo);
+
         }
 
         private void ShowEditFestival()

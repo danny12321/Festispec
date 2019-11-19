@@ -28,6 +28,29 @@ namespace Festispec.ViewModel.FestivalVM
             get { return _service.SelectedFestival; }
         }
 
+        public TimeSpan StartTime
+        {
+            get { return SelectedFestival.StartTime; }
+            set { SelectedFestival.StartTime = value; }
+        }
+
+        public DateTime StartDateBegin
+        {
+            get { return SelectedFestival.StartDateBegin; }
+            set { SelectedFestival.StartDateBegin = value; }
+        }
+
+        public TimeSpan EndTime
+        {
+            get { return SelectedFestival.EndTime; }
+            set { SelectedFestival.EndTime = value; }
+        }
+
+        public DateTime EndDateEnd
+        {
+            get { return SelectedFestival.EndDateEnd; }
+            set { SelectedFestival.EndDateEnd = value; }
+        }
 
         public EditFestivalVM(MainViewModel main, IDataService service, ClientInfoVM clients)
         {
@@ -36,6 +59,11 @@ namespace Festispec.ViewModel.FestivalVM
             this._clients = clients;
 
             EditFestivalCommand = new RelayCommand(SaveClient, CanSaveClient);
+
+            StartDateBegin = SelectedFestival.StartDate.Date;
+            StartTime = TimeSpan.Parse(SelectedFestival.StartDate.ToString("hh:mm tt"));
+            EndDateEnd = SelectedFestival.EndDate.Date;
+            EndTime = TimeSpan.Parse(SelectedFestival.EndDate.ToString("hh:mm tt"));
         }
 
         private bool CanSaveClient()
@@ -49,6 +77,9 @@ namespace Festispec.ViewModel.FestivalVM
 
         private void SaveClient()
         {
+            SelectedFestival.StartDate = (StartDateBegin + StartTime);
+            SelectedFestival.EndDate = (EndDateEnd + EndTime);
+
             using (var context = new FestispecEntities())
             {
                 context.Entry(SelectedFestival.ToModel()).State = EntityState.Modified;

@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec.View.FestivalViews"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EditFestival"
@@ -20,29 +21,40 @@
             <StackPanel>
                 <TextBlock Text="Festival gegevens wijzigen" FontSize="25" Padding="0,10"/>
 
-                <TextBlock FontSize="20" Text="Festival naam:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.FestivalName, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="20" Text="Postcode:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="6" Text="{Binding SelectedFestival.PostalCode, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="20" Text="Straat:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.Street, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="20" Text="Huisnummer:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.HouseNumber, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="20" Text="Land:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.Country, Mode=TwoWay}"></TextBox>
-
-                <TextBlock FontSize="20" Text="Begin datum:"></TextBlock>
-
-                <TextBlock FontSize="20" Text="Eind datum:"></TextBlock>
-
-                <TextBlock FontSize="20" Text="Klant id:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.ClientId}" IsReadOnly="True"></TextBox>
-                <TextBlock FontSize="20" Text="Gemeente id:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.MunicipalityId}" IsReadOnly="True"></TextBox>
-                <TextBlock FontSize="20" Text="Breedtegraad:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.Latitude, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="20" Text="Hoogtegraad:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.Longitude, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Festival naam:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.FestivalName, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Postcode:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="6" Text="{Binding SelectedFestival.PostalCode, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Straat:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.Street, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Huisnummer:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.HouseNumber, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Land:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.Country, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Begin datum:"></TextBlock>
+                <DatePicker Width="100" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="Locale Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDate="{Binding StartDateBegin}" Text="{Binding StartDateBegin}"/>
+                <materialDesign:TimePicker materialDesign:HintAssist.Hint="Selecteer tijd" Is24Hours="True" SelectedTime="{Binding StartTime}"
+                      x:Name="WithSecondsTimePicker"
+                      WithSeconds="True"
+                      HorizontalAlignment="Left"
+                      Text="{Binding StartTime}"
+                      Width="100" />
+                <TextBlock FontSize="15" Text="Eind datum:"></TextBlock>
+                <DatePicker Width="100" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="Selecteer datum" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDate="{Binding EndDateEnd}" Text="{Binding EndDateEnd}"/>
+                <materialDesign:TimePicker materialDesign:HintAssist.Hint="Selecteer tijd" Is24Hours="True" SelectedTime="{Binding EndTime}"
+                      x:Name="WithSecondsTimePicker2"
+                      WithSeconds="True"
+                      HorizontalAlignment="Left"
+                      Text="{Binding EndTime}"
+                      Width="100" />
+                <TextBlock FontSize="15" Text="Klant id:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.ClientId}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="15" Text="Gemeente id:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.MunicipalityId}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="15" Text="Breedtegraad:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.Latitude, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Hoogtegraad:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.Longitude, Mode=TwoWay}"></TextBox>
 
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding EditFestivalCommand}" CommandParameter="{Binding EditFestivalCommand}"
