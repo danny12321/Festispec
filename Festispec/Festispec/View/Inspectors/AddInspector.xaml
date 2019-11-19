@@ -42,18 +42,20 @@
                 <TextBox MaxLength="5" Text="{Binding Inspector.Housenumber, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="TelefoonNummer:"></TextBlock>
                 <TextBox MaxLength="10" Text="{Binding Inspector.Phone, Mode=TwoWay}"></TextBox>
-                
+                <TextBlock Text="Wachtwoord:"></TextBlock>
+                <TextBox MaxLength="10" Text="{Binding Password, Mode=TwoWay}" Margin="0,0,167,0"></TextBox>
 
+                <Button Content="Genereer Wachtwoord" Command="{Binding CreatePass}" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="193"/>
                 <Border Padding="10">
+
                     <Button HorizontalAlignment="Right" Command="{Binding AddInspectorCommand}" CommandParameter="{Binding AddInspectorCommand}"
-                    Style="{StaticResource MaterialDesignRaisedButton}"
-                    Width="100"
-                    ToolTip="Resource name: MaterialDesignRaisedButton">
-                        Voeg Toe
-                    </Button>
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Width="100"
+                        ToolTip="Resource name: MaterialDesignRaisedButton" Content="Voeg Toe"/>
                 </Border>
 
             </StackPanel>
         </Border>
+        
     </Grid>
 </Page>
