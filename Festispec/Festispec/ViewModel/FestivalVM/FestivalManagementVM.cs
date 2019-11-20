@@ -21,7 +21,7 @@ namespace Festispec.ViewModel.FestivalVMs
 
         public ObservableCollection<FestivalVM.FestivalVM> FestivalList { get; set; }
 
-        public ICommand ShowFestival;
+        public ICommand ShowFestival { get; set; }
         public ICommand ShowAddInspection;
 
         public FestivalVM.FestivalVM SelectedFestival
@@ -46,7 +46,12 @@ namespace Festispec.ViewModel.FestivalVMs
 
                 FestivalList = new ObservableCollection<FestivalVM.FestivalVM>(festival);
             }
+            ShowFestival = new RelayCommand(ShowFestivalInfo);
         }
 
+        private void ShowFestivalInfo()
+        {
+            _main.SetPage("FestivalInfo");
+        }
     }
 }
