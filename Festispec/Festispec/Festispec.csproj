@@ -68,7 +68,7 @@
       <HintPath>..\packages\MaterialDesignThemes.2.6.0\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Maps.MapControl.WPF">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Bing Maps WPF Control\V1\Libraries\Microsoft.Maps.MapControl.WPF.dll</HintPath>
+      <HintPath>..\..\..\..\..\Downloads\Microsoft.Maps.MapControl.WPF.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -141,9 +141,6 @@
     </Compile>
     <Compile Include="View\Inspections\Inspections.xaml.cs">
       <DependentUpon>Inspections.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Questionnaires\Open.xaml.cs">
-      <DependentUpon>Open.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ClientsViews\AddClients.xaml.cs">
       <DependentUpon>AddClients.xaml</DependentUpon>

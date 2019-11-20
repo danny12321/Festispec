@@ -51,7 +51,6 @@ namespace Festispec.ViewModel.Festival_VMs
             AddFestivalCommand = new RelayCommand(AddFestivalMethod, CanAddFestival);
 
             Festival.ClientId = _clients.SelectedClient.ClientId;
-            Festival.MunicipalityId = 1;
 
             StartDateBegin = DateTime.Now;
             StartTime = DateTime.Now.TimeOfDay;
@@ -84,7 +83,7 @@ namespace Festispec.ViewModel.Festival_VMs
 
         private bool IsMatch()
         {
-            if (!IsEmptyField(Festival.FestivalName) && !IsEmptyField(Festival.PostalCode) && !IsEmptyField(Festival.Street) && !IsEmptyField(Festival.HouseNumber) && !IsEmptyField(Festival.Country) && !IsEmptyField(Festival.Longitude.ToString()) && !IsEmptyField(Festival.Latitude.ToString()))
+            if (!IsEmptyField(Festival.FestivalName) && !IsEmptyField(Festival.PostalCode) && !IsEmptyField(Festival.Street) && !IsEmptyField(Festival.HouseNumber) && !IsEmptyField(Festival.Country) && !IsEmptyField(Festival.Longitude) && !IsEmptyField(Festival.Latitude))
             {
                 return true;
             }

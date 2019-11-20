@@ -51,7 +51,7 @@ namespace Festispec.ViewModel.FestivalVMs
 
         private void ShowFestivalInfo()
         {
-            _main.SetPage("FestivalInfo");
+            _main.SetPage("FestivalInfo", false);
         }
     }
 }

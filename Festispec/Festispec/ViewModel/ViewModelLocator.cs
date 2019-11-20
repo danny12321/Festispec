@@ -60,11 +60,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                if (_festivalManagementVM == null)
-                {
-                    _festivalManagementVM = new FestivalManagementVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
-                }
-                return _festivalManagementVM;
+                return new FestivalManagementVM(Main, ServiceLocator.Current.GetInstance<IDataService>()); ;
             }
         }
 
@@ -130,7 +126,28 @@ namespace Festispec.ViewModel
                 return new EditClientVM(Main, ServiceLocator.Current.GetInstance<IDataService>(), _clientManageVM);
             }
         }
-        
+
+        public ClientManageVM client
+        {
+            get
+            {
+                if (_clientManageVM == null)
+                {
+                    _clientManageVM = new ClientManageVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
+                }
+
+                return _clientManageVM;
+            }
+        }
+
+        public AddClientsVM addclient
+        {
+            get
+            {
+                return new AddClientsVM(_clientManageVM);
+            }
+        }
+
         public InspectorsVM.AddInspectorViewModel AddInspector
         {
             get
