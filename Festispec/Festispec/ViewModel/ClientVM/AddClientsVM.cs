@@ -29,65 +29,30 @@ namespace Festispec.ViewModel.ClientVM
 
         private void AddClientMethod()
         {
-            if (IsMatch())
+            _clients.Clients.Add(Client);
+
+            using (var context = new FestispecEntities())
             {
-                _clients.Clients.Add(Client);
-
-                using (var context = new FestispecEntities())
-                {
-                    context.Clients.Add(Client.ToModel());
-                    context.SaveChanges();
-                }
-                _clients.ShowClientPage();
+                context.Clients.Add(Client.ToModel());
+                context.SaveChanges();
             }
+            _clients.ShowClientPage();
         }
 
-        public bool CanAddClient()
+        private bool CanAddClient()
         {
-            return true;
-        }
-        
-        private bool IsMatch()
-        {
-            if (IsLetter(Client.ClientName) && IsLetterNumber(Client.PostalCode) && IsLetter(Client.Street) && IsNumber(Client.Housenumber) && IsLetter(Client.Country) && IsPhoneNumber(Client.Phone))
+            if(IsMatch())
             {
                 return true;
             }
             return false;
         }
-
-        private bool IsLetter(string input)
-        {
-            if (!IsEmptyField(input))
-            {
-                if (Regex.IsMatch(input, @"^^(?! )[A-Za-z\s]+$"))
-                {
-                    return true;
-                }
-            }         
-            return false;
-        }
         
-        private bool IsNumber(string input)
+        private bool IsMatch()
         {
-            if (!IsEmptyField(input))
+            if (!IsEmptyField(Client.ClientName) && !IsEmptyField(Client.PostalCode) && !IsEmptyField(Client.Street) && !IsEmptyField(Client.Housenumber) && !IsEmptyField(Client.Country))
             {
-                if (Regex.IsMatch(input, @"^^(?! )[0-9\s]+$"))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private bool IsLetterNumber(string input)
-        {
-            if (!IsEmptyField(input))
-            {
-                if (Regex.IsMatch(input, @"^^(?! )[A-Za-z0-9\s]+$"))
-                {
-                    return true;
-                }
+                return true;
             }
             return false;
         }
@@ -101,17 +66,5 @@ namespace Festispec.ViewModel.ClientVM
             return false;
         }
 
-        private bool IsPhoneNumber(string input)
-        {
-            if(input == null)
-            {
-                return true;
-            }
-            else if (Regex.IsMatch(input, @"^^(?! )[0-9\s]+$"))
-            {
-                return true;
-            }
-            return false;
-        }
     }
 }

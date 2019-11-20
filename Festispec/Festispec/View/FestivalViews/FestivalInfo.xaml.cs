@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec.View.Festival_Views
+namespace Festispec.View.FestivalViews
 {
     /// <summary>
-    /// Interaction logic for Festival.xaml
+    /// Interaction logic for FestivalInfo.xaml
     /// </summary>
-    public partial class Festivals : Page
+    public partial class FestivalInfo : Page
     {
-        public Festivals()
+        public FestivalInfo()
         {
             InitializeComponent();
         }

@@ -1,6 +1,9 @@
 using CommonServiceLocator;
 using Festispec.ViewModel.ClientVM;
+using Festispec.ViewModel.DataService;
 using Festispec.ViewModel.Festival_VMs;
+using Festispec.ViewModel.FestivalVM;
+using Festispec.ViewModel.FestivalVMs;
 using Festispec.ViewModel.Questionnaires;
 using Festispec.ViewModel.MunicipalityVM;
 using GalaSoft.MvvmLight;
@@ -11,12 +14,20 @@ namespace Festispec.ViewModel
 
     public class ViewModelLocator
     {
+        private ClientManageVM _clientManageVM;
+        private ClientInfoVM _clientInfoVM;
+        private FestivalManagementVM _festivalManagementVM;
+        private FestivalInfoVM _festivalInfoVM;
+
         private InspectorsVM.InspectorListViewModel _inspectors;
         private MunicipalityVM.MunicipalityViewModel _municipality;
+        
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register<MainViewModel>();
+
+            SimpleIoc.Default.Register<IDataService, DataService.DataService>();
             SimpleIoc.Default.Register<PopUpViewModel>();
         }
 
@@ -48,7 +59,36 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new FestivalManagementVM();
+                if (_festivalManagementVM == null)
+                {
+                    _festivalManagementVM = new FestivalManagementVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
+                }
+                return _festivalManagementVM;
+            }
+        }
+
+        public FestivalInfoVM festivalinfo
+        {
+            get
+            {
+                _festivalInfoVM = new FestivalInfoVM(Main, ServiceLocator.Current.GetInstance<IDataService>(), _festivalManagementVM);
+                return _festivalInfoVM;
+            }
+        }
+
+        public AddFestivalVM addFestival
+        {
+            get
+            {
+                return new AddFestivalVM(_clientInfoVM);
+            }
+        }
+
+        public EditFestivalVM editFestival
+        {
+            get
+            {
+                return new EditFestivalVM(Main, ServiceLocator.Current.GetInstance<IDataService>(), _clientInfoVM);
             }
         }
 
@@ -56,6 +96,10 @@ namespace Festispec.ViewModel
         {
             get
             {
+                if(_clientManageVM == null)
+                {
+                    _clientManageVM = new ClientManageVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
+                }
                 return new QuestionnairesViewModel();
 
             }
@@ -68,6 +112,24 @@ namespace Festispec.ViewModel
                 return _inspectors;
             }
         }
+
+        public ClientInfoVM clientinfo
+        {
+            get
+            {
+                _clientInfoVM = new ClientInfoVM(Main, ServiceLocator.Current.GetInstance<IDataService>(), _clientManageVM);
+                return _clientInfoVM;
+            }
+        }
+
+        public EditClientVM editClient
+        {
+            get
+            {
+                return new EditClientVM(Main, ServiceLocator.Current.GetInstance<IDataService>(), _clientManageVM);
+            }
+        }
+        
         public InspectorsVM.AddInspectorViewModel AddInspector
         {
             get

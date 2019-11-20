@@ -1,69 +1,57 @@
-﻿using Festispec.View.Festival_Views;
+﻿using Festispec.Domain;
+using Festispec.View.FestivalViews;
+using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Festispec.ViewModel.Festival_VMs
+namespace Festispec.ViewModel.FestivalVMs
 {
     public class FestivalManagementVM : ViewModelBase
     {
-        private Page _frameContent;
+        private IDataService _service;
+        private MainViewModel _main;
 
-        public Page FrameContent
+        public ObservableCollection<FestivalVM.FestivalVM> FestivalList { get; set; }
+
+        public ICommand ShowFestival { get; set; }
+        public ICommand ShowAddInspection;
+
+        public FestivalVM.FestivalVM SelectedFestival
         {
-            get { return _frameContent; }
+            get { return _service.SelectedFestival; }
             set
             {
-                _frameContent = value;
-                RaisePropertyChanged("FrameContent");
+                _service.SelectedFestival = value;
+                RaisePropertyChanged();
             }
         }
 
-        private string _pageTitle;
-
-        public string PageTitle
+        public FestivalManagementVM(MainViewModel main, IDataService service)
         {
-            get { return _pageTitle; }
-            set
+            this._main = main;
+            this._service = service;
+
+            using (var context = new FestispecEntities())
             {
-                _pageTitle = value;
-                RaisePropertyChanged("PageTitle");
+                var festival = context.Festivals.ToList()
+                             .Select(e => new FestivalVM.FestivalVM(e));
+
+                FestivalList = new ObservableCollection<FestivalVM.FestivalVM>(festival);
             }
+            ShowFestival = new RelayCommand(ShowFestivalInfo);
         }
 
-
-        public ICommand SetPageCommand { get; set; }
-
-        public FestivalManagementVM()
+        private void ShowFestivalInfo()
         {
-            SetPageCommand = new RelayCommand<string>(SetPage);
-        }
-
-        public void SetPage(string page)
-        {
-            switch (page)
-            {
-                case "AddFestival":
-                    FrameContent = new AddFestival();
-                    PageTitle = "Festival toevoegen";
-                    break;
-                    /*
-                case "EditFestival":
-                    FrameContent = new EditFestival();
-                    PageTitle = "Planning";
-                    break;
-                    */
-                default:
-                    FrameContent = new Festivals();
-                    PageTitle = "Festival beheer";
-                    break;
-            }
+            _main.SetPage("FestivalInfo");
         }
     }
 }

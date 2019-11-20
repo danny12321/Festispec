@@ -1,6 +1,5 @@
 using Festispec.Domain;
 using Festispec.View;
-using Festispec.View.Festival_Views;
 using Festispec.View.Questionnaires;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -61,12 +60,20 @@ namespace Festispec.ViewModel
                     PageTitle = "Planning";
                     break;
                 case "Festival":
-                    FrameContent = new View.Festival_Views.Festivals();
+                    FrameContent = new View.FestivalViews.Festivals();
                     PageTitle = "Festival beheer";
+                    break;
+                case "FestivalInfo":
+                    FrameContent = new View.FestivalViews.FestivalInfo();
+                    PageTitle = "Festival info";
                     break;
                 case "Clients":
                     FrameContent = new View.ClientsViews.Client();
                     PageTitle = "Klanten beheer";
+                    break;
+                case "ClientInfo":
+                    FrameContent = new View.ClientsViews.ClientInfo();
+                    PageTitle = "Klanten info";
                     break;
                 case "Vragenlijsten TEMP":
                     FrameContent = new View.Questionnaires.Questionnaires();
@@ -83,6 +90,18 @@ namespace Festispec.ViewModel
                 case "AddClient":
                     FrameContent = new View.ClientsViews.AddClients();
                     PageTitle = "Klanten toevoegen";
+                    break;
+                case "EditClient":
+                    FrameContent = new View.ClientsViews.EditClient();
+                    PageTitle = "Klanten wijzigen";
+                    break;
+                case "addFestival":
+                    FrameContent = new View.FestivalViews.AddFestival();
+                    PageTitle = "Festival toevoegen";
+                    break;
+                case "EditFestival":
+                    FrameContent = new View.FestivalViews.EditFestival();
+                    PageTitle = "Festival wijzigingen";
                     break;
                 case "Inspectors":
                     FrameContent = new View.Inspectors.Inspectors();
