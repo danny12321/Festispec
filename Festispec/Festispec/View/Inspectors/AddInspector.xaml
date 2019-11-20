@@ -35,9 +35,9 @@
                 <TextBlock Text="Geboorte Datum:"></TextBlock>
                 <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding Inspector.Birthday,Mode=OneWayToSource}" DisplayDate="2019-11-19"/>
                 <TextBlock Text="Postcode:"></TextBlock>
-                <TextBox MaxLength="6" Text="{Binding Inspector.PostalCode, Mode=TwoWay}"></TextBox>
+                <TextBox Width="100" MaxLength="10" Text="{Binding Inspector.PostalCode, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Straat:"></TextBlock>
-                <TextBox MaxLength="25" Text="{Binding Inspector.Street, Mode=TwoWay}"></TextBox>
+                <TextBox  MaxLength="25" Text="{Binding Inspector.Street, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Huisnummer:"></TextBlock>
                 <TextBox MaxLength="5" Text="{Binding Inspector.Housenumber, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="TelefoonNummer:"></TextBlock>
