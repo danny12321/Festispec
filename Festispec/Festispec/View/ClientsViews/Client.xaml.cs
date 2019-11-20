@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace Festispec.View.ClientsViews
 {
     /// <summary>
-    /// Interaction logic for Clients.xaml
+    /// Interaction logic for Client.xaml
     /// </summary>
     public partial class Client : Page
     {

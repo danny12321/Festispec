@@ -53,7 +53,7 @@
                     ToolTip="Resource name: MaterialDesignRaisedButton">
                         Save
                     </Button>
-                </Border>   
+                </Border>
 
             </StackPanel>
         </Border>
