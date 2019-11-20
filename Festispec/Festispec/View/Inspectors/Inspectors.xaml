@@ -43,7 +43,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Naam" Binding="{Binding InspectorFirstName}" Foreground="#FF1D1616" />
                 <DataGridTextColumn Header="Achternaam" Binding="{Binding InspectorLastName}" Foreground="#FF1D1616" />
-                <DataGridTextColumn Header="Actief sinds:" Binding="{Binding Active}" Foreground="#FF1D1616" />
+               
                 <DataGridTemplateColumn Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

@@ -7,7 +7,16 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       DataContext="{Binding EditInspector, Source={StaticResource Locator}}"
-      Title="EditInspector">
+      Title="EditInspector"
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
+    
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -25,7 +34,7 @@
                 <TextBlock Text="Achternaam:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.InspectorLastName, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Geboorte Datum:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.Birthday, Mode=TwoWay}"></TextBox>
+                <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding  InspectorViewModel.SelectedInspector.Birthday,Mode=TwoWay}"/>
                 <TextBlock Text="Postcode:"></TextBlock>
                 <TextBox MaxLength="6" Text="{Binding InspectorViewModel.SelectedInspector.PostalCode, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Straat:"></TextBlock>
@@ -35,7 +44,7 @@
                 <TextBlock Text="TelefoonNummer:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.Phone, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Actief:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.Active, Mode=TwoWay}"></TextBox>
+                <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding  InspectorViewModel.SelectedInspector.Active,Mode=TwoWay}"/>
 
 
                 <Border Padding="10">
