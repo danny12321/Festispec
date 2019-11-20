@@ -74,7 +74,11 @@ namespace Festispec.ViewModel
                     break;
                 case "AddInspection":
                     FrameContent = new View.Inspections.AddInspection();
-                    PageTitle = "Add Inspections";
+                    PageTitle = "Add Inspection";
+                    break;
+                case "EditInspection":
+                    FrameContent = new View.Inspections.EditInspection();
+                    PageTitle = "Edit Inspection";
                     break;
                 default:
                     FrameContent = new Home();

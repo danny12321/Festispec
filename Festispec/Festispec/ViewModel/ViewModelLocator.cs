@@ -53,7 +53,14 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new InspectionAddViewModel();
+                return new InspectionAddViewModel(Main);
+            }
+        }
+        public InspectionEditViewModel InspectionEdit
+        {
+            get
+            {
+                return new InspectionEditViewModel(Main);
             }
         }
 

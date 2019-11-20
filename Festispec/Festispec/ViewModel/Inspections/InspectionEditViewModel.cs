@@ -1,21 +1,22 @@
-﻿using System;
+﻿using Festispec.Domain;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Festispec.Domain;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
-using Microsoft.Maps.MapControl.WPF;
 
 namespace Festispec.ViewModel.Inspections
 {
-    public class InspectionAddViewModel : ViewModelBase
+    public class InspectionEditViewModel : ViewModelBase
     {
         //TODO Make this dynamic
         private int _festivalId = 1;
+        private int _inspetionId = 3;
 
 
         public ObservableCollection<InspectorsVM> Inspectors { get; set; }
@@ -43,33 +44,27 @@ namespace Festispec.ViewModel.Inspections
             get { return EndDate + EndTime; }
         }
 
-        public DateTime StartDateTimeCombined {
+        public DateTime StartDateTimeCombined
+        {
             get { return StartDate + StartTime; }
         }
 
         private MainViewModel _main;
 
         public ICommand TestButton { get; set; }
-        public ICommand AddInspectionCommand { get; set; }
+        public ICommand EditInspectionCommand { get; set; }
         public ICommand SetViewToSelectedPersonCommand { get; set; }
         public ICommand SelectInspectorCommand { get; set; }
         public ICommand DelectInspectorCommand { get; set; }
 
-        public InspectionAddViewModel(MainViewModel main)
+        public InspectionEditViewModel(MainViewModel main)
         {
             _main = main;
 
-            SelectedInspectors = new ObservableCollection<InspectorsVM>();
-            Inspection = new InspectionVM();
-
-            StartDate = DateTime.Now;
-            StartTime = DateTime.Now.TimeOfDay;
-
-            EndDate = DateTime.Now;
-            EndTime = DateTime.Now.TimeOfDay;
+            
 
             TestButton = new RelayCommand(Debug);
-            AddInspectionCommand = new RelayCommand(AddInspection);
+            EditInspectionCommand = new RelayCommand(EditInspection);
             SelectInspectorCommand = new RelayCommand<InspectorsVM>(SelectInspector);
             DelectInspectorCommand = new RelayCommand<InspectorsVM>(DelectInspector);
 
@@ -80,12 +75,34 @@ namespace Festispec.ViewModel.Inspections
                     .Select(i => new InspectorsVM(i));
 
                 Inspectors = new ObservableCollection<InspectorsVM>(inspectors);
-                   
+                SelectedInspectors = new ObservableCollection<InspectorsVM>();
+
+                //Used for posistion of festival in bing maps
                 Festival = new FestivalVM(context.Festivals.ToList().First(f => f.id == _festivalId));
+
+                //Get the inspection
+                Inspection = new InspectionVM(context.Inspections.ToList().First(i => i.id == _inspetionId));
+                StartDate = Inspection.Start_date;
+                StartTime = Inspection.Start_date.TimeOfDay;
+
+                EndDate = Inspection.End_date;
+                EndTime = Inspection.End_date.TimeOfDay;
+
+                context.Inspectors_at_inspection.ToList().ForEach(i =>
+                {
+                    if (i.inspection_id == _inspetionId)
+                    {
+                        var tempInspector = Inspectors.ToList().First(j => j.Inspector.id == i.inpector_id);
+                        SelectedInspectors.Add(tempInspector);
+                        Inspectors.Remove(tempInspector);
+                    }
+                });
+
+                RaisePropertyChanged();
             }
         }
 
-        private void AddInspection()
+        private void EditInspection()
         {
             // Combining all values in here instead of binding directly to the view because the start and end datetime is separate
             Inspection.Start_date = StartDateTimeCombined;
@@ -98,30 +115,30 @@ namespace Festispec.ViewModel.Inspections
 
             if (ValidateInput(Inspection))
             {
-                using (var context = new FestispecEntities())
-                {
-                    context.Inspections.Add(Inspection.ToModel());
-                    context.SaveChanges();
-                }
-
                 SelectedInspectors.ToList().ForEach(i => {
                     var inspector_at_inspection = new Inspectors_at_inspection();
                     inspector_at_inspection.inpector_id = i.Inspector.id;
-                    inspector_at_inspection.inspection_id = Inspection.Id;
+                    inspector_at_inspection.inspection_id = _inspetionId;
                     InspectorsAtInspection.Add(new InspectorAtInspectionVM(inspector_at_inspection));
                 });
 
                 using (var context = new FestispecEntities())
                 {
+                    context.Entry(Inspection.ToModel()).State = EntityState.Modified;
+
+                    context.Inspectors_at_inspection.RemoveRange(context.Inspectors_at_inspection.Where(i => i.inspection_id == _inspetionId));
+
                     InspectorsAtInspection.ToList().ForEach(i =>
                     {
                         context.Inspectors_at_inspection.Add(i.Inspectors_at_inspection);
                     });
+
                     context.SaveChanges();
                 }
 
                 _main.SetPage("Home", false);
-            } else
+            }
+            else
             {
                 // Show wrong input error message
                 Console.WriteLine("Wrong input");
@@ -142,13 +159,15 @@ namespace Festispec.ViewModel.Inspections
 
         private bool IsDescriptionValid(string description)
         {
-            if (description == null) 
+            if (description == null)
             {
                 return false;
-            } else if(description.Length < 0)
+            }
+            else if (description.Length < 0)
             {
                 return false;
-            } else if(description.Length > 500)
+            }
+            else if (description.Length > 500)
             {
                 return false;
             }

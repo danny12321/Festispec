@@ -15,6 +15,7 @@ namespace Festispec.ViewModel.Inspections
         private MainViewModel _main;
         public ObservableCollection<InspectionVM> Inspections { get; set; }
         public ICommand NavigateAddInspectionCommand { get; set; }
+        public ICommand NavigateEditInspectionCommand { get; set; }
 
         public InspectionsViewModel(MainViewModel main)
         {
@@ -22,6 +23,7 @@ namespace Festispec.ViewModel.Inspections
             _main = main;
 
             NavigateAddInspectionCommand = new RelayCommand(NavigateAddInspection);
+            NavigateEditInspectionCommand = new RelayCommand<InspectionVM>(NavigateEditInspection);
 
             using (var context = new FestispecEntities())
             {
@@ -34,6 +36,11 @@ namespace Festispec.ViewModel.Inspections
         private void NavigateAddInspection()
         {
             _main.SetPage("AddInspection", false);
+        }
+
+        private void NavigateEditInspection(InspectionVM inspection)
+        {
+            _main.SetPage("EditInspection", false);
         }
     }
 }

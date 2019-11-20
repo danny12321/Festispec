@@ -92,6 +92,7 @@
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\Inspections\FestivalVM.cs" />
     <Compile Include="ViewModel\Inspections\InspectionAddViewModel.cs" />
+    <Compile Include="ViewModel\Inspections\InspectionEditViewModel.cs" />
     <Compile Include="ViewModel\Inspections\InspectionsViewModel.cs" />
     <Compile Include="ViewModel\Inspections\InspectionVM.cs" />
     <Compile Include="ViewModel\Inspections\InspectorAtInspectionVM.cs" />
@@ -104,6 +105,9 @@
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\Inspections\AddInspection.xaml.cs">
       <DependentUpon>AddInspection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Inspections\EditInspection.xaml.cs">
+      <DependentUpon>EditInspection.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Inspections\Inspections.xaml.cs">
       <DependentUpon>Inspections.xaml</DependentUpon>
@@ -129,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Inspections\AddInspection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspections\EditInspection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
