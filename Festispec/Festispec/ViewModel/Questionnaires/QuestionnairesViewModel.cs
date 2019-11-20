@@ -1,7 +1,8 @@
 ﻿using Festispec.Domain;
 using Festispec.View.Questionnaires;
+using Festispec.ViewModel.Questionnaires.Types;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,18 +20,6 @@ namespace Festispec.ViewModel.Questionnaires
 
         public ObservableCollection<QuestionViewModel> Questions { get; set; }
 
-        private Page _questionContent;
-
-        public Page QuestionContent
-        {
-            get { return _questionContent; }
-            set
-            {
-                _questionContent = value;
-                RaisePropertyChanged("QuestionContent");
-            }
-        }
-
         private QuestionViewModel _selectedQuestion;
 
         public QuestionViewModel SelectedQuestion
@@ -39,6 +28,8 @@ namespace Festispec.ViewModel.Questionnaires
             set
             {
                 _selectedQuestion = value;
+                EditPage = _selectedQuestion?.GetEditPage;
+                RaisePropertyChanged("EditPage");
                 RaisePropertyChanged("SelectedQuestion");
                 RaisePropertyChanged("GetVisibility");
             }
@@ -53,19 +44,40 @@ namespace Festispec.ViewModel.Questionnaires
             }
         }
 
-        public ICommand SelectQuestionCommand { get; set; }
+        public void ChangeType(QuestionViewModel question)
+        {
+            var newVm = GetQuestionClass(question.ToModel());
+            int index = Questions.IndexOf(question);
+            Questions[index] = newVm;
+            SelectedQuestion = newVm;
+
+            RaisePropertyChanged("EditPage");
+        }
+
+        private Page _editPage;
+
+        public Page EditPage
+        {
+            get { return _editPage; }
+            set
+            {
+                _editPage = value;
+                RaisePropertyChanged("EditPage");
+            }
+        }
 
         public ICommand AddQuestionCommand { get; set; }
 
+
         public QuestionnairesViewModel()
         {
-            SelectQuestionCommand = new RelayCommand<int>(SelectQuestion);
             AddQuestionCommand = new RelayCommand(AddQuestion);
 
             using (var context = new FestispecEntities())
             {
                 var questions = context.Questions.ToList()
-                    .Select(q => new QuestionViewModel(this, q));
+                    .Select(q => GetQuestionClass(q));
+
 
                 Questions = new ObservableCollection<QuestionViewModel>(questions);
 
@@ -76,40 +88,38 @@ namespace Festispec.ViewModel.Questionnaires
             }
         }
 
-        private void SelectQuestion(int id)
+        private QuestionViewModel GetQuestionClass(Questions q)
         {
-            var question = Questions.Where(e => e.Id == id).First();
-
-            if (question != null)
+            switch (q.type_question)
             {
-                SelectedQuestion = question;
-                SetQuestionContent();
+                case 1:
+                    return new OpenQuestion(this, q);
+
+                case 2:
+                    return new MultipleChoiseQuestion(this, q);
+
+                case 3:
+                    return new SelectQuestion(this, q);
+
+                default:
+                    return null;
             }
         }
 
         private void AddQuestion()
         {
-            SelectedQuestion = new QuestionViewModel(this);
-            SetQuestionContent();
-        }
+            var question = new Questions() { question = "New question", type_question = 2 };
 
-        public void SetQuestionContent()
-        {
-
-            switch (SelectedQuestion.Type)
+            using (var context = new FestispecEntities())
             {
-                case "ComboBox":
-                    QuestionContent = new SelectBox();
-                    break;
-
-                case "Open":
-                    QuestionContent = new Open();
-                    break;
-
-                default:
-                    QuestionContent = null;
-                    break;
+                context.Questions.Add(question);
+                question.Type_questions = context.Type_questions.First(tq => tq.id == question.type_question);
+                context.SaveChanges();
             }
+
+            var newQuestion = GetQuestionClass(question);
+            SelectedQuestion = newQuestion;
+            Questions.Add(newQuestion);
         }
     }
 }

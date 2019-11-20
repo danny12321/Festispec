@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec.View.Questionnaires
+namespace Festispec.View.Municipality
 {
     /// <summary>
-    /// Interaction logic for Open.xaml
+    /// Interaction logic for Municipality.xaml
     /// </summary>
-    public partial class Open : Page
+    public partial class Municipality : Page
     {
-        public Open()
+        public Municipality()
         {
             InitializeComponent();
         }

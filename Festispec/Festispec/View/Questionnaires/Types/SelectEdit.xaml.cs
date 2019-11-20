@@ -13,24 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec.View
+namespace Festispec.View.Questionnaires.Types
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SelectEdit.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class SelectEdit : Page
     {
-        public LoginWindow()
+        public SelectEdit()
         {
             InitializeComponent();
-        }
-
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            if (this.DataContext != null)
-            { 
-                ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password; 
-            }
         }
     }
 }
