@@ -16,7 +16,7 @@ namespace Festispec.ViewModel.Inspections
     {
         //TODO Make this dynamic
         private int _festivalId = 1;
-        private int _inspetionId = 3;
+        private int _inspetionId = 1;
 
 
         public ObservableCollection<InspectorsVM> Inspectors { get; set; }

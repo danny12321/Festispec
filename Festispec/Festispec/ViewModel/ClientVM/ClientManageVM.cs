@@ -55,22 +55,22 @@ namespace Festispec.ViewModel.ClientVM
 
         private void ShowEditPage()
         {
-            _main.SetPage("EditClient");
+            _main.SetPage("EditClient", false);
         }
 
         private void showClient()
         {
-            _main.SetPage("ClientInfo");
+            _main.SetPage("ClientInfo", false);
         }
 
         private void ShowAddPage()
         {
-            _main.SetPage("AddClient");
+            _main.SetPage("AddClient", false);
         }
 
         public void ShowClientPage()
         {
-            _main.SetPage("Clients");
+            _main.SetPage("Clients", false);
         }
     }
 }

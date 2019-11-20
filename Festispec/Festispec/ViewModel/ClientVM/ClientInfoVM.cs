@@ -63,20 +63,20 @@ namespace Festispec.ViewModel.ClientVM
 
         private void ShowEditFestival()
         {
-            _main.SetPage("EditFestival");
+            _main.SetPage("EditFestival", false);
         }
         public void ShowAddFestival()
         {
-            _main.SetPage("addFestival");
+            _main.SetPage("addFestival", false);
         }
         public void ShowFestivalInfo()
         {
-            _main.SetPage("FestivalInfo");
+            _main.SetPage("FestivalInfo", false);
         }
 
         public void ShowClientPage()
         {
-            _main.SetPage("ClientInfo");
+            _main.SetPage("ClientInfo", false);
         }
 
     }

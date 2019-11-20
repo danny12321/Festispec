@@ -65,7 +65,7 @@ namespace Festispec.ViewModel.InspectorsVM
         }
 
 
-        public DateTime Active
+        public DateTime? Active
         {
             get
             {

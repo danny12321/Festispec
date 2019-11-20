@@ -51,9 +51,10 @@
           <Property Name="start_date" Type="datetime" Nullable="false" />
           <Property Name="end_date" Type="datetime" Nullable="false" />
           <Property Name="client_id" Type="int" Nullable="false" />
-          <Property Name="municipality_id" Type="int" Nullable="false" />
+          <Property Name="municipality_id" Type="int" />
           <Property Name="latitude" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="longitude" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="city" Type="nchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Inspections">
           <Key>
@@ -251,7 +252,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Festivals_Municipalities">
-          <End Role="Municipalities" Type="Self.Municipalities" Multiplicity="1" />
+          <End Role="Municipalities" Type="Self.Municipalities" Multiplicity="0..1" />
           <End Role="Festivals" Type="Self.Festivals" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Municipalities">
@@ -577,9 +578,10 @@
           <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="client_id" Type="Int32" Nullable="false" />
-          <Property Name="municipality_id" Type="Int32" Nullable="false" />
+          <Property Name="municipality_id" Type="Int32" />
           <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_Festivals_Clients" FromRole="Festivals" ToRole="Clients" />
           <NavigationProperty Name="Contactpersons" Relationship="Self.FK_Contactpersons_Festivals" FromRole="Festivals" ToRole="Contactpersons" />
           <NavigationProperty Name="Municipalities" Relationship="Self.FK_Festivals_Municipalities" FromRole="Festivals" ToRole="Municipalities" />
@@ -810,7 +812,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Festivals_Municipalities">
-          <End Role="Municipalities" Type="Self.Municipalities" Multiplicity="1" />
+          <End Role="Municipalities" Type="Self.Municipalities" Multiplicity="0..1" />
           <End Role="Festivals" Type="Self.Festivals" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Municipalities">
@@ -1098,6 +1100,7 @@
                 <ScalarProperty Name="municipality_id" ColumnName="municipality_id" />
                 <ScalarProperty Name="latitude" ColumnName="latitude" />
                 <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="city" ColumnName="city" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
