@@ -31,13 +31,13 @@
                 <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Logout" TextDecorations="None" Foreground="White"><InlineUIContainer><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="ExitToApp" VerticalAlignment="Center"/></InlineUIContainer><Run Text="uitloggen"/></Hyperlink></TextBlock>
             </ListBox>
         </Border>
-      
+
         <DockPanel Grid.Column="1">
-          
-            <Border Background="LightGray" Height="100">
+
+            <Border DockPanel.Dock="Top" Background="LightGray" Height="100">
                 <TextBlock Text="{Binding PageTitle}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="20"/>
             </Border>
-            
+
             <Frame DockPanel.Dock="Bottom" Content="{Binding FrameContent}" NavigationUIVisibility="Hidden"></Frame>
         </DockPanel>
 
