@@ -1,5 +1,6 @@
 ﻿using Festispec.Domain;
 using Festispec.View;
+using Festispec.ViewModel.AccountsVM;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,6 @@ namespace Festispec.ViewModel
     public class LoginViewModel
     {
         public ICommand LoginCommand { get; set; }
-
-        public AccountsVM.UsersVM _user;
-        public AccountsVM.UserRollsVM _roll;
-        private Boolean _validated = true;
 
         public string Email { get; set; }
 
@@ -54,43 +51,43 @@ namespace Festispec.ViewModel
 
         private void Login()
         {
-            //moet bij release eruit.
-            if (Password != null)
+            if(string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Email))
             {
-                CalculateMD5Hash(Password);
+                new PopUpWindow().Show();
+                return;
             }
-            
-            _user = new AccountsVM.UsersVM();
-            _roll = new AccountsVM.UserRollsVM();
-            _user.email = Email;
 
-            using (var context = new FestispecEntities())
+            List<Users> user;
+
+            // Voor testen
+            if (true)
             {
-                var password = context.Users.Where(u => u.email == _user.email).ToList();
-                //voor testen.
-                if(password.Count != 0)
+                using (var context = new FestispecEntities())
                 {
-                    if (password[0].password.Equals(CalculateMD5Hash(ToString())))
-                    {
-                        _validated = true;
-                    }
+                    user = context.Users.ToList();
                 }
-
             }
-            if (_validated == true)
+            else
             {
-                if (String.IsNullOrEmpty(Email) == false || String.IsNullOrEmpty(Email) == true)//voor test.
+                using (var context = new FestispecEntities())
                 {
-                    _roll.id = 1;
-                    _roll.role = "Admin";
-                    new BaseWindow().Show();
-                    Application.Current.Windows[0].Close();
+                    var hPass = CalculateMD5Hash(Password);
+                    user = context.Users.Where(u => (u.email == Email && u.password == hPass)).ToList();
+                    Console.WriteLine(hPass);
                 }
+            }
 
-                else
-                {
-                    new PopUpWindow().Show();
-                }
+            if (user.Count > 0)
+            {
+                // user is ingelogd
+                new UsersVM(user[0]);
+                new BaseWindow().Show();
+                Application.Current.Windows[0].Close();
+            }
+            else
+            {
+                // inloggegevens zijn fout
+                new PopUpWindow().Show();
             }
         }
     }
