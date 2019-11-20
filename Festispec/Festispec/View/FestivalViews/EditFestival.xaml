@@ -29,8 +29,18 @@
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.Street, Mode=TwoWay}"></TextBox>
                 <TextBlock FontSize="15" Text="Huisnummer:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.HouseNumber, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="15" Text="Land:"></TextBlock>
-                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.Country, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="20" Text="Land:"></TextBlock>
+                <ComboBox
+                        SelectedValue="{Binding Path=SelectedFestival.Country}"
+                        Margin="0 8 0 8"
+                        HorizontalAlignment="Left">
+                    <ComboBoxItem>
+                        Nederland
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        België
+                    </ComboBoxItem>
+                </ComboBox>
                 <TextBlock FontSize="15" Text="Begin datum:"></TextBlock>
                 <DatePicker Width="100" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="Locale Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDate="{Binding StartDateBegin}" Text="{Binding StartDateBegin}"/>
                 <materialDesign:TimePicker materialDesign:HintAssist.Hint="Selecteer tijd" Is24Hours="True" SelectedTime="{Binding StartTime}"
