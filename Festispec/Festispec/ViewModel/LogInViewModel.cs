@@ -22,15 +22,6 @@ namespace Festispec.ViewModel
         public LoginViewModel()
         {
             LoginCommand = new RelayCommand<Window>(Login);
-
-
-            using (var context = new FestispecEntities())
-            {
-                // Cheating for performance
-                // Startup is slow now..
-                context.Questions.ToList();
-                context.Type_questions.ToList();
-            }
         }
 
         private void Login(Window window)
