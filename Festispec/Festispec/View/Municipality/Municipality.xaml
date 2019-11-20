@@ -6,9 +6,37 @@
       xmlns:local="clr-namespace:Festispec.View.Municipality"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Municipality">
+      DataContext="{Binding MunicipalityVM, Source={StaticResource Locator}}"
+      Title="Municipality"
+    
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight="Regular"
+      TextElement.FontSize="13"
+      TextOptions.TextFormattingMode="Ideal"
+      TextOptions.TextRenderingMode="Auto"
+      Background="{DynamicResource MaterialDesignPaper}"
+      FontFamily="{DynamicResource MaterialDesignFont}">
 
-    <Grid>
-        <TextBlock>Gemeente</TextBlock>
-    </Grid>
+
+    <StackPanel>
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="600"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Gemeenten" FontSize="28" Grid.Column="0" Padding="20"/>
+
+            <Button  Command="{Binding ShowAddMunicipality}"
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                 ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                <materialDesign:PackIcon
+                Kind="Add"
+                Height="24"
+                Width="24" />
+
+            </Button>
+        </Grid>
+    </StackPanel>
 </Page>

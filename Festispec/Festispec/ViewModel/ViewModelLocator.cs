@@ -2,6 +2,7 @@ using CommonServiceLocator;
 using Festispec.ViewModel.ClientVM;
 using Festispec.ViewModel.Festival_VMs;
 using Festispec.ViewModel.Questionnaires;
+using Festispec.ViewModel.MunicipalityVM;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 
@@ -11,6 +12,7 @@ namespace Festispec.ViewModel
     public class ViewModelLocator
     {
         private InspectorsVM.InspectorListViewModel _inspectors;
+        private MunicipalityVM.MunicipalityViewModel _municipality;
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
@@ -82,6 +84,18 @@ namespace Festispec.ViewModel
                 return new ViewModel.InspectorsVM.EditInspectorViewModel(_inspectors);
             }
         }
+
+        public MunicipalityViewModel MunicipalityVM
+        {
+            get
+            {
+                _municipality = new MunicipalityVM.MunicipalityViewModel(Main);
+                return _municipality;
+            }
+        }
+
+
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
