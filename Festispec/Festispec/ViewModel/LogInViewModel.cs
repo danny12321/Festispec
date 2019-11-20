@@ -51,7 +51,9 @@ namespace Festispec.ViewModel
 
         private void Login()
         {
-            if(string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Email))
+            var autoLogin = true;
+
+            if ((string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Email)) && !autoLogin)
             {
                 new PopUpWindow().Show();
                 return;
@@ -60,7 +62,7 @@ namespace Festispec.ViewModel
             List<Users> user;
 
             // Voor testen
-            if (true)
+            if (autoLogin)
             {
                 using (var context = new FestispecEntities())
                 {
