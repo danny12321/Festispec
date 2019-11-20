@@ -1,11 +1,14 @@
 using Festispec.Domain;
 using Festispec.View;
+using Festispec.View.Festival_Views;
 using Festispec.View.Questionnaires;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Linq;
+using System;
+using System.Windows;
 
 namespace Festispec.ViewModel
 {
@@ -57,15 +60,56 @@ namespace Festispec.ViewModel
                     FrameContent = new Schedule();
                     PageTitle = "Planning";
                     break;
+                case "Festival":
+                    FrameContent = new View.Festival_Views.Festivals();
+                    PageTitle = "Festival beheer";
+                    break;
+                case "Clients":
+                    FrameContent = new View.ClientsViews.Client();
+                    PageTitle = "Klanten beheer";
+                    break;
                 case "Vragenlijsten TEMP":
                     FrameContent = new View.Questionnaires.Questionnaires();
                     PageTitle = "Vragenlijsten";
+                    break;
+                case "Municipality":
+                    FrameContent = new View.Municipality.Municipality();
+                    PageTitle = "Gemeenten";
+                    break;
+                case "AddMunicipality":
+                    FrameContent = new View.Municipality.AddMunicipality();
+                    PageTitle = "Gemeenten toevoegen";
+                    break;
+                case "AddClient":
+                    FrameContent = new View.ClientsViews.AddClients();
+                    PageTitle = "Klanten toevoegen";
+                    break;
+                case "Inspectors":
+                    FrameContent = new View.Inspectors.Inspectors();
+                    PageTitle = "Inspecteurs beheer";
+                    break;
+                case "AddInspector":
+                    FrameContent = new View.Inspectors.AddInspector();
+                    PageTitle = "Inspecteur Toevoegen";
+                    break;
+                case "EditInspector":
+                    FrameContent = new View.Inspectors.EditInspector();
+                    PageTitle = "Inspecteur bewerken";
+                    break;
+                case "Logout":
+                    closeWindow();
                     break;
                 default:
                     FrameContent = new Home();
                     PageTitle = "Home";
                     break;
             }
+        }
+
+        private void closeWindow()
+        {
+            new LoginWindow().Show();
+            Application.Current.Windows[0].Close();
         }
     }
 }
