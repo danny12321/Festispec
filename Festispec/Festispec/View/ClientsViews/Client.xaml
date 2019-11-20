@@ -19,7 +19,7 @@
      FontFamily="{DynamicResource MaterialDesignFont}">
 
     <StackPanel>
-        <Grid >
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="600"/>
                 <ColumnDefinition Width="50"/>
@@ -27,7 +27,7 @@
 
             <TextBlock Text="Klanten" FontSize="28" Grid.Column="0" Padding="20"/>
 
-            <Button Command="{Binding showAddClient}"
+            <Button Command="{Binding showAddClient}"   
                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
                  ToolTip="Klant toevoegen">
                 <materialDesign:PackIcon
@@ -51,7 +51,7 @@
                             <Button Command="{Binding DataContext.ShowEditClient, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
                                   ToolTip="Klant wijzigen">
-                                  <materialDesign:PackIcon
+                                <materialDesign:PackIcon
                                     Kind="Pen"
                                     Height="20"
                                     Width="20" />

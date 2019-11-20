@@ -123,6 +123,12 @@
     <Compile Include="ViewModel\Questionnaires\Types\OpenQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Types\SelectQuestion.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\ClientsViews\AddClients.xaml.cs">
+      <DependentUpon>AddClients.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientsViews\Client.xaml.cs">
+      <DependentUpon>Client.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Municipality\AddMunicipality.xaml.cs">
       <DependentUpon>AddMunicipality.xaml</DependentUpon>
     </Compile>
@@ -132,7 +138,7 @@
     <Compile Include="View\PopUpWindow.xaml.cs">
       <DependentUpon>PopUpWindow.xaml</DependentUpon>
     </Compile>
-    <Compile>
+    <Compile Include="View\ClientsViews\ClientInfo.xaml.cs">
       <DependentUpon>ClientInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ClientsViews\EditClient.xaml.cs">
@@ -151,7 +157,7 @@
       <DependentUpon>Festivals.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Inspectors\AddInspector.xaml.cs">
-        <DependentUpon>AddInspector.xaml</DependentUpon>
+      <DependentUpon>AddInspector.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Inspectors\EditInspector.xaml.cs">
       <DependentUpon>EditInspector.xaml</DependentUpon>
@@ -245,9 +251,11 @@
     </Compile>
     <Compile Include="View\BaseWindow.xaml.cs">
       <DependentUpon>BaseWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="View\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
