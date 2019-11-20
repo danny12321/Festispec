@@ -66,7 +66,7 @@
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding Festival.Longitude, Mode=TwoWay}"></TextBox>
 
                 <Border Padding="10">
-                    <Button HorizontalAlignment="Right" Command="{Binding AddFestivalCommand}" CommandParameter="{Binding AddFestivalCommand}"
+                    <Button HorizontalAlignment="Right" Command="{Binding AddFestivalCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="100"
                     ToolTip="Festival opslaan">

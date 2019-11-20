@@ -46,7 +46,7 @@
                 <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedClient.Phone, Mode=TwoWay}"></TextBox>
 
                 <Border Padding="10">
-                    <Button HorizontalAlignment="Right" Command="{Binding EditClientCommand}" CommandParameter="{Binding EditClientCommand}"
+                    <Button HorizontalAlignment="Right" Command="{Binding EditClientCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="150"
                     ToolTip="Wijzigingen opslaan">
