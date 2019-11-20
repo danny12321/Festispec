@@ -13,8 +13,7 @@
         ItemsSource="{Binding Possible_answers}"
         VerticalContentAlignment="Top"  
         ScrollViewer.VerticalScrollBarVisibility="Hidden"
-        ScrollViewer.CanContentScroll="False"
-        MaxHeight="800">
+        ScrollViewer.CanContentScroll="False">
         <ItemsControl.ItemTemplate>
             <DataTemplate >
                 <StackPanel Orientation="Horizontal">

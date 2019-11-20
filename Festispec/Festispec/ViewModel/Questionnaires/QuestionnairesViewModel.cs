@@ -30,9 +30,8 @@ namespace Festispec.ViewModel.Questionnaires
                 _selectedQuestion = value;
                 EditPage = _selectedQuestion?.GetEditPage;
                 RaisePropertyChanged("EditPage");
-                RaisePropertyChanged("GetVisibility");
                 RaisePropertyChanged("SelectedQuestion");
-                RaisePropertyChanged("SelectedQuestion.StringType");
+                RaisePropertyChanged("GetVisibility");
             }
         }
 
@@ -45,14 +44,14 @@ namespace Festispec.ViewModel.Questionnaires
             }
         }
 
-        public void ChangeType(QuestionViewModel question, Type_questions value)
+        public void ChangeType(QuestionViewModel question)
         {
+            var newVm = GetQuestionClass(question.ToModel());
             int index = Questions.IndexOf(question);
-            Console.WriteLine(question.Type.type);
-            Questions[index] = GetQuestionClass(question.ToModel());
-            RaisePropertyChanged("EditPage");
+            Questions[index] = newVm;
+            SelectedQuestion = newVm;
 
-            Console.WriteLine("Type changed");
+            RaisePropertyChanged("EditPage");
         }
 
         private Page _editPage;
@@ -69,12 +68,10 @@ namespace Festispec.ViewModel.Questionnaires
 
         public ICommand AddQuestionCommand { get; set; }
 
-        public ICommand DeleteQuestionCommand { get; set; }
 
         public QuestionnairesViewModel()
         {
             AddQuestionCommand = new RelayCommand(AddQuestion);
-            DeleteQuestionCommand = new RelayCommand(DeleteQuestion);
 
             using (var context = new FestispecEntities())
             {
@@ -123,19 +120,6 @@ namespace Festispec.ViewModel.Questionnaires
             var newQuestion = GetQuestionClass(question);
             SelectedQuestion = newQuestion;
             Questions.Add(newQuestion);
-        }
-
-        private void DeleteQuestion()
-        {
-            using (var context = new FestispecEntities())
-            {
-                context.Questions.Attach(SelectedQuestion.ToModel());
-                context.Questions.Remove(SelectedQuestion.ToModel());
-                context.SaveChanges();
-            }
-
-            Questions.Remove(SelectedQuestion);
-            SelectedQuestion = null;
         }
     }
 }

@@ -8,7 +8,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Questionnaires"
-      Background="White"
       DataContext="{Binding Questionnaires, Source={StaticResource Locator}}">
 
     <Grid>
@@ -18,10 +17,12 @@
         </Grid.ColumnDefinitions>
 
         <Border Grid.Column="0" Padding="20">
-            <StackPanel>
 
-                <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+            <DockPanel>
+
+                <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
                     <TextBlock FontSize="30">Vragen</TextBlock>
+
                     <Button HorizontalAlignment="Right" Command="{Binding AddQuestionCommand}">
                         <materialDesign:PackIcon Kind="Add"/>
                     </Button>
@@ -30,15 +31,13 @@
                 <ListBox
                     ItemsSource="{Binding Questions}"
                     SelectedItem="{Binding SelectedQuestion}"
-                    VerticalContentAlignment="Top"  
-                    ScrollViewer.VerticalScrollBarVisibility="Visible"
-                    ScrollViewer.CanContentScroll="False"
-                    MaxHeight="800">
+                    DockPanel.Dock="Bottom"
+                >
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
 
-                                <TextBox IsReadOnly="True" Text="{Binding Question}" materialDesign:HintAssist.Hint="(Selecteer vraag)" FontSize="25" HorizontalAlignment="Stretch"></TextBox>
+                                <TextBox IsReadOnly="True" IsReadOnlyCaretVisible="False" Cursor="Arrow" Text="{Binding Question}" materialDesign:HintAssist.Hint="(Selecteer vraag)" FontSize="25" HorizontalAlignment="Stretch"></TextBox>
 
                                 <Frame Margin="10" Content="{Binding GetPreviewPage}" />
 
@@ -46,51 +45,52 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-            </StackPanel>
+            </DockPanel>
         </Border>
 
         <!-- Selected Question -->
         <Border Grid.Column="1" Padding="20">
-            <StackPanel Grid.Column="1" Visibility="{Binding GetVisibility}">
+            <ScrollViewer Visibility="{Binding GetVisibility}">
+                <StackPanel Grid.Row="0">
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+                        <TextBlock Text="Geselecteerde vraag" FontSize="30" />
 
-                <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
-                    <TextBlock Text="Geselecteerde vraag" FontSize="30" />
+                        <Button HorizontalAlignment="Right" Command="{Binding SelectedQuestion.DeleteQuestionCommand}">
+                            <materialDesign:PackIcon Kind="TrashCanOutline" Height="25" Width="25" />
+                        </Button>
+                    </DockPanel>
 
-                    <Button HorizontalAlignment="Right" Command="{Binding DeleteQuestionCommand}">
-                        <materialDesign:PackIcon Kind="TrashCanOutline" Height="25" Width="25" />
-                    </Button>
-                </DockPanel>
-
-                <TextBox 
-                    materialDesign:HintAssist.Hint="Vraag"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    FontSize="25"
-                    Text="{Binding SelectedQuestion.Question}"
-                />
-
-
-                <TextBlock
-                    FontSize="25"
-                    Text="{Binding SelectedQuestion.StringType.Id}"
-                />
-
-                <Grid Margin="0, 30">
-                    <ComboBox 
-                        ItemsSource="{Binding QuestionTypes}"   
-                        SelectedItem="{Binding SelectedQuestion.StringType}"
-                        
-                        DisplayMemberPath="Type"
-                        SelectedValuePath="Id"
-                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                        materialDesign:HintAssist.Hint="Type vraag"
-                        IsSynchronizedWithCurrentItem="True"
-                        IsEditable="False"
+                    <TextBox
+                        materialDesign:HintAssist.Hint="Vraag"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        FontSize="25"
+                        Text="{Binding SelectedQuestion.Question}"
                     />
-                </Grid>
 
-                <Frame Content="{Binding EditPage}" NavigationUIVisibility="Hidden"/>
 
-            </StackPanel>
+                    <TextBlock
+                        FontSize="25"
+                        Text="{Binding SelectedQuestion.StringType.Id}"
+                    />
+
+                    <Grid Margin="0, 30" DockPanel.Dock="Top">
+                        <ComboBox 
+                            ItemsSource="{Binding QuestionTypes}"   
+                            SelectedItem="{Binding SelectedQuestion.StringType, Mode=TwoWay}"
+                        
+                            DisplayMemberPath="Type"
+                            SelectedValuePath="Id"
+                        
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                            materialDesign:HintAssist.Hint="Type vraag"
+                            IsSynchronizedWithCurrentItem="True"
+                        />
+                    </Grid>
+
+                    <Frame Grid.Row="1" Content="{Binding EditPage}" NavigationUIVisibility="Hidden"/>
+                </StackPanel>
+            </ScrollViewer>
+
         </Border>
     </Grid>
 </Page>

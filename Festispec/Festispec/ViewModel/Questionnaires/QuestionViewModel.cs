@@ -28,8 +28,11 @@ namespace Festispec.ViewModel.Questionnaires
             }
             set
             {
-                Console.WriteLine(value);
                 _question.Type_questions = value.ToModel();
+                _question.type_question = value.Id;
+                _question.Type_questions = value.ToModel();
+                Questionnaires.ChangeType(this);
+                SaveChanges();
             }
         }
 
@@ -41,9 +44,9 @@ namespace Festispec.ViewModel.Questionnaires
             }
             set
             {
-                //_question.Type_questions = value;
-                //_question.type_question = value.id;
-                Questionnaires.ChangeType(this, value);
+                _question.Type_questions = value;
+                _question.type_question = value.id;
+                Questionnaires.ChangeType(this);
             }
         }
 
@@ -64,6 +67,8 @@ namespace Festispec.ViewModel.Questionnaires
 
         public ICommand AddAnswerRowCommand { get; set; }
 
+        public ICommand DeleteQuestionCommand { get; set; }
+
         public virtual Page GetPreviewPage { get => null; }
 
         public virtual Page GetEditPage { get => null; }
@@ -74,28 +79,51 @@ namespace Festispec.ViewModel.Questionnaires
             _question = q;
 
             var possible_answers = _question.Possible_answer.ToList()
-                .Select(pa => new Possible_answerVM(pa));
+                .Select(pa => new Possible_answerVM(pa,this));
 
             Possible_answers = new ObservableCollection<Possible_answerVM>(possible_answers);
 
             AddAnswerRowCommand = new RelayCommand(AddAnswerRow);
-
-            
+            DeleteQuestionCommand = new RelayCommand(DeleteQuestion);
         }
 
         public void AddAnswerRow()
         {
-            Possible_answers.Add(new Possible_answerVM());
+            var pa = new Possible_answerVM(this);
+
+            using (var context = new FestispecEntities())
+            {
+                context.Questions.Attach(_question);
+                _question.Possible_answer.Add(pa.ToModel());
+                Possible_answers.Add(pa);
+
+                context.SaveChanges();
+            }
         }
 
         public void SaveChanges()
         {
             using (var context = new FestispecEntities())
             {
-                var question = context.Questions.First(q => q.id == _question.id);
-                question.question = Question;
+                context.Entry(_question).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
             }
+        }
+
+        private void DeleteQuestion()
+        {
+            Possible_answers.ToList().ForEach(pa => pa.Delete());
+
+            using (var context = new FestispecEntities())
+            {
+                context.Questions.Attach(_question);
+                context.Questions.Remove(_question);
+                context.SaveChanges();
+            }
+
+            Questionnaires.Questions.Remove(this);
+            Questionnaires.SelectedQuestion = null;
+            Console.WriteLine("Selected question null");
         }
 
         internal Questions ToModel()
