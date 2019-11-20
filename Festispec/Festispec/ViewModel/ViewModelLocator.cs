@@ -5,6 +5,7 @@ using Festispec.ViewModel.Festival_VMs;
 using Festispec.ViewModel.FestivalVM;
 using Festispec.ViewModel.FestivalVMs;
 using Festispec.ViewModel.Questionnaires;
+using Festispec.ViewModel.MunicipalityVM;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 
@@ -18,13 +19,16 @@ namespace Festispec.ViewModel
         private FestivalManagementVM _festivalManagementVM;
         private FestivalInfoVM _festivalInfoVM;
 
+        private InspectorsVM.InspectorListViewModel _inspectors;
+        private MunicipalityVM.MunicipalityViewModel _municipality;
+        
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
-
             SimpleIoc.Default.Register<MainViewModel>();
+
             SimpleIoc.Default.Register<IDataService, DataService.DataService>();
+            SimpleIoc.Default.Register<PopUpViewModel>();
         }
 
         public MainViewModel Main
@@ -40,6 +44,14 @@ namespace Festispec.ViewModel
             get
             {
                 return new LoginViewModel();
+            }
+        }
+
+        public PopUpViewModel PopUpWindow
+        {
+            get
+            {
+                return new PopUpViewModel();
             }
         }
 
@@ -80,7 +92,7 @@ namespace Festispec.ViewModel
             }
         }
 
-        public ClientManageVM client
+        public QuestionnairesViewModel Questionnaires
         {
             get
             {
@@ -88,16 +100,16 @@ namespace Festispec.ViewModel
                 {
                     _clientManageVM = new ClientManageVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
                 }
+                return new QuestionnairesViewModel();
 
-                return _clientManageVM;
             }
         }
-
-        public AddClientsVM addclient
+        public InspectorsVM.InspectorListViewModel InspectorsVM
         {
             get
             {
-                return new AddClientsVM(_clientManageVM);
+                _inspectors = new InspectorsVM.InspectorListViewModel(Main);
+                return _inspectors;
             }
         }
 
@@ -118,13 +130,33 @@ namespace Festispec.ViewModel
             }
         }
         
-        public QuestionnairesViewModel Questionnaires
+        public InspectorsVM.AddInspectorViewModel AddInspector
         {
             get
             {
-                return new QuestionnairesViewModel();
+                
+                return new ViewModel.InspectorsVM.AddInspectorViewModel(_inspectors);
             }
         }
+        public InspectorsVM.EditInspectorViewModel EditInspector
+        {
+            get
+            {
+
+                return new ViewModel.InspectorsVM.EditInspectorViewModel(_inspectors);
+            }
+        }
+
+        public MunicipalityViewModel MunicipalityVM
+        {
+            get
+            {
+                _municipality = new MunicipalityVM.MunicipalityViewModel(Main);
+                return _municipality;
+            }
+        }
+
+
 
         public static void Cleanup()
         {
