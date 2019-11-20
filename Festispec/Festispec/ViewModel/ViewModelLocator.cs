@@ -1,4 +1,5 @@
 using CommonServiceLocator;
+using Festispec.ViewModel.Inspections;
 using Festispec.ViewModel.ClientVM;
 using Festispec.ViewModel.DataService;
 using Festispec.ViewModel.Festival_VMs;
@@ -157,6 +158,29 @@ namespace Festispec.ViewModel
         }
 
 
+
+        public InspectionsViewModel Inspections
+        {
+            get
+            {
+                return new InspectionsViewModel(Main);
+            }
+        }
+
+        public InspectionAddViewModel InspectionAdd
+        {
+            get
+            {
+                return new InspectionAddViewModel(Main);
+            }
+        }
+        public InspectionEditViewModel InspectionEdit
+        {
+            get
+            {
+                return new InspectionEditViewModel(Main);
+            }
+        }
 
         public static void Cleanup()
         {
