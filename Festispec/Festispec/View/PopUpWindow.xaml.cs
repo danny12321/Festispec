@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec.View.Questionnaires
+namespace Festispec.View
 {
     /// <summary>
-    /// Interaction logic for Open.xaml
+    /// Interaction logic for PopUp.xaml
     /// </summary>
-    public partial class Open : Page
+    public partial class PopUpWindow : Window
     {
-        public Open()
+        public PopUpWindow()
         {
             InitializeComponent();
         }

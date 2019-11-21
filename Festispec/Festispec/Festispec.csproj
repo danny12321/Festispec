@@ -27,6 +27,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,6 +37,10 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
@@ -62,6 +67,9 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.6.0.325, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.6.0\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Maps.MapControl.WPF">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Bing Maps WPF Control\V1\Libraries\Microsoft.Maps.MapControl.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -86,21 +94,116 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\AccountsVM\UsersRollsVM.cs" />
+    <Compile Include="ViewModel\AccountsVM\UsersVM.cs" />
+    <Compile Include="ViewModel\ClientVM\AddClientsVM.cs" />
+    <Compile Include="ViewModel\ClientVM\ClientInfoVM.cs" />
+    <Compile Include="ViewModel\ClientVM\ClientManageVM.cs" />
+    <Compile Include="ViewModel\ClientVM\ClientsVM.cs" />
+    <Compile Include="ViewModel\ClientVM\EditClientVM.cs" />
+    <Compile Include="ViewModel\DataService\DataService.cs" />
+    <Compile Include="ViewModel\DataService\IDataService.cs" />
+    <Compile Include="ViewModel\FestivalVM\AddFestivalVM.cs" />
+    <Compile Include="ViewModel\FestivalVM\EditFestivalVM.cs" />
+    <Compile Include="ViewModel\FestivalVM\FestivalInfoVM.cs" />
+    <Compile Include="ViewModel\FestivalVM\FestivalManagementVM.cs" />
+    <Compile Include="ViewModel\FestivalVM\FestivalVM.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
+    <Compile Include="ViewModel\Inspections\FestivalVM.cs" />
+    <Compile Include="ViewModel\Inspections\InspectionAddViewModel.cs" />
+    <Compile Include="ViewModel\Inspections\InspectionEditViewModel.cs" />
+    <Compile Include="ViewModel\Inspections\InspectionsViewModel.cs" />
+    <Compile Include="ViewModel\Inspections\InspectionVM.cs" />
+    <Compile Include="ViewModel\Inspections\InspectorAtInspectionVM.cs" />
+    <Compile Include="ViewModel\Inspections\InspectorsVM.cs" />
+    <Compile Include="ViewModel\InspectorsVM\AddInspectorViewModel.cs" />
+    <Compile Include="ViewModel\InspectorsVM\EditInspectorViewModel.cs" />
+    <Compile Include="ViewModel\InspectorsVM\InspectorListViewModel.cs" />
+    <Compile Include="ViewModel\InspectorsVM\InspectorviewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\Questionnaires\IQuestion.cs" />
+    <Compile Include="ViewModel\Questionnaires\Possible_answerVM.cs" />
+    <Compile Include="ViewModel\MunicipalityVM\MunicipalityViewModel.cs" />
+    <Compile Include="ViewModel\PopUpViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionnairesViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionTypeViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionViewModel.cs" />
+    <Compile Include="ViewModel\Questionnaires\Types\MultipleChoiseQuestion.cs" />
+    <Compile Include="ViewModel\Questionnaires\Types\OpenQuestion.cs" />
+    <Compile Include="ViewModel\Questionnaires\Types\SelectQuestion.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="View\Questionnaires\Open.xaml.cs">
-      <DependentUpon>Open.xaml</DependentUpon>
+    <Compile Include="View\Inspections\AddInspection.xaml.cs">
+      <DependentUpon>AddInspection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Inspections\EditInspection.xaml.cs">
+      <DependentUpon>EditInspection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Inspections\Inspections.xaml.cs">
+      <DependentUpon>Inspections.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientsViews\AddClients.xaml.cs">
+      <DependentUpon>AddClients.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientsViews\Client.xaml.cs">
+      <DependentUpon>Client.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Municipality\AddMunicipality.xaml.cs">
+      <DependentUpon>AddMunicipality.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Municipality\Municipality.xaml.cs">
+      <DependentUpon>Municipality.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PopUpWindow.xaml.cs">
+      <DependentUpon>PopUpWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientsViews\ClientInfo.xaml.cs">
+      <DependentUpon>ClientInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientsViews\EditClient.xaml.cs">
+      <DependentUpon>EditClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FestivalViews\AddFestival.xaml.cs">
+      <DependentUpon>AddFestival.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FestivalViews\EditFestival.xaml.cs">
+      <DependentUpon>EditFestival.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FestivalViews\FestivalInfo.xaml.cs">
+      <DependentUpon>FestivalInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FestivalViews\Festivals.xaml.cs">
+      <DependentUpon>Festivals.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Inspectors\AddInspector.xaml.cs">
+      <DependentUpon>AddInspector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Inspectors\EditInspector.xaml.cs">
+      <DependentUpon>EditInspector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Inspectors\Inspectors.xaml.cs">
+      <DependentUpon>Inspectors.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Questionnaires\Questionnaires.xaml.cs">
       <DependentUpon>Questionnaires.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Questionnaires\SelectBox.xaml.cs">
-      <DependentUpon>SelectBox.xaml</DependentUpon>
+    <Compile Include="View\Questionnaires\Types\MultipleChoiseEdit.xaml.cs">
+      <DependentUpon>MultipleChoiseEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\MultipleChoisePreview.xaml.cs">
+      <DependentUpon>MultipleChoisePreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\OpenEdit.xaml.cs">
+      <DependentUpon>OpenEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\OpenPreview.xaml.cs">
+      <DependentUpon>OpenPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\SelectEdit.xaml.cs">
+      <DependentUpon>SelectEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\SelectPreview.xaml.cs">
+      <DependentUpon>SelectPreview.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Schedule.xaml.cs">
       <DependentUpon>Schedule.xaml</DependentUpon>
@@ -109,7 +212,63 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ClientsViews\AddClients.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClientsViews\Client.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClientsViews\ClientInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClientsViews\EditClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FestivalViews\AddFestival.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FestivalViews\EditFestival.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FestivalViews\FestivalInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FestivalViews\Festivals.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspections\AddInspection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspections\EditInspection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspections\Inspections.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspectors\AddInspector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspectors\EditInspector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspectors\Inspectors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,23 +282,53 @@
     </Compile>
     <Compile Include="View\BaseWindow.xaml.cs">
       <DependentUpon>BaseWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="View\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\Questionnaires\Open.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Questionnaires\Questionnaires.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Questionnaires\SelectBox.xaml">
+    <Page Include="View\Municipality\AddMunicipality.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Municipality\Municipality.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PopUpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\MultipleChoiseEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\MultipleChoisePreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\OpenEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\OpenPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\SelectEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\SelectPreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
