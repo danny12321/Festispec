@@ -33,9 +33,9 @@
                 <TextBlock Text="Achternaam:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding Inspector.InspectorLastName, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Geboorte Datum:"></TextBlock>
-                <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding Inspector.Birthday,Mode=OneWayToSource}" DisplayDate="2019-11-19"/>
+                <DatePicker materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding Inspector.Birthday,Mode=OneWayToSource}" DisplayDate="2019-11-19" Margin="0,0,247,0"/>
                 <TextBlock Text="Postcode:"></TextBlock>
-                <TextBox Width="100" MaxLength="10" Text="{Binding Inspector.PostalCode, Mode=TwoWay}"></TextBox>
+                <TextBox MaxLength="10" Text="{Binding Inspector.PostalCode, Mode=TwoWay}" Margin="10,0,130,0"/>
                 <TextBlock Text="Straat:"></TextBlock>
                 <TextBox  MaxLength="25" Text="{Binding Inspector.Street, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Huisnummer:"></TextBlock>
@@ -56,6 +56,6 @@
 
             </StackPanel>
         </Border>
-        
+
     </Grid>
 </Page>

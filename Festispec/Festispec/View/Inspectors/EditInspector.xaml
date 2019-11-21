@@ -16,7 +16,7 @@
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}">
-    
+
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -34,7 +34,7 @@
                 <TextBlock Text="Achternaam:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.InspectorLastName, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Geboorte Datum:"></TextBlock>
-                <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding  InspectorViewModel.SelectedInspector.Birthday,Mode=TwoWay}"/>
+                <DatePicker materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding  InspectorViewModel.SelectedInspector.Birthday,Mode=TwoWay}" Margin="0,0,250,0"/>
                 <TextBlock Text="Postcode:"></TextBlock>
                 <TextBox MaxLength="6" Text="{Binding InspectorViewModel.SelectedInspector.PostalCode, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Straat:"></TextBlock>
@@ -44,7 +44,7 @@
                 <TextBlock Text="TelefoonNummer:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.Phone, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Actief:"></TextBlock>
-                <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding  InspectorViewModel.SelectedInspector.Active,Mode=TwoWay}"/>
+                <DatePicker materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding  InspectorViewModel.SelectedInspector.Active,Mode=TwoWay}" Margin="0,0,250,0"/>
 
 
                 <Border Padding="10">
