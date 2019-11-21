@@ -22,7 +22,7 @@ namespace Festispec.Domain
     
         public int inpector_id { get; set; }
         public int inspection_id { get; set; }
-        public System.DateTime absent { get; set; }
+        public Nullable<System.DateTime> absent { get; set; }
     
         public virtual Inspections Inspections { get; set; }
         public virtual Inspectors Inspectors { get; set; }

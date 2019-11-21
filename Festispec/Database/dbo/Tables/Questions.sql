@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Questions] (
     [id]               INT            IDENTITY (1, 1) NOT NULL,
-    [question]         NVARCHAR (500) NOT NULL,
+    [question]         NVARCHAR (500) NULL,
     [type_question]    INT            NOT NULL,
     [questionnaire_id] INT            NOT NULL,
     CONSTRAINT [PK_Questions] PRIMARY KEY CLUSTERED ([id] ASC),
