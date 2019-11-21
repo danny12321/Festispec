@@ -1,4 +1,5 @@
 ﻿using Festispec.Domain;
+using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,13 @@ namespace Festispec.ViewModel.Inspections
         public ObservableCollection<InspectionVM> Inspections { get; set; }
         public ICommand NavigateAddInspectionCommand { get; set; }
         public ICommand NavigateEditInspectionCommand { get; set; }
+        private IDataService _service;
 
-        public InspectionsViewModel(MainViewModel main)
+        public InspectionsViewModel(MainViewModel main, IDataService service)
         {
 
             _main = main;
+            _service = service;
 
             NavigateAddInspectionCommand = new RelayCommand(NavigateAddInspection);
             NavigateEditInspectionCommand = new RelayCommand<InspectionVM>(NavigateEditInspection);
@@ -40,6 +43,7 @@ namespace Festispec.ViewModel.Inspections
 
         private void NavigateEditInspection(InspectionVM inspection)
         {
+            _service.SelectedInspection = inspection;
             _main.SetPage("EditInspection", false);
         }
     }
