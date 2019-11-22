@@ -5,6 +5,8 @@
     [email] NVARCHAR(50) NULL, 
     [birthday]    DATETIME      NULL,
     [postalcode]  NVARCHAR (6)  NULL,
+    [country] NVARCHAR(50) NULL, 
+    [city] NVARCHAR(50) NULL, 
     [street]      NVARCHAR (50) NULL,
     [housenumber] NVARCHAR (10) NULL,
     [phone]       NVARCHAR (50) NULL,
