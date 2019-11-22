@@ -104,15 +104,18 @@ namespace Festispec.ViewModel.Festival_VMs
 
         private async void GenerateLatLongBasedOnAdress()
         {
-            LatLongGenerator latLongGenerator = new LatLongGenerator();
+            //You need atleast a country and a city to get a good result
+            if (Festival.Country != null || Festival.City != null)
+            {
+                LatLongGenerator latLongGenerator = new LatLongGenerator();
 
-            Task<string> latLongGeneratorAwait = latLongGenerator.GenerateLatLong(Festival.Country, Festival.City, Festival.Street, Festival.HouseNumber);
-            string latlong = await latLongGeneratorAwait;
+                Task<string> latLongGeneratorAwait = latLongGenerator.GenerateLatLong(Festival.Country, Festival.City, Festival.Street, Festival.HouseNumber);
+                string latlong = await latLongGeneratorAwait;
 
-
-            Festival.Latitude = latlong.Split(',')[0];
-            Festival.Longitude = latlong.Split(',')[1];
-            RaisePropertyChanged("Festival");
+                Festival.Latitude = latlong.Split(',')[0];
+                Festival.Longitude = latlong.Split(',')[1];
+                RaisePropertyChanged("Festival");
+            }
         }
     }
 }

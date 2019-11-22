@@ -140,7 +140,7 @@ namespace Festispec.ViewModel.Inspections
                     context.SaveChanges();
                 }
 
-                _main.SetPage("Home", false);
+                _main.SetPage("Inspections", false);
             }
             else
             {
