@@ -46,12 +46,12 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="postalcode" Type="nvarchar" MaxLength="6" />
-          <Property Name="city" Type="nvarchar" MaxLength="50" />
+          <Property Name="city" Type="nchar" MaxLength="50" />
           <Property Name="street" Type="nvarchar" MaxLength="50" />
           <Property Name="housenumber" Type="nvarchar" MaxLength="10" />
           <Property Name="country" Type="nvarchar" MaxLength="50" />
-          <Property Name="start_date" Type="datetime" />
-          <Property Name="end_date" Type="datetime" />
+          <Property Name="start_date" Type="datetime" Nullable="false" />
+          <Property Name="end_date" Type="datetime" Nullable="false" />
           <Property Name="client_id" Type="int" Nullable="false" />
           <Property Name="municipality_id" Type="int" />
           <Property Name="latitude" Type="nvarchar" MaxLength="50" />
@@ -78,6 +78,7 @@
           <Property Name="email" Type="nvarchar" MaxLength="50" />
           <Property Name="birthday" Type="datetime" />
           <Property Name="postalcode" Type="nvarchar" MaxLength="6" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" />
           <Property Name="city" Type="nvarchar" MaxLength="50" />
           <Property Name="street" Type="nvarchar" MaxLength="50" />
           <Property Name="housenumber" Type="nvarchar" MaxLength="10" />
@@ -576,12 +577,12 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
-          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="housenumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="start_date" Type="DateTime" Precision="3" />
-          <Property Name="end_date" Type="DateTime" Precision="3" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="client_id" Type="Int32" Nullable="false" />
           <Property Name="municipality_id" Type="Int32" />
           <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -614,6 +615,7 @@
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="birthday" Type="DateTime" Precision="3" />
           <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="housenumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
@@ -1132,6 +1134,7 @@
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="birthday" ColumnName="birthday" />
                 <ScalarProperty Name="postalcode" ColumnName="postalcode" />
+                <ScalarProperty Name="country" ColumnName="country" />
                 <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="street" ColumnName="street" />
                 <ScalarProperty Name="housenumber" ColumnName="housenumber" />
