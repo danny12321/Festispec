@@ -9,6 +9,7 @@ using Festispec.ViewModel.Questionnaires;
 using Festispec.ViewModel.MunicipalityVM;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using Festispec.ViewModel.ContactPersonsVM;
 
 namespace Festispec.ViewModel
 {
@@ -86,6 +87,14 @@ namespace Festispec.ViewModel
             get
             {
                 return new EditFestivalVM(Main, ServiceLocator.Current.GetInstance<IDataService>(), _clientInfoVM);
+            }
+        }
+
+        public AddContactPersonVM addContactPerson
+        {
+            get
+            {
+                return new AddContactPersonVM(festivalinfo, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
 

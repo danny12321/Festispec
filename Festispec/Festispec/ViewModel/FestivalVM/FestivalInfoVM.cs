@@ -1,4 +1,5 @@
 ﻿using Festispec.Domain;
+using Festispec.ViewModel.ContactPersonsVM;
 using Festispec.ViewModel.DataService;
 using Festispec.ViewModel.FestivalVMs;
 using GalaSoft.MvvmLight;
@@ -22,6 +23,11 @@ namespace Festispec.ViewModel.FestivalVM
         private MainViewModel _main;
 
         public ObservableCollection<FestivalVM> Festivals { get; set; }
+        public ObservableCollection<ContactPersonVM> Contactpersons { get; set; }
+
+        public ICommand AddContactCommand { get; set; }
+        public ICommand ShowContactCommand { get; set; }
+        public ICommand EditContactCommand { get; set; }
 
         public FestivalVM SelectedFestival
         {
@@ -29,6 +35,16 @@ namespace Festispec.ViewModel.FestivalVM
             set
             {
                 _service.SelectedFestival = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public ContactPersonVM SelectedContactPerson
+        {
+            get { return _service.SelectedContactPerson; }
+            set
+            {
+                _service.SelectedContactPerson = value;
                 RaisePropertyChanged();
             }
         }
@@ -44,12 +60,23 @@ namespace Festispec.ViewModel.FestivalVM
                 var festival = context.Festivals.ToList()
                              .Select(e => new FestivalVM(e));
 
-                Festivals = new ObservableCollection<FestivalVM>(festival);
-            }
+                var person = context.Contactpersons.ToList()
+                              .Select(i => new ContactPersonVM(i)).Where(i => i.FestivalId == SelectedFestival.FestivalId);
 
+                Festivals = new ObservableCollection<FestivalVM>(festival);
+                Contactpersons = new ObservableCollection<ContactPersonVM>(person);
+            }
+            AddContactCommand = new RelayCommand(ShowAddContactPerson);
         }
 
+        private void ShowAddContactPerson()
+        {
+            _main.SetPage("ShowAddContactPerson", false);
+        }
 
-
+        public void ShowFestivalPage()
+        {
+            _main.SetPage("FestivalInfo", false);
+        }
     }
 }

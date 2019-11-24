@@ -134,6 +134,10 @@ namespace Festispec.ViewModel
                     FrameContent = new View.Inspectors.EditInspector();
                     PageTitle = "Inspecteur bewerken";
                     break;
+                case "ShowAddContactPerson":
+                    FrameContent = new View.ContactPersonsView.AddContactPerson();
+                    PageTitle = "contactpersoon toevoegen";
+                    break;
                 case "Logout":
                     closeWindow();
                     break;

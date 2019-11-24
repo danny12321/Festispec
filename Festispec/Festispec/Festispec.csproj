@@ -101,6 +101,8 @@
     <Compile Include="ViewModel\ClientVM\ClientManageVM.cs" />
     <Compile Include="ViewModel\ClientVM\ClientsVM.cs" />
     <Compile Include="ViewModel\ClientVM\EditClientVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\AddContactPersonVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\ContactPersonVM.cs" />
     <Compile Include="ViewModel\DataService\DataService.cs" />
     <Compile Include="ViewModel\DataService\IDataService.cs" />
     <Compile Include="ViewModel\FestivalVM\AddFestivalVM.cs" />
@@ -133,6 +135,9 @@
     <Compile Include="ViewModel\Questionnaires\Types\OpenQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Types\SelectQuestion.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\ContactPersonsView\AddContactPerson.xaml.cs">
+      <DependentUpon>AddContactPerson.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Inspections\AddInspection.xaml.cs">
       <DependentUpon>AddInspection.xaml</DependentUpon>
     </Compile>
@@ -225,6 +230,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ClientsViews\EditClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactPersonsView\AddContactPerson.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
