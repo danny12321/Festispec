@@ -98,6 +98,22 @@ namespace Festispec.ViewModel
             }
         }
 
+        public ContactPersonInfoVM contactPersonInfo
+        {
+            get
+            {
+                return new ContactPersonInfoVM(ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+
+        public EditContactPersonVM editContactPerson
+        {
+            get
+            {
+                return new EditContactPersonVM(ServiceLocator.Current.GetInstance<IDataService>(), festivalinfo);
+            }
+        }
+
         public QuestionnairesViewModel Questionnaires
         {
             get
