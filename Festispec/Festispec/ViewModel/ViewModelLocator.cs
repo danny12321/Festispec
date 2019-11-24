@@ -9,6 +9,7 @@ using Festispec.ViewModel.Questionnaires;
 using Festispec.ViewModel.MunicipalityVM;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using System;
 
 namespace Festispec.ViewModel
 {
@@ -93,14 +94,18 @@ namespace Festispec.ViewModel
         {
             get
             {
-                if(_clientManageVM == null)
-                {
-                    _clientManageVM = new ClientManageVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
-                }
-                return new QuestionnairesViewModel();
+                //if(_clientManageVM == null)
+                //{
+                //    _clientManageVM = new ClientManageVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
+                //}
+
+                //return new QuestionnairesViewModel();
+
+                return new QuestionnairesViewModel(ServiceLocator.Current.GetInstance<IDataService>());
 
             }
         }
+
         public InspectorsVM.InspectorListViewModel InspectorsVM
         {
             get

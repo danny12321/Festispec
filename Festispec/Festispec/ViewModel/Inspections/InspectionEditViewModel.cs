@@ -1,4 +1,5 @@
 ﻿using Festispec.Domain;
+using Festispec.ViewModel.Questionnaires;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
@@ -25,6 +26,7 @@ namespace Festispec.ViewModel.Inspections
 
         public ObservableCollection<InspectorsVM> SelectedInspectors { get; set; }
 
+        public ObservableCollection<QuestionnairesViewModel> Questionnaires { get; set; }
 
         public FestivalVM Festival { get; set; }
 
@@ -56,17 +58,19 @@ namespace Festispec.ViewModel.Inspections
         public ICommand SetViewToSelectedPersonCommand { get; set; }
         public ICommand SelectInspectorCommand { get; set; }
         public ICommand DelectInspectorCommand { get; set; }
+        public ICommand AddQuestionnaireCommand { get; set; }
+        public ICommand OpenQuestionnaireCommand { get; set; }
 
         public InspectionEditViewModel(MainViewModel main)
         {
             _main = main;
 
-            
-
             TestButton = new RelayCommand(Debug);
             EditInspectionCommand = new RelayCommand(EditInspection);
             SelectInspectorCommand = new RelayCommand<InspectorsVM>(SelectInspector);
             DelectInspectorCommand = new RelayCommand<InspectorsVM>(DelectInspector);
+            AddQuestionnaireCommand = new RelayCommand(AddQuestionnaire);
+            OpenQuestionnaireCommand = new RelayCommand<QuestionnairesViewModel>(OpenQuestionnaire);
 
             using (var context = new FestispecEntities())
             {
@@ -87,6 +91,9 @@ namespace Festispec.ViewModel.Inspections
 
                 EndDate = Inspection.End_date;
                 EndTime = Inspection.End_date.TimeOfDay;
+
+                var questionnaires = context.Questionnaires.Where(q => q.inspection_id == _inspetionId).ToList().Select(q => new QuestionnairesViewModel(q));
+                Questionnaires = new ObservableCollection<QuestionnairesViewModel>(questionnaires);
 
                 context.Inspectors_at_inspection.ToList().ForEach(i =>
                 {
@@ -136,6 +143,8 @@ namespace Festispec.ViewModel.Inspections
                     context.SaveChanges();
                 }
 
+                Questionnaires.ToList().ForEach(q => q.Save());
+
                 _main.SetPage("Home", false);
             }
             else
@@ -153,7 +162,6 @@ namespace Festispec.ViewModel.Inspections
             isValid = IsDescriptionValid(inspection.Description);
             isValid = IsStartDateTimeInFuture(inspection.Start_date);
             isValid = IsEndDateAfterTheStartDate(inspection.Start_date, inspection.End_date);
-
             return isValid;
         }
 
@@ -195,6 +203,19 @@ namespace Festispec.ViewModel.Inspections
         {
             SelectedInspectors.Remove(inspector);
             Inspectors.Add(inspector);
+        }
+
+        private void AddQuestionnaire()
+        {
+            Console.WriteLine("Add quest");
+            var questionnaire = new QuestionnairesViewModel(Inspection);
+            Questionnaires.Add(questionnaire);
+        }
+
+        public void OpenQuestionnaire(QuestionnairesViewModel questionnaire)
+        {
+            DataService.
+            Console.WriteLine("Open");
         }
 
         private void Debug()

@@ -50,7 +50,9 @@
         </DataTemplate>
     </Page.Resources>
 
-    <Grid>
+    <ScrollViewer Grid.Column="0" Grid.Row="0" VerticalAlignment="Top">
+
+        <Grid>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -62,17 +64,19 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Width="300" Grid.Column="0" Grid.Row="0" Height="500">
+            <StackPanel>
+                
             <Border BorderThickness="10">
-                <TextBox TextWrapping="Wrap"
-                            VerticalAlignment="Stretch"
-                            MinWidth="280"
-                            AcceptsReturn="True"
-                            VerticalScrollBarVisibility="Auto"
-                            SpellCheck.IsEnabled="True"
-                            materialDesign:HintAssist.Hint="Beschrijving"
-                            Height="80"
-                            Text="{Binding Inspection.Description}"></TextBox>
+                <TextBox 
+                    TextWrapping="Wrap"
+                    VerticalAlignment="Stretch"
+                    MinWidth="280"
+                    AcceptsReturn="True"
+                    VerticalScrollBarVisibility="Auto"
+                    SpellCheck.IsEnabled="True"
+                    materialDesign:HintAssist.Hint="Beschrijving"
+                    materialDesign:HintAssist.IsFloating="True"
+                    Text="{Binding Inspection.Description}"></TextBox>
             </Border>
             <!--Begin time-->
             <Border BorderThickness="10">
@@ -108,9 +112,45 @@
                 </StackPanel>
             </Border>
 
-            <Button Command="{Binding EditInspectionCommand}">Verander aan</Button>
+            <Border BorderThickness="10" Margin="0, 20, 0, 0">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="20">Vragenlijsten</TextBlock>
+                        <Button Margin="20, 0,0,0" Command="{Binding AddQuestionnaireCommand}">Toevoegen</Button>
+                    </StackPanel>
 
-        </StackPanel>
+                    <ItemsControl
+                        ItemsSource="{Binding Questionnaires}"
+                        >
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="5">
+                                    <DockPanel HorizontalAlignment="Stretch">
+
+                                        <TextBlock Text="Dit is een vragenlijst" VerticalAlignment="Center"></TextBlock>
+                                        <Button 
+                                            HorizontalAlignment="Right"
+                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.OpenQuestionnaireCommand}"
+                                            CommandParameter="{Binding}"
+                                            Background="Transparent"
+                                        >
+                                            <materialDesign:PackIcon Kind="OpenInNew"></materialDesign:PackIcon>
+                                        </Button>
+                                    </DockPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+
+            <Border BorderThickness="10">
+                <Button Command="{Binding EditInspectionCommand}">Opslaan</Button>
+            </Border>
+
+            </StackPanel>
 
         <Border Grid.Column="1" Grid.Row="0">
             <StackPanel>
@@ -199,4 +239,6 @@
             </m:Map.Children>
         </m:Map>
     </Grid>
+    </ScrollViewer>
+
 </Page>

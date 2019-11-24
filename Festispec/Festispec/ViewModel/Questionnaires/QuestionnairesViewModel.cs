@@ -1,5 +1,7 @@
 ﻿using Festispec.Domain;
 using Festispec.View.Questionnaires;
+using Festispec.ViewModel.DataService;
+using Festispec.ViewModel.Inspections;
 using Festispec.ViewModel.Questionnaires.Types;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -16,6 +18,12 @@ namespace Festispec.ViewModel.Questionnaires
 {
     public class QuestionnairesViewModel : ViewModelBase
     {
+        private Domain.Questionnaires _questionnaire;
+
+        private InspectionVM _inspection;
+
+        private bool _insertedInDatabase;
+
         public ObservableCollection<QuestionTypeViewModel> QuestionTypes { get; set; }
 
         public ObservableCollection<QuestionViewModel> Questions { get; set; }
@@ -55,6 +63,7 @@ namespace Festispec.ViewModel.Questionnaires
         }
 
         private Page _editPage;
+        private IDataService dataService;
 
         public Page EditPage
         {
@@ -69,15 +78,15 @@ namespace Festispec.ViewModel.Questionnaires
         public ICommand AddQuestionCommand { get; set; }
 
 
-        public QuestionnairesViewModel()
+        public QuestionnairesViewModel(Domain.Questionnaires questionnaire)
         {
+            _questionnaire = questionnaire;
             AddQuestionCommand = new RelayCommand(AddQuestion);
 
             using (var context = new FestispecEntities())
             {
-                var questions = context.Questions.ToList()
+                var questions = questionnaire.Questions.ToList()
                     .Select(q => GetQuestionClass(q));
-
 
                 Questions = new ObservableCollection<QuestionViewModel>(questions);
 
@@ -86,6 +95,30 @@ namespace Festispec.ViewModel.Questionnaires
 
                 QuestionTypes = new ObservableCollection<QuestionTypeViewModel>(questionTypes);
             }
+        }
+
+        public QuestionnairesViewModel(Inspections.InspectionVM inspection)
+        {
+            _inspection = inspection;
+            _insertedInDatabase = false;
+
+            // TODO: make inspector id nullable
+            _questionnaire = new Domain.Questionnaires() { inspection_id = inspection.Id };
+
+            using (var context = new FestispecEntities())
+            {
+                var questionTypes = context.Type_questions.ToList()
+                    .Select(qt => new QuestionTypeViewModel(qt));
+
+                QuestionTypes = new ObservableCollection<QuestionTypeViewModel>(questionTypes);
+                Questions = new ObservableCollection<QuestionViewModel>();
+            }
+        }
+
+        public QuestionnairesViewModel(IDataService dataService)
+        {
+            this.dataService = dataService;
+            dataService.SelectedQuestionnaire
         }
 
         private QuestionViewModel GetQuestionClass(Questions q)
@@ -120,6 +153,18 @@ namespace Festispec.ViewModel.Questionnaires
             var newQuestion = GetQuestionClass(question);
             SelectedQuestion = newQuestion;
             Questions.Add(newQuestion);
+        }
+
+        public void Save()
+        {
+            if (!_insertedInDatabase)
+            {
+                using (var context = new FestispecEntities())
+                {
+                    context.Questionnaires.Add(_questionnaire);
+                    context.SaveChanges();
+                }
+            }
         }
     }
 }
