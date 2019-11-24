@@ -185,7 +185,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new InspectionsViewModel(Main);
+                return new InspectionsViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
 
@@ -193,14 +193,14 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new InspectionAddViewModel(Main);
+                return new InspectionAddViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
         public InspectionEditViewModel InspectionEdit
         {
             get
             {
-                return new InspectionEditViewModel(Main);
+                return new InspectionEditViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
 

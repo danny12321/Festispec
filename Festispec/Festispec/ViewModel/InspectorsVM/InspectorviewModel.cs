@@ -38,7 +38,7 @@ namespace Festispec.ViewModel.InspectorsVM
         {
             get
             {
-                return _i.birthday;
+                return _i.birthday ?? DateTime.Now;
             }
             set
             {

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Festispec.Domain;
+using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Microsoft.Maps.MapControl.WPF;
@@ -14,10 +15,8 @@ namespace Festispec.ViewModel.Inspections
 {
     public class InspectionAddViewModel : ViewModelBase
     {
-        //TODO Make this dynamic
-        private int _festivalId = 1;
-
-
+        private int _festivalId;
+    
         public ObservableCollection<InspectorsVM> Inspectors { get; set; }
 
         public ObservableCollection<InspectorAtInspectionVM> InspectorsAtInspection { get; set; }
@@ -55,9 +54,14 @@ namespace Festispec.ViewModel.Inspections
         public ICommand SelectInspectorCommand { get; set; }
         public ICommand DelectInspectorCommand { get; set; }
 
-        public InspectionAddViewModel(MainViewModel main)
+        public IDataService _service;
+
+        public InspectionAddViewModel(MainViewModel main, IDataService service)
         {
             _main = main;
+            _service = service;
+
+            _festivalId = service.SelectedFestival.FestivalId;
 
             SelectedInspectors = new ObservableCollection<InspectorsVM>();
             Inspection = new InspectionVM();
@@ -120,7 +124,7 @@ namespace Festispec.ViewModel.Inspections
                     context.SaveChanges();
                 }
 
-                _main.SetPage("Home", false);
+                _main.SetPage("Inspections", false);
             } else
             {
                 // Show wrong input error message

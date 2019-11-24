@@ -162,7 +162,7 @@
                                 <Button
                                           Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                           HorizontalAlignment="Left"
-                                         ToolTip="Selecteer inspecteur"
+                                          ToolTip="Selecteer inspecteur"
                                           Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.DelectInspectorCommand}" CommandParameter="{Binding }">
                                     <materialDesign:PackIcon Kind="ArrowLeft" />
                                 </Button>

@@ -1,5 +1,6 @@
 ﻿using Festispec.Domain;
 using Festispec.ViewModel.Questionnaires;
+using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
@@ -16,8 +17,8 @@ namespace Festispec.ViewModel.Inspections
     public class InspectionEditViewModel : ViewModelBase
     {
         //TODO Make this dynamic
-        private int _festivalId = 1;
-        private int _inspetionId = 1;
+        private int _festivalId;
+        private int _inspetionId;
 
 
         public ObservableCollection<InspectorsVM> Inspectors { get; set; }
@@ -60,10 +61,15 @@ namespace Festispec.ViewModel.Inspections
         public ICommand DelectInspectorCommand { get; set; }
         public ICommand AddQuestionnaireCommand { get; set; }
         public ICommand OpenQuestionnaireCommand { get; set; }
+        private IDataService _service;
 
-        public InspectionEditViewModel(MainViewModel main)
+        public InspectionEditViewModel(MainViewModel main, IDataService service)
         {
             _main = main;
+            _service = service;
+
+            _festivalId = service.SelectedFestival.FestivalId;
+            _inspetionId = service.SelectedInspection.Id;
 
             TestButton = new RelayCommand(Debug);
             EditInspectionCommand = new RelayCommand(EditInspection);
@@ -145,7 +151,7 @@ namespace Festispec.ViewModel.Inspections
 
                 Questionnaires.ToList().ForEach(q => q.Save());
 
-                _main.SetPage("Home", false);
+                _main.SetPage("Inspections", false);
             }
             else
             {

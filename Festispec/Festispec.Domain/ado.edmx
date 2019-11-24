@@ -19,10 +19,11 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="postalcode" Type="nvarchar" MaxLength="6" Nullable="false" />
-          <Property Name="street" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="housenumber" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="country" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="postalcode" Type="nvarchar" MaxLength="6" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
+          <Property Name="street" Type="nvarchar" MaxLength="50" />
+          <Property Name="housenumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" />
           <Property Name="phone" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Contactpersons">
@@ -32,8 +33,8 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
           <Property Name="festival_id" Type="int" />
           <Property Name="client_id" Type="int" />
           <Property Name="type_contact" Type="int" Nullable="false" />
@@ -44,17 +45,17 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="postalcode" Type="nvarchar" MaxLength="6" Nullable="false" />
-          <Property Name="street" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="housenumber" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="country" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="start_date" Type="datetime" Nullable="false" />
-          <Property Name="end_date" Type="datetime" Nullable="false" />
+          <Property Name="postalcode" Type="nvarchar" MaxLength="6" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
+          <Property Name="street" Type="nvarchar" MaxLength="50" />
+          <Property Name="housenumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" />
+          <Property Name="start_date" Type="datetime" />
+          <Property Name="end_date" Type="datetime" />
           <Property Name="client_id" Type="int" Nullable="false" />
           <Property Name="municipality_id" Type="int" />
-          <Property Name="latitude" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="longitude" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="city" Type="nchar" MaxLength="50" />
+          <Property Name="latitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="longitude" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Inspections">
           <Key>
@@ -74,10 +75,12 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="birthday" Type="datetime" Nullable="false" />
-          <Property Name="postalcode" Type="nvarchar" MaxLength="6" Nullable="false" />
-          <Property Name="street" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="housenumber" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="birthday" Type="datetime" />
+          <Property Name="postalcode" Type="nvarchar" MaxLength="6" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
+          <Property Name="street" Type="nvarchar" MaxLength="50" />
+          <Property Name="housenumber" Type="nvarchar" MaxLength="10" />
           <Property Name="phone" Type="nvarchar" MaxLength="50" />
           <Property Name="active" Type="datetime" />
           <Property Name="latitude" Type="nvarchar" MaxLength="50" />
@@ -540,10 +543,11 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="housenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="housenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Contactpersons" Relationship="Self.FK_Contactpersons_Clients" FromRole="Clients" ToRole="Contactpersons" />
           <NavigationProperty Name="Festivals" Relationship="Self.FK_Festivals_Clients" FromRole="Clients" ToRole="Festivals" />
@@ -556,8 +560,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="festival_id" Type="Int32" />
           <Property Name="client_id" Type="Int32" />
           <Property Name="type_contact" Type="Int32" Nullable="false" />
@@ -571,17 +575,17 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="housenumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="housenumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="start_date" Type="DateTime" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Precision="3" />
           <Property Name="client_id" Type="Int32" Nullable="false" />
           <Property Name="municipality_id" Type="Int32" />
-          <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="city" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_Festivals_Clients" FromRole="Festivals" ToRole="Clients" />
           <NavigationProperty Name="Contactpersons" Relationship="Self.FK_Contactpersons_Festivals" FromRole="Festivals" ToRole="Contactpersons" />
           <NavigationProperty Name="Municipalities" Relationship="Self.FK_Festivals_Municipalities" FromRole="Festivals" ToRole="Municipalities" />
@@ -607,10 +611,12 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="birthday" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="housenumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="birthday" Type="DateTime" Precision="3" />
+          <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="housenumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="active" Type="DateTime" Precision="3" />
           <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1064,6 +1070,7 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="postalcode" ColumnName="postalcode" />
+                <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="street" ColumnName="street" />
                 <ScalarProperty Name="housenumber" ColumnName="housenumber" />
                 <ScalarProperty Name="country" ColumnName="country" />
@@ -1091,6 +1098,7 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="postalcode" ColumnName="postalcode" />
+                <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="street" ColumnName="street" />
                 <ScalarProperty Name="housenumber" ColumnName="housenumber" />
                 <ScalarProperty Name="country" ColumnName="country" />
@@ -1100,7 +1108,6 @@
                 <ScalarProperty Name="municipality_id" ColumnName="municipality_id" />
                 <ScalarProperty Name="latitude" ColumnName="latitude" />
                 <ScalarProperty Name="longitude" ColumnName="longitude" />
-                <ScalarProperty Name="city" ColumnName="city" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1122,8 +1129,10 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="birthday" ColumnName="birthday" />
                 <ScalarProperty Name="postalcode" ColumnName="postalcode" />
+                <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="street" ColumnName="street" />
                 <ScalarProperty Name="housenumber" ColumnName="housenumber" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
