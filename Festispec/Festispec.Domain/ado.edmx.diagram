@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3ebff3a8651a4624a24d7c162124993e" Name="Diagram1">
+      <Diagram DiagramId="77c68945f4634f5f8cb5984eb1749566" Name="Diagram1">
         <EntityTypeShape EntityType="FestispecModel.Answers" Width="1.5" PointX="16.5" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Clients" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Contactpersons" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Festivals" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Inspections" Width="1.5" PointX="7.5" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestispecModel.Inspectors" Width="1.5" PointX="7.5" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestispecModel.Inspectors" Width="1.5" PointX="7.5" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Inspectors_at_inspection" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Inspectors_availability" Width="1.5" PointX="9.75" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Laws" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
