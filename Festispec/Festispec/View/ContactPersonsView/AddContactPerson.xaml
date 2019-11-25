@@ -31,8 +31,6 @@
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding ContactPerson.ContactPersonMail, Mode=TwoWay}"></TextBox>
                 <TextBlock FontSize="15" Text="Telefoonnummer:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding ContactPerson.ContactPersonPhoneNumber, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="15" Text="Festival id:"></TextBlock>
-                <TextBox FontSize="15" MaxLength="50" Text="{Binding ContactPerson.FestivalId}" IsReadOnly="True"></TextBox>
                 <TextBlock FontSize="15" Text="Klant id:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding ContactPerson.ClientId}" IsReadOnly="True"></TextBox>
                 <TextBlock FontSize="15" Text="type contact:"></TextBlock>

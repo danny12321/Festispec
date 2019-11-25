@@ -27,7 +27,6 @@ namespace Festispec.ViewModel.ContactPersonsVM
             ContactPerson = new ContactPersonVM();
 
             ContactPerson.ClientId = _service.SelectedClient.ClientId;
-            ContactPerson.FestivalId = _service.SelectedFestival.FestivalId;
 
             SaveCommand = new RelayCommand(SaveContact, CanSaveContact);
         }
@@ -43,7 +42,8 @@ namespace Festispec.ViewModel.ContactPersonsVM
 
             using (var context = new FestispecEntities())
             {
-                context.Contactpersons.Add(ContactPerson.ToModel());
+                var c = ContactPerson.ToModel();
+                context.Contactpersons.Add(c);
                 context.SaveChanges();
             }
             _festival.ShowFestivalPage();

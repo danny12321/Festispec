@@ -51,12 +51,6 @@ namespace Festispec.ViewModel.ContactPersonsVM
             set { _contactperson.phone = value; }
         }
 
-        public int? FestivalId
-        {
-            get { return _contactperson.festival_id; }
-            set { _contactperson.festival_id = value; }
-        }
-
         public int? ClientId
         {
             get { return _contactperson.client_id; }

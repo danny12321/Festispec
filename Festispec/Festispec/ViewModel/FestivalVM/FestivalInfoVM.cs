@@ -19,10 +19,8 @@ namespace Festispec.ViewModel.FestivalVM
     public class FestivalInfoVM : ViewModelBase
     {
         private IDataService _service;
-        private FestivalManagementVM _festivals;
         private MainViewModel _main;
 
-        public ObservableCollection<FestivalVM> Festivals { get; set; }
         public ObservableCollection<ContactPersonVM> Contactpersons { get; set; }
 
         public ICommand AddContactCommand { get; set; }
@@ -49,22 +47,15 @@ namespace Festispec.ViewModel.FestivalVM
             }
         }
 
-        public FestivalInfoVM(MainViewModel main, IDataService service, FestivalManagementVM festivals)
+        public FestivalInfoVM(MainViewModel main, IDataService service, FestivalManagementVM festival)
         {
             this._main = main;
             _service = service;
-            this._festivals = festivals;
 
             using (var context = new FestispecEntities())
             {
-                var festival = context.Festivals.ToList()
-                             .Select(e => new FestivalVM(e));
-
-                var person = context.Contactpersons.ToList()
-                              .Select(i => new ContactPersonVM(i)).Where(i => i.FestivalId == SelectedFestival.FestivalId);
-
-                Festivals = new ObservableCollection<FestivalVM>(festival);
-                Contactpersons = new ObservableCollection<ContactPersonVM>(person);
+                context.Festivals.Attach(SelectedFestival.ToModel());
+                Contactpersons = new ObservableCollection<ContactPersonVM>(SelectedFestival.ContactPersons);
             }
             AddContactCommand = new RelayCommand(ShowAddContactPerson);
             ShowContactCommand = new RelayCommand(ShowContactPersonInfo);
