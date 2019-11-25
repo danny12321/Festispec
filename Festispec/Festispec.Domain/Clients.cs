@@ -17,6 +17,7 @@ namespace Festispec.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Clients()
         {
+            this.Contactpersons = new HashSet<Contactpersons>();
             this.Festivals = new HashSet<Festivals>();
         }
     
@@ -28,7 +29,8 @@ namespace Festispec.Domain
         public string country { get; set; }
         public string phone { get; set; }
     
-        public virtual Contactpersons Contactpersons { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Contactpersons> Contactpersons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Festivals> Festivals { get; set; }
         public virtual Quotations Quotations { get; set; }
