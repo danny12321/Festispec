@@ -1,18 +1,17 @@
-﻿CREATE TABLE [dbo].[Inspectors] (
-    [id]          INT           IDENTITY (1, 1) NOT NULL,
-    [name]        NVARCHAR (50) NOT NULL,
-    [lastname]    NVARCHAR (50) NOT NULL,
-    [email] NVARCHAR(50) NULL, 
-    [birthday]    DATETIME      NULL,
-    [postalcode]  NVARCHAR (6)  NULL,
-    [country] NVARCHAR(50) NULL, 
-    [city] NVARCHAR(50) NULL, 
-    [street]      NVARCHAR (50) NULL,
-    [housenumber] NVARCHAR (10) NULL,
-    [phone]       NVARCHAR (50) NULL,
-    [active]      DATETIME      NULL,
-    [latitude] NVARCHAR(50) NULL, 
-    [longitude] NVARCHAR(50) NULL, 
-    CONSTRAINT [PK_Inspectors] PRIMARY KEY CLUSTERED ([id] ASC)
-);
-
+﻿CREATE TABLE [dbo].[Inspectors](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [nvarchar](50) NOT NULL,
+	[lastname] [nvarchar](50) NOT NULL,
+	[birthday] [datetime] NOT NULL,
+	[postalcode] [nvarchar](6) NOT NULL,
+	[street] [nvarchar](50) NOT NULL,
+	[housenumber] [nvarchar](10) NOT NULL,
+	[phone] [nvarchar](50) NULL,
+	[active] [datetime] NULL,
+	[latitude] [nvarchar](50) NULL,
+	[longitude] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Inspectors] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
