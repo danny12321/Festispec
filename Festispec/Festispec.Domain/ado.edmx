@@ -213,14 +213,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contactpersons_Clients">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
-          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clients">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Contactpersons">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="client_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -779,14 +779,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contactpersons_Clients">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
-          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clients">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Contactpersons">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="client_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
