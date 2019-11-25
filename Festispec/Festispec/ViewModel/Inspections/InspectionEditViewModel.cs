@@ -32,10 +32,10 @@ namespace Festispec.ViewModel.Inspections
         public InspectionVM Inspection { get; set; }
 
         private DateTime _startDate;
-        public DateTime StartDate { get { return _startDate; } set { _startDate = value; EndDate = value; RaisePropertyChanged("EndDate"); } }
+        public DateTime StartDate { get { return _startDate; } set { _startDate = value; EndDate = value; } }
 
         private TimeSpan _startTime;
-        public TimeSpan StartTime { get { return _startTime; } set { _startTime = value; EndTime = value; RaisePropertyChanged("EndTime"); } }
+        public TimeSpan StartTime { get { return _startTime; } set { _startTime = value; EndTime = value; } }
 
         public DateTime EndDate { get; set; }
         public TimeSpan EndTime { get; set; }
