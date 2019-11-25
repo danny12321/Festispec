@@ -24,6 +24,7 @@ namespace Festispec.Domain
         public int id { get; set; }
         public string name { get; set; }
         public string postalcode { get; set; }
+        public string city { get; set; }
         public string street { get; set; }
         public string housenumber { get; set; }
         public string country { get; set; }
@@ -33,7 +34,6 @@ namespace Festispec.Domain
         public Nullable<int> municipality_id { get; set; }
         public string latitude { get; set; }
         public string longitude { get; set; }
-        public string city { get; set; }
     
         public virtual Clients Clients { get; set; }
         public virtual Municipalities Municipalities { get; set; }
