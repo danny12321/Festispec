@@ -28,7 +28,7 @@ namespace Festispec.ViewModel.ContactPersonsVM
 
 /*            ContactPerson.ClientId = _service.SelectedClient.ClientId;*/
             ContactPerson.ToModel().Clients = _service.SelectedClient.ToModel();
-            _service.SelectedClient.ToModel().Contactpersons = ContactPerson.ToModel();
+            _service.SelectedClient.ToModel().Contactpersons.Add(ContactPerson.ToModel());
 
             SaveCommand = new RelayCommand(SaveContact, CanSaveContact);
         }

@@ -42,7 +42,7 @@ namespace Festispec.ViewModel.ClientVM
 
             using (var context = new FestispecEntities())
             {
-                var clients = context.Clients.ToList()
+                var clients = context.Clients.Include("Contactpersons").ToList()
                              .Select(client => new ClientsVM(client));
 
                 Clients = new ObservableCollection<ClientsVM>(clients);
