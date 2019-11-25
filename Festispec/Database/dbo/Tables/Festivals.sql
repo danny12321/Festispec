@@ -1,17 +1,17 @@
 ﻿CREATE TABLE [dbo].[Festivals](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[name] [nvarchar](50) NOT NULL,
-	[postalcode] [nvarchar](6) NOT NULL,
-	[street] [nvarchar](50) NOT NULL,
-	[housenumber] [nvarchar](10) NOT NULL,
-	[country] [nvarchar](50) NOT NULL,
+	[postalcode] [nvarchar](6) NULL,
+	[city] [nvarchar](50) NULL,
+	[street] [nvarchar](50) NULL,
+	[housenumber] [nvarchar](10) NULL,
+	[country] [nvarchar](50) NULL,
 	[start_date] [datetime] NOT NULL,
 	[end_date] [datetime] NOT NULL,
 	[client_id] [int] NOT NULL,
 	[municipality_id] [int] NULL,
-	[latitude] [nvarchar](50) NOT NULL,
-	[longitude] [nvarchar](50) NOT NULL,
-	[city] [nvarchar](50) NULL,
+	[latitude] [nvarchar](50) NULL,
+	[longitude] [nvarchar](50) NULL,
  CONSTRAINT [PK_Festivals] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
