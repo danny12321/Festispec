@@ -14,17 +14,23 @@ namespace Festispec.Domain
     
     public partial class Contactpersons
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Contactpersons()
+        {
+            this.Festivals = new HashSet<Festivals>();
+        }
+    
         public int id { get; set; }
         public string name { get; set; }
         public string lastname { get; set; }
         public string email { get; set; }
         public string phone { get; set; }
-        public Nullable<int> festival_id { get; set; }
         public Nullable<int> client_id { get; set; }
         public int type_contact { get; set; }
     
         public virtual Clients Clients { get; set; }
-        public virtual Festivals Festivals { get; set; }
         public virtual Type_contacts Type_contacts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Festivals> Festivals { get; set; }
     }
 }
