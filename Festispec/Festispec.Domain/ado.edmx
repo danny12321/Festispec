@@ -19,11 +19,10 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="postalcode" Type="nvarchar" MaxLength="6" />
-          <Property Name="city" Type="nvarchar" MaxLength="50" />
-          <Property Name="street" Type="nvarchar" MaxLength="50" />
-          <Property Name="housenumber" Type="nvarchar" MaxLength="50" />
-          <Property Name="country" Type="nvarchar" MaxLength="50" />
+          <Property Name="postalcode" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="street" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="housenumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="phone" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Contactpersons">
@@ -33,11 +32,18 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="email" Type="nvarchar" MaxLength="100" />
-          <Property Name="phone" Type="nvarchar" MaxLength="50" />
-          <Property Name="festival_id" Type="int" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="client_id" Type="int" />
           <Property Name="type_contact" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Festival_contacts">
+          <Key>
+            <PropertyRef Name="Festival_id" />
+            <PropertyRef Name="Contactperson_id" />
+          </Key>
+          <Property Name="Festival_id" Type="int" Nullable="false" />
+          <Property Name="Contactperson_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Festivals">
           <Key>
@@ -46,7 +52,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="postalcode" Type="nvarchar" MaxLength="6" />
-          <Property Name="city" Type="nchar" MaxLength="50" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
           <Property Name="street" Type="nvarchar" MaxLength="50" />
           <Property Name="housenumber" Type="nvarchar" MaxLength="10" />
           <Property Name="country" Type="nvarchar" MaxLength="50" />
@@ -75,10 +81,8 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="email" Type="nvarchar" MaxLength="50" />
           <Property Name="birthday" Type="datetime" />
           <Property Name="postalcode" Type="nvarchar" MaxLength="6" />
-          <Property Name="country" Type="nvarchar" MaxLength="50" />
           <Property Name="city" Type="nvarchar" MaxLength="50" />
           <Property Name="street" Type="nvarchar" MaxLength="50" />
           <Property Name="housenumber" Type="nvarchar" MaxLength="10" />
@@ -136,8 +140,9 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="nvarchar" MaxLength="50" />
-          <Property Name="inspector_id" Type="int" Nullable="false" />
+          <Property Name="inspector_id" Type="int" />
           <Property Name="inspection_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Questions">
           <Key>
@@ -219,18 +224,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Contactpersons_Festivals">
-          <End Role="Festivals" Type="Self.Festivals" Multiplicity="0..1" />
-          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Festivals">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Contactpersons">
-              <PropertyRef Name="festival_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Contactpersons_Type_contacts">
           <End Role="Type_contacts" Type="Self.Type_contacts" Multiplicity="1" />
           <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
@@ -240,6 +233,30 @@
             </Principal>
             <Dependent Role="Contactpersons">
               <PropertyRef Name="type_contact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Festival_contacts_Contactpersons">
+          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="1" />
+          <End Role="Festival_contacts" Type="Self.Festival_contacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contactpersons">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Festival_contacts">
+              <PropertyRef Name="Contactperson_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Festival_contacts_Festivals">
+          <End Role="Festivals" Type="Self.Festivals" Multiplicity="1" />
+          <End Role="Festival_contacts" Type="Self.Festival_contacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Festivals">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Festival_contacts">
+              <PropertyRef Name="Festival_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -342,7 +359,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Questionnaires_Inspectors_at_inspection">
-          <End Role="Inspectors_at_inspection" Type="Self.Inspectors_at_inspection" Multiplicity="1" />
+          <End Role="Inspectors_at_inspection" Type="Self.Inspectors_at_inspection" Multiplicity="0..1" />
           <End Role="Questionnaires" Type="Self.Questionnaires" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inspectors_at_inspection">
@@ -431,6 +448,7 @@
           <EntitySet Name="Answers" EntityType="Self.Answers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contactpersons" EntityType="Self.Contactpersons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Festival_contacts" EntityType="Self.Festival_contacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Festivals" EntityType="Self.Festivals" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inspections" EntityType="Self.Inspections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inspectors" EntityType="Self.Inspectors" Schema="dbo" store:Type="Tables" />
@@ -455,13 +473,17 @@
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Contactpersons" EntitySet="Contactpersons" />
           </AssociationSet>
-          <AssociationSet Name="FK_Contactpersons_Festivals" Association="Self.FK_Contactpersons_Festivals">
-            <End Role="Festivals" EntitySet="Festivals" />
-            <End Role="Contactpersons" EntitySet="Contactpersons" />
-          </AssociationSet>
           <AssociationSet Name="FK_Contactpersons_Type_contacts" Association="Self.FK_Contactpersons_Type_contacts">
             <End Role="Type_contacts" EntitySet="Type_contacts" />
             <End Role="Contactpersons" EntitySet="Contactpersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Festival_contacts_Contactpersons" Association="Self.FK_Festival_contacts_Contactpersons">
+            <End Role="Contactpersons" EntitySet="Contactpersons" />
+            <End Role="Festival_contacts" EntitySet="Festival_contacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Festival_contacts_Festivals" Association="Self.FK_Festival_contacts_Festivals">
+            <End Role="Festivals" EntitySet="Festivals" />
+            <End Role="Festival_contacts" EntitySet="Festival_contacts" />
           </AssociationSet>
           <AssociationSet Name="FK_Festivals_Clients" Association="Self.FK_Festivals_Clients">
             <End Role="Clients" EntitySet="Clients" />
@@ -544,11 +566,10 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
-          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="housenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="housenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Contactpersons" Relationship="Self.FK_Contactpersons_Clients" FromRole="Clients" ToRole="Contactpersons" />
           <NavigationProperty Name="Festivals" Relationship="Self.FK_Festivals_Clients" FromRole="Clients" ToRole="Festivals" />
@@ -561,14 +582,13 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="festival_id" Type="Int32" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="client_id" Type="Int32" />
           <Property Name="type_contact" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_Contactpersons_Clients" FromRole="Contactpersons" ToRole="Clients" />
-          <NavigationProperty Name="Festivals" Relationship="Self.FK_Contactpersons_Festivals" FromRole="Contactpersons" ToRole="Festivals" />
           <NavigationProperty Name="Type_contacts" Relationship="Self.FK_Contactpersons_Type_contacts" FromRole="Contactpersons" ToRole="Type_contacts" />
+          <NavigationProperty Name="Festivals" Relationship="Self.Festival_contacts" FromRole="Contactpersons" ToRole="Festivals" />
         </EntityType>
         <EntityType Name="Festivals">
           <Key>
@@ -577,7 +597,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
-          <Property Name="city" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="housenumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -588,9 +608,9 @@
           <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_Festivals_Clients" FromRole="Festivals" ToRole="Clients" />
-          <NavigationProperty Name="Contactpersons" Relationship="Self.FK_Contactpersons_Festivals" FromRole="Festivals" ToRole="Contactpersons" />
           <NavigationProperty Name="Municipalities" Relationship="Self.FK_Festivals_Municipalities" FromRole="Festivals" ToRole="Municipalities" />
           <NavigationProperty Name="Inspections" Relationship="Self.FK_Inspections_Festivals" FromRole="Festivals" ToRole="Inspections" />
+          <NavigationProperty Name="Contactpersons" Relationship="Self.Festival_contacts" FromRole="Festivals" ToRole="Contactpersons" />
         </EntityType>
         <EntityType Name="Inspections">
           <Key>
@@ -612,10 +632,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="birthday" Type="DateTime" Precision="3" />
           <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
-          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="housenumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
@@ -684,8 +702,9 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="inspector_id" Type="Int32" Nullable="false" />
+          <Property Name="inspector_id" Type="Int32" />
           <Property Name="inspection_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Inspectors_at_inspection" Relationship="Self.FK_Questionnaires_Inspectors_at_inspection" FromRole="Questionnaires" ToRole="Inspectors_at_inspection" />
           <NavigationProperty Name="Questions" Relationship="Self.FK_Questions_Questionnaires" FromRole="Questionnaires" ToRole="Questions" />
         </EntityType>
@@ -795,18 +814,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Contactpersons_Festivals">
-          <End Role="Festivals" Type="Self.Festivals" Multiplicity="0..1" />
-          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Festivals">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Contactpersons">
-              <PropertyRef Name="festival_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Contactpersons_Type_contacts">
           <End Role="Type_contacts" Type="Self.Type_contacts" Multiplicity="1" />
           <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
@@ -894,7 +901,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Questionnaires_Inspectors_at_inspection">
-          <End Role="Inspectors_at_inspection" Type="Self.Inspectors_at_inspection" Multiplicity="1" />
+          <End Role="Inspectors_at_inspection" Type="Self.Inspectors_at_inspection" Multiplicity="0..1" />
           <End Role="Questionnaires" Type="Self.Questionnaires" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inspectors_at_inspection">
@@ -955,6 +962,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Festival_contacts">
+          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
+          <End Role="Festivals" Type="Self.Festivals" Multiplicity="*" />
+        </Association>
         <Association Name="User_rolls">
           <End Role="Rolls" Type="Self.Rolls" Multiplicity="*" />
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
@@ -993,10 +1004,6 @@
           <AssociationSet Name="FK_Quotations_Clients" Association="Self.FK_Quotations_Clients">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Quotations" EntitySet="Quotations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contactpersons_Festivals" Association="Self.FK_Contactpersons_Festivals">
-            <End Role="Festivals" EntitySet="Festivals" />
-            <End Role="Contactpersons" EntitySet="Contactpersons" />
           </AssociationSet>
           <AssociationSet Name="FK_Contactpersons_Type_contacts" Association="Self.FK_Contactpersons_Type_contacts">
             <End Role="Type_contacts" EntitySet="Type_contacts" />
@@ -1046,6 +1053,10 @@
             <End Role="Type_questions" EntitySet="Type_questions" />
             <End Role="Questions" EntitySet="Questions" />
           </AssociationSet>
+          <AssociationSet Name="Festival_contacts" Association="Self.Festival_contacts">
+            <End Role="Contactpersons" EntitySet="Contactpersons" />
+            <End Role="Festivals" EntitySet="Festivals" />
+          </AssociationSet>
           <AssociationSet Name="User_rolls" Association="Self.User_rolls">
             <End Role="Rolls" EntitySet="Rolls" />
             <End Role="Users" EntitySet="Users" />
@@ -1072,7 +1083,6 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="postalcode" ColumnName="postalcode" />
-                <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="street" ColumnName="street" />
                 <ScalarProperty Name="housenumber" ColumnName="housenumber" />
                 <ScalarProperty Name="country" ColumnName="country" />
@@ -1088,7 +1098,6 @@
                 <ScalarProperty Name="lastname" ColumnName="lastname" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="festival_id" ColumnName="festival_id" />
                 <ScalarProperty Name="client_id" ColumnName="client_id" />
                 <ScalarProperty Name="type_contact" ColumnName="type_contact" />
               </MappingFragment>
@@ -1131,10 +1140,8 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="lastname" ColumnName="lastname" />
-                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="birthday" ColumnName="birthday" />
                 <ScalarProperty Name="postalcode" ColumnName="postalcode" />
-                <ScalarProperty Name="country" ColumnName="country" />
                 <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="street" ColumnName="street" />
                 <ScalarProperty Name="housenumber" ColumnName="housenumber" />
@@ -1199,6 +1206,7 @@
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="inspector_id" ColumnName="inspector_id" />
                 <ScalarProperty Name="inspection_id" ColumnName="inspection_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1256,6 +1264,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="Festival_contacts" TypeName="FestispecModel.Festival_contacts" StoreEntitySet="Festival_contacts">
+            <EndProperty Name="Contactpersons">
+              <ScalarProperty Name="id" ColumnName="Contactperson_id" />
+            </EndProperty>
+            <EndProperty Name="Festivals">
+              <ScalarProperty Name="id" ColumnName="Festival_id" />
+            </EndProperty>
+          </AssociationSetMapping>
           <AssociationSetMapping Name="User_rolls" TypeName="FestispecModel.User_rolls" StoreEntitySet="User_rolls">
             <EndProperty Name="Rolls">
               <ScalarProperty Name="id" ColumnName="role_id" />
