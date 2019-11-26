@@ -11,7 +11,7 @@ namespace Festispec.ViewModel.Questionnaires.Types
 {
     public class OpenQuestion : QuestionViewModel, IQuestion
     {
-        public OpenQuestion(QuestionnairesViewModel questionnaires, Questions q) : base(questionnaires, q)
+        public OpenQuestion(QuestionnairesViewModel questionnaires, Questions q, FestispecEntities context) : base(questionnaires, q, context)
         {
         }
 

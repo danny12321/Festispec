@@ -11,7 +11,7 @@ namespace Festispec.ViewModel.Questionnaires.Types
 {
     public class MultipleChoiseQuestion : QuestionViewModel, IQuestion
     {
-        public MultipleChoiseQuestion(QuestionnairesViewModel questionnaires, Questions q) : base(questionnaires, q)
+        public MultipleChoiseQuestion(QuestionnairesViewModel questionnaires, Questions q, FestispecEntities context) : base(questionnaires, q, context)
         {
         }
 

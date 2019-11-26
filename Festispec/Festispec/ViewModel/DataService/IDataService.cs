@@ -17,6 +17,7 @@ namespace Festispec.ViewModel.DataService
         FestivalVM.FestivalVM SelectedFestival { get; set; }
 
         QuestionnairesViewModel SelectedQuestionnaire { get; set; }
+
         InspectionVM SelectedInspection { get; set; }
     }
 }

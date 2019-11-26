@@ -50,9 +50,8 @@
         </DataTemplate>
     </Page.Resources>
 
-    <ScrollViewer Grid.Column="0" Grid.Row="0" VerticalAlignment="Top">
 
-        <Grid>
+    <Grid>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -63,11 +62,12 @@
             <ColumnDefinition Width="300"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <ScrollViewer  Grid.Column="0" Grid.Row="0" VerticalAlignment="Top">
 
             <StackPanel>
-                
-            <Border BorderThickness="10">
-                <TextBox 
+
+                <Border BorderThickness="10">
+                    <TextBox 
                     TextWrapping="Wrap"
                     VerticalAlignment="Stretch"
                     MinWidth="280"
@@ -77,80 +77,83 @@
                     materialDesign:HintAssist.Hint="Beschrijving"
                     materialDesign:HintAssist.IsFloating="True"
                     Text="{Binding Inspection.Description}"></TextBox>
-            </Border>
-            <!--Begin time-->
-            <Border BorderThickness="10">
-                <StackPanel>
-                    <TextBlock>Start datum en tijd</TextBlock>
+                </Border>
+                <!--Begin time-->
+                <Border BorderThickness="10">
+                    <StackPanel>
+                        <TextBlock>Start datum en tijd</TextBlock>
 
-                    <StackPanel Orientation="Horizontal">
-                        <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding StartDate}"/>
-                        <materialDesign:TimePicker
+                        <StackPanel Orientation="Horizontal">
+                            <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding StartDate}"/>
+                            <materialDesign:TimePicker
                               Is24Hours="True"
                               Margin="10,0,0,0"
                               x:Name="PresetBeginTimePicker"
                               Width="100"
                               Text="{Binding StartTime}"
                                />
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
-            </Border>
-            <Border BorderThickness="10">
-                <StackPanel>
-                    <TextBlock>Eind datum en tijd</TextBlock>
+                </Border>
+                <Border BorderThickness="10">
+                    <StackPanel>
+                        <TextBlock>Eind datum en tijd</TextBlock>
 
-                    <StackPanel Orientation="Horizontal">
-                        <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding EndDate}"/>
-                        <materialDesign:TimePicker
+                        <StackPanel Orientation="Horizontal">
+                            <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding EndDate}"/>
+                            <materialDesign:TimePicker
                               Is24Hours="True"
                               Margin="10,0,0,0"
                               x:Name="PresetEindTimePicker"
                               Width="100"
                               Text="{Binding EndTime}"
                                />
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
-            </Border>
+                </Border>
 
-            <Border BorderThickness="10" Margin="0, 20, 0, 0">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock FontSize="20">Vragenlijsten</TextBlock>
-                        <Button Margin="20, 0,0,0" Command="{Binding AddQuestionnaireCommand}">Toevoegen</Button>
-                    </StackPanel>
+                <Border BorderThickness="10">
+                    <Button Command="{Binding EditInspectionCommand}">Opslaan</Button>
+                </Border>
 
-                    <ItemsControl
+                <Border BorderThickness="10" Margin="0, 20, 0, 0">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="20">Vragenlijsten</TextBlock>
+                            <Button Margin="20, 0,0,0" Command="{Binding AddQuestionnaireCommand}">Toevoegen</Button>
+                        </StackPanel>
+
+                        <ItemsControl
                         ItemsSource="{Binding Questionnaires}"
                         >
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border BorderThickness="5">
-                                    <DockPanel HorizontalAlignment="Stretch">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderThickness="5">
+                                        <DockPanel HorizontalAlignment="Stretch">
 
-                                        <TextBlock Text="Dit is een vragenlijst" VerticalAlignment="Center"></TextBlock>
-                                        <Button 
-                                            HorizontalAlignment="Right"
-                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.OpenQuestionnaireCommand}"
-                                            CommandParameter="{Binding}"
-                                            Background="Transparent"
-                                        >
-                                            <materialDesign:PackIcon Kind="OpenInNew"></materialDesign:PackIcon>
-                                        </Button>
-                                    </DockPanel>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
+                                            <TextBlock Text="{Binding Id}" VerticalAlignment="Center"></TextBlock>
+                                            <Button 
+                                                HorizontalAlignment="Right"
+                                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.OpenQuestionnaireCommand}"
+                                                CommandParameter="{Binding}"
+                                                Background="Transparent"
+                                            >
+                                                <materialDesign:PackIcon Kind="OpenInNew"></materialDesign:PackIcon>
+                                            </Button>
+                                        </DockPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
 
-                    </ItemsControl>
-                </StackPanel>
-            </Border>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
 
 
-            <Border BorderThickness="10">
-                <Button Command="{Binding EditInspectionCommand}">Opslaan</Button>
-            </Border>
+
 
             </StackPanel>
+        </ScrollViewer>
 
         <Border Grid.Column="1" Grid.Row="0">
             <StackPanel>
@@ -239,6 +242,5 @@
             </m:Map.Children>
         </m:Map>
     </Grid>
-    </ScrollViewer>
 
 </Page>

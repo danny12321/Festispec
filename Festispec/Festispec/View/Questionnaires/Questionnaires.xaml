@@ -70,21 +70,28 @@
 
                     <TextBlock
                         FontSize="25"
-                        Text="{Binding SelectedQuestion.StringType.Id}"
+                        Margin="0, 30, 0, 10"
+                        Text="{Binding SelectedQuestion.Type.Type, StringFormat={}Vraag type: {0}}"
+                        
                     />
 
-                    <Grid Margin="0, 30" DockPanel.Dock="Top">
-                        <ComboBox 
-                            ItemsSource="{Binding QuestionTypes}"   
-                            SelectedItem="{Binding SelectedQuestion.StringType, Mode=TwoWay}"
-                        
-                            DisplayMemberPath="Type"
-                            SelectedValuePath="Id"
-                        
-                            Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                            materialDesign:HintAssist.Hint="Type vraag"
-                            IsSynchronizedWithCurrentItem="True"
-                        />
+                    <Grid DockPanel.Dock="Top">
+                        <ItemsControl ItemsSource="{Binding QuestionTypes}" >
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button
+                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                         Command="{Binding DataContext.SelectedQuestion.SetTypeCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                        CommandParameter="{Binding}"
+                                        Content="{Binding Type}" Margin="5"></Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
                     </Grid>
 
                     <Frame Grid.Row="1" Content="{Binding EditPage}" NavigationUIVisibility="Hidden"/>

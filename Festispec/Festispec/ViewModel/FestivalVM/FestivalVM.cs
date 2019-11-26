@@ -70,19 +70,19 @@ namespace Festispec.ViewModel.FestivalVM
 
         public DateTime StartDate
         {
-            get { return _festival.start_date ?? DateTime.Now; }
+            get { return _festival.start_date; }
             set { _festival.start_date = value; }
         }
 
         public DateTime EndDate
         {
-            get { return _festival.end_date ?? DateTime.Now; }
+            get { return _festival.end_date; }
             set { _festival.end_date = value; }
         }
 
         public int? Year
         {
-            get { return _festival.start_date?.Year; }
+            get { return _festival.start_date.Year; }
         }
 
         public int ClientId

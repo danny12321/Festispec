@@ -82,7 +82,7 @@ namespace Festispec.ViewModel
                     FrameContent = new View.ClientsViews.ClientInfo();
                     PageTitle = "Klanten info";
                     break;
-                case "Vragenlijsten TEMP":
+                case "Vragenlijsten":
                     FrameContent = new View.Questionnaires.Questionnaires();
                     PageTitle = "Vragenlijsten";
                     break;
