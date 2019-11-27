@@ -4,6 +4,7 @@
 	[lastname] [nvarchar](50) NOT NULL,
 	[birthday] [datetime] NULL,
 	[postalcode] [nvarchar](6) NULL,
+    [country] NVARCHAR(50) NULL, 
     [city] NVARCHAR(50) NULL, 
 	[street] [nvarchar](50) NULL,
 	[housenumber] [nvarchar](10) NULL,

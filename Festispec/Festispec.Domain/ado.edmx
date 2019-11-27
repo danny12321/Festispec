@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FestispecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FestispecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Answers">
           <Key>
             <PropertyRef Name="id" />
@@ -83,6 +83,7 @@
           <Property Name="lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="birthday" Type="datetime" />
           <Property Name="postalcode" Type="nvarchar" MaxLength="6" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" />
           <Property Name="city" Type="nvarchar" MaxLength="50" />
           <Property Name="street" Type="nvarchar" MaxLength="50" />
           <Property Name="housenumber" Type="nvarchar" MaxLength="10" />
@@ -213,14 +214,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contactpersons_Clients">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
-          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clients">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Contactpersons">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="client_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -546,8 +547,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FestispecModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -644,6 +644,7 @@
           <NavigationProperty Name="Inspectors_at_inspection" Relationship="Self.FK_Inspectors_at_inspection_Inspectors" FromRole="Inspectors" ToRole="Inspectors_at_inspection" />
           <NavigationProperty Name="Inspectors_availability" Relationship="Self.FK_Inspectors_availability_Inspectors" FromRole="Inspectors" ToRole="Inspectors_availability" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_Inspectors" FromRole="Inspectors" ToRole="Users" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Inspectors_at_inspection">
           <Key>
@@ -779,14 +780,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contactpersons_Clients">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
-          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clients">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Contactpersons">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="client_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1137,6 +1138,7 @@
           <EntitySetMapping Name="Inspectors">
             <EntityTypeMapping TypeName="FestispecModel.Inspectors">
               <MappingFragment StoreEntitySet="Inspectors">
+                <ScalarProperty Name="country" ColumnName="country" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="lastname" ColumnName="lastname" />
