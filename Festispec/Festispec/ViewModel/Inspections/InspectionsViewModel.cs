@@ -20,6 +20,8 @@ namespace Festispec.ViewModel.Inspections
         public ICommand NavigateEditInspectionCommand { get; set; }
         private IDataService _service;
 
+        public string NoInspections { get { return Inspections.Count > 0 ? null : "Nog geen inspecties"; } }
+
         public InspectionsViewModel(MainViewModel main, IDataService service)
         {
             _main = main;

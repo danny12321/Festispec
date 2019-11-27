@@ -68,9 +68,11 @@ namespace Festispec.ViewModel.Inspections
 
             StartDate = DateTime.Now;
             StartTime = DateTime.Now.TimeOfDay;
+            StartTime = TimeSpan.FromMinutes(Math.Round(StartTime.TotalMinutes));
 
             EndDate = DateTime.Now;
             EndTime = DateTime.Now.TimeOfDay;
+            EndTime = TimeSpan.FromMinutes(Math.Round(StartTime.TotalMinutes) + 60);
 
             TestButton = new RelayCommand(Debug);
             AddInspectionCommand = new RelayCommand(AddInspection);
@@ -180,6 +182,10 @@ namespace Festispec.ViewModel.Inspections
         {
             SelectedInspectors.Remove(inspector);
             Inspectors.Add(inspector);
+        }
+        DateTime RoundUp(DateTime dt, TimeSpan d)
+        {
+            return new DateTime((dt.Ticks + d.Ticks - 1) / d.Ticks * d.Ticks, dt.Kind);
         }
 
         private void Debug()

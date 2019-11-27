@@ -71,7 +71,6 @@
                             VerticalScrollBarVisibility="Auto"
                             SpellCheck.IsEnabled="True"
                             materialDesign:HintAssist.Hint="Beschrijving"
-                            Height="80"
                             Text="{Binding Inspection.Description}"></TextBox>
             </Border>
             <!--Begin time-->

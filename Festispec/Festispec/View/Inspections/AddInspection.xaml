@@ -63,7 +63,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Width="300" Grid.Column="0" Grid.Row="0" Height="500">
+        <StackPanel Width="300" Grid.Column="0" Grid.Row="0" >
             <Border BorderThickness="10">
                 <TextBox TextWrapping="Wrap"
                             VerticalAlignment="Stretch"
@@ -72,7 +72,6 @@
                             VerticalScrollBarVisibility="Auto"
                             SpellCheck.IsEnabled="True"
                             materialDesign:HintAssist.Hint="Beschrijving"
-                            Height="80"
                             Text="{Binding Inspection.Description}"></TextBox>
             </Border>
             <!--Begin time-->

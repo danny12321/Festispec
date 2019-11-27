@@ -12,6 +12,7 @@
 
     <StackPanel>
 
+        <TextBlock Text="{Binding NoInspections}" FontSize="20"></TextBlock>
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Inspections}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Beschrijving" Binding="{Binding Description}" Foreground="#FF1D1616" Width="200"/>
