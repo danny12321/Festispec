@@ -62,7 +62,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Width="300" Grid.Column="0" Grid.Row="0" Height="500">
+        <StackPanel Width="300" Grid.Column="0" Grid.Row="0">
             <Border BorderThickness="10">
                 <TextBox TextWrapping="Wrap"
                             VerticalAlignment="Stretch"
@@ -104,10 +104,11 @@
                               Text="{Binding EndTime}"
                                />
                     </StackPanel>
+                    <Button Margin="0,10,0,0" Command="{Binding EditInspectionCommand}">Verander inspectie</Button>
+                    <Button Margin="0,10,0,0" Background="Red" BorderThickness="0" Command="{Binding DeleteInspectionCommand}">Verwijder inspectie</Button>
                 </StackPanel>
             </Border>
 
-            <Button Command="{Binding EditInspectionCommand}">Verander aan</Button>
 
         </StackPanel>
 

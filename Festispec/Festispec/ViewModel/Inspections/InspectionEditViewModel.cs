@@ -15,17 +15,14 @@ namespace Festispec.ViewModel.Inspections
 {
     public class InspectionEditViewModel : ViewModelBase
     {
-        //TODO Make this dynamic
         private int _festivalId;
         private int _inspetionId;
-
 
         public ObservableCollection<InspectorsVM> Inspectors { get; set; }
 
         public ObservableCollection<InspectorAtInspectionVM> InspectorsAtInspection { get; set; }
 
         public ObservableCollection<InspectorsVM> SelectedInspectors { get; set; }
-
 
         public FestivalVM Festival { get; set; }
 
@@ -57,6 +54,8 @@ namespace Festispec.ViewModel.Inspections
         public ICommand SetViewToSelectedPersonCommand { get; set; }
         public ICommand SelectInspectorCommand { get; set; }
         public ICommand DelectInspectorCommand { get; set; }
+        public ICommand DeleteInspectionCommand { get; set; }
+
         private IDataService _service;
 
         public InspectionEditViewModel(MainViewModel main, IDataService service)
@@ -71,6 +70,9 @@ namespace Festispec.ViewModel.Inspections
             EditInspectionCommand = new RelayCommand(EditInspection);
             SelectInspectorCommand = new RelayCommand<InspectorsVM>(SelectInspector);
             DelectInspectorCommand = new RelayCommand<InspectorsVM>(DelectInspector);
+
+            //Does not work problem with on delete cascade in database :(
+            DeleteInspectionCommand = new RelayCommand(DeleteInspection);
 
             using (var context = new FestispecEntities())
             {
@@ -199,6 +201,20 @@ namespace Festispec.ViewModel.Inspections
         {
             SelectedInspectors.Remove(inspector);
             Inspectors.Add(inspector);
+        }
+
+        private void DeleteInspection()
+        {
+            //Does not work problem with on delete cascade in database :(
+            using (var context = new FestispecEntities())
+            {
+                var inspection = new Festispec.Domain.Inspections { id = _inspetionId };
+                context.Inspections.Attach(inspection);
+                context.Inspections.Remove(inspection);
+                context.SaveChanges();
+            }
+
+            _main.SetPage("Inspections", false);
         }
 
         private void Debug()
