@@ -32,7 +32,7 @@ namespace Festispec.ViewModel.Inspections
         public DateTime StartDate { get { return _startDate; } set { _startDate = value; EndDate = value; RaisePropertyChanged("EndDate"); } }
 
         private TimeSpan _startTime;
-        public TimeSpan StartTime { get { return _startTime; } set { _startTime = value; EndTime = value; RaisePropertyChanged("EndTime"); } }
+        public TimeSpan StartTime { get { return _startTime; } set { _startTime = value; EndTime = TimeSpan.FromMinutes(value.TotalMinutes + 60); RaisePropertyChanged("EndTime"); } }
 
         public DateTime EndDate { get; set; }
         public TimeSpan EndTime { get; set; }
