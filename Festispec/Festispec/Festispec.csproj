@@ -98,6 +98,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Utils\LatLongGenerator.cs" />
+    <Compile Include="Utils\RouteDurationCalculator.cs" />
     <Compile Include="ViewModel\AccountsVM\UsersRollsVM.cs" />
     <Compile Include="ViewModel\AccountsVM\UsersVM.cs" />
     <Compile Include="ViewModel\ClientVM\AddClientsVM.cs" />

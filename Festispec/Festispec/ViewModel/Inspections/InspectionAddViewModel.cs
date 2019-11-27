@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Festispec.Domain;
+using Festispec.Utils;
 using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -89,6 +90,13 @@ namespace Festispec.ViewModel.Inspections
                    
                 Festival = new FestivalVM(context.Festivals.ToList().First(f => f.id == _festivalId));
             }
+
+
+            // TESTING
+            var duration = CalculateRouteDurationForInspector(Inspectors[1]);
+            var time = duration.Result.ToString(@"hh\:mm");
+            Console.WriteLine();
+            //TESTING
         }
 
         private void AddInspection()
@@ -183,10 +191,14 @@ namespace Festispec.ViewModel.Inspections
             SelectedInspectors.Remove(inspector);
             Inspectors.Add(inspector);
         }
-        DateTime RoundUp(DateTime dt, TimeSpan d)
+
+        private async Task<TimeSpan> CalculateRouteDurationForInspector(InspectorsVM inspector)
         {
-            return new DateTime((dt.Ticks + d.Ticks - 1) / d.Ticks * d.Ticks, dt.Kind);
+            RouteDurationCalculator routeDurationCalculator = new RouteDurationCalculator();
+            return await routeDurationCalculator.CalculateRoute(inspector.Inspector.longitude + "," + inspector.Inspector.latitude, Festival.Festivals.longitude + "," + Festival.Festivals.latitude);
+
         }
+
 
         private void Debug()
         {
