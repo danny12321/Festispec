@@ -35,6 +35,7 @@ namespace Festispec.Domain
         public string latitude { get; set; }
         public string longitude { get; set; }
         public string country { get; set; }
+        public string email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspectors_at_inspection> Inspectors_at_inspection { get; set; }
