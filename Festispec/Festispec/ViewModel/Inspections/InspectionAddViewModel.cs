@@ -16,6 +16,9 @@ namespace Festispec.ViewModel.Inspections
 {
     public class InspectionAddViewModel : ViewModelBase
     {
+
+        private bool _useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt = false;
+
         private int _festivalId;
     
         public ObservableCollection<InspectorsVM> Inspectors { get; set; }
@@ -83,20 +86,21 @@ namespace Festispec.ViewModel.Inspections
             using (var context = new FestispecEntities())
             {
                 //Get inspectors
-                var inspectors = context.Inspectors.ToList()
-                    .Select(i => new InspectorsVM(i));
+                var inspectors = context.Inspectors.ToList().Select(i => new InspectorsVM(i));
 
                 Inspectors = new ObservableCollection<InspectorsVM>(inspectors);
                    
                 Festival = new FestivalVM(context.Festivals.ToList().First(f => f.id == _festivalId));
+
+                //Calc Travel Time
+                if (_useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt)
+                {
+                    Inspectors.ToList().ForEach(i => {
+                        var timespan = CalculateRouteDurationForInspector(i).GetAwaiter().GetResult();
+                        i.TravelTime = timespan;
+                    });
+                }
             }
-
-
-            // TESTING
-            var duration = CalculateRouteDurationForInspector(Inspectors[1]);
-            var time = duration.Result.ToString(@"hh\:mm");
-            Console.WriteLine();
-            //TESTING
         }
 
         private void AddInspection()
@@ -195,9 +199,10 @@ namespace Festispec.ViewModel.Inspections
         private async Task<TimeSpan> CalculateRouteDurationForInspector(InspectorsVM inspector)
         {
             RouteDurationCalculator routeDurationCalculator = new RouteDurationCalculator();
-            return await routeDurationCalculator.CalculateRoute(inspector.Inspector.longitude + "," + inspector.Inspector.latitude, Festival.Festivals.longitude + "," + Festival.Festivals.latitude);
+            return await routeDurationCalculator.CalculateRoute(inspector.Inspector.longitude + "," + inspector.Inspector.latitude, Festival.Festivals.longitude + "," + Festival.Festivals.latitude).ConfigureAwait(false);
 
         }
+
 
 
         private void Debug()

@@ -18,6 +18,8 @@ namespace Festispec.ViewModel.Inspections
 
         public string Pos { get { return Inspector.latitude + "," + Inspector.longitude; } }
 
+        public TimeSpan TravelTime { get; set; }
+
         public ICommand SetViewToSelectedPersonCommand { get; set; }
 
         public InspectorsVM(Inspectors inspectors)
