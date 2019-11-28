@@ -90,11 +90,19 @@ namespace Festispec.ViewModel
             }
         }
 
+        public ContactPersonManageVM contactManagement
+        {
+            get
+            {
+                return new ContactPersonManageVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+
         public AddContactPersonVM addContactPerson
         {
             get
             {
-                return new AddContactPersonVM(festivalinfo, ServiceLocator.Current.GetInstance<IDataService>());
+                return new AddContactPersonVM(contactManagement, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
 

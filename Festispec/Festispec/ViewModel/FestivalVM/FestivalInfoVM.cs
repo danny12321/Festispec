@@ -57,7 +57,7 @@ namespace Festispec.ViewModel.FestivalVM
                 context.Festivals.Attach(SelectedFestival.ToModel());
                 Contactpersons = new ObservableCollection<ContactPersonVM>(SelectedFestival.ContactPersons);
             }
-            AddContactCommand = new RelayCommand(ShowAddContactPerson);
+           
             ShowContactCommand = new RelayCommand(ShowContactPersonInfo);
             EditContactCommand = new RelayCommand(ShowEditContactPerson);
         }
@@ -72,10 +72,7 @@ namespace Festispec.ViewModel.FestivalVM
             _main.SetPage("ShowContactPersonInfo", false);
         }
 
-        private void ShowAddContactPerson()
-        {
-            _main.SetPage("ShowAddContactPerson", false);
-        }
+        
 
         public void ShowFestivalPage()
         {

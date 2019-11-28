@@ -103,6 +103,7 @@
     <Compile Include="ViewModel\ClientVM\EditClientVM.cs" />
     <Compile Include="ViewModel\ContactPersonsVM\AddContactPersonVM.cs" />
     <Compile Include="ViewModel\ContactPersonsVM\ContactPersonInfoVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\ContactPersonManageVM.cs" />
     <Compile Include="ViewModel\ContactPersonsVM\ContactPersonVM.cs" />
     <Compile Include="ViewModel\ContactPersonsVM\EditContactPersonVM.cs" />
     <Compile Include="ViewModel\DataService\DataService.cs" />
@@ -142,6 +143,9 @@
     </Compile>
     <Compile Include="View\ContactPersonsView\ContactPersonInfo.xaml.cs">
       <DependentUpon>ContactPersonInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactPersonsView\ContactPersonsManage.xaml.cs">
+      <DependentUpon>ContactPersonsManage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ContactPersonsView\EditContactPerson.xaml.cs">
       <DependentUpon>EditContactPerson.xaml</DependentUpon>
@@ -246,6 +250,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ContactPersonsView\ContactPersonInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactPersonsView\ContactPersonsManage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -13,22 +13,22 @@ namespace Festispec.ViewModel.ContactPersonsVM
 {
     public class AddContactPersonVM
     {
-        private FestivalInfoVM _festival;
+        private ContactPersonManageVM _contact;
         private IDataService _service;
 
         public ContactPersonVM ContactPerson { get; set; }
 
         public ICommand SaveCommand { get; set; }
 
-        public AddContactPersonVM(FestivalInfoVM festival, IDataService service)
+        public AddContactPersonVM(ContactPersonManageVM contact, IDataService service)
         {
             this._service = service;
-            _festival = festival;
+            _contact = contact;
             ContactPerson = new ContactPersonVM();
 
-/*            ContactPerson.ClientId = _service.SelectedClient.ClientId;*/
-            ContactPerson.ToModel().Clients = _service.SelectedClient.ToModel();
-            _service.SelectedClient.ToModel().Contactpersons.Add(ContactPerson.ToModel());
+            ContactPerson.ClientId = _service.SelectedClient.ClientId;
+/*            ContactPerson.ToModel().Clients = _service.SelectedClient.ToModel();
+            _service.SelectedClient.ToModel().Contactpersons.Add(ContactPerson.ToModel());*/
 
             SaveCommand = new RelayCommand(SaveContact, CanSaveContact);
         }
@@ -40,15 +40,14 @@ namespace Festispec.ViewModel.ContactPersonsVM
 
         private void SaveContact()
         {
-            _festival.Contactpersons.Add(ContactPerson);
+            _contact.ContactPersons.Add(ContactPerson);
 
             using (var context = new FestispecEntities())
             {
-                var c = ContactPerson.ToModel();
-                context.Contactpersons.Add(c);
+                context.Contactpersons.Add(ContactPerson.ToModel());
                 context.SaveChanges();
             }
-            _festival.ShowFestivalPage();
+            _contact.ShowManagementPage();
         }
     }
 }
