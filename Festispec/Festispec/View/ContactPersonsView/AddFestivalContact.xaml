@@ -28,7 +28,7 @@
                 <DataGridTextColumn Header="Achternaam" Binding="{Binding ContactPersonLastName}" Foreground="#FF1D1616" Width="150"/>
                 <DataGridTextColumn Header="Mail" Binding="{Binding ContactPersonMail}" Foreground="#FF1D1616" Width="200"/>
                 <DataGridTextColumn Header="Telefoonnummer" Binding="{Binding ContactPersonPhoneNumber}" Foreground="#FF1D1616" Width="150"/>
-                <DataGridTemplateColumn Width="90" Header="Wijzigen">
+                <DataGridTemplateColumn Width="90" Header="Toevoegen">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Command="{Binding DataContext.showEditContactPerson, RelativeSource={RelativeSource AncestorType=DataGrid}}"

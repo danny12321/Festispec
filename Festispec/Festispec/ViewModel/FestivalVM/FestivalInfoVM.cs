@@ -23,6 +23,8 @@ namespace Festispec.ViewModel.FestivalVM
 
         public ObservableCollection<ContactPersonVM> Contactpersons { get; set; }
 
+        public ContactPersonVM Contact;
+
         public ICommand ShowContactCommand { get; set; }
 
         public FestivalVM SelectedFestival
@@ -53,6 +55,7 @@ namespace Festispec.ViewModel.FestivalVM
             using (var context = new FestispecEntities())
             {
                 context.Festivals.Attach(SelectedFestival.ToModel());
+                //var contacts = SelectedFestival.ContactPersons.ToList().Where(e => e.ToModel())
                 Contactpersons = new ObservableCollection<ContactPersonVM>(SelectedFestival.ContactPersons);
             }
 
