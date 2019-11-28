@@ -2,6 +2,7 @@
 using Festispec.ViewModel.ClientVM;
 using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,6 +20,7 @@ namespace Festispec.ViewModel.ContactPersonsVM
 
         public ObservableCollection<ContactPersonVM> ContactPersons { get; set; }
 
+        public ICommand AddContactPersonToFestival { get; set; }
 
         public ClientsVM SelectedClient
         {
@@ -47,6 +49,13 @@ namespace Festispec.ViewModel.ContactPersonsVM
 
                 ContactPersons = new ObservableCollection<ContactPersonVM>(contacts);
             }
+
+            AddContactPersonToFestival = new RelayCommand(AddContactPerson);
+        }
+
+        private void AddContactPerson()
+        {
+            
         }
     }
 }
