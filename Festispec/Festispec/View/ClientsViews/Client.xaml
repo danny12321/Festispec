@@ -38,6 +38,7 @@
                 <DataGridTextColumn Header="Huisnummer" Binding="{Binding Housenumber}" Foreground="#FF1D1616" Width="150"/>
                 <DataGridTextColumn Header="Land" Binding="{Binding Country}" Foreground="#FF1D1616" Width="150"/>
                 <DataGridTextColumn Header="Telefoonnummer" Binding="{Binding Phone}" Foreground="#FF1D1616" Width="150"/>
+                <DataGridTextColumn Header="Plaats" Binding="{Binding City}" Foreground="#FF1D1616" Width="150"/>
                 <DataGridTemplateColumn Width="90" Header="Contact">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

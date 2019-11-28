@@ -26,6 +26,8 @@
                 <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.FestivalName}" IsReadOnly="True"></TextBox>
                 <TextBlock FontSize="20" Text="Postcode:"></TextBlock>
                 <TextBox FontSize="16" MaxLength="6" Text="{Binding SelectedFestival.PostalCode}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="20" Text="Plaats:"></TextBlock>
+                <TextBox FontSize="16" MaxLength="6" Text="{Binding SelectedFestival.City}" IsReadOnly="True"></TextBox>
                 <TextBlock FontSize="20" Text="Straat:"></TextBlock>
                 <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.Street}" IsReadOnly="True"></TextBox>
                 <TextBlock FontSize="20" Text="Huisnummer:"></TextBlock>

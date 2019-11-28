@@ -32,6 +32,8 @@
                 <TextBox FontSize="16"  Text="{Binding SelectedClient.Housenumber}" IsReadOnly="True"></TextBox>
                 <TextBlock FontSize="20" Text="Land:"></TextBlock>
                 <TextBox FontSize="16"  Text="{Binding SelectedClient.Country}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="20" Text="Plaats:"></TextBlock>
+                <TextBox FontSize="16"  Text="{Binding SelectedClient.City}" IsReadOnly="True"></TextBox>
                 <TextBlock FontSize="20" Text="Telefoon nummer:"></TextBlock>
                 <TextBox FontSize="16"  Text="{Binding SelectedClient.Phone}" IsReadOnly="True"></TextBox>
 

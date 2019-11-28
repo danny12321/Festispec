@@ -45,6 +45,12 @@ namespace Festispec.ViewModel.FestivalVM
             set { _festival.postalcode = value; }
         }
 
+        public string City
+        {
+            get { return _festival.city; }
+            set { _festival.city = value; }
+        }
+
         public string Street
         {
             get { return _festival.street; }

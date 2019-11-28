@@ -43,6 +43,8 @@
                         België
                     </ComboBoxItem>
                 </ComboBox>
+                <TextBlock FontSize="20" Text="Plaats:"></TextBlock>
+                <TextBox FontSize="16" MaxLength="50" Text="{Binding Client.City, Mode=TwoWay}"></TextBox>
                 <TextBlock FontSize="20" Text="Telefoon nummer(Optioneel):"></TextBlock>
                 <TextBox FontSize="16" MaxLength="50" Text="{Binding Client.Phone, Mode=TwoWay}"></TextBox>
 

@@ -83,7 +83,7 @@ namespace Festispec.ViewModel.Festival_VMs
 
         private bool IsMatch()
         {
-            if (!IsEmptyField(Festival.FestivalName) && !IsEmptyField(Festival.PostalCode) && !IsEmptyField(Festival.Street) && !IsEmptyField(Festival.HouseNumber) && !IsEmptyField(Festival.Country) && !IsEmptyField(Festival.Longitude) && !IsEmptyField(Festival.Latitude))
+            if (!IsEmptyField(Festival.FestivalName))
             {
                 return true;
             }
