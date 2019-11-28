@@ -15,7 +15,7 @@ namespace Festispec.ViewModel.ContactPersonsVM
     public class EditContactPersonVM
     {
         private IDataService _service;
-        private FestivalInfoVM _festival;
+        private ContactPersonManageVM _contact;
 
         public ICommand SaveCommand { get; set; }
 
@@ -24,10 +24,10 @@ namespace Festispec.ViewModel.ContactPersonsVM
             get { return _service.SelectedContactPerson; }
         }
 
-        public EditContactPersonVM(IDataService service, FestivalInfoVM festival)
+        public EditContactPersonVM(IDataService service, ContactPersonManageVM contact)
         {
             _service = service;
-            _festival = festival;
+            _contact = contact;
 
             SaveCommand = new RelayCommand(SaveChanges, canSaveChanges);
         }
@@ -44,7 +44,7 @@ namespace Festispec.ViewModel.ContactPersonsVM
                 context.Entry(SelectedContactPerson.ToModel()).State = EntityState.Modified;
                 context.SaveChanges();
             }
-            _festival.ShowFestivalPage();
+            _contact.ShowManagementPage();
         }
     }
 }

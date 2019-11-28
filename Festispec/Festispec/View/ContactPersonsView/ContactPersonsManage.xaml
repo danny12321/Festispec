@@ -39,7 +39,7 @@
                 <DataGridTemplateColumn Width="90" Header="Wijzigen">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Command="{Binding DataContext.ShowEditClient, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                            <Button Command="{Binding DataContext.showEditContactPerson, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
                                   ToolTip="Klant wijzigen">
                                 <materialDesign:PackIcon
@@ -53,7 +53,7 @@
                 <DataGridTemplateColumn Width="90" Header="Informatie">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Command="{Binding DataContext.ShowClientInfo, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                            <Button Command="{Binding DataContext.ShowContactPerson, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
                                   ToolTip="Klant tonen">
                                 <materialDesign:PackIcon

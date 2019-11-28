@@ -118,7 +118,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new EditContactPersonVM(ServiceLocator.Current.GetInstance<IDataService>(), festivalinfo);
+                return new EditContactPersonVM(ServiceLocator.Current.GetInstance<IDataService>(), contactManagement);
             }
         }
 

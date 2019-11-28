@@ -21,6 +21,8 @@ namespace Festispec.ViewModel.ContactPersonsVM
         public ObservableCollection<ContactPersonVM> ContactPersons { get; set; }
 
         public ICommand showAddContactPerson { get; set; }
+        public ICommand showEditContactPerson { get; set; }
+        public ICommand ShowContactPerson { get; set; }
 
         public ClientsVM SelectedClient
         {
@@ -51,6 +53,8 @@ namespace Festispec.ViewModel.ContactPersonsVM
             }
 
             showAddContactPerson = new RelayCommand(ShowAddContactPerson);
+            showEditContactPerson = new RelayCommand(ShowEditContactPerson);
+            ShowContactPerson = new RelayCommand(ShowContactPersonInfo);
         }
 
         private void ShowAddContactPerson()
@@ -61,6 +65,15 @@ namespace Festispec.ViewModel.ContactPersonsVM
         public void ShowManagementPage()
         {
             _main.SetPage("ContactPersonManagement", false);
+        }
+
+        private void ShowEditContactPerson()
+        {
+            _main.SetPage("ShowEditContactPerson", false);
+        }
+        private void ShowContactPersonInfo()
+        {
+            _main.SetPage("ShowContactPersonInfo", false);
         }
     }
 }
