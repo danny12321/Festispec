@@ -114,6 +114,14 @@ namespace Festispec.ViewModel
             }
         }
 
+        public AddFestivalContactVM festcalContact
+        {
+            get
+            {
+                return new AddFestivalContactVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+
         public EditContactPersonVM editContactPerson
         {
             get

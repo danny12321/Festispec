@@ -150,6 +150,10 @@ namespace Festispec.ViewModel
                     FrameContent = new View.ContactPersonsView.ContactPersonsManage();
                     PageTitle = "Contactpersoon beheer";
                     break;
+                case "AddContactFestival":
+                    FrameContent = new View.ContactPersonsView.AddFestivalContact();
+                    PageTitle = "Contactpersoon toevoegen aan festival";
+                    break;
                 case "Logout":
                     closeWindow();
                     break;

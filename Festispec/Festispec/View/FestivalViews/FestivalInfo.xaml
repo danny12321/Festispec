@@ -59,7 +59,7 @@
 
                     <TextBlock Text="Festival contact persoon" FontSize="28" Grid.Column="0" Padding="10"/>
 
-                    <Button Grid.Column="1" Command="{Binding AddContactCommand}"
+                    <Button Grid.Column="1" Command="{Binding ShowContactCommand}"
                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
                         ToolTip="contactpersoon koppelen aan festival">
                         <materialDesign:PackIcon
