@@ -45,7 +45,7 @@
                 <DataGridTextColumn Header="Huisnummer" Binding="{Binding Housenumber}" Foreground="#FF1D1616" Width="150"/>
                 <DataGridTextColumn Header="Land" Binding="{Binding Country}" Foreground="#FF1D1616" Width="150"/>
                 <DataGridTextColumn Header="Telefoonnummer" Binding="{Binding Phone}" Foreground="#FF1D1616" Width="150"/>
-                <DataGridTemplateColumn Width="75" Header="Edit">
+                <DataGridTemplateColumn Width="90" Header="Wijzigen">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Command="{Binding DataContext.ShowEditClient, RelativeSource={RelativeSource AncestorType=DataGrid}}"
@@ -59,7 +59,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="75" Header="Info">
+                <DataGridTemplateColumn Width="90" Header="Informatie">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Command="{Binding DataContext.ShowClientInfo, RelativeSource={RelativeSource AncestorType=DataGrid}}"
@@ -73,6 +73,20 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="90" Header="Contact">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding DataContext.ShowClientInfo, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                  Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
+                                  ToolTip="Klant tonen">
+                            <materialDesign:PackIcon
+                                    Kind="Contact"
+                                    Height="20"
+                                    Width="20" />
+                        </Button>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
