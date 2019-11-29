@@ -22,7 +22,7 @@
 
                 <TextBlock Text="Klant gegevens" FontSize="25" Padding="0,10"/>
 
-                <TextBlock FontSize="20" Text="Bedrijf naam:"></TextBlock>
+                <TextBlock FontSize="20" Text="Bedrijfsnaam:"></TextBlock>
                 <TextBox FontSize="16" Text="{Binding SelectedClient.ClientName}" IsReadOnly="True"></TextBox>
                 <TextBlock FontSize="20" Text="Postcode:"></TextBlock>
                 <TextBox FontSize="16"  Text="{Binding SelectedClient.PostalCode}" IsReadOnly="True"></TextBox>
@@ -34,7 +34,7 @@
                 <TextBox FontSize="16"  Text="{Binding SelectedClient.Country}" IsReadOnly="True"></TextBox>
                 <TextBlock FontSize="20" Text="Plaats:"></TextBlock>
                 <TextBox FontSize="16"  Text="{Binding SelectedClient.City}" IsReadOnly="True"></TextBox>
-                <TextBlock FontSize="20" Text="Telefoon nummer:"></TextBlock>
+                <TextBlock FontSize="20" Text="Telefoonnummer:"></TextBlock>
                 <TextBox FontSize="16"  Text="{Binding SelectedClient.Phone}" IsReadOnly="True"></TextBox>
 
             </StackPanel>
