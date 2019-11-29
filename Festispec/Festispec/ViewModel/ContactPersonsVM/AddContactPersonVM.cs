@@ -35,7 +35,11 @@ namespace Festispec.ViewModel.ContactPersonsVM
 
         private bool CanSaveContact()
         {
-            return true;
+            if (IsMatch())
+            {
+                return true;
+            }
+            return false;
         }
 
         private void SaveContact()
@@ -48,6 +52,24 @@ namespace Festispec.ViewModel.ContactPersonsVM
                 context.SaveChanges();
             }
             _contact.ShowManagementPage();
+        }
+
+        private bool IsMatch()
+        {
+            if (!IsEmptyField(ContactPerson.ContactPersonName) && !IsEmptyField(ContactPerson.ContactPersonLastName))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool IsEmptyField(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

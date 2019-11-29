@@ -29,12 +29,16 @@ namespace Festispec.ViewModel.ContactPersonsVM
             _service = service;
             _contact = contact;
 
-            SaveCommand = new RelayCommand(SaveChanges, canSaveChanges);
+            SaveCommand = new RelayCommand(SaveChanges, CanSaveChanges);
         }
 
-        private bool canSaveChanges()
+        private bool CanSaveChanges()
         {
-            return true;
+            if (IsMatch())
+            {
+                return true;
+            }
+            return false;
         }
 
         private void SaveChanges()
@@ -45,6 +49,24 @@ namespace Festispec.ViewModel.ContactPersonsVM
                 context.SaveChanges();
             }
             _contact.ShowManagementPage();
+        }
+
+        private bool IsMatch()
+        {
+            if (!IsEmptyField(SelectedContactPerson.ContactPersonName) && !IsEmptyField(SelectedContactPerson.ContactPersonLastName))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool IsEmptyField(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
