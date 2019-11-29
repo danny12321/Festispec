@@ -49,8 +49,6 @@ namespace Festispec.ViewModel.ContactPersonsVM
 
             using (var context = new FestispecEntities())
             {
-                /*var contacts = context.Contactpersons.ToList()
-                             .Select(contact => new ContactPersonVM(contact)).Where(e => e.ClientId.Equals(SelectedClient.ClientId));*/
                 ContactPersons = new ObservableCollection<ContactPersonVM>();
 
                 context.Festivals.Attach(SelectedFestival.ToModel());
