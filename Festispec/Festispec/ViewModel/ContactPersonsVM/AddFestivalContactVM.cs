@@ -27,6 +27,11 @@ namespace Festispec.ViewModel.ContactPersonsVM
             get { return _service.SelectedClient; }
         }
 
+        public FestivalVM.FestivalVM SelectedFestival
+        {
+            get { return _service.SelectedFestival; }
+        }
+
         public ContactPersonVM SelectedContactPerson
         {
             get { return _service.SelectedContactPerson; }
@@ -44,18 +49,42 @@ namespace Festispec.ViewModel.ContactPersonsVM
 
             using (var context = new FestispecEntities())
             {
-                var contacts = context.Contactpersons.ToList()
-                             .Select(contact => new ContactPersonVM(contact)).Where(e => e.ClientId.Equals(SelectedClient.ClientId));
+                /*var contacts = context.Contactpersons.ToList()
+                             .Select(contact => new ContactPersonVM(contact)).Where(e => e.ClientId.Equals(SelectedClient.ClientId));*/
+                ContactPersons = new ObservableCollection<ContactPersonVM>();
 
-                ContactPersons = new ObservableCollection<ContactPersonVM>(contacts);
+                context.Festivals.Attach(SelectedFestival.ToModel());
+                context.Contactpersons.Where(s => s.client_id == SelectedClient.ClientId).ToList().Where(s => !s.Festivals.Contains(SelectedFestival.ToModel())).ToList().ForEach(s => ContactPersons.Add(new ContactPersonVM(s)));
             }
 
-            AddContactPersonToFestival = new RelayCommand(AddContactPerson);
+            AddContactPersonToFestival = new RelayCommand(AddContactPerson, CanAddContact);
+        }
+
+        private bool CanAddContact()
+        {
+            return true;
         }
 
         private void AddContactPerson()
         {
-            
+            if(SelectedContactPerson != null)
+            {
+                using (var context = new FestispecEntities())
+                {
+                    context.Contactpersons.Attach(SelectedContactPerson.ToModel());
+                    context.Festivals.Attach(SelectedFestival.ToModel());
+
+                    SelectedFestival.ContactPersons.Add(SelectedContactPerson);
+                    SelectedContactPerson.ToModel().Festivals.Add(SelectedFestival.ToModel());
+
+                    ContactPersons.Remove(SelectedContactPerson);
+
+                    context.SaveChanges();
+                }
+                base.RaisePropertyChanged();
+
+                _main.SetPage("FestivalInfo", false);
+            }
         }
     }
 }

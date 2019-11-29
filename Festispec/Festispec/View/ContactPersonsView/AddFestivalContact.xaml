@@ -31,7 +31,7 @@
                 <DataGridTemplateColumn Width="90" Header="Toevoegen">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Command="{Binding DataContext.showEditContactPerson, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                            <Button Command="{Binding DataContext.AddContactPersonToFestival, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
                                   ToolTip="Klant toevoegen aan festival">
                                 <materialDesign:PackIcon
