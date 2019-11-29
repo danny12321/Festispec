@@ -75,7 +75,20 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Naam" Binding="{Binding ContactPersonName}" Foreground="#FF1D1616" Width="200"/>
                         <DataGridTextColumn Header="Achternaam" Binding="{Binding ContactPersonLastName}" Foreground="#FF1D1616" Width="200"/>
-                        
+                        <DataGridTemplateColumn Width="100" Header="Verwijderen">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Command="{Binding DataContext.RemoveContactPersonToFestival, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                  Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
+                                  ToolTip="Klant verwijderen van festival">
+                                        <materialDesign:PackIcon
+                                    Kind="Remove"
+                                    Height="20"
+                                    Width="20" />
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
 

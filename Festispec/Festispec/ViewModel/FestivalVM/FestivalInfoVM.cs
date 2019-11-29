@@ -26,6 +26,7 @@ namespace Festispec.ViewModel.FestivalVM
         public ContactPersonVM Contact;
 
         public ICommand ShowContactCommand { get; set; }
+        public ICommand RemoveContactPersonToFestival { get; set; }
 
         public FestivalVM SelectedFestival
         {
@@ -55,11 +56,35 @@ namespace Festispec.ViewModel.FestivalVM
             using (var context = new FestispecEntities())
             {
                 context.Festivals.Attach(SelectedFestival.ToModel());
-                //var contacts = SelectedFestival.ContactPersons.ToList().Where(e => e.ToModel())
                 Contactpersons = new ObservableCollection<ContactPersonVM>(SelectedFestival.ContactPersons);
             }
 
             ShowContactCommand = new RelayCommand(ShowContact);
+            RemoveContactPersonToFestival = new RelayCommand(RemoveContactPerson, CanRemoveContactPerson);
+        }
+
+        private bool CanRemoveContactPerson()
+        {
+            if(SelectedContactPerson != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void RemoveContactPerson()
+        {
+            using(var context = new FestispecEntities())
+            {
+                context.Festivals.Attach(SelectedFestival.ToModel());
+                SelectedFestival.ToModel().Contactpersons.Remove(SelectedContactPerson.ToModel());
+                context.SaveChanges();
+
+                Contactpersons.Clear();
+                context.Festivals.Attach(SelectedFestival.ToModel());
+                Contactpersons = new ObservableCollection<ContactPersonVM>(SelectedFestival.ContactPersons);
+            }
+            base.RaisePropertyChanged();
         }
 
         private void ShowContact()
