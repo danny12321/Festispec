@@ -19,6 +19,8 @@ namespace Festispec.ViewModel.ContactPersonsVM
 
         public ContactPersonVM ContactPerson { get; set; }
 
+        public TypeContactVM TypeContact { get; set; }
+
         public ObservableCollection<TypeContactVM> ComboList;
 
         public ICommand SaveCommand { get; set; }
@@ -35,13 +37,13 @@ namespace Festispec.ViewModel.ContactPersonsVM
 
             using(var context = new FestispecEntities())
             {
+                ComboList = new ObservableCollection<TypeContactVM>();
+
                 context.Type_contacts.ToList().ForEach(s =>
                 {
-                    ComboList.Add(new TypeContactVM());
+                    ComboList.Add(new TypeContactVM(){ Id = s.id, Type = s.type});
                     //test
                 });
-
-                ComboList = new ObservableCollection<TypeContactVM>();
                 
             }
 

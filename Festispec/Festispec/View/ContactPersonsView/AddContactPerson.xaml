@@ -34,6 +34,7 @@
                 <TextBlock FontSize="15" Text="type contact:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding ContactPerson.TypeContact, Mode=TwoWay}"></TextBox>
 
+                <ComboBox ItemsSource="{Binding ComboList}" DisplayMemberPath="{Binding TypeContact.Type}" SelectedValuePath="{Binding TypeContact.Id}" Text="{Binding ContactPerson.TypeContact}"></ComboBox>
 
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding SaveCommand}"
