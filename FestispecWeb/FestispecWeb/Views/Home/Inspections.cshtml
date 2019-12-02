@@ -8,70 +8,40 @@
 <h2> </h2>
 
 <div class="container2">
-           <div class="row">
-               <div class="box">
-                   <div class="col-md-6">
-                       <h2 class="Text">Aankomende inspecties</h2>
-                   </div>
-               </div>
-           </div>
-       </div>
+    <div class="row">
+        <div class="box">
+            <div class="col-md-6">
+                <h2 class="Text">Aankomende inspecties</h2>
+            </div>
+        </div>
+    </div>
+</div>
 
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.start_date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.end_date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.finished)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Festivals.name)
-        </th>
-        <th></th>
-    </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.start_date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.end_date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.finished)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Festivals.name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Festivals.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Festivals.start_date)
+        </td>
+        <td>
+            @Html.ActionLink("bekoekeloeren", "Go", new { id = item.id })
+    </tr>
     }
 
-    <style>
-        .container2 {
-            background-color: #4B4B4B;
-        }
-
-        .Text {
-            color: white;
-            margin-left: 10px;
-        }
-    </style>
-
 </table>
+
+<style>
+    .container2 {
+        background-color: #4B4B4B;
+    }
+
+    .Text {
+        color: white;
+        margin-left: 10px;
+    }
+</style>
