@@ -24,11 +24,11 @@ namespace Festispec.Domain
         public int id { get; set; }
         public string name { get; set; }
         public string postalcode { get; set; }
+        public string country { get; set; }
+        public string city { get; set; }
         public string street { get; set; }
         public string housenumber { get; set; }
-        public string country { get; set; }
         public string phone { get; set; }
-        public string city { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contactpersons> Contactpersons { get; set; }
