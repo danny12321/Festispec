@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="FestispecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="FestispecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Answers">
           <Key>
             <PropertyRef Name="id" />
@@ -553,7 +553,8 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FestispecModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -573,14 +574,14 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="housenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Contactpersons" Relationship="Self.FK_Contactpersons_Clients" FromRole="Clients" ToRole="Contactpersons" />
           <NavigationProperty Name="Festivals" Relationship="Self.FK_Festivals_Clients" FromRole="Clients" ToRole="Festivals" />
           <NavigationProperty Name="Quotations" Relationship="Self.FK_Quotations_Clients" FromRole="Clients" ToRole="Quotations" />
-          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Contactpersons">
           <Key>
@@ -640,7 +641,9 @@
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="birthday" Type="DateTime" Precision="3" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="housenumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
@@ -651,8 +654,6 @@
           <NavigationProperty Name="Inspectors_at_inspection" Relationship="Self.FK_Inspectors_at_inspection_Inspectors" FromRole="Inspectors" ToRole="Inspectors_at_inspection" />
           <NavigationProperty Name="Inspectors_availability" Relationship="Self.FK_Inspectors_availability_Inspectors" FromRole="Inspectors" ToRole="Inspectors_availability" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_Inspectors" FromRole="Inspectors" ToRole="Users" />
-          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Inspectors_at_inspection">
           <Key>
@@ -860,7 +861,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Inspectors_at_inspection_Inspections">
-          <End Role="Inspections" Type="Self.Inspections" Multiplicity="1" />
+          <End Role="Inspections" Type="Self.Inspections" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Inspectors_at_inspection" Type="Self.Inspectors_at_inspection" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inspections">
@@ -872,7 +875,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Inspectors_at_inspection_Inspectors">
-          <End Role="Inspectors" Type="Self.Inspectors" Multiplicity="1" />
+          <End Role="Inspectors" Type="Self.Inspectors" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Inspectors_at_inspection" Type="Self.Inspectors_at_inspection" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inspectors">
@@ -1089,13 +1094,13 @@
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="FestispecModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
-                <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="postalcode" ColumnName="postalcode" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="street" ColumnName="street" />
                 <ScalarProperty Name="housenumber" ColumnName="housenumber" />
-                <ScalarProperty Name="country" ColumnName="country" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1147,13 +1152,13 @@
           <EntitySetMapping Name="Inspectors">
             <EntityTypeMapping TypeName="FestispecModel.Inspectors">
               <MappingFragment StoreEntitySet="Inspectors">
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="country" ColumnName="country" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="lastname" ColumnName="lastname" />
                 <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="postalcode" ColumnName="postalcode" />
+                <ScalarProperty Name="country" ColumnName="country" />
                 <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="street" ColumnName="street" />
                 <ScalarProperty Name="housenumber" ColumnName="housenumber" />
