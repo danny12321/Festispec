@@ -28,6 +28,10 @@ namespace FestispecWeb.Controllers
         {
             return View();
         }
+        public ActionResult Inspections()
+        {
+            return View();
+        }
 
     }
 }

@@ -175,6 +175,7 @@
     <Content Include="Views\Home\Planning.cshtml" />
     <Content Include="Views\Home\Questionnaires.cshtml" />
     <Content Include="Views\Login.cshtml" />
+    <Content Include="Views\Home\Inspections.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
