@@ -235,3 +235,4 @@ _Pvt_Extensions
 *.binlog
 *.jfm
 Festispec/Festispec/connections.config
+FestispecWeb/FestispecWeb/connections.config
