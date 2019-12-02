@@ -7,9 +7,16 @@
 
 <h2> </h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="container2">
+           <div class="row">
+               <div class="box">
+                   <div class="col-md-6">
+                       <h2 class="Text">Aankomende inspecties</h2>
+                   </div>
+               </div>
+           </div>
+       </div>
+
 <table class="table">
     <tr>
         <th>
@@ -25,7 +32,7 @@
             @Html.DisplayNameFor(model => model.finished)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.festival_id)
+            @Html.DisplayNameFor(model => model.Festivals.name)
         </th>
         <th></th>
     </tr>
@@ -46,7 +53,7 @@
                 @Html.DisplayFor(modelItem => item.finished)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.festival_id)
+                @Html.DisplayFor(modelItem => item.Festivals.name)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
@@ -56,6 +63,17 @@
         </tr>
     }
 
+    <style>
+        .container2 {
+            background-color: #4B4B4B;
+        }
+
+        .Text {
+            color: white;
+            margin-left: 10px;
+        }
+    </style>
+
     <!--  <div class="container1">
            <div class="row">
                <div class="box">
@@ -63,7 +81,7 @@
                        <table class="table">
                            <tr>
                                <th>
-                                   
+
                                </th>
                            </tr>
                        </table>
