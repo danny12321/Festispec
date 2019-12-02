@@ -4,6 +4,7 @@ using Festispec.ViewModel.FestivalVM;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,8 @@ namespace Festispec.ViewModel.ContactPersonsVM
 
         public ContactPersonVM ContactPerson { get; set; }
 
+        public ObservableCollection<TypeContactVM> ComboList;
+
         public ICommand SaveCommand { get; set; }
 
         public AddContactPersonVM(ContactPersonManageVM contact, IDataService service)
@@ -29,6 +32,17 @@ namespace Festispec.ViewModel.ContactPersonsVM
             ContactPerson.ClientId = _service.SelectedClient.ClientId;
 /*            ContactPerson.ToModel().Clients = _service.SelectedClient.ToModel();
             _service.SelectedClient.ToModel().Contactpersons.Add(ContactPerson.ToModel());*/
+
+            using(var context = new FestispecEntities())
+            {
+                context.Type_contacts.ToList().ForEach(s =>
+                {
+                    ComboList.Add(new TypeContactVM());
+                });
+
+                ComboList = new ObservableCollection<TypeContactVM>();
+                
+            }
 
             SaveCommand = new RelayCommand(SaveContact, CanSaveContact);
         }
@@ -71,5 +85,6 @@ namespace Festispec.ViewModel.ContactPersonsVM
             }
             return false;
         }
+
     }
 }

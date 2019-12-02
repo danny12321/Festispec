@@ -33,7 +33,7 @@
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding ContactPerson.ContactPersonPhoneNumber, Mode=TwoWay}"></TextBox>
                 <TextBlock FontSize="15" Text="type contact:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding ContactPerson.TypeContact, Mode=TwoWay}"></TextBox>
-                
+
 
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding SaveCommand}"
