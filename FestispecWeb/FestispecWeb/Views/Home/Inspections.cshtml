@@ -1,8 +1,96 @@
-﻿
+﻿@model IEnumerable<Festipec.Domain.Inspections>
+
 @{
     ViewBag.Title = "Inspections";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Inspections</h2>
+<h2> </h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.start_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.end_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.finished)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.festival_id)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.start_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.end_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.finished)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.festival_id)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+    <!--  <div class="container1">
+           <div class="row">
+               <div class="box">
+                   <div class="col-md-6">
+                       <table class="table">
+                           <tr>
+                               <th>
+                                   
+                               </th>
+                           </tr>
+                       </table>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+       <div class="container2">
+           <div class="row">
+               <div class="box">
+                   <div class="col-md-6">
+                       <h2 class="Text">Aankomende inspecties</h2>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+       <style>
+           .container1 {
+               background-color: #4B4B4B;
+           }
+
+           .Text {
+               color: white;
+               margin-left: 10px;
+           }
+       </style>-->
+
+</table>
