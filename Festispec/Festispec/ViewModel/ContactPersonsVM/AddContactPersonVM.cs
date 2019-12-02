@@ -38,6 +38,7 @@ namespace Festispec.ViewModel.ContactPersonsVM
                 context.Type_contacts.ToList().ForEach(s =>
                 {
                     ComboList.Add(new TypeContactVM());
+                    //test
                 });
 
                 ComboList = new ObservableCollection<TypeContactVM>();

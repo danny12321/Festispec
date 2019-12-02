@@ -107,6 +107,7 @@
     <Compile Include="ViewModel\ContactPersonsVM\ContactPersonManageVM.cs" />
     <Compile Include="ViewModel\ContactPersonsVM\ContactPersonVM.cs" />
     <Compile Include="ViewModel\ContactPersonsVM\EditContactPersonVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\TypeContactVM.cs" />
     <Compile Include="ViewModel\DataService\DataService.cs" />
     <Compile Include="ViewModel\DataService\IDataService.cs" />
     <Compile Include="ViewModel\FestivalVM\AddFestivalVM.cs" />
