@@ -22,6 +22,16 @@ namespace Festispec.ViewModel.Inspections
 
         public ICommand SetViewToSelectedPersonCommand { get; set; }
 
+        public bool HasPos { get
+            {
+                if (Inspector.latitude != null && Inspector.longitude != null)
+                {
+                    return true;
+                }
+                return false;
+            } 
+        }
+
         public InspectorsVM(Inspectors inspectors)
         {
             SetViewToSelectedPersonCommand = new RelayCommand<Map>(SetViewToSelectedPerson);

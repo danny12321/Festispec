@@ -175,10 +175,10 @@
         <m:Map Grid.Column="3" Grid.Row="0" x:Name="MijnMap" CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo" Mode="Road" ZoomLevel="6" Center="52.0753513,5.7688085">
             <m:Map.Children>
 
-                <m:MapItemsControl ItemTemplate="{StaticResource LogoTemplate}" ItemsSource="{Binding Inspectors}" >
+                <m:MapItemsControl ItemTemplate="{StaticResource LogoTemplate}" ItemsSource="{Binding InspectorsMaps}" >
                 </m:MapItemsControl>
 
-                <m:MapItemsControl ItemTemplate="{StaticResource LogoTemplate1}" ItemsSource="{Binding SelectedInspectors}" >
+                <m:MapItemsControl ItemTemplate="{StaticResource LogoTemplate1}" ItemsSource="{Binding SelectedInspectorsMaps}" >
                 </m:MapItemsControl>
 
                 <!--Het festival-->

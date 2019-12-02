@@ -19,12 +19,15 @@ namespace Festispec.ViewModel.Inspections
         private int _inspetionId;
 
         public ObservableCollection<InspectorsVM> Inspectors { get; set; }
+        public ObservableCollection<InspectorsVM> InspectorsMaps { get; set; }
 
         public ObservableCollection<InspectorAtInspectionVM> InspectorsAtInspection { get; set; }
 
         public ObservableCollection<InspectorsVM> SelectedInspectors { get; set; }
+        public ObservableCollection<InspectorsVM> SelectedInspectorsMaps { get; set; }
 
         public FestivalVM Festival { get; set; }
+        public FestivalVM FestivalMaps { get; set; }
 
         public InspectionVM Inspection { get; set; }
 
@@ -82,6 +85,8 @@ namespace Festispec.ViewModel.Inspections
 
                 Inspectors = new ObservableCollection<InspectorsVM>(inspectors);
                 SelectedInspectors = new ObservableCollection<InspectorsVM>();
+                SelectedInspectorsMaps = new ObservableCollection<InspectorsVM>();
+                InspectorsMaps = new ObservableCollection<InspectorsVM>();
 
                 //Used for posistion of festival in bing maps
                 Festival = new FestivalVM(context.Festivals.ToList().First(f => f.id == _festivalId));
@@ -99,12 +104,30 @@ namespace Festispec.ViewModel.Inspections
                     if (i.inspection_id == _inspetionId)
                     {
                         var tempInspector = Inspectors.ToList().First(j => j.Inspector.id == i.inpector_id);
+
+                        if (tempInspector.HasPos)
+                        {
+                            SelectedInspectorsMaps.Add(tempInspector);
+                            InspectorsMaps.Remove(tempInspector);
+                        }
                         SelectedInspectors.Add(tempInspector);
                         Inspectors.Remove(tempInspector);
                     }
                 });
 
                 RaisePropertyChanged();
+            }
+
+            Inspectors.ToList().ForEach(i => {
+                if (i.HasPos)
+                {
+                    InspectorsMaps.Add(i);
+                }
+            });
+
+            if (Festival.HasPos)
+            {
+                FestivalMaps = Festival;
             }
         }
 
@@ -195,12 +218,24 @@ namespace Festispec.ViewModel.Inspections
         {
             Inspectors.Remove(inspector);
             SelectedInspectors.Add(inspector);
+
+            if (InspectorsMaps.Contains(inspector))
+            {
+                InspectorsMaps.Remove(inspector);
+                SelectedInspectorsMaps.Add(inspector);
+            }
         }
 
         private void DelectInspector(InspectorsVM inspector)
         {
             SelectedInspectors.Remove(inspector);
             Inspectors.Add(inspector);
+
+            if (SelectedInspectorsMaps.Contains(inspector))
+            {
+                SelectedInspectorsMaps.Remove(inspector);
+                InspectorsMaps.Add(inspector);
+            }
         }
 
         private void DeleteInspection()

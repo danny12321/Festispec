@@ -16,21 +16,25 @@ namespace Festispec.ViewModel.Inspections
 {
     public class InspectionAddViewModel : ViewModelBase
     {
-
         private bool _useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt = false;
 
         private int _festivalId;
     
         public ObservableCollection<InspectorsVM> Inspectors { get; set; }
+        public ObservableCollection<InspectorsVM> InspectorsMaps { get; set; }
 
         public ObservableCollection<InspectorAtInspectionVM> InspectorsAtInspection { get; set; }
 
         public ObservableCollection<InspectorsVM> SelectedInspectors { get; set; }
-
+        public ObservableCollection<InspectorsVM> SelectedInspectorsMaps { get; set; }
 
         public FestivalVM Festival { get; set; }
+        
+        // Same as Festival only difference is the check if there are coordinates
+        public FestivalVM FestivalMaps { get; set; }
 
         public InspectionVM Inspection { get; set; }
+        public InspectionVM InspectionMaps { get; set; }
 
         private DateTime _startDate;
         public DateTime StartDate { get { return _startDate; } set { _startDate = value; EndDate = value; RaisePropertyChanged("EndDate"); } }
@@ -68,6 +72,8 @@ namespace Festispec.ViewModel.Inspections
             _festivalId = service.SelectedFestival.FestivalId;
 
             SelectedInspectors = new ObservableCollection<InspectorsVM>();
+            SelectedInspectorsMaps = new ObservableCollection<InspectorsVM>();
+            InspectorsMaps = new ObservableCollection<InspectorsVM>();
             Inspection = new InspectionVM();
 
             StartDate = DateTime.Now;
@@ -101,6 +107,18 @@ namespace Festispec.ViewModel.Inspections
                     });
                 }
             }
+
+            Inspectors.ToList().ForEach(i => {
+                if (i.HasPos)
+                {
+                    InspectorsMaps.Add(i);
+                }
+            });
+
+            if (Festival.HasPos)
+            {
+                FestivalMaps = Festival;
+            }
         }
 
         private void AddInspection()
@@ -109,7 +127,6 @@ namespace Festispec.ViewModel.Inspections
             Inspection.Start_date = StartDateTimeCombined;
             Inspection.End_date = EndDateTimeCombined;
 
-            // TODO Make festival id dynamic
             Inspection.Festival_id = _festivalId;
 
             InspectorsAtInspection = new ObservableCollection<InspectorAtInspectionVM>();
@@ -188,12 +205,24 @@ namespace Festispec.ViewModel.Inspections
         {
             Inspectors.Remove(inspector);
             SelectedInspectors.Add(inspector);
+
+            if (InspectorsMaps.Contains(inspector))
+            {
+                InspectorsMaps.Remove(inspector);
+                SelectedInspectorsMaps.Add(inspector);
+            }
         }
 
         private void DelectInspector(InspectorsVM inspector)
         {
             SelectedInspectors.Remove(inspector);
             Inspectors.Add(inspector);
+
+            if (SelectedInspectorsMaps.Contains(inspector))
+            {
+                SelectedInspectorsMaps.Remove(inspector);
+                InspectorsMaps.Add(inspector);
+            }
         }
 
         private async Task<TimeSpan> CalculateRouteDurationForInspector(InspectorsVM inspector)
