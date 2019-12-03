@@ -1,8 +1,47 @@
-﻿@{
+﻿
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Beschikbaarheid";
-    
 }
 
-<h2>@ViewBag.Title</h2>
+    <!DOCTYPE html>
 
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Index</title>
+        <link href="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler_material.css"
+              rel="stylesheet" type="text/css" />
+        <script src="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function (event) {
+                // initializing scheduler
+                scheduler.init("scheduler_here", new Date(2019, 0, 15));
+
+                // initiating data loading
+                scheduler.load("/api/scheduler");
+                // initializing dataProcessor
+                var dp = new dataProcessor("/api/scheduler");
+                // and attaching it to scheduler
+                dp.init(scheduler);
+                // setting the REST mode for dataProcessor
+                dp.setTransactionMode("REST");
+            });
+        </script>
+    </head>
+    <body>
+        <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:100vh;'>
+            <div class="dhx_cal_navline">
+                <div class="dhx_cal_prev_button">&nbsp;</div>
+                <div class="dhx_cal_next_button">&nbsp;</div>
+                <div class="dhx_cal_today_button"></div>
+                <div class="dhx_cal_date"></div>
+                <div class="dhx_cal_tab" name="day_tab"></div>
+                <div class="dhx_cal_tab" name="week_tab"></div>
+                <div class="dhx_cal_tab" name="month_tab"></div>
+            </div>
+            <div class="dhx_cal_header"></div>
+            <div class="dhx_cal_data"></div>
+        </div>
+    </body>
+</html>

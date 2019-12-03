@@ -1,5 +1,6 @@
 ﻿@{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Planning";
 }
 
 <!DOCTYPE html>
@@ -12,9 +13,10 @@
           rel="stylesheet" type="text/css" />
     <script src="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function(event) {
+        document.addEventListener("DOMContentLoaded", function (event) {
+            scheduler.config.readonly = true;
             // initializing scheduler
-            scheduler.init("scheduler_here", new Date(2019,0,15));
+            scheduler.init("scheduler_here", new Date(2019, 0, 15));
 
             // initiating data loading
             scheduler.load("/api/scheduler");
