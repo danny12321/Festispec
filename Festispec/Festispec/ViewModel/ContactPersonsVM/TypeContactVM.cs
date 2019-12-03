@@ -1,4 +1,5 @@
 ﻿using Festispec.Domain;
+using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Festispec.ViewModel.ContactPersonsVM
 {
-    public class TypeContactVM
+    public class TypeContactVM : ViewModelBase
     {
         private Type_contacts _typeContact;
 
@@ -24,13 +25,13 @@ namespace Festispec.ViewModel.ContactPersonsVM
         public int Id
         {
             get { return _typeContact.id; }
-            set { value = _typeContact.id; }
+            set { value = _typeContact.id; RaisePropertyChanged(); }
         }
 
         public string Type
         {
             get { return _typeContact.type; }
-            set { value = _typeContact.type; }
+            set { value = _typeContact.type; RaisePropertyChanged(); }
         }
 
         internal Type_contacts ToModel()

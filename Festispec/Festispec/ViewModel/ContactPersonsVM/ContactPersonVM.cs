@@ -57,7 +57,7 @@ namespace Festispec.ViewModel.ContactPersonsVM
             set { _contactperson.client_id = value; }
         }
 
-        public int TypeContact
+        public int? TypeContact
         {
             get { return _contactperson.type_contact; }
             set { _contactperson.type_contact = value; }

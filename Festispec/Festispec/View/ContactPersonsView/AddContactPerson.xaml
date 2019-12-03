@@ -32,9 +32,7 @@
                 <TextBlock FontSize="15" Text="Telefoonnummer:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding ContactPerson.ContactPersonPhoneNumber, Mode=TwoWay}"></TextBox>
                 <TextBlock FontSize="15" Text="Type contact:"></TextBlock>
-                <!--<TextBox FontSize="15" MaxLength="50" Text="{Binding ContactPerson.TypeContact, Mode=TwoWay}"></TextBox>-->
-
-                <ComboBox Width="200" HorizontalAlignment="Left" ItemsSource="{Binding ComboList}" SelectedItem="{Binding SelectedTypeContact.TypeContact, Mode=TwoWay}"
+                <ComboBox Width="200" HorizontalAlignment="Left" ItemsSource="{Binding ComboList}" SelectedItem="{Binding SelectedTypeContact, Mode=TwoWay}"
                           
                           DisplayMemberPath="Type" 
                           SelectedValuePath="Id"
@@ -42,7 +40,6 @@
                           Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                             materialDesign:HintAssist.Hint="Type contact"
                             IsSynchronizedWithCurrentItem="True">
-
                 </ComboBox>
 
                 <Border Padding="10">

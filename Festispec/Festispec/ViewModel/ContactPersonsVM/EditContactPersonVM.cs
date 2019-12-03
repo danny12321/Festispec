@@ -4,6 +4,7 @@ using Festispec.ViewModel.FestivalVM;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -16,18 +17,40 @@ namespace Festispec.ViewModel.ContactPersonsVM
     {
         private IDataService _service;
         private ContactPersonManageVM _contact;
+        private TypeContactVM _selectedTypeContact;
 
         public ICommand SaveCommand { get; set; }
+
+        public ObservableCollection<TypeContactVM> ComboList { get; set; }
 
         public ContactPersonVM SelectedContactPerson
         {
             get { return _service.SelectedContactPerson; }
         }
 
+        public TypeContactVM SelectedTypeContact
+        {
+            get
+            {
+                return _selectedTypeContact;
+            }
+            set
+            {
+                _selectedTypeContact = value;
+            }
+        }
+
         public EditContactPersonVM(IDataService service, ContactPersonManageVM contact)
         {
             _service = service;
             _contact = contact;
+
+            using (var context = new FestispecEntities())
+            {
+                var typecontacts = context.Type_contacts.ToList().Select(c => new TypeContactVM(c));
+
+                ComboList = new ObservableCollection<TypeContactVM>(typecontacts);
+            }
 
             SaveCommand = new RelayCommand(SaveChanges, CanSaveChanges);
         }
@@ -43,6 +66,8 @@ namespace Festispec.ViewModel.ContactPersonsVM
 
         private void SaveChanges()
         {
+            SelectedContactPerson.TypeContact = _selectedTypeContact.Id;
+
             using (var context = new FestispecEntities())
             {
                 context.Entry(SelectedContactPerson.ToModel()).State = EntityState.Modified;

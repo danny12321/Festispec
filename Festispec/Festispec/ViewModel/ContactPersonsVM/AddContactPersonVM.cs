@@ -16,14 +16,25 @@ namespace Festispec.ViewModel.ContactPersonsVM
     {
         private ContactPersonManageVM _contact;
         private IDataService _service;
+        private TypeContactVM _selectedTypeContact;
 
         public ContactPersonVM ContactPerson { get; set; }
 
-        public TypeContactVM TypeContact { get; set; }
-
-        public ObservableCollection<TypeContactVM> ComboList;
+        public ObservableCollection<TypeContactVM> ComboList { get; set; }
 
         public ICommand SaveCommand { get; set; }
+
+        public TypeContactVM SelectedTypeContact
+        {
+            get
+            {
+                return _selectedTypeContact;
+            }
+            set
+            {
+                _selectedTypeContact = value;
+            }
+        }
 
         public AddContactPersonVM(ContactPersonManageVM contact, IDataService service)
         {
@@ -32,21 +43,12 @@ namespace Festispec.ViewModel.ContactPersonsVM
             ContactPerson = new ContactPersonVM();
 
             ContactPerson.ClientId = _service.SelectedClient.ClientId;
-/*            ContactPerson.ToModel().Clients = _service.SelectedClient.ToModel();
-            _service.SelectedClient.ToModel().Contactpersons.Add(ContactPerson.ToModel());*/
 
             using(var context = new FestispecEntities())
             {
-                ComboList = new ObservableCollection<TypeContactVM>();
+                var typecontacts = context.Type_contacts.ToList().Select(c => new TypeContactVM(c));
 
-                var test = context.Type_contacts.ToList();
-
-                foreach(var s in test)
-                {
-                    ComboList.Add(new TypeContactVM(){ Id = s.id, Type = s.type});
-                    //test
-                };
-                
+                ComboList = new ObservableCollection<TypeContactVM>(typecontacts);
             }
 
             SaveCommand = new RelayCommand(SaveContact, CanSaveContact);
@@ -63,6 +65,7 @@ namespace Festispec.ViewModel.ContactPersonsVM
 
         private void SaveContact()
         {
+            ContactPerson.TypeContact = _selectedTypeContact.Id;
             _contact.ContactPersons.Add(ContactPerson);
 
             using (var context = new FestispecEntities())
