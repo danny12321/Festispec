@@ -32,7 +32,7 @@
                 <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedClient.Housenumber, Mode=TwoWay}"></TextBox>
                 <TextBlock FontSize="20" Text="Land:"></TextBlock>
                 <ComboBox
-                        SelectedValue="{Binding Path=SelectedClient.Country}"
+                        SelectedValue="{Binding SelectedClient.Country}"
                         Margin="0 8 0 8"
                         HorizontalAlignment="Left">
                     <ComboBoxItem>
