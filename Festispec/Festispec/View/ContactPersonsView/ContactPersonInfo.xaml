@@ -30,7 +30,7 @@
                 <TextBlock FontSize="15" Text="Telefoonnummer:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedContactPerson.ContactPersonPhoneNumber}" IsReadOnly="True"></TextBox>
                 <TextBlock FontSize="15" Text="type contact:"></TextBlock>
-                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedContactPerson.TypeContact}" IsReadOnly="True"></TextBox>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding getTypeContact}" IsReadOnly="True"></TextBox>
 
 
             </StackPanel>
