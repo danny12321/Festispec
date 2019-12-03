@@ -36,7 +36,7 @@
           <Property Name="email" Type="nvarchar" MaxLength="100" />
           <Property Name="phone" Type="nvarchar" MaxLength="50" />
           <Property Name="client_id" Type="int" />
-          <Property Name="type_contact" Type="int" Nullable="false" />
+          <Property Name="type_contact" Type="int" />
         </EntityType>
         <EntityType Name="Festival_contacts">
           <Key>
@@ -111,6 +111,7 @@
           <Property Name="start_date" Type="datetime" Nullable="false" />
           <Property Name="end_date" Type="datetime" Nullable="false" />
           <Property Name="inspector_id" Type="int" Nullable="false" />
+          <Property Name="text" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="Laws">
           <Key>
@@ -228,7 +229,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contactpersons_Type_contacts">
-          <End Role="Type_contacts" Type="Self.Type_contacts" Multiplicity="1" />
+          <End Role="Type_contacts" Type="Self.Type_contacts" Multiplicity="0..1" />
           <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Type_contacts">
@@ -593,7 +594,7 @@
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="client_id" Type="Int32" />
-          <Property Name="type_contact" Type="Int32" Nullable="false" />
+          <Property Name="type_contact" Type="Int32" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_Contactpersons_Clients" FromRole="Contactpersons" ToRole="Clients" />
           <NavigationProperty Name="Type_contacts" Relationship="Self.FK_Contactpersons_Type_contacts" FromRole="Contactpersons" ToRole="Type_contacts" />
           <NavigationProperty Name="Festivals" Relationship="Self.Festival_contacts" FromRole="Contactpersons" ToRole="Festivals" />
@@ -675,6 +676,7 @@
           <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="inspector_id" Type="Int32" Nullable="false" />
+          <Property Name="text" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Inspectors" Relationship="Self.FK_Inspectors_availability_Inspectors" FromRole="Inspectors_availability" ToRole="Inspectors" />
         </EntityType>
         <EntityType Name="Laws">
@@ -825,7 +827,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contactpersons_Type_contacts">
-          <End Role="Type_contacts" Type="Self.Type_contacts" Multiplicity="1" />
+          <End Role="Type_contacts" Type="Self.Type_contacts" Multiplicity="0..1" />
           <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Type_contacts">
@@ -1185,6 +1187,7 @@
                 <ScalarProperty Name="start_date" ColumnName="start_date" />
                 <ScalarProperty Name="end_date" ColumnName="end_date" />
                 <ScalarProperty Name="inspector_id" ColumnName="inspector_id" />
+                <ScalarProperty Name="text" ColumnName="text" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
