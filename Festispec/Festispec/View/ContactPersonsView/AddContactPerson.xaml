@@ -31,10 +31,19 @@
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding ContactPerson.ContactPersonMail, Mode=TwoWay}"></TextBox>
                 <TextBlock FontSize="15" Text="Telefoonnummer:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding ContactPerson.ContactPersonPhoneNumber, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="15" Text="type contact:"></TextBlock>
-                <TextBox FontSize="15" MaxLength="50" Text="{Binding ContactPerson.TypeContact, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Type contact:"></TextBlock>
+                <!--<TextBox FontSize="15" MaxLength="50" Text="{Binding ContactPerson.TypeContact, Mode=TwoWay}"></TextBox>-->
 
-                <ComboBox ItemsSource="{Binding ComboList}" DisplayMemberPath="{Binding TypeContact.Type}" SelectedValuePath="{Binding TypeContact.Id}" Text="{Binding ContactPerson.TypeContact}"></ComboBox>
+                <ComboBox Width="200" HorizontalAlignment="Left" ItemsSource="{Binding ComboList}" SelectedItem="{Binding SelectedTypeContact.TypeContact, Mode=TwoWay}"
+                          
+                          DisplayMemberPath="Type" 
+                          SelectedValuePath="Id"
+                          
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                            materialDesign:HintAssist.Hint="Type contact"
+                            IsSynchronizedWithCurrentItem="True">
+
+                </ComboBox>
 
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding SaveCommand}"
