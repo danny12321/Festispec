@@ -32,5 +32,20 @@ namespace FestispecWeb.Controllers
 
             return View(db.Questionnaires.ToList().Where(s => s.inspection_id == id));
         }
+
+        public ActionResult questionnaire(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var questionaires = db.Questionnaires.Find(id);
+
+            if(questionaires == null)
+            {
+                return HttpNotFound();
+            }
+            return View(db.Questions.ToList().Where(s => s.questionnaire_id == id));
+        }
     }
 }

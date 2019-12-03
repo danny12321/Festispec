@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Festipec.Domain.Questions>
+
+@{
+    ViewBag.Title = "questionnaire";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2> </h2>
+
+<div class="container2">
+    <div class="row">
+        <div class="box">
+            <div class="col-md-6">
+                <h2 class="Text">Vragenlijst</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Table of form gebruiken-->
+<table class="table">
+    @foreach (var item in Model)
+    {
+        <tr class="borderless">
+            <th>
+                <h4>Vraag:</h4>
+                @Html.DisplayFor(modelItem => item.question)
+            </th>
+          </tr>
+          <tr>
+              <th>
+                  <h4>Antwoord:</h4>
+                  @Html.DisplayFor(modelItem => item.type_question)
+                  <asp:TextBox id="tb1" TextMode="multiline"/>
+                  <br><br>
+              </th>
+        </tr>
+
+    }
+</table>
+
+
+<style>
+    .container2 {
+        background-color: #4B4B4B;
+    }
+
+    .Text {
+        color: white;
+        margin-left: 10px;
+    }
+
+    .table{
+        border-right: 1px solid black;
+        border-left: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+
+    .borderless {
+      border-bottom: hidden;
+    }
+
+    .tr{
+        border-bottom: 1px;
+    }
+
+</style>

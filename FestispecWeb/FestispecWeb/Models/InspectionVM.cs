@@ -7,7 +7,6 @@ namespace FestispecWeb.Models
 {
     public class InspectionVM
     {
-
         public int Id { get; set; }
 
         public string Description { get; set; }
@@ -19,5 +18,6 @@ namespace FestispecWeb.Models
         public DateTime Finished { get; set; }
 
         public int FestivalId { get; set; }
+
     }
 }
