@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Festipec.Domain.Questionnaires>
+
+
+@{
+    ViewBag.Title = "Questionnaires";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2> </h2>
+
+<div class="container2">
+    <div class="row">
+        @foreach(var e in Model)
+        <div class="box">
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.Select(e => e.))
+                <h2 class="Text"></h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.version)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.version)
+    </td>
+    <td>
+        @Html.ActionLink("Naar vragenlijst", "Edit", new { id = item.id })
+    </td>
+</tr>
+    }
+
+</table>
+
+<style>
+    .container2 {
+        background-color: #4B4B4B;
+    }
+
+    .Text {
+        color: white;
+        margin-left: 10px;
+    }
+</style>

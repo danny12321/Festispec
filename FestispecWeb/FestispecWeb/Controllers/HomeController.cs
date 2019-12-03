@@ -10,8 +10,6 @@ namespace FestispecWeb.Controllers
     public class HomeController : Controller
     {
 
-        FestispecEntities fe = new FestispecEntities();
-
         public ActionResult Index()
         {
             return View();
@@ -30,10 +28,6 @@ namespace FestispecWeb.Controllers
         public ActionResult Questionnaires()
         {
             return View();
-        }
-        public ActionResult Inspections()
-        {
-            return View(fe.Inspections.ToList());
         }
 
     }

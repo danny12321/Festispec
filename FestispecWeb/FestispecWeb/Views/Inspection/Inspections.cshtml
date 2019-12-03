@@ -26,10 +26,13 @@
             @Html.DisplayFor(modelItem => item.Festivals.name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Festivals.start_date)
+            @Html.DisplayFor(modelItem => item.Festivals.start_date.Date)
         </td>
         <td>
-            @Html.ActionLink("bekoekeloeren", "Go", new { id = item.id })
+            @Html.DisplayFor(modelItem => item.Festivals.start_date.TimeOfDay)
+        </td>
+        <td>
+            @Html.ActionLink("bekoekeloeren", "Questionnaires", new { id = item.id })
     </tr>
     }
 
