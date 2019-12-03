@@ -1,4 +1,5 @@
 ﻿using Festispec.Domain;
+using Festispec.Utils;
 using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -15,6 +16,8 @@ namespace Festispec.ViewModel.Inspections
 {
     public class InspectionEditViewModel : ViewModelBase
     {
+        private bool _useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt = false;
+
         private int _festivalId;
         private int _inspetionId;
 
@@ -51,6 +54,8 @@ namespace Festispec.ViewModel.Inspections
         }
 
         private MainViewModel _main;
+
+        public string ErrorMessage { get; set; }
 
         public ICommand TestButton { get; set; }
         public ICommand EditInspectionCommand { get; set; }
@@ -99,6 +104,15 @@ namespace Festispec.ViewModel.Inspections
                 EndDate = Inspection.End_date;
                 EndTime = Inspection.End_date.TimeOfDay;
 
+                //Calc Travel Time
+                if (_useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt)
+                {
+                    Inspectors.ToList().ForEach(i => {
+                        var timespan = CalculateRouteDurationForInspector(i).GetAwaiter().GetResult();
+                        i.TravelTime = timespan;
+                    });
+                }
+
                 context.Inspectors_at_inspection.ToList().ForEach(i =>
                 {
                     if (i.inspection_id == _inspetionId)
@@ -117,6 +131,8 @@ namespace Festispec.ViewModel.Inspections
 
                 RaisePropertyChanged();
             }
+
+            
 
             Inspectors.ToList().ForEach(i => {
                 if (i.HasPos)
@@ -170,6 +186,8 @@ namespace Festispec.ViewModel.Inspections
             else
             {
                 // Show wrong input error message
+                ErrorMessage = "Beschrijving mag niet leeg zijn\nStart datum en tijd moet in de toekomst liggen\nEind datum en tijd moet na de start zijn";
+                RaisePropertyChanged("ErrorMessage");
                 Console.WriteLine("Wrong input");
             }
 
@@ -177,13 +195,20 @@ namespace Festispec.ViewModel.Inspections
 
         private bool ValidateInput(InspectionVM inspection)
         {
-            bool isValid = true;
+            if (!IsDescriptionValid(inspection.Description))
+            {
+                return false;
+            }
+            if(IsStartDateTimeInFuture(inspection.Start_date))
+            {
+                return false;
+            }
+            if(IsEndDateAfterTheStartDate(inspection.Start_date, inspection.End_date))
+            {
+                return false;
+            }
 
-            isValid = IsDescriptionValid(inspection.Description);
-            isValid = IsStartDateTimeInFuture(inspection.Start_date);
-            isValid = IsEndDateAfterTheStartDate(inspection.Start_date, inspection.End_date);
-
-            return isValid;
+            return true;
         }
 
         private bool IsDescriptionValid(string description)
@@ -250,6 +275,12 @@ namespace Festispec.ViewModel.Inspections
             }
 
             _main.SetPage("Inspections", false);
+        }
+
+        private async Task<TimeSpan> CalculateRouteDurationForInspector(InspectorsVM inspector)
+        {
+            RouteDurationCalculator routeDurationCalculator = new RouteDurationCalculator();
+            return await routeDurationCalculator.CalculateRoute(inspector.Inspector.longitude + "," + inspector.Inspector.latitude, Festival.Festivals.longitude + "," + Festival.Festivals.latitude).ConfigureAwait(false);
         }
 
         private void Debug()

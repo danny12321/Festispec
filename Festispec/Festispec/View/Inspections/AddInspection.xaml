@@ -108,7 +108,14 @@
                 </StackPanel>
             </Border>
 
-            <Button Command="{Binding AddInspectionCommand}">Maak aan</Button>
+            <Border BorderThickness="10">
+                <StackPanel>
+                    
+                    <Button Command="{Binding AddInspectionCommand}">Maak aan</Button>
+
+                    <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" TextWrapping="Wrap"></TextBlock>
+                </StackPanel>
+            </Border>
 
         </StackPanel>
 
@@ -130,12 +137,14 @@
                             <StackPanel Orientation="Horizontal">
                                 <Button Grid.Column="1" FontSize="10" BorderBrush="Gray" Background="Transparent" Command="{Binding SetViewToSelectedPersonCommand}" CommandParameter="{Binding ElementName=MijnMap}" Content="{Binding Fullname}"></Button>
                                 <Button
+                                    Margin="10,0,0,0"
                                       Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                       HorizontalAlignment="Left"
                                       ToolTip="Selecteer inspecteur"
                                       Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.SelectInspectorCommand}" CommandParameter="{Binding }">
                                     <materialDesign:PackIcon Kind="ArrowRight" />
                                 </Button>
+                                <TextBlock Margin="10,10,0,0" Text="{Binding TravelTime}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -159,6 +168,7 @@
                             <StackPanel Orientation="Horizontal">
                                 
                                 <Button
+                                    Margin="0,0,10,0"
                                           Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                           HorizontalAlignment="Left"
                                           ToolTip="Selecteer inspecteur"
@@ -166,6 +176,7 @@
                                     <materialDesign:PackIcon Kind="ArrowLeft" />
                                 </Button>
                                 <Button Grid.Column="1" FontSize="10" BorderBrush="Gray" Background="Transparent" Command="{Binding SetViewToSelectedPersonCommand}" CommandParameter="{Binding ElementName=MijnMap}" Content="{Binding Fullname}"></Button>
+                                <TextBlock Margin="10,10,0,0" Text="{Binding TravelTime}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -175,10 +186,10 @@
         <m:Map Grid.Column="3" Grid.Row="0" x:Name="MijnMap" CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo" Mode="Road" ZoomLevel="6" Center="52.0753513,5.7688085">
             <m:Map.Children>
 
-                <m:MapItemsControl ItemTemplate="{StaticResource LogoTemplate}" ItemsSource="{Binding InspectorsMaps}" >
+                <m:MapItemsControl ItemTemplate="{StaticResource LogoTemplate}" ItemsSource="{Binding InspectorsMaps}">
                 </m:MapItemsControl>
 
-                <m:MapItemsControl ItemTemplate="{StaticResource LogoTemplate1}" ItemsSource="{Binding SelectedInspectorsMaps}" >
+                <m:MapItemsControl ItemTemplate="{StaticResource LogoTemplate1}" ItemsSource="{Binding SelectedInspectorsMaps}">
                 </m:MapItemsControl>
 
                 <!--Het festival-->

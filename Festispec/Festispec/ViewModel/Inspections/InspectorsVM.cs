@@ -40,10 +40,13 @@ namespace Festispec.ViewModel.Inspections
 
         private void SetViewToSelectedPerson(Map map)
         {
-            var longitude = Convert.ToDouble(Inspector.longitude.Replace('.', ','));
-            var latitude = Convert.ToDouble(Inspector.latitude.Replace('.', ','));
-            var location = new Location(latitude, longitude);
-            map.SetView(location, 10);
+            if (Inspector.longitude != null || Inspector.latitude != null)
+            {
+                var longitude = Convert.ToDouble(Inspector.longitude.Replace('.', ','));
+                var latitude = Convert.ToDouble(Inspector.latitude.Replace('.', ','));
+                var location = new Location(latitude, longitude);
+                map.SetView(location, 10);
+            }
         }
     }
 }
