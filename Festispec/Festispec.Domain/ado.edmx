@@ -36,7 +36,7 @@
           <Property Name="email" Type="nvarchar" MaxLength="100" />
           <Property Name="phone" Type="nvarchar" MaxLength="50" />
           <Property Name="client_id" Type="int" />
-          <Property Name="type_contact" Type="int" Nullable="false" />
+          <Property Name="type_contact" Type="int" />
         </EntityType>
         <EntityType Name="Festival_contacts">
           <Key>
@@ -228,7 +228,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contactpersons_Type_contacts">
-          <End Role="Type_contacts" Type="Self.Type_contacts" Multiplicity="1" />
+          <End Role="Type_contacts" Type="Self.Type_contacts" Multiplicity="0..1" />
           <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Type_contacts">
@@ -593,7 +593,7 @@
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="client_id" Type="Int32" />
-          <Property Name="type_contact" Type="Int32" Nullable="false" />
+          <Property Name="type_contact" Type="Int32" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_Contactpersons_Clients" FromRole="Contactpersons" ToRole="Clients" />
           <NavigationProperty Name="Type_contacts" Relationship="Self.FK_Contactpersons_Type_contacts" FromRole="Contactpersons" ToRole="Type_contacts" />
           <NavigationProperty Name="Festivals" Relationship="Self.Festival_contacts" FromRole="Contactpersons" ToRole="Festivals" />
@@ -825,7 +825,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contactpersons_Type_contacts">
-          <End Role="Type_contacts" Type="Self.Type_contacts" Multiplicity="1" />
+          <End Role="Type_contacts" Type="Self.Type_contacts" Multiplicity="0..1" />
           <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Type_contacts">
