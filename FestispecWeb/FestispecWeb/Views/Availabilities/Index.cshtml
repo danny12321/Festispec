@@ -1,8 +1,7 @@
 ﻿@{
-    Layout = null;
+      Layout = "~/Views/Shared/_Layout.cshtml";
+      ViewBag.Title = "Beschikbaarheid";
 }
-Â
-Â
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +13,7 @@
     </style>
 </head>
 <body>
-    <div style="height:700px;width:900px;margin:0 auto">
+    <div style="height:700px;margin:0 auto">
         @Html.Raw(Model.Render())
     </div>
 </body>
