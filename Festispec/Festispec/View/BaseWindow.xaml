@@ -29,6 +29,7 @@
                 <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="MonitorDashboard" VerticalAlignment="Center"/>Dahboard</Hyperlink></TextBlock>
                 <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Vragenlijsten TEMP" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="MonitorDashboard" VerticalAlignment="Center"/>Vragenlijsten TEMP</Hyperlink></TextBlock>
                 <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Logo ut" TextDecorations="None" Foreground="White"><InlineUIContainer><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="ExitToApp" VerticalAlignment="Center"/></InlineUIContainer><Run Text="uitloggen"/></Hyperlink></TextBlock>
+                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="ReportPage" TextDecorations="None" Foreground="White"><InlineUIContainer><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="ExitToApp" VerticalAlignment="Center"/></InlineUIContainer><Run Text="Raportages"/></Hyperlink></TextBlock>
             </ListBox>
         </Border>
 

@@ -1,7 +1,9 @@
-﻿using Festispec.ViewModel.ClientVM;
+using Festispec.ViewModel.ClientVM;
 using Festispec.ViewModel.FestivalVM;
+using Festispec.ViewModel.Questionnaires;
 using Festispec.ViewModel.ContactPersonsVM;
 using Festispec.ViewModel.Inspections;
+using Festispec.ViewModel.InspectorsVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +17,9 @@ namespace Festispec.ViewModel.DataService
         ClientsVM SelectedClient { get; set; }
 
         FestivalVM.FestivalVM SelectedFestival { get; set; }
-
+        QuestionnairesViewModel SelectedQuestionnaire { get; set; }
         ContactPersonVM SelectedContactPerson { get; set; }
         InspectionVM SelectedInspection { get; set; }
+        InspectorviewModel SelectedInspector { get; set; }
     }
 }
