@@ -18,8 +18,8 @@
     </div>
 </div>
 
-<p>@Model.Inspections.start_date.Date</p>
-<p>@Model.Inspections.start_date.TimeOfDay</p>
+<!--<p>@Model.Inspections.start_date.Date</p>
+<p>@Model.Inspections.start_date.TimeOfDay</p>-->
 
 
 <h3>@Model.Inspections.description</h3>
@@ -27,17 +27,17 @@
 <table class="table">
     @foreach (var item in Model.Questionnaires)
     {
-<tr>
-    <td>
-        <p>@item.name</p>
-    </td>
-    <td>
-        <p>@item.version</p>
-    </td>
-    <td>
-        @Html.ActionLink("Naar vragenlijst", "questionnaire", new { id = item.id })
-    </td>
-</tr>
+        <tr>
+            <td>
+                <p>@item.name</p>
+            </td>
+            <td>
+                <p>@item.version</p>
+            </td>
+            <td>
+                @Html.ActionLink("Naar vragenlijst", "questionnaire", new { id = item.id })
+            </td>
+        </tr>
     }
 
 </table>

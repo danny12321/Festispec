@@ -17,25 +17,44 @@
     </div>
 </div>
 
-<!--Table of form gebruiken-->
-<table class="table">
+<!--Form of form gebruiken-->
+<form class="form">
     @foreach (var item in Model)
     {
-        <tr class="borderless">
-            <th>
-                <h4>Vraag:</h4>
-                @Html.DisplayFor(modelItem => item.question)
-            </th>
-          </tr>
-          <tr>
-              <th>
-                  <h4>Antwoord:</h4>
-                  @Html.DisplayFor(modelItem => item.type_question)
-              </th>
-        </tr>
+        <div class="form__question">
+            <h2>@Html.DisplayFor(modelItem => item.question)</h2>
 
+            <h4>Antwoord:</h4>
+
+            @if (item.type_question == 1)
+            {
+                <input name="@item.id" />
+            }
+            else if (item.type_question == 2)
+            {
+                foreach (var pasnwer in item.Possible_answer)
+                {
+                    <input type="checkbox" name="@item.id" /> @pasnwer.answer <br />
+                }
+            }
+            else if (item.type_question == 3)
+            {
+                foreach (var pasnwer in item.Possible_answer)
+                {
+                    <input type="radio" name="@item.id" /> @pasnwer.answer <br />
+                }
+            }
+            else
+            {
+                <div>question type not found</div>
+            }
+        </div>
     }
-</table>
+
+    <input type="checkbox" /> Is klaar <br />
+
+    <button type="submit">Opslaan</button>
+</form>
 
 
 <style>
@@ -48,18 +67,18 @@
         margin-left: 10px;
     }
 
-    .table{
-        border-right: 1px solid black;
-        border-left: 1px solid black;
-        border-bottom: 1px solid black;
+    .form {
+    }
+
+    .form__question {
+        margin: 30px 0;
     }
 
     .borderless {
-      border-bottom: hidden;
+        border-bottom: hidden;
     }
 
-    .tr{
+    .tr {
         border-bottom: 1px;
     }
-
 </style>
