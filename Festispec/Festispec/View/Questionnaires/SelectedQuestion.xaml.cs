@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec.View.Inspectors
+namespace Festispec.View.Questionnaires
 {
     /// <summary>
-    /// Interaction logic for Inspectors.xaml
+    /// Interaction logic for SelectedQuestion.xaml
     /// </summary>
-    public partial class Inspectors : Page
+    public partial class SelectedQuestion : Page
     {
-        public Inspectors()
+        public SelectedQuestion()
         {
             InitializeComponent();
         }

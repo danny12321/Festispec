@@ -28,11 +28,12 @@ namespace Festispec.ViewModel
         public string Email { get; set; }
 
         public string Password { get; set; }
+        public FestispecEntities EntityContext { get; }
 
-
-        public LoginViewModel()
+        public LoginViewModel(FestispecEntities entityContext)
         {
             LoginCommand = new RelayCommand(Login);
+            EntityContext = entityContext;
         }
 
         public string CalculateMD5Hash(string input)
@@ -64,10 +65,7 @@ namespace Festispec.ViewModel
             // Voor testen
             if (autoLogin)
             {
-                using (var context = new FestispecEntities())
-                {
-                    user = context.Users.ToList();
-                }
+                    user = EntityContext.Users.ToList();
             }
             else
             {

@@ -18,34 +18,23 @@ namespace Festispec.ViewModel.Questionnaires
 
         private Questions _question;
 
+        private FestispecEntities _context;
+
         public int Id { get; private set; }
 
-        public QuestionTypeViewModel StringType
+        private QuestionTypeViewModel _type;
+
+        public QuestionTypeViewModel Type
         {
             get
             {
-                return new QuestionTypeViewModel(_question.Type_questions);
+                return _type;
             }
             set
             {
                 _question.Type_questions = value.ToModel();
                 _question.type_question = value.Id;
-                _question.Type_questions = value.ToModel();
-                Questionnaires.ChangeType(this);
                 SaveChanges();
-            }
-        }
-
-        public Type_questions Type
-        {
-            get
-            {
-                return _question.Type_questions;
-            }
-            set
-            {
-                _question.Type_questions = value;
-                _question.type_question = value.id;
                 Questionnaires.ChangeType(this);
             }
         }
@@ -69,57 +58,61 @@ namespace Festispec.ViewModel.Questionnaires
 
         public ICommand DeleteQuestionCommand { get; set; }
 
+        public ICommand SetTypeCommand { get; set; }
+
         public virtual Page GetPreviewPage { get => null; }
 
         public virtual Page GetEditPage { get => null; }
 
-        public QuestionViewModel(QuestionnairesViewModel questionnaires, Questions q)
+        public QuestionViewModel(QuestionnairesViewModel questionnaires, Questions q, FestispecEntities context)
         {
             Questionnaires = questionnaires;
             _question = q;
+            _context = context;
 
             var possible_answers = _question.Possible_answer.ToList()
-                .Select(pa => new Possible_answerVM(pa,this));
+                .Select(pa => new Possible_answerVM(pa, this));
 
             Possible_answers = new ObservableCollection<Possible_answerVM>(possible_answers);
 
+            _type = new QuestionTypeViewModel(q.Type_questions);
+
             AddAnswerRowCommand = new RelayCommand(AddAnswerRow);
             DeleteQuestionCommand = new RelayCommand(DeleteQuestion);
+            SetTypeCommand = new RelayCommand<QuestionTypeViewModel>(SetType);
+        }
+
+        private void SetType(QuestionTypeViewModel type)
+        {
+            Console.WriteLine("Set type");
+            Type = type;
         }
 
         public void AddAnswerRow()
         {
             var pa = new Possible_answerVM(this);
 
-            using (var context = new FestispecEntities())
-            {
-                context.Questions.Attach(_question);
-                _question.Possible_answer.Add(pa.ToModel());
-                Possible_answers.Add(pa);
+            _context.Questions.Attach(_question);
+            _question.Possible_answer.Add(pa.ToModel());
+            Possible_answers.Add(pa);
 
-                context.SaveChanges();
-            }
+            _context.SaveChanges();
         }
 
         public void SaveChanges()
         {
-            using (var context = new FestispecEntities())
-            {
-                context.Entry(_question).State = System.Data.Entity.EntityState.Modified;
-                context.SaveChanges();
-            }
+            _context.Entry(_question).State = System.Data.Entity.EntityState.Modified;
+            _context.SaveChanges();
         }
 
         private void DeleteQuestion()
         {
             Possible_answers.ToList().ForEach(pa => pa.Delete());
 
-            using (var context = new FestispecEntities())
-            {
-                context.Questions.Attach(_question);
-                context.Questions.Remove(_question);
-                context.SaveChanges();
-            }
+            _context.Questions.Attach(_question);
+            _context.Questions.Remove(_question);
+            _context.SaveChanges();
+
 
             Questionnaires.Questions.Remove(this);
             Questionnaires.SelectedQuestion = null;

@@ -34,18 +34,17 @@ namespace Festispec.ViewModel.FestivalVMs
             }
         }
 
-        public FestivalManagementVM(MainViewModel main, IDataService service)
+        public FestispecEntities EntityContext { get; }
+
+        public FestivalManagementVM(MainViewModel main, IDataService service, FestispecEntities entityContext)
         {
             this._main = main;
             this._service = service;
-
-            using (var context = new FestispecEntities())
-            {
-                var festival = context.Festivals.ToList()
+            EntityContext = entityContext;
+            var festival = EntityContext.Festivals.ToList()
                              .Select(e => new FestivalVM.FestivalVM(e));
 
                 FestivalList = new ObservableCollection<FestivalVM.FestivalVM>(festival);
-            }
             ShowFestival = new RelayCommand(ShowFestivalInfo);
             ShowAddInspection = new RelayCommand(NavigateInspection);
         }

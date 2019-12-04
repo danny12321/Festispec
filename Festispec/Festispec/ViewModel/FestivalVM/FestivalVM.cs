@@ -44,6 +44,12 @@ namespace Festispec.ViewModel.FestivalVM
             set { _festival.postalcode = value; }
         }
 
+        public string City
+        {
+            get { return _festival.city; }
+            set { _festival.city = value; }
+        }
+
         public string Street
         {
             get { return _festival.street; }
@@ -74,7 +80,7 @@ namespace Festispec.ViewModel.FestivalVM
             set { _festival.end_date = value; }
         }
 
-        public int Year
+        public int? Year
         {
             get { return _festival.start_date.Year; }
         }
