@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Festipec.Domain;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
 
@@ -7,17 +9,15 @@ namespace FestispecWeb.Models
 {
     public class InspectionVM
     {
-        public int Id { get; set; }
+        public Inspections Inspections { get; set; }
+        public IEnumerable<Questionnaires> Questionnaires { get; set; }
 
-        public string Description { get; set; }
 
-        public DateTime StartDate { get; set; }
-
-        public DateTime EndDate { get; set; }
-
-        public DateTime Finished { get; set; }
-
-        public int FestivalId { get; set; }
+        public InspectionVM()
+        {
+            Inspections = new Inspections();
+            Questionnaires = new ObservableCollection<Questionnaires>();
+        }
 
     }
 }

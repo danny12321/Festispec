@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Festipec.Domain.Questionnaires>
+﻿@model FestispecWeb.Models.InspectionVM
 
 
 @{
@@ -12,31 +12,21 @@
     <div class="row">
         <div class="box">
             <div class="col-md-6">
-                <h2 class="Text">Vragenlijsten</h2>
+                <h2 class="Text">@Model.Inspections.description</h2>
             </div>
         </div>
     </div>
 </div>
 
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.version)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
+    @foreach (var item in Model.Questionnaires)
     {
 <tr>
     <td>
-        @Html.DisplayFor(modelItem => item.name)
+        <p>@item.name</p>
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.version)
+        <p>@item.version</p>
     </td>
     <td>
         @Html.ActionLink("Naar vragenlijst", "questionnaire", new { id = item.id })

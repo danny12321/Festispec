@@ -1,4 +1,5 @@
 ﻿using Festipec.Domain;
+using FestispecWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace FestispecWeb.Controllers
     public class InspectionController : Controller
     {
         FestispecEntities db = new FestispecEntities();
+        InspectionVM InspectionVM;
+
 
         public ActionResult Inspections()
         {
@@ -19,6 +22,8 @@ namespace FestispecWeb.Controllers
 
         public ActionResult Questionnaires(int? id)
         {
+            InspectionVM = new InspectionVM();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -30,11 +35,16 @@ namespace FestispecWeb.Controllers
                 return HttpNotFound();
             }
 
-            return View(db.Questionnaires.ToList().Where(s => s.inspection_id == id));
+            InspectionVM.Questionnaires = db.Questionnaires.ToList().Where(s => s.inspection_id == id);
+            InspectionVM.Inspections = inspection;
+
+
+            return View(InspectionVM);
         }
 
         public ActionResult questionnaire(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
