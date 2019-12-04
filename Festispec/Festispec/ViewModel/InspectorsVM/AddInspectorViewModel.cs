@@ -1,4 +1,5 @@
 ﻿using Festispec.Domain;
+using Festispec.Utils;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
@@ -21,6 +22,7 @@ namespace Festispec.ViewModel.InspectorsVM
 
         public ICommand AddInspectorCommand { get; set; }
         public ICommand CreatePass { get; set; }
+        public ICommand GenerateLatLongBasedOnAdressCommand { get; set; }
 
         public String Password
         {
@@ -40,6 +42,7 @@ namespace Festispec.ViewModel.InspectorsVM
             this._inspectors = Inspectors;
             this.Inspector = new InspectorviewModel();
 
+            GenerateLatLongBasedOnAdressCommand = new RelayCommand(GenerateLatLongBasedOnAdress);
             AddInspectorCommand = new RelayCommand(AddInspectorMethod, CanAddInspector);
             CreatePass = new RelayCommand(GeneratePassword);
         }
@@ -158,6 +161,23 @@ namespace Festispec.ViewModel.InspectorsVM
                 return builder.ToString();
             }
         }
+
+        private async void GenerateLatLongBasedOnAdress()
+        {
+            //You need atleast a country and a city to get a good result
+            if (Inspector.Country != null || Inspector.City != null)
+            {
+                LatLongGenerator latLongGenerator = new LatLongGenerator();
+
+                Task<string> latLongGeneratorAwait = latLongGenerator.GenerateLatLong(Inspector.Country, Inspector.City, Inspector.Street, Inspector.Housenumber);
+                string latlong = await latLongGeneratorAwait;
+
+                Inspector.Latitude = latlong.Split(',')[0];
+                Inspector.Longitude = latlong.Split(',')[1];
+                RaisePropertyChanged("Inspector");
+            }
+        }
+
 
 
     }

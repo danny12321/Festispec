@@ -50,7 +50,7 @@ namespace Festispec.ViewModel.ClientVM
         
         private bool IsMatch()
         {
-            if (!IsEmptyField(Client.ClientName) && !IsEmptyField(Client.PostalCode) && !IsEmptyField(Client.Street) && !IsEmptyField(Client.Housenumber) && !IsEmptyField(Client.Country))
+            if (!IsEmptyField(Client.ClientName))
             {
                 return true;
             }

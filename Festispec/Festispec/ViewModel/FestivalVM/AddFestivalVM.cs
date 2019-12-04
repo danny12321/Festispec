@@ -1,4 +1,5 @@
 ﻿using Festispec.Domain;
+using Festispec.Utils;
 using Festispec.ViewModel.ClientVM;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -40,6 +41,7 @@ namespace Festispec.ViewModel.Festival_VMs
         }
 
         public ICommand AddFestivalCommand { get; set; }
+        public ICommand GenerateLatLongBasedOnAdressCommand { get; set; }
 
         public FestivalVM.FestivalVM Festival { get; set; }
 
@@ -49,6 +51,7 @@ namespace Festispec.ViewModel.Festival_VMs
             Festival = new FestivalVM.FestivalVM();
 
             AddFestivalCommand = new RelayCommand(AddFestivalMethod, CanAddFestival);
+            GenerateLatLongBasedOnAdressCommand = new RelayCommand(GenerateLatLongBasedOnAdress);
 
             Festival.ClientId = _clients.SelectedClient.ClientId;
 
@@ -83,7 +86,7 @@ namespace Festispec.ViewModel.Festival_VMs
 
         private bool IsMatch()
         {
-            if (!IsEmptyField(Festival.FestivalName) && !IsEmptyField(Festival.PostalCode) && !IsEmptyField(Festival.Street) && !IsEmptyField(Festival.HouseNumber) && !IsEmptyField(Festival.Country) && !IsEmptyField(Festival.Longitude) && !IsEmptyField(Festival.Latitude))
+            if (!IsEmptyField(Festival.FestivalName))
             {
                 return true;
             }
@@ -97,6 +100,22 @@ namespace Festispec.ViewModel.Festival_VMs
                 return true;
             }
             return false;
+        }
+
+        private async void GenerateLatLongBasedOnAdress()
+        {
+            //You need atleast a country and a city to get a good result
+            if (Festival.Country != null || Festival.City != null)
+            {
+                LatLongGenerator latLongGenerator = new LatLongGenerator();
+
+                Task<string> latLongGeneratorAwait = latLongGenerator.GenerateLatLong(Festival.Country, Festival.City, Festival.Street, Festival.HouseNumber);
+                string latlong = await latLongGeneratorAwait;
+
+                Festival.Latitude = latlong.Split(',')[0];
+                Festival.Longitude = latlong.Split(',')[1];
+                RaisePropertyChanged("Festival");
+            }
         }
     }
 }

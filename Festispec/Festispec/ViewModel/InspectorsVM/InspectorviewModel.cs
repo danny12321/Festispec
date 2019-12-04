@@ -34,11 +34,11 @@ namespace Festispec.ViewModel.InspectorsVM
             get { return _i.lastname; }
             set { _i.lastname = value; }
         }
-        public DateTime Birthday
+        public DateTime? Birthday
         {
             get
             {
-                return _i.birthday;
+                return _i.birthday ?? DateTime.Now;
             }
             set
             {
@@ -50,6 +50,16 @@ namespace Festispec.ViewModel.InspectorsVM
         {
             get { return _i.postalcode; }
             set { _i.postalcode = value; }
+        }
+        public string Country
+        {
+            get { return _i.country; }
+            set { _i.country = value; }
+        }
+        public string City
+        {
+            get { return _i.city; }
+            set { _i.city = value; }
         }
 
         public string Street
@@ -81,6 +91,16 @@ namespace Festispec.ViewModel.InspectorsVM
         {
             get { return _i.phone; }
             set { _i.phone = value; }
+        }
+        public string Latitude
+        {
+            get { return _i.latitude; }
+            set { _i.latitude = value; }
+        }
+        public string Longitude
+        {
+            get { return _i.longitude; }
+            set { _i.longitude = value; }
         }
 
         internal Inspectors ToModel()

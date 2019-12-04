@@ -22,7 +22,7 @@
 
                 <TextBlock Text="Klant gegevens wijzigen" FontSize="25" Padding="0,10"/>
 
-                <TextBlock FontSize="20" Text="Bedrijf naam:"></TextBlock>
+                <TextBlock FontSize="20" Text="Bedrijfsnaam:"></TextBlock>
                 <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedClient.ClientName, Mode=TwoWay}"></TextBox>
                 <TextBlock FontSize="20" Text="Postcode:"></TextBlock>
                 <TextBox FontSize="16" MaxLength="6" Text="{Binding SelectedClient.PostalCode, Mode=TwoWay}"></TextBox>
@@ -42,7 +42,9 @@
                         België
                     </ComboBoxItem>
                 </ComboBox>
-                <TextBlock FontSize="20" Text="Telefoon nummer(Optioneel):"></TextBlock>
+                <TextBlock FontSize="20" Text="Plaats:"></TextBlock>
+                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedClient.City, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="20" Text="Telefoonnummer:"></TextBlock>
                 <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedClient.Phone, Mode=TwoWay}"></TextBox>
 
                 <Border Padding="10">

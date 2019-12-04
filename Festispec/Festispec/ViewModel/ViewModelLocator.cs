@@ -9,6 +9,7 @@ using Festispec.ViewModel.Questionnaires;
 using Festispec.ViewModel.MunicipalityVM;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using Festispec.ViewModel.ContactPersonsVM;
 
 namespace Festispec.ViewModel
 {
@@ -86,6 +87,46 @@ namespace Festispec.ViewModel
             get
             {
                 return new EditFestivalVM(Main, ServiceLocator.Current.GetInstance<IDataService>(), _clientInfoVM);
+            }
+        }
+
+        public ContactPersonManageVM contactManagement
+        {
+            get
+            {
+                return new ContactPersonManageVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+
+        public AddContactPersonVM addContactPerson
+        {
+            get
+            {
+                return new AddContactPersonVM(contactManagement, ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+
+        public ContactPersonInfoVM contactPersonInfo
+        {
+            get
+            {
+                return new ContactPersonInfoVM(ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+
+        public AddFestivalContactVM festcalContact
+        {
+            get
+            {
+                return new AddFestivalContactVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+
+        public EditContactPersonVM editContactPerson
+        {
+            get
+            {
+                return new EditContactPersonVM(ServiceLocator.Current.GetInstance<IDataService>(), contactManagement);
             }
         }
 
@@ -180,7 +221,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new InspectionsViewModel(Main);
+                return new InspectionsViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
 
@@ -188,14 +229,14 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new InspectionAddViewModel(Main);
+                return new InspectionAddViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
         public InspectionEditViewModel InspectionEdit
         {
             get
             {
-                return new InspectionEditViewModel(Main);
+                return new InspectionEditViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
 
