@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Festispec.Domain;
+using Festispec.Utils;
 using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -15,24 +16,31 @@ namespace Festispec.ViewModel.Inspections
 {
     public class InspectionAddViewModel : ViewModelBase
     {
+        private bool _useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt = false;
+
         private int _festivalId;
     
         public ObservableCollection<InspectorsVM> Inspectors { get; set; }
+        public ObservableCollection<InspectorsVM> InspectorsMaps { get; set; }
 
         public ObservableCollection<InspectorAtInspectionVM> InspectorsAtInspection { get; set; }
 
         public ObservableCollection<InspectorsVM> SelectedInspectors { get; set; }
-
+        public ObservableCollection<InspectorsVM> SelectedInspectorsMaps { get; set; }
 
         public FestivalVM Festival { get; set; }
+        
+        // Same as Festival only difference is the check if there are coordinates
+        public FestivalVM FestivalMaps { get; set; }
 
         public InspectionVM Inspection { get; set; }
+        public InspectionVM InspectionMaps { get; set; }
 
         private DateTime _startDate;
         public DateTime StartDate { get { return _startDate; } set { _startDate = value; EndDate = value; RaisePropertyChanged("EndDate"); } }
 
         private TimeSpan _startTime;
-        public TimeSpan StartTime { get { return _startTime; } set { _startTime = value; EndTime = value; RaisePropertyChanged("EndTime"); } }
+        public TimeSpan StartTime { get { return _startTime; } set { _startTime = value; EndTime = TimeSpan.FromMinutes(value.TotalMinutes + 60); RaisePropertyChanged("EndTime"); } }
 
         public DateTime EndDate { get; set; }
         public TimeSpan EndTime { get; set; }
@@ -47,6 +55,8 @@ namespace Festispec.ViewModel.Inspections
         }
 
         private MainViewModel _main;
+
+        public string ErrorMessage { get; set; }
 
         public ICommand TestButton { get; set; }
         public ICommand AddInspectionCommand { get; set; }
@@ -64,13 +74,17 @@ namespace Festispec.ViewModel.Inspections
             _festivalId = service.SelectedFestival.FestivalId;
 
             SelectedInspectors = new ObservableCollection<InspectorsVM>();
+            SelectedInspectorsMaps = new ObservableCollection<InspectorsVM>();
+            InspectorsMaps = new ObservableCollection<InspectorsVM>();
             Inspection = new InspectionVM();
 
             StartDate = DateTime.Now;
             StartTime = DateTime.Now.TimeOfDay;
+            StartTime = TimeSpan.FromMinutes(Math.Round(StartTime.TotalMinutes));
 
             EndDate = DateTime.Now;
             EndTime = DateTime.Now.TimeOfDay;
+            EndTime = TimeSpan.FromMinutes(Math.Round(StartTime.TotalMinutes) + 60);
 
             TestButton = new RelayCommand(Debug);
             AddInspectionCommand = new RelayCommand(AddInspection);
@@ -80,12 +94,32 @@ namespace Festispec.ViewModel.Inspections
             using (var context = new FestispecEntities())
             {
                 //Get inspectors
-                var inspectors = context.Inspectors.ToList()
-                    .Select(i => new InspectorsVM(i));
+                var inspectors = context.Inspectors.ToList().Select(i => new InspectorsVM(i));
 
                 Inspectors = new ObservableCollection<InspectorsVM>(inspectors);
                    
                 Festival = new FestivalVM(context.Festivals.ToList().First(f => f.id == _festivalId));
+            }
+
+            //Calc Travel Time
+            if (_useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt)
+            {
+                Inspectors.ToList().ForEach(i => {
+                    var timespan = CalculateRouteDurationForInspector(i).GetAwaiter().GetResult();
+                    i.TravelTime = timespan;
+                });
+            }
+
+            Inspectors.ToList().ForEach(i => {
+                if (i.HasPos)
+                {
+                    InspectorsMaps.Add(i);
+                }
+            });
+
+            if (Festival.HasPos)
+            {
+                FestivalMaps = Festival;
             }
         }
 
@@ -95,7 +129,6 @@ namespace Festispec.ViewModel.Inspections
             Inspection.Start_date = StartDateTimeCombined;
             Inspection.End_date = EndDateTimeCombined;
 
-            // TODO Make festival id dynamic
             Inspection.Festival_id = _festivalId;
 
             InspectorsAtInspection = new ObservableCollection<InspectorAtInspectionVM>();
@@ -124,10 +157,12 @@ namespace Festispec.ViewModel.Inspections
                     context.SaveChanges();
                 }
 
-                _main.SetPage("Home", false);
+                _main.SetPage("Inspections", false);
             } else
             {
                 // Show wrong input error message
+                ErrorMessage = "Beschrijving mag niet leeg zijn\nStart datum en tijd moet in de toekomst liggen\nEind datum en tijd moet na de start zijn";
+                RaisePropertyChanged("ErrorMessage");
                 Console.WriteLine("Wrong input");
             }
 
@@ -135,13 +170,20 @@ namespace Festispec.ViewModel.Inspections
 
         private bool ValidateInput(InspectionVM inspection)
         {
-            bool isValid = true;
+            if (!IsDescriptionValid(inspection.Description))
+            {
+                return false;
+            }
+            if (!IsStartDateTimeInFuture(inspection.Start_date))
+            {
+                return false;
+            }
+            if (!IsEndDateAfterTheStartDate(inspection.Start_date, inspection.End_date))
+            {
+                return false;
+            }
 
-            isValid = IsDescriptionValid(inspection.Description);
-            isValid = IsStartDateTimeInFuture(inspection.Start_date);
-            isValid = IsEndDateAfterTheStartDate(inspection.Start_date, inspection.End_date);
-
-            return isValid;
+            return true;
         }
 
         private bool IsDescriptionValid(string description)
@@ -174,12 +216,30 @@ namespace Festispec.ViewModel.Inspections
         {
             Inspectors.Remove(inspector);
             SelectedInspectors.Add(inspector);
+
+            if (InspectorsMaps.Contains(inspector))
+            {
+                InspectorsMaps.Remove(inspector);
+                SelectedInspectorsMaps.Add(inspector);
+            }
         }
 
         private void DelectInspector(InspectorsVM inspector)
         {
             SelectedInspectors.Remove(inspector);
             Inspectors.Add(inspector);
+
+            if (SelectedInspectorsMaps.Contains(inspector))
+            {
+                SelectedInspectorsMaps.Remove(inspector);
+                InspectorsMaps.Add(inspector);
+            }
+        }
+
+        private async Task<TimeSpan> CalculateRouteDurationForInspector(InspectorsVM inspector)
+        {
+            RouteDurationCalculator routeDurationCalculator = new RouteDurationCalculator();
+            return await routeDurationCalculator.CalculateRoute(inspector.Inspector.longitude + "," + inspector.Inspector.latitude, Festival.Festivals.longitude + "," + Festival.Festivals.latitude).ConfigureAwait(false);
         }
 
         private void Debug()
