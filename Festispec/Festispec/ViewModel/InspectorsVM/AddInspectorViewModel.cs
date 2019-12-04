@@ -49,11 +49,13 @@ namespace Festispec.ViewModel.InspectorsVM
 
         private void AddInspectorMethod()
         {
+            
             Inspector.Active = DateTime.Now;
             _inspectors.Inspectors.Add(Inspector);
             var newuser = new Users();
             newuser.email = Inspector.InspectorFirstName + Inspector.InspectorLastName.Replace(" ", string.Empty);
-            newuser.password = CalculateMD5Hash(Password);
+            newuser.password = ComputeSha256Hash(Password);
+           
            
             using (var context = new FestispecEntities())
             {
@@ -62,6 +64,8 @@ namespace Festispec.ViewModel.InspectorsVM
                 context.SaveChanges();
                 var newinspector = context.Inspectors.Attach(Inspector.ToModel());
                 newuser.inspector_id = newinspector.id;
+                var role = context.Rolls.Find(1001);
+                newuser.Rolls.Add(role);
                 context.Users.Add(newuser);
                 
                 context.SaveChanges();
@@ -139,6 +143,23 @@ namespace Festispec.ViewModel.InspectorsVM
 
             return sb.ToString();
 
+        }
+        private string ComputeSha256Hash(string rawData)
+        {
+            // Create a SHA256   
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // ComputeHash - returns byte array  
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convert byte array to a string   
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
         }
 
         private async void GenerateLatLongBasedOnAdress()
