@@ -26,7 +26,7 @@ namespace Festispec.Domain
         public string email { get; set; }
         public string phone { get; set; }
         public Nullable<int> client_id { get; set; }
-        public int type_contact { get; set; }
+        public Nullable<int> type_contact { get; set; }
     
         public virtual Clients Clients { get; set; }
         public virtual Type_contacts Type_contacts { get; set; }

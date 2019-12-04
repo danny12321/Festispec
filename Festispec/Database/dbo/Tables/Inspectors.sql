@@ -3,6 +3,7 @@
 	[name] [nvarchar](50) NOT NULL,
 	[lastname] [nvarchar](50) NOT NULL,
 	[birthday] [datetime] NULL,
+    [email] NVARCHAR(50) NULL, 
 	[postalcode] [nvarchar](6) NULL,
     [country] NVARCHAR(50) NULL, 
     [city] NVARCHAR(50) NULL, 

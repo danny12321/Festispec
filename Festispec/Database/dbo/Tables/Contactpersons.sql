@@ -2,10 +2,10 @@
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[name] [nvarchar](50) NOT NULL,
 	[lastname] [nvarchar](50) NOT NULL,
-	[email] [nvarchar](100) NOT NULL,
-	[phone] [nvarchar](50) NOT NULL,
+	[email] [nvarchar](100) NULL,
+	[phone] [nvarchar](50) NULL,
 	[client_id] [int] NULL,
-	[type_contact] [int] NOT NULL,
+	[type_contact] [int] NULL,
  CONSTRAINT [PK_Contactpersons] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
