@@ -35,17 +35,22 @@ namespace Festispec.ViewModel
             LoginCommand = new RelayCommand(Login);
         }
 
-        public string CalculateMD5Hash(string input)
+        private string ComputeSha256Hash(string rawData)
         {
-            MD5 md5 = System.Security.Cryptography.MD5.Create();
-            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
-            byte[] hash = md5.ComputeHash(inputBytes);
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < hash.Length; i++)
+            // Create a SHA256
+            using (SHA256 sha256Hash = SHA256.Create())
             {
-                sb.Append(hash[i].ToString("X2"));
+                // ComputeHash - returns byte array
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convert byte array to a string
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
             }
-            return sb.ToString();
         }
 
 
@@ -73,7 +78,8 @@ namespace Festispec.ViewModel
             {
                 using (var context = new FestispecEntities())
                 {
-                    var hPass = CalculateMD5Hash(Password);
+                    var hPass = ComputeSha256Hash(Password);
+                    Console.WriteLine(hPass);
                     user = context.Users.Where(u => (u.email == Email && u.password == hPass)).ToList();
                     Console.WriteLine(hPass);
                 }
