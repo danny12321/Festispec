@@ -15,26 +15,15 @@
         <DockPanel Margin="10" DockPanel.Dock="Top">
 
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Left">
-                <Button Command="{Binding MinWeek}">-1 week</Button>
-                <DatePicker SelectedDate="{Binding SelectedDate}" Width="200" Margin="10 0"></DatePicker>
-                <Button Command="{Binding AddWeek}">+1 week</Button>
+                <Button Command="{Binding MinWeek}" Content="-"></Button>
+                <Button Command="{Binding AddWeek}" Content="+"></Button>
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Right" Orientation="Horizontal">
-                <TextBox
-                    materialDesign:HintAssist.Hint="Aantal dagen"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding AmountOfDaysToShow}" Width="100"
-                    Margin="10 0"
-                />
-
-                <TextBox
-                    materialDesign:HintAssist.Hint="Kolommen"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding Columns}" Width="100"
-                />
-
+                <Button Command="{Binding SetWeekCommand}" Content="Week"/>
+                <Button Command="{Binding SetMonthCommand}" Content="Maand"/>
             </StackPanel>
+            
         </DockPanel>
 
 
@@ -73,7 +62,7 @@
                 </ItemsControl.ItemTemplate>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid VerticalAlignment="Top" Columns="{Binding Columns}" />
+                        <UniformGrid VerticalAlignment="Top" Columns="7" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
