@@ -1,5 +1,4 @@
 ﻿using Festispec.Domain;
-using Festispec.ViewModel.Questionnaires;
 using Festispec.Utils;
 using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight;
@@ -22,19 +21,13 @@ namespace Festispec.ViewModel.Inspections
         private int _festivalId;
         private int _inspetionId;
 
-        private FestispecEntities _context;
-
         public ObservableCollection<InspectorsVM> Inspectors { get; set; }
         public ObservableCollection<InspectorsVM> InspectorsMaps { get; set; }
 
         public ObservableCollection<InspectorAtInspectionVM> InspectorsAtInspection { get; set; }
 
         public ObservableCollection<InspectorsVM> SelectedInspectors { get; set; }
-
-        public ObservableCollection<QuestionnairesViewModel> Questionnaires { get; set; }
-
         public ObservableCollection<InspectorsVM> SelectedInspectorsMaps { get; set; }
-
 
         public FestivalVM Festival { get; set; }
         public FestivalVM FestivalMaps { get; set; }
@@ -69,19 +62,14 @@ namespace Festispec.ViewModel.Inspections
         public ICommand SetViewToSelectedPersonCommand { get; set; }
         public ICommand SelectInspectorCommand { get; set; }
         public ICommand DelectInspectorCommand { get; set; }
-
-        public ICommand AddQuestionnaireCommand { get; set; }
-        public ICommand OpenQuestionnaireCommand { get; set; }
-
         public ICommand DeleteInspectionCommand { get; set; }
+
         private IDataService _service;
 
-        public InspectionEditViewModel(MainViewModel main, IDataService service, FestispecEntities context)
+        public InspectionEditViewModel(MainViewModel main, IDataService service)
         {
-            Console.WriteLine("EDITT");
             _main = main;
             _service = service;
-            _context = context;
 
             _festivalId = service.SelectedFestival.FestivalId;
             _inspetionId = service.SelectedInspection.Id;
@@ -90,8 +78,7 @@ namespace Festispec.ViewModel.Inspections
             EditInspectionCommand = new RelayCommand(EditInspection);
             SelectInspectorCommand = new RelayCommand<InspectorsVM>(SelectInspector);
             DelectInspectorCommand = new RelayCommand<InspectorsVM>(DelectInspector);
-            AddQuestionnaireCommand = new RelayCommand(AddQuestionnaire);
-            OpenQuestionnaireCommand = new RelayCommand<QuestionnairesViewModel>(OpenQuestionnaire);
+
             //Does not work problem with on delete cascade in database :(
             DeleteInspectionCommand = new RelayCommand(DeleteInspection);
 
@@ -106,6 +93,9 @@ namespace Festispec.ViewModel.Inspections
                 SelectedInspectorsMaps = new ObservableCollection<InspectorsVM>();
                 InspectorsMaps = new ObservableCollection<InspectorsVM>();
 
+                //Used for posistion of festival in bing maps
+                Festival = new FestivalVM(context.Festivals.ToList().First(f => f.id == _festivalId));
+
                 //Get the inspection
                 Inspection = new InspectionVM(context.Inspections.ToList().First(i => i.id == _inspetionId));
                 StartDate = Inspection.Start_date;
@@ -114,8 +104,6 @@ namespace Festispec.ViewModel.Inspections
                 EndDate = Inspection.End_date;
                 EndTime = Inspection.End_date.TimeOfDay;
 
-                var questionnaires = context.Questionnaires.Where(q => q.inspection_id == _inspetionId).ToList().Select(q => new QuestionnairesViewModel(q, context));
-                Questionnaires = new ObservableCollection<QuestionnairesViewModel>(questionnaires);
                 //Calc Travel Time
                 if (_useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt)
                 {
@@ -172,8 +160,7 @@ namespace Festispec.ViewModel.Inspections
 
             if (ValidateInput(Inspection))
             {
-                SelectedInspectors.ToList().ForEach(i =>
-                {
+                SelectedInspectors.ToList().ForEach(i => {
                     var inspector_at_inspection = new Inspectors_at_inspection();
                     inspector_at_inspection.inpector_id = i.Inspector.id;
                     inspector_at_inspection.inspection_id = _inspetionId;
@@ -294,21 +281,6 @@ namespace Festispec.ViewModel.Inspections
         {
             RouteDurationCalculator routeDurationCalculator = new RouteDurationCalculator();
             return await routeDurationCalculator.CalculateRoute(inspector.Inspector.longitude + "," + inspector.Inspector.latitude, Festival.Festivals.longitude + "," + Festival.Festivals.latitude).ConfigureAwait(false);
-        }
-
-        private void AddQuestionnaire()
-        {
-            Console.WriteLine("Add quest");
-            var questionnaire = new QuestionnairesViewModel(Inspection, _context);
-            Questionnaires.Add(questionnaire);
-        }
-
-        public void OpenQuestionnaire(QuestionnairesViewModel questionnaire)
-        {
-            // TODO: check if alles is opgeslagen
-            _service.SelectedQuestionnaire = questionnaire;
-            Console.WriteLine("Open " + questionnaire.Questionnaire.id);
-            _main.SetPage("Vragenlijsten", false);
         }
 
         private void Debug()

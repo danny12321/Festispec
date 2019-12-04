@@ -1,5 +1,4 @@
 ﻿using Festispec.Domain;
-using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -19,24 +18,21 @@ namespace Festispec.ViewModel.InspectorsVM
         private MainViewModel _mainViewModel;
         public ICommand ShowAddInspector { get; set; }
         public ICommand ShowEditInspector { get; set; }
-        private IDataService _service;
 
         public InspectorviewModel SelectedInspector
         {
             get
             {
-                return _service.SelectedInspector;
+                return _selectedInspector;
             }
             set
             {
-                _service.SelectedInspector = value;
+                _selectedInspector = value;
                 base.RaisePropertyChanged();
             }
         }
-        public InspectorListViewModel(MainViewModel main,IDataService dataservice)
-
+        public InspectorListViewModel(MainViewModel main)
         {
-            _service = dataservice;
             _mainViewModel = main;
             ShowAddInspector = new RelayCommand(AddInspector);
             ShowEditInspector = new RelayCommand(EditInspector);
