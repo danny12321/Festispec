@@ -25,13 +25,13 @@ namespace FestispecWeb.Controllers
 
         public ContentResult Data()
         {
-            //return (new SchedulerAjaxData(
-            //new FestispecEntities().Inspectors_availability.
-            //Select(e => new { e.id, e.text, e.start_date, e.end_date, e.inspector_id })
-            //)
-            //    );
-            return null;
-        }
+            
+            return (new SchedulerAjaxData(
+                new FestispecEntities().Inspectors_availability.
+                    Select(e => new { e.id, e.start_date, e.end_date, e.inspector_id, e.text })
+                )
+            );
+        } 
 
         public ContentResult Save(int? id, FormCollection actionValues)
         {
@@ -43,6 +43,7 @@ namespace FestispecWeb.Controllers
                 switch (action.Type)
                 {
                     case DataActionTypes.Insert:
+                        changedEvent.inspector_id = 1;
                         entities.Inspectors_availability.Add(changedEvent);
                         break;
                     case DataActionTypes.Delete:

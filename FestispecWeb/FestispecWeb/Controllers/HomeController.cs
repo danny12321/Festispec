@@ -16,16 +16,6 @@ namespace FestispecWeb.Controllers
             return View();
         }
 
-        public ActionResult Availability()
-        {
-            var sched = new DHXScheduler(this);
-            sched.Skin = DHXScheduler.Skins.Terrace;
-            sched.LoadData = true;
-            sched.EnableDataprocessor = true;
-            sched.InitialDate = DateTime.Today;
-            return View(sched);
-        }
-
         public ActionResult Planning()
         {
             return View();
