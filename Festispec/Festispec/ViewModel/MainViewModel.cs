@@ -10,6 +10,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Windows;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using System.IO;
 
 namespace Festispec.ViewModel
 {
@@ -108,6 +111,7 @@ namespace Festispec.ViewModel
                     break;
                 case "AddClient":
                     FrameContent = new View.ClientsViews.AddClients();
+
                     PageTitle = "Klanten toevoegen";
                     break;
                 case "EditClient":
@@ -124,6 +128,27 @@ namespace Festispec.ViewModel
                     break;
                 case "Inspectors":
                     FrameContent = new View.Inspectors.Inspectors();
+                    RenderTargetBitmap renderTargetBitmap =
+    new RenderTargetBitmap(1000, 1000, 96, 96, PixelFormats.Pbgra32);
+                    renderTargetBitmap.Render(FrameContent);
+                    PngBitmapEncoder pngImage = new PngBitmapEncoder();
+                    
+                    var exportFolder1 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                    var exportFile1 = System.IO.Path.Combine(exportFolder1, "TempChartImage2.jpg");
+                    Image myImage = new Image();
+
+
+
+
+
+                    RenderTargetBitmap bmp = new RenderTargetBitmap(180, 180, 120, 96, PixelFormats.Pbgra32);
+                    bmp.Render(FrameContent);
+                    pngImage.Frames.Add(BitmapFrame.Create(bmp));
+                    myImage.Source = bmp;
+                    using (Stream fileStream = File.Create(exportFile1))
+                    {
+                        pngImage.Save(fileStream);
+                    }
                     PageTitle = "Inspecteurs beheer";
                     break;
                 case "AddInspector":
@@ -133,6 +158,10 @@ namespace Festispec.ViewModel
                 case "EditInspector":
                     FrameContent = new View.Inspectors.EditInspector();
                     PageTitle = "Inspecteur bewerken";
+                    break;
+                case "ReportPage":
+                    FrameContent = new View.Inspections.Report();
+                    PageTitle = "Rapportages";
                     break;
                 case "Logout":
                     closeWindow();

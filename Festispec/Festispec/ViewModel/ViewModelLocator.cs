@@ -105,7 +105,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                _inspectors = new InspectorsVM.InspectorListViewModel(Main);
+                _inspectors = new InspectorsVM.InspectorListViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
                 return _inspectors;
             }
         }
@@ -196,6 +196,13 @@ namespace Festispec.ViewModel
             get
             {
                 return new InspectionEditViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+        public ReportViewModel ReportVM
+        {
+            get
+            {
+                return new ReportViewModel();
             }
         }
 
