@@ -1,4 +1,5 @@
 ﻿using Festispec.Domain;
+using Festispec.ViewModel.ContactPersonsVM;
 using Festispec.ViewModel.DataService;
 using Festispec.ViewModel.FestivalVMs;
 using GalaSoft.MvvmLight;
@@ -18,10 +19,14 @@ namespace Festispec.ViewModel.FestivalVM
     public class FestivalInfoVM : ViewModelBase
     {
         private IDataService _service;
-        private FestivalManagementVM _festivals;
         private MainViewModel _main;
 
-        public ObservableCollection<FestivalVM> Festivals { get; set; }
+        public ObservableCollection<ContactPersonVM> Contactpersons { get; set; }
+
+        public ContactPersonVM Contact;
+
+        public ICommand ShowContactCommand { get; set; }
+        public ICommand RemoveContactPersonToFestival { get; set; }
 
         public FestivalVM SelectedFestival
         {
@@ -33,23 +38,58 @@ namespace Festispec.ViewModel.FestivalVM
             }
         }
 
-        public FestivalInfoVM(MainViewModel main, IDataService service, FestivalManagementVM festivals)
+        public ContactPersonVM SelectedContactPerson
+        {
+            get { return _service.SelectedContactPerson; }
+            set
+            {
+                _service.SelectedContactPerson = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public FestivalInfoVM(MainViewModel main, IDataService service, FestivalManagementVM festival)
         {
             this._main = main;
             _service = service;
-            this._festivals = festivals;
 
             using (var context = new FestispecEntities())
             {
-                var festival = context.Festivals.ToList()
-                             .Select(e => new FestivalVM(e));
-
-                Festivals = new ObservableCollection<FestivalVM>(festival);
+                context.Festivals.Attach(SelectedFestival.ToModel());
+                Contactpersons = new ObservableCollection<ContactPersonVM>(SelectedFestival.ContactPersons);
             }
 
+            ShowContactCommand = new RelayCommand(ShowContact);
+            RemoveContactPersonToFestival = new RelayCommand(RemoveContactPerson, CanRemoveContactPerson);
         }
 
+        private bool CanRemoveContactPerson()
+        {
+            if(SelectedContactPerson != null)
+            {
+                return true;
+            }
+            return false;
+        }
 
+        private void RemoveContactPerson()
+        {
+            using(var context = new FestispecEntities())
+            {
+                context.Festivals.Attach(SelectedFestival.ToModel());
+                SelectedFestival.ToModel().Contactpersons.Remove(SelectedContactPerson.ToModel());
+                context.SaveChanges();
 
+                Contactpersons.Clear();
+                context.Festivals.Attach(SelectedFestival.ToModel());
+                Contactpersons = new ObservableCollection<ContactPersonVM>(SelectedFestival.ContactPersons);
+            }
+            base.RaisePropertyChanged();
+        }
+
+        private void ShowContact()
+        {
+            _main.SetPage("AddContactFestival", false);
+        }
     }
 }

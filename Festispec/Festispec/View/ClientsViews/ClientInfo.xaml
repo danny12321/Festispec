@@ -22,7 +22,7 @@
 
                 <TextBlock Text="Klant gegevens" FontSize="25" Padding="0,10"/>
 
-                <TextBlock FontSize="20" Text="Bedrijf naam:"></TextBlock>
+                <TextBlock FontSize="20" Text="Bedrijfsnaam:"></TextBlock>
                 <TextBox FontSize="16" Text="{Binding SelectedClient.ClientName}" IsReadOnly="True"></TextBox>
                 <TextBlock FontSize="20" Text="Postcode:"></TextBlock>
                 <TextBox FontSize="16"  Text="{Binding SelectedClient.PostalCode}" IsReadOnly="True"></TextBox>
@@ -32,7 +32,9 @@
                 <TextBox FontSize="16"  Text="{Binding SelectedClient.Housenumber}" IsReadOnly="True"></TextBox>
                 <TextBlock FontSize="20" Text="Land:"></TextBlock>
                 <TextBox FontSize="16"  Text="{Binding SelectedClient.Country}" IsReadOnly="True"></TextBox>
-                <TextBlock FontSize="20" Text="Telefoon nummer:"></TextBlock>
+                <TextBlock FontSize="20" Text="Plaats:"></TextBlock>
+                <TextBox FontSize="16"  Text="{Binding SelectedClient.City}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="20" Text="Telefoonnummer:"></TextBlock>
                 <TextBox FontSize="16"  Text="{Binding SelectedClient.Phone}" IsReadOnly="True"></TextBox>
 
             </StackPanel>
@@ -47,7 +49,7 @@
                         <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Festivallen" FontSize="28" Grid.Column="0" Padding="10"/>
+                    <TextBlock Text="Festivals" FontSize="28" Grid.Column="0" Padding="10"/>
 
                     <Button Grid.Column="1" Command="{Binding AddFestivalCommand}"
                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
@@ -63,7 +65,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Naam" Binding="{Binding FestivalName}" Foreground="#FF1D1616" Width="200"/>
                         <DataGridTextColumn Header="Jaar" Binding="{Binding Year}" Foreground="#FF1D1616" Width="200"/>
-                        <DataGridTemplateColumn Width="75">
+                        <DataGridTemplateColumn Width="75" Header="Edit">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Command="{Binding DataContext.ShowEditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
@@ -77,7 +79,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Width="100">
+                        <DataGridTemplateColumn Width="100" Header="Info">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Command="{Binding DataContext.ShowFestivalCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"

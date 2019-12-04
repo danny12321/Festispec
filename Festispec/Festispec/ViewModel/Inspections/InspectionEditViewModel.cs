@@ -1,5 +1,6 @@
 ﻿using Festispec.Domain;
 using Festispec.ViewModel.Questionnaires;
+using Festispec.Utils;
 using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -16,13 +17,15 @@ namespace Festispec.ViewModel.Inspections
 {
     public class InspectionEditViewModel : ViewModelBase
     {
-        //TODO Make this dynamic
+        private bool _useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt = false;
+
         private int _festivalId;
         private int _inspetionId;
 
         private FestispecEntities _context;
 
         public ObservableCollection<InspectorsVM> Inspectors { get; set; }
+        public ObservableCollection<InspectorsVM> InspectorsMaps { get; set; }
 
         public ObservableCollection<InspectorAtInspectionVM> InspectorsAtInspection { get; set; }
 
@@ -30,15 +33,19 @@ namespace Festispec.ViewModel.Inspections
 
         public ObservableCollection<QuestionnairesViewModel> Questionnaires { get; set; }
 
+        public ObservableCollection<InspectorsVM> SelectedInspectorsMaps { get; set; }
+
+
         public FestivalVM Festival { get; set; }
+        public FestivalVM FestivalMaps { get; set; }
 
         public InspectionVM Inspection { get; set; }
 
         private DateTime _startDate;
-        public DateTime StartDate { get { return _startDate; } set { _startDate = value; EndDate = value; RaisePropertyChanged("EndDate"); } }
+        public DateTime StartDate { get { return _startDate; } set { _startDate = value; EndDate = value; } }
 
         private TimeSpan _startTime;
-        public TimeSpan StartTime { get { return _startTime; } set { _startTime = value; EndTime = value; RaisePropertyChanged("EndTime"); } }
+        public TimeSpan StartTime { get { return _startTime; } set { _startTime = value; EndTime = value; } }
 
         public DateTime EndDate { get; set; }
         public TimeSpan EndTime { get; set; }
@@ -55,13 +62,18 @@ namespace Festispec.ViewModel.Inspections
 
         private MainViewModel _main;
 
+        public string ErrorMessage { get; set; }
+
         public ICommand TestButton { get; set; }
         public ICommand EditInspectionCommand { get; set; }
         public ICommand SetViewToSelectedPersonCommand { get; set; }
         public ICommand SelectInspectorCommand { get; set; }
         public ICommand DelectInspectorCommand { get; set; }
+
         public ICommand AddQuestionnaireCommand { get; set; }
         public ICommand OpenQuestionnaireCommand { get; set; }
+
+        public ICommand DeleteInspectionCommand { get; set; }
         private IDataService _service;
 
         public InspectionEditViewModel(MainViewModel main, IDataService service, FestispecEntities context)
@@ -80,40 +92,71 @@ namespace Festispec.ViewModel.Inspections
             DelectInspectorCommand = new RelayCommand<InspectorsVM>(DelectInspector);
             AddQuestionnaireCommand = new RelayCommand(AddQuestionnaire);
             OpenQuestionnaireCommand = new RelayCommand<QuestionnairesViewModel>(OpenQuestionnaire);
+            //Does not work problem with on delete cascade in database :(
+            DeleteInspectionCommand = new RelayCommand(DeleteInspection);
 
-            //Get inspectors
-            var inspectors = context.Inspectors.ToList()
-                .Select(i => new InspectorsVM(i));
-
-            Inspectors = new ObservableCollection<InspectorsVM>(inspectors);
-            SelectedInspectors = new ObservableCollection<InspectorsVM>();
-
-            //Used for posistion of festival in bing maps
-            Festival = new FestivalVM(context.Festivals.ToList().First(f => f.id == _festivalId));
-
-            //Get the inspection
-            Inspection = new InspectionVM(context.Inspections.ToList().First(i => i.id == _inspetionId));
-            StartDate = Inspection.Start_date;
-            StartTime = Inspection.Start_date.TimeOfDay;
-
-            EndDate = Inspection.End_date;
-            EndTime = Inspection.End_date.TimeOfDay;
-
-            var questionnaires = context.Questionnaires.Where(q => q.inspection_id == _inspetionId).ToList().Select(q => new QuestionnairesViewModel(q, context));
-            Questionnaires = new ObservableCollection<QuestionnairesViewModel>(questionnaires);
-
-
-            context.Inspectors_at_inspection.ToList().ForEach(i =>
+            using (var context = new FestispecEntities())
             {
-                if (i.inspection_id == _inspetionId)
+                //Get inspectors
+                var inspectors = context.Inspectors.ToList()
+                    .Select(i => new InspectorsVM(i));
+
+                Inspectors = new ObservableCollection<InspectorsVM>(inspectors);
+                SelectedInspectors = new ObservableCollection<InspectorsVM>();
+                SelectedInspectorsMaps = new ObservableCollection<InspectorsVM>();
+                InspectorsMaps = new ObservableCollection<InspectorsVM>();
+
+                //Get the inspection
+                Inspection = new InspectionVM(context.Inspections.ToList().First(i => i.id == _inspetionId));
+                StartDate = Inspection.Start_date;
+                StartTime = Inspection.Start_date.TimeOfDay;
+
+                EndDate = Inspection.End_date;
+                EndTime = Inspection.End_date.TimeOfDay;
+
+                var questionnaires = context.Questionnaires.Where(q => q.inspection_id == _inspetionId).ToList().Select(q => new QuestionnairesViewModel(q, context));
+                Questionnaires = new ObservableCollection<QuestionnairesViewModel>(questionnaires);
+                //Calc Travel Time
+                if (_useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt)
                 {
-                    var tempInspector = Inspectors.ToList().First(j => j.Inspector.id == i.inpector_id);
-                    SelectedInspectors.Add(tempInspector);
-                    Inspectors.Remove(tempInspector);
+                    Inspectors.ToList().ForEach(i => {
+                        var timespan = CalculateRouteDurationForInspector(i).GetAwaiter().GetResult();
+                        i.TravelTime = timespan;
+                    });
+                }
+
+                context.Inspectors_at_inspection.ToList().ForEach(i =>
+                {
+                    if (i.inspection_id == _inspetionId)
+                    {
+                        var tempInspector = Inspectors.ToList().First(j => j.Inspector.id == i.inpector_id);
+
+                        if (tempInspector.HasPos)
+                        {
+                            SelectedInspectorsMaps.Add(tempInspector);
+                            InspectorsMaps.Remove(tempInspector);
+                        }
+                        SelectedInspectors.Add(tempInspector);
+                        Inspectors.Remove(tempInspector);
+                    }
+                });
+
+                RaisePropertyChanged();
+            }
+
+            
+
+            Inspectors.ToList().ForEach(i => {
+                if (i.HasPos)
+                {
+                    InspectorsMaps.Add(i);
                 }
             });
 
-            RaisePropertyChanged();
+            if (Festival.HasPos)
+            {
+                FestivalMaps = Festival;
+            }
         }
 
         private void EditInspection()
@@ -156,6 +199,8 @@ namespace Festispec.ViewModel.Inspections
             else
             {
                 // Show wrong input error message
+                ErrorMessage = "Beschrijving mag niet leeg zijn\nStart datum en tijd moet in de toekomst liggen\nEind datum en tijd moet na de start zijn";
+                RaisePropertyChanged("ErrorMessage");
                 Console.WriteLine("Wrong input");
             }
 
@@ -163,12 +208,20 @@ namespace Festispec.ViewModel.Inspections
 
         private bool ValidateInput(InspectionVM inspection)
         {
-            bool isValid = true;
+            if (!IsDescriptionValid(inspection.Description))
+            {
+                return false;
+            }
+            if(IsStartDateTimeInFuture(inspection.Start_date))
+            {
+                return false;
+            }
+            if(IsEndDateAfterTheStartDate(inspection.Start_date, inspection.End_date))
+            {
+                return false;
+            }
 
-            isValid = IsDescriptionValid(inspection.Description);
-            isValid = IsStartDateTimeInFuture(inspection.Start_date);
-            isValid = IsEndDateAfterTheStartDate(inspection.Start_date, inspection.End_date);
-            return isValid;
+            return true;
         }
 
         private bool IsDescriptionValid(string description)
@@ -203,12 +256,44 @@ namespace Festispec.ViewModel.Inspections
         {
             Inspectors.Remove(inspector);
             SelectedInspectors.Add(inspector);
+
+            if (InspectorsMaps.Contains(inspector))
+            {
+                InspectorsMaps.Remove(inspector);
+                SelectedInspectorsMaps.Add(inspector);
+            }
         }
 
         private void DelectInspector(InspectorsVM inspector)
         {
             SelectedInspectors.Remove(inspector);
             Inspectors.Add(inspector);
+
+            if (SelectedInspectorsMaps.Contains(inspector))
+            {
+                SelectedInspectorsMaps.Remove(inspector);
+                InspectorsMaps.Add(inspector);
+            }
+        }
+
+        private void DeleteInspection()
+        {
+            //Does not work problem with on delete cascade in database :(
+            using (var context = new FestispecEntities())
+            {
+                var inspection = new Festispec.Domain.Inspections { id = _inspetionId };
+                context.Inspections.Attach(inspection);
+                context.Inspections.Remove(inspection);
+                context.SaveChanges();
+            }
+
+            _main.SetPage("Inspections", false);
+        }
+
+        private async Task<TimeSpan> CalculateRouteDurationForInspector(InspectorsVM inspector)
+        {
+            RouteDurationCalculator routeDurationCalculator = new RouteDurationCalculator();
+            return await routeDurationCalculator.CalculateRoute(inspector.Inspector.longitude + "," + inspector.Inspector.latitude, Festival.Festivals.longitude + "," + Festival.Festivals.latitude).ConfigureAwait(false);
         }
 
         private void AddQuestionnaire()

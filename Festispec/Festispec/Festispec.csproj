@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\EntityFramework.6.4.0-preview2-19525-03\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0-preview2-19525-03\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -104,7 +104,10 @@
       <HintPath>..\packages\MaterialDesignThemes.2.6.0\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Maps.MapControl.WPF">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Bing Maps WPF Control\V1\Libraries\Microsoft.Maps.MapControl.WPF.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Downloads\Microsoft.Maps.MapControl.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -136,6 +139,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Utils\LatLongGenerator.cs" />
+    <Compile Include="Utils\RouteDurationCalculator.cs" />
     <Compile Include="ViewModel\AccountsVM\UsersRollsVM.cs" />
     <Compile Include="ViewModel\AccountsVM\UsersVM.cs" />
     <Compile Include="ViewModel\ClientVM\AddClientsVM.cs" />
@@ -143,6 +147,13 @@
     <Compile Include="ViewModel\ClientVM\ClientManageVM.cs" />
     <Compile Include="ViewModel\ClientVM\ClientsVM.cs" />
     <Compile Include="ViewModel\ClientVM\EditClientVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\AddContactPersonVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\AddFestivalContactVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\ContactPersonInfoVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\ContactPersonManageVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\ContactPersonVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\EditContactPersonVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\TypeContactVM.cs" />
     <Compile Include="ViewModel\DataService\DataService.cs" />
     <Compile Include="ViewModel\DataService\IDataService.cs" />
     <Compile Include="ViewModel\FestivalVM\AddFestivalVM.cs" />
@@ -176,6 +187,21 @@
     <Compile Include="ViewModel\Questionnaires\Types\OpenQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Types\SelectQuestion.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\ContactPersonsView\AddContactPerson.xaml.cs">
+      <DependentUpon>AddContactPerson.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactPersonsView\AddFestivalContact.xaml.cs">
+      <DependentUpon>AddFestivalContact.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactPersonsView\ContactPersonInfo.xaml.cs">
+      <DependentUpon>ContactPersonInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactPersonsView\ContactPersonsManage.xaml.cs">
+      <DependentUpon>ContactPersonsManage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactPersonsView\EditContactPerson.xaml.cs">
+      <DependentUpon>EditContactPerson.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Inspections\AddInspection.xaml.cs">
       <DependentUpon>AddInspection.xaml</DependentUpon>
     </Compile>
@@ -271,6 +297,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ClientsViews\EditClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactPersonsView\AddContactPerson.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactPersonsView\AddFestivalContact.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactPersonsView\ContactPersonInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactPersonsView\ContactPersonsManage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactPersonsView\EditContactPerson.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

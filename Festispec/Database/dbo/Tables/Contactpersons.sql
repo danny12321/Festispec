@@ -2,17 +2,17 @@
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[name] [nvarchar](50) NOT NULL,
 	[lastname] [nvarchar](50) NOT NULL,
-	[email] [nvarchar](100) NOT NULL,
-	[phone] [nvarchar](50) NOT NULL,
+	[email] [nvarchar](100) NULL,
+	[phone] [nvarchar](50) NULL,
 	[client_id] [int] NULL,
-	[type_contact] [int] NOT NULL,
+	[type_contact] [int] NULL,
  CONSTRAINT [PK_Contactpersons] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[Contactpersons]  WITH CHECK ADD  CONSTRAINT [FK_Contactpersons_Clients] FOREIGN KEY([id])
+ALTER TABLE [dbo].[Contactpersons]  WITH CHECK ADD  CONSTRAINT [FK_Contactpersons_Clients] FOREIGN KEY([Client_id])
 REFERENCES [dbo].[Clients] ([id])
 GO
 

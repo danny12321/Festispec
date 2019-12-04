@@ -11,6 +11,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using System;
 using Festispec.Domain;
+using Festispec.ViewModel.ContactPersonsVM;
 
 namespace Festispec.ViewModel
 {
@@ -95,6 +96,46 @@ namespace Festispec.ViewModel
             get
             {
                 return new EditFestivalVM(Main, ServiceLocator.Current.GetInstance<IDataService>(), _clientInfoVM);
+            }
+        }
+
+        public ContactPersonManageVM contactManagement
+        {
+            get
+            {
+                return new ContactPersonManageVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+
+        public AddContactPersonVM addContactPerson
+        {
+            get
+            {
+                return new AddContactPersonVM(contactManagement, ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+
+        public ContactPersonInfoVM contactPersonInfo
+        {
+            get
+            {
+                return new ContactPersonInfoVM(ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+
+        public AddFestivalContactVM festcalContact
+        {
+            get
+            {
+                return new AddFestivalContactVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+
+        public EditContactPersonVM editContactPerson
+        {
+            get
+            {
+                return new EditContactPersonVM(ServiceLocator.Current.GetInstance<IDataService>(), contactManagement);
             }
         }
 

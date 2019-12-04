@@ -1,4 +1,5 @@
 ﻿using Festispec.Domain;
+using Festispec.Utils;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -14,6 +15,7 @@ namespace Festispec.ViewModel.InspectorsVM
     {
         private InspectorListViewModel _inspectorViewModel;
         public ICommand EditInspectorCommand { get; set; }
+        public ICommand GenerateLatLongBasedOnAdressCommand { get; set; }
         public InspectorListViewModel InspectorViewModel
         {
             get
@@ -25,6 +27,7 @@ namespace Festispec.ViewModel.InspectorsVM
         {
             _inspectorViewModel = i;
             EditInspectorCommand = new RelayCommand(EditInspectorMethod);
+            GenerateLatLongBasedOnAdressCommand = new RelayCommand(GenerateLatLongBasedOnAdress);
         }
         private void EditInspectorMethod()
         {
@@ -103,6 +106,21 @@ namespace Festispec.ViewModel.InspectorsVM
                 return true;
             }
             return false;
+        }
+        private async void GenerateLatLongBasedOnAdress()
+        {
+            //You need atleast a country and a city to get a good result
+            if (InspectorViewModel.SelectedInspector.Country != null || InspectorViewModel.SelectedInspector.City != null)
+            {
+                LatLongGenerator latLongGenerator = new LatLongGenerator();
+
+                Task<string> latLongGeneratorAwait = latLongGenerator.GenerateLatLong(InspectorViewModel.SelectedInspector.Country, InspectorViewModel.SelectedInspector.City, InspectorViewModel.SelectedInspector.Street, InspectorViewModel.SelectedInspector.Housenumber);
+                string latlong = await latLongGeneratorAwait;
+
+                InspectorViewModel.SelectedInspector.Latitude = latlong.Split(',')[0];
+                InspectorViewModel.SelectedInspector.Longitude = latlong.Split(',')[1];
+                RaisePropertyChanged("InspectorViewModel");
+            }
         }
     }
 }
