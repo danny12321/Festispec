@@ -34,7 +34,7 @@ namespace Festispec.ViewModel.InspectorsVM
             get { return _i.lastname; }
             set { _i.lastname = value; }
         }
-        public DateTime Birthday
+        public DateTime? Birthday
         {
             get
             {

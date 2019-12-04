@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Festispec.Domain;
+using Festispec.ViewModel.ContactPersonsVM;
 using GalaSoft.MvvmLight;
 
 namespace Festispec.ViewModel.FestivalVM
@@ -42,6 +43,12 @@ namespace Festispec.ViewModel.FestivalVM
         {
             get { return _festival.postalcode; }
             set { _festival.postalcode = value; }
+        }
+
+        public string City
+        {
+            get { return _festival.city; }
+            set { _festival.city = value; }
         }
 
         public string Street
@@ -125,6 +132,14 @@ namespace Festispec.ViewModel.FestivalVM
         {
             get { return _EndDateEnd; }
             set { _EndDateEnd = value; }
+        }
+
+        public List<ContactPersonVM> ContactPersons
+        {
+            get
+            {
+                return _festival.Contactpersons.Select(c => new ContactPersonVM(c)).ToList();
+            }
         }
 
         internal Festivals ToModel()

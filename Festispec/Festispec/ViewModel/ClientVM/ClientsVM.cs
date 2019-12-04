@@ -63,6 +63,12 @@ namespace Festispec.ViewModel.ClientVM
             set { _client.phone = value; }
         }
 
+        public string City
+        {
+            get { return _client.city; }
+            set { _client.city = value; }
+        }
+
         internal Clients ToModel()
         {
             return _client;
