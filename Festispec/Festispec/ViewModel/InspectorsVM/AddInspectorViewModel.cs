@@ -46,11 +46,13 @@ namespace Festispec.ViewModel.InspectorsVM
 
         private void AddInspectorMethod()
         {
+            
             Inspector.Active = DateTime.Now;
             _inspectors.Inspectors.Add(Inspector);
             var newuser = new Users();
             newuser.email = Inspector.InspectorFirstName + Inspector.InspectorLastName.Replace(" ", string.Empty);
             newuser.password = ComputeSha256Hash(Password);
+           
            
             using (var context = new FestispecEntities())
             {
@@ -59,6 +61,8 @@ namespace Festispec.ViewModel.InspectorsVM
                 context.SaveChanges();
                 var newinspector = context.Inspectors.Attach(Inspector.ToModel());
                 newuser.inspector_id = newinspector.id;
+                var role = context.Rolls.Find(1001);
+                newuser.Rolls.Add(role);
                 context.Users.Add(newuser);
                 
                 context.SaveChanges();
