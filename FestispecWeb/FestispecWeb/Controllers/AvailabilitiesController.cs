@@ -23,7 +23,7 @@ namespace FestispecWeb.Controllers
             return View(sched);
         }
 
-        public ContentResult Data()
+/*        public ContentResult Data()
         {
             
             return (new SchedulerAjaxData(
@@ -31,7 +31,7 @@ namespace FestispecWeb.Controllers
                     Select(e => new { e.id, e.start_date, e.end_date, e.inspector_id, e.text })
                 )
             );
-        } 
+        } */
 
         public ContentResult Save(int? id, FormCollection actionValues)
         {
