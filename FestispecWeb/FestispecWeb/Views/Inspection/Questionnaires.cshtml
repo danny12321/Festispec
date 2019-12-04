@@ -18,6 +18,12 @@
     </div>
 </div>
 
+<p>@Model.Inspections.start_date.Date</p>
+<p>@Model.Inspections.start_date.TimeOfDay</p>
+
+
+<h3>@Model.Inspections.description</h3>
+
 <table class="table">
     @foreach (var item in Model.Questionnaires)
     {
