@@ -132,10 +132,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AvailabilitiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InspectionController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\InspectionVM.cs" />
     <Compile Include="Models\InspectorAvailability.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -389,9 +391,12 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Planning.cshtml" />
+    <Content Include="Views\Inspection\Inspections.cshtml" />
+    <Content Include="Views\Inspection\Questionnaires.cshtml" />
     <Content Include="Views\Home\Questionnaires.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Availabilities\Index.cshtml" />
+    <Content Include="Views\Inspection\questionnaire.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
