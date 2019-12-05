@@ -28,36 +28,33 @@
 
                 <TextBlock Text="Voeg een nieuwe inspecteur toe" FontSize="25" Padding="0,10"/>
 
-                <TextBlock Text="Voornaam:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Inspector.InspectorFirstName, Mode=TwoWay}"></TextBox>
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Voornaam" MaxLength="50" Text="{Binding Inspector.InspectorFirstName, Mode=TwoWay}"></TextBox>
 
-                <TextBlock Text="Achternaam:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Inspector.InspectorLastName, Mode=TwoWay}"></TextBox>
-                    
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Achternaam" MaxLength="50" Text="{Binding Inspector.InspectorLastName, Mode=TwoWay}"></TextBox>
+
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Email" MaxLength="50" Text="{Binding Inspector.Email, Mode=TwoWay}"></TextBox>
+
                 <TextBlock Text="Geboorte Datum:"></TextBlock>
 
                 <DatePicker HorizontalAlignment="Left" Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding Inspector.Birthday,Mode=OneWayToSource}" DisplayDate="2019-11-19"/>
-                    
-                <TextBlock Text="Postcode:"></TextBlock>
-                <TextBox HorizontalAlignment="Left" Width="100" MaxLength="6" Text="{Binding Inspector.PostalCode, Mode=TwoWay}"></TextBox>
-                    
-                <TextBlock Text="Land:"></TextBlock>
-                <TextBox  MaxLength="50" Text="{Binding Inspector.Country, Mode=TwoWay}"></TextBox>
-                    
-                <TextBlock Text="Plaats:"></TextBlock>
-                <TextBox  MaxLength="50" Text="{Binding Inspector.City, Mode=TwoWay}"></TextBox>
-                    
-                <TextBlock Text="Straat:"></TextBlock>
-                <TextBox  MaxLength="50" Text="{Binding Inspector.Street, Mode=TwoWay}"></TextBox>
-                    
-                <TextBlock Text="Huisnummer:"></TextBlock>
-                <TextBox MaxLength="10" Text="{Binding Inspector.Housenumber, Mode=TwoWay}"></TextBox>
-                    
-                <TextBlock Text="TelefoonNummer:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding Inspector.Phone, Mode=TwoWay}"></TextBox>
-                    
-                <TextBlock Text="Wachtwoord:"></TextBlock>
-                <TextBox MaxLength="10" Text="{Binding Password, Mode=TwoWay}" Margin="0,0,167,0"></TextBox>
+
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Postcode" HorizontalAlignment="Left" Width="100" MaxLength="6" Text="{Binding Inspector.PostalCode, Mode=TwoWay}"></TextBox>
+
+
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Land" MaxLength="50" Text="{Binding Inspector.Country, Mode=TwoWay}"></TextBox>
+
+
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Plaats" MaxLength="50" Text="{Binding Inspector.City, Mode=TwoWay}"></TextBox>
+
+
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Straat" MaxLength="50" Text="{Binding Inspector.Street, Mode=TwoWay}"></TextBox>
+
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Huisnummer" MaxLength="10" Text="{Binding Inspector.Housenumber, Mode=TwoWay}"></TextBox>
+
+
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Telefoonnummer" MaxLength="50" Text="{Binding Inspector.Phone, Mode=TwoWay}"></TextBox>
+
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Wachtwoord" MaxLength="10" Text="{Binding Password, Mode=TwoWay}" Margin="0,0,167,0"></TextBox>
 
                 <Button Content="Genereer Wachtwoord" Command="{Binding CreatePass}" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="193"/>
 

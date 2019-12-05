@@ -102,10 +102,19 @@ namespace Festispec.ViewModel.InspectorsVM
             get { return _i.longitude; }
             set { _i.longitude = value; }
         }
+        public string Email
+        {
+            get { return _i.email; }
+            set
+            {
+                _i.email = value;
+            }
+        }
 
         internal Inspectors ToModel()
         {
             return _i;
         }
+
     }
 }

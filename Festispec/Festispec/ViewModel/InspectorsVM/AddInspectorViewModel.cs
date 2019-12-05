@@ -53,7 +53,7 @@ namespace Festispec.ViewModel.InspectorsVM
             Inspector.Active = DateTime.Now;
             _inspectors.Inspectors.Add(Inspector);
             var newuser = new Users();
-            newuser.email = Inspector.InspectorFirstName + Inspector.InspectorLastName.Replace(" ", string.Empty);
+            newuser.email = Inspector.Email;
             newuser.password = ComputeSha256Hash(Password);
            
            
