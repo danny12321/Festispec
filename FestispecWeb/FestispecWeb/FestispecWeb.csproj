@@ -391,7 +391,6 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Planning.cshtml" />
-    <Content Include="Views\Login.cshtml" />
     <Content Include="Views\Inspection\Inspections.cshtml" />
     <Content Include="Views\Inspection\Questionnaires.cshtml" />
     <Content Include="Views\Home\Questionnaires.cshtml" />
