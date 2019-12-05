@@ -23,16 +23,16 @@
     {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Festivals.name)
+            <p>@item.Festivals.name</p>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Festivals.start_date.Date)
+            <p>@item.start_date.ToShortDateString()</p>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Festivals.start_date.TimeOfDay)
+            <p>@item.Festivals.start_date.TimeOfDay</p>
         </td>
         <td>
-            @Html.ActionLink("bekoekeloeren", "Questionnaires", new { id = item.id })
+            @Html.ActionLink("Bekijk inspectie", "Questionnaires", new { id = item.id })
     </tr>
     }
 
