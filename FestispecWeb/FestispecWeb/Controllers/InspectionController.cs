@@ -59,6 +59,8 @@ namespace FestispecWeb.Controllers
                 return HttpNotFound();
             }
 
+            //AnswersVM.Questions = db.Questions.ToList().Where(q => q.questionnaire_id == id);
+
             return View(db.Questions.ToList().Where(s => s.questionnaire_id == id));
         }
 
