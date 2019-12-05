@@ -137,6 +137,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AnswersVM.cs" />
     <Compile Include="Models\InspectionVM.cs" />
     <Compile Include="Models\InspectorAvailability.cs" />
     <Compile Include="Models\LoginModel.cs" />
