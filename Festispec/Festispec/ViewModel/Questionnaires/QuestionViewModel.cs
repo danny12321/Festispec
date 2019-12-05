@@ -18,8 +18,6 @@ namespace Festispec.ViewModel.Questionnaires
 
         private Questions _question;
 
-        private FestispecEntities _context;
-
         public int Id { get; private set; }
 
         private QuestionTypeViewModel _type;
@@ -64,11 +62,10 @@ namespace Festispec.ViewModel.Questionnaires
 
         public virtual Page GetEditPage { get => null; }
 
-        public QuestionViewModel(QuestionnairesViewModel questionnaires, Questions q, FestispecEntities context)
+        public QuestionViewModel(QuestionnairesViewModel questionnaires, Questions q)
         {
             Questionnaires = questionnaires;
             _question = q;
-            _context = context;
 
             var possible_answers = _question.Possible_answer.ToList()
                 .Select(pa => new Possible_answerVM(pa, this));
@@ -92,31 +89,38 @@ namespace Festispec.ViewModel.Questionnaires
         {
             var pa = new Possible_answerVM(this);
 
-            _context.Questions.Attach(_question);
-            _question.Possible_answer.Add(pa.ToModel());
-            Possible_answers.Add(pa);
+            using (var context = new FestispecEntities())
+            {
+                context.Questions.Attach(_question);
+                _question.Possible_answer.Add(pa.ToModel());
+                Possible_answers.Add(pa);
 
-            _context.SaveChanges();
+                context.SaveChanges();
+            }
         }
 
         public void SaveChanges()
         {
-            _context.Entry(_question).State = System.Data.Entity.EntityState.Modified;
-            _context.SaveChanges();
+            using (var context = new FestispecEntities())
+            {
+                context.Entry(_question).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
         }
 
         private void DeleteQuestion()
         {
             Possible_answers.ToList().ForEach(pa => pa.Delete());
 
-            _context.Questions.Attach(_question);
-            _context.Questions.Remove(_question);
-            _context.SaveChanges();
-
+            using (var context = new FestispecEntities())
+            {
+                context.Questions.Attach(_question);
+                context.Questions.Remove(_question);
+                context.SaveChanges();
+            }
 
             Questionnaires.Questions.Remove(this);
             Questionnaires.SelectedQuestion = null;
-            Console.WriteLine("Selected question null");
         }
 
         internal Questions ToModel()

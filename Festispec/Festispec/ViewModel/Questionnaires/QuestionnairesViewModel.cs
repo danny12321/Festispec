@@ -21,14 +21,15 @@ namespace Festispec.ViewModel.Questionnaires
     {
         public Domain.Questionnaires Questionnaire;
 
-        public int Id { get
+        public int Id
+        {
+            get
             {
                 return Questionnaire.id;
-            } }
+            }
+        }
 
         private InspectionVM _inspection;
-
-        private FestispecEntities _context;
 
         public ObservableCollection<QuestionTypeViewModel> QuestionTypes { get; set; }
 
@@ -83,37 +84,33 @@ namespace Festispec.ViewModel.Questionnaires
 
         public ICommand AddQuestionCommand { get; set; }
 
-
-        public QuestionnairesViewModel(Inspections.InspectionVM inspection, FestispecEntities context)
+        public QuestionnairesViewModel(Inspections.InspectionVM inspection)
         {
             _inspection = inspection;
-            _context = context;
 
             // TODO: make inspector id nullable
             Questionnaire = new Domain.Questionnaires() { inspection_id = inspection.Id };
 
+            using (var context = new FestispecEntities())
+            {
+                context.Questionnaires.Add(Questionnaire);
+                context.SaveChanges();
 
-            context.Questionnaires.Add(Questionnaire);
-            context.SaveChanges();
+                var questionTypes = context.Type_questions.ToList()
+                    .Select(qt => new QuestionTypeViewModel(qt));
 
-            var questionTypes = context.Type_questions.ToList()
-                .Select(qt => new QuestionTypeViewModel(qt));
-
-            QuestionTypes = new ObservableCollection<QuestionTypeViewModel>(questionTypes);
-            Questions = new ObservableCollection<QuestionViewModel>();
-
+                QuestionTypes = new ObservableCollection<QuestionTypeViewModel>(questionTypes);
+                Questions = new ObservableCollection<QuestionViewModel>();
+            }
         }
 
-        public QuestionnairesViewModel(Domain.Questionnaires questionnaire, FestispecEntities context)
+        public QuestionnairesViewModel(Domain.Questionnaires questionnaire)
         {
-            _context = context;
             Init(questionnaire);
         }
 
-        [PreferredConstructor]
-        public QuestionnairesViewModel(IDataService dataService, FestispecEntities context)
+        public QuestionnairesViewModel(IDataService dataService)
         {
-            _context = context;
             this.dataService = dataService;
             Init(dataService.SelectedQuestionnaire.Questionnaire);
         }
@@ -129,10 +126,13 @@ namespace Festispec.ViewModel.Questionnaires
 
             Questions = new ObservableCollection<QuestionViewModel>(questions);
 
-            var questionTypes = _context.Type_questions.ToList()
-                .Select(qt => new QuestionTypeViewModel(qt));
+            using (var context = new FestispecEntities())
+            {
+                var questionTypes = context.Type_questions.ToList()
+                    .Select(qt => new QuestionTypeViewModel(qt));
 
-            QuestionTypes = new ObservableCollection<QuestionTypeViewModel>(questionTypes);
+                QuestionTypes = new ObservableCollection<QuestionTypeViewModel>(questionTypes);
+            }
         }
 
         private QuestionViewModel GetQuestionClass(Questions q)
@@ -140,13 +140,13 @@ namespace Festispec.ViewModel.Questionnaires
             switch (q.type_question)
             {
                 case 1:
-                    return new OpenQuestion(this, q, _context);
+                    return new OpenQuestion(this, q);
 
                 case 2:
-                    return new MultipleChoiseQuestion(this, q, _context);
+                    return new MultipleChoiseQuestion(this, q);
 
                 case 3:
-                    return new SelectQuestion(this, q, _context);
+                    return new SelectQuestion(this, q);
 
                 default:
                     return null;
@@ -157,10 +157,13 @@ namespace Festispec.ViewModel.Questionnaires
         {
             var question = new Questions() { question = "New question", type_question = 2, questionnaire_id = Questionnaire.id };
 
-            question.Type_questions = _context.Type_questions.First(tq => tq.id == question.type_question);
-            _context.Questions.Add(question);
+            using (var context = new FestispecEntities())
+            {
+                question.Type_questions = context.Type_questions.First(tq => tq.id == question.type_question);
+                context.Questions.Add(question);
 
-            _context.SaveChanges();
+                context.SaveChanges();
+            }
 
             var newQuestion = GetQuestionClass(question);
             SelectedQuestion = newQuestion;

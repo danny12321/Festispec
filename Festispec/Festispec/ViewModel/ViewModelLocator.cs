@@ -31,12 +31,8 @@ namespace Festispec.ViewModel
 
             SimpleIoc.Default.Register<IDataService, DataService.DataService>();
 
-            SimpleIoc.Default.Register<FestispecEntities>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
-            SimpleIoc.Default.Register<FestivalManagementVM>();
-            SimpleIoc.Default.Register<QuestionnairesViewModel>();
-            SimpleIoc.Default.Register<InspectionEditViewModel>();
 
             SimpleIoc.Default.Register<PopUpViewModel>();
         }
@@ -53,7 +49,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<LoginViewModel>();
+                return new LoginViewModel();
             }
         }
 
@@ -69,7 +65,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<FestivalManagementVM>();
+                return new FestivalManagementVM(Main, ServiceLocator.Current.GetInstance<IDataService>()); ;
             }
         }
 
@@ -102,7 +98,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<QuestionnairesViewModel>();
+                return new QuestionnairesViewModel(ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
 
@@ -200,7 +196,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<InspectionEditViewModel>();
+                return new InspectionEditViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
 
