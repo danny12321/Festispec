@@ -240,6 +240,14 @@ namespace Festispec.ViewModel
             }
         }
 
+        public ScheduleVM.ScheduleVM Schedule
+        {
+            get
+            {
+                return new ScheduleVM.ScheduleVM();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
