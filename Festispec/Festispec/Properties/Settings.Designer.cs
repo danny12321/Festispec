@@ -34,17 +34,5 @@ namespace Festispec.Properties {
                 this["Schedule_AmountOfDaysToShow"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int Schedule_Columns {
-            get {
-                return ((int)(this["Schedule_Columns"]));
-            }
-            set {
-                this["Schedule_Columns"] = value;
-            }
-        }
     }
 }
