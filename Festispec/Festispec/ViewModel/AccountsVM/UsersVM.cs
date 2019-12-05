@@ -9,12 +9,12 @@ namespace Festispec.ViewModel.AccountsVM
 {
     public class UsersVM
     {
-        private Users _user;
+        private Domain.Users _user;
         public UsersVM()
         {
-            _user = new Users();
+            _user = new Domain.Users();
         }
-        public UsersVM(Users user)
+        public UsersVM(Domain.Users user)
         {
             _user = user;
         }
@@ -38,7 +38,7 @@ namespace Festispec.ViewModel.AccountsVM
             get { return _user.inspector_id; }
             set { _user.inspector_id = value; }
         }
-        internal Users ToModel()
+        internal Domain.Users ToModel()
         {
             return _user;
         }

@@ -146,6 +146,9 @@
     <Compile Include="ViewModel\Questionnaires\Types\SelectQuestion.cs" />
     <Compile Include="ViewModel\ScheduleVM\ScheduleColumnVM.cs" />
     <Compile Include="ViewModel\ScheduleVM\ScheduleVM.cs" />
+    <Compile Include="ViewModel\Users\AddUserVM.cs" />
+    <Compile Include="ViewModel\Users\UsersVM.cs" />
+    <Compile Include="ViewModel\Users\UserVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\ContactPersonsView\AddContactPerson.xaml.cs">
       <DependentUpon>AddContactPerson.xaml</DependentUpon>
@@ -236,6 +239,12 @@
     </Compile>
     <Compile Include="View\Schedule\Schedule.xaml.cs">
       <DependentUpon>Schedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Users\AddUser.xaml.cs">
+      <DependentUpon>AddUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Users\Users.xaml.cs">
+      <DependentUpon>Users.xaml</DependentUpon>
     </Compile>
     <Page Include="View\BaseWindow.xaml">
       <SubType>Designer</SubType>
@@ -382,6 +391,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Schedule\Schedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Users\AddUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Users\Users.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -10,6 +10,7 @@ using Festispec.ViewModel.MunicipalityVM;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Festispec.ViewModel.ContactPersonsVM;
+using Festispec.ViewModel.Users;
 
 namespace Festispec.ViewModel
 {
@@ -245,6 +246,21 @@ namespace Festispec.ViewModel
             get
             {
                 return new ScheduleVM.ScheduleVM();
+            }
+        }
+
+        public UsersVM UsersViewModel
+        {
+            get
+            {
+                return new UsersVM(Main);
+            }
+        }
+        public AddUserVM AddUserVM
+        {
+            get
+            {
+                return new AddUserVM();
             }
         }
 
