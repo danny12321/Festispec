@@ -13,6 +13,7 @@ namespace FestispecWeb.Controllers
     {
         FestispecEntities db = new FestispecEntities();
         InspectionVM InspectionVM;
+        AnswersVM AnswersVM;
 
 
         public ActionResult Inspections()
@@ -45,6 +46,8 @@ namespace FestispecWeb.Controllers
         public ActionResult questionnaire(int? id)
         {
 
+            AnswersVM = new AnswersVM();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -55,7 +58,14 @@ namespace FestispecWeb.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(db.Questions.ToList().Where(s => s.questionnaire_id == id));
+        }
+
+        public ContentResult SaveAnswers()
+        {
+
+            return null;
         }
     }
 }
