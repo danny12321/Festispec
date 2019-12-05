@@ -25,8 +25,11 @@ namespace Festispec.Domain
         public int id { get; set; }
         public string name { get; set; }
         public string lastname { get; set; }
-        public System.DateTime birthday { get; set; }
+        public Nullable<System.DateTime> birthday { get; set; }
+        public string email { get; set; }
         public string postalcode { get; set; }
+        public string country { get; set; }
+        public string city { get; set; }
         public string street { get; set; }
         public string housenumber { get; set; }
         public string phone { get; set; }

@@ -16,7 +16,7 @@
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}">
-    
+
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -31,22 +31,46 @@
 
                 <TextBlock Text="Voornaam:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.InspectorFirstName, Mode=TwoWay}"></TextBox>
+                
                 <TextBlock Text="Achternaam:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.InspectorLastName, Mode=TwoWay}"></TextBox>
+                
                 <TextBlock Text="Geboorte Datum:"></TextBlock>
-                <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding  InspectorViewModel.SelectedInspector.Birthday,Mode=TwoWay}"/>
+
+                <DatePicker HorizontalAlignment="Left" Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding  InspectorViewModel.SelectedInspector.Birthday,Mode=TwoWay}"/>
+                
                 <TextBlock Text="Postcode:"></TextBlock>
-                <TextBox MaxLength="6" Text="{Binding InspectorViewModel.SelectedInspector.PostalCode, Mode=TwoWay}"></TextBox>
+                <TextBox HorizontalAlignment="Left" MaxLength="6" Text="{Binding InspectorViewModel.SelectedInspector.PostalCode, Mode=TwoWay}"></TextBox>
+                
+                <TextBlock Text="Land:"></TextBlock>
+                <TextBox  MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.Country, Mode=TwoWay}"></TextBox>
+                
+                <TextBlock Text="Plaats:"></TextBlock>
+                <TextBox  MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.City, Mode=TwoWay}"></TextBox>
+                
                 <TextBlock Text="Straat:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.Street, Mode=TwoWay}"></TextBox>
+                
                 <TextBlock Text="Huisnummer:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.Housenumber, Mode=TwoWay}"></TextBox>
+                
                 <TextBlock Text="TelefoonNummer:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.Phone, Mode=TwoWay}"></TextBox>
+                
                 <TextBlock Text="Actief:"></TextBlock>
-                <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding  InspectorViewModel.SelectedInspector.Active,Mode=TwoWay}"/>
 
+                <DatePicker HorizontalAlignment="Left" Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding  InspectorViewModel.SelectedInspector.Active,Mode=TwoWay}"/>
 
+                <TextBlock Margin="0,10,0,0" Text="Breedtegraad:"></TextBlock>
+                <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.Latitude, Mode=TwoWay}"></TextBox>
+
+                <TextBlock Text="Hoogtegraad:"></TextBlock>
+                <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.Longitude, Mode=TwoWay}"></TextBox>
+
+                <Border Padding="10">
+                    <Button HorizontalAlignment="Left" Command="{Binding GenerateLatLongBasedOnAdressCommand}">Genereer op adres gegvens</Button>
+                </Border>
+                
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding EditInspectorCommand}" CommandParameter="{Binding EditInspectorCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"

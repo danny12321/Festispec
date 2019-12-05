@@ -18,7 +18,19 @@ namespace Festispec.ViewModel.Inspections
 
         public string Pos { get { return Inspector.latitude + "," + Inspector.longitude; } }
 
+        public TimeSpan TravelTime { get; set; }
+
         public ICommand SetViewToSelectedPersonCommand { get; set; }
+
+        public bool HasPos { get
+            {
+                if (Inspector.latitude != null && Inspector.longitude != null)
+                {
+                    return true;
+                }
+                return false;
+            } 
+        }
 
         public InspectorsVM(Inspectors inspectors)
         {
@@ -28,10 +40,13 @@ namespace Festispec.ViewModel.Inspections
 
         private void SetViewToSelectedPerson(Map map)
         {
-            var longitude = Convert.ToDouble(Inspector.longitude.Replace('.', ','));
-            var latitude = Convert.ToDouble(Inspector.latitude.Replace('.', ','));
-            var location = new Location(latitude, longitude);
-            map.SetView(location, 10);
+            if (Inspector.longitude != null || Inspector.latitude != null)
+            {
+                var longitude = Convert.ToDouble(Inspector.longitude.Replace('.', ','));
+                var latitude = Convert.ToDouble(Inspector.latitude.Replace('.', ','));
+                var location = new Location(latitude, longitude);
+                map.SetView(location, 10);
+            }
         }
     }
 }

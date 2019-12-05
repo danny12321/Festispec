@@ -27,6 +27,8 @@
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding Festival.FestivalName, Mode=TwoWay}"></TextBox>
                 <TextBlock FontSize="15" Text="Postcode:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="6" Text="{Binding Festival.PostalCode, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Plaats:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding Festival.City, Mode=TwoWay}"></TextBox>
                 <TextBlock FontSize="15" Text="Straat:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding Festival.Street, Mode=TwoWay}"></TextBox>
                 <TextBlock FontSize="15" Text="Huisnummer:"></TextBlock>
@@ -56,14 +58,16 @@
                       HorizontalAlignment="Left"
                       Text="{Binding EndTime}"
                       Width="100" />
-                <TextBlock FontSize="15" Text="Klant id:"></TextBlock>
-                <TextBox FontSize="15" MaxLength="50" Text="{Binding Festival.ClientId}" IsReadOnly="True"></TextBox>
                 <TextBlock FontSize="15" Text="Gemeente id:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding Festival.MunicipalityId}" IsReadOnly="True"></TextBox>
                 <TextBlock FontSize="15" Text="Breedtegraad:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding Festival.Latitude, Mode=TwoWay}"></TextBox>
                 <TextBlock FontSize="15" Text="Hoogtegraad:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding Festival.Longitude, Mode=TwoWay}"></TextBox>
+                <Border Padding="10">
+
+                    <Button HorizontalAlignment="Left" Command="{Binding GenerateLatLongBasedOnAdressCommand}">Genereer op adres gegvens</Button>
+                </Border>
 
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding AddFestivalCommand}"
