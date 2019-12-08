@@ -113,6 +113,7 @@
     <Compile Include="ViewModel\ContactPersonsVM\ContactPersonVM.cs" />
     <Compile Include="ViewModel\ContactPersonsVM\EditContactPersonVM.cs" />
     <Compile Include="ViewModel\ContactPersonsVM\TypeContactVM.cs" />
+    <Compile Include="ViewModel\DashboardVM\ManageDashboardVM.cs" />
     <Compile Include="ViewModel\DataService\DataService.cs" />
     <Compile Include="ViewModel\DataService\IDataService.cs" />
     <Compile Include="ViewModel\FestivalVM\AddFestivalVM.cs" />
@@ -161,6 +162,9 @@
     </Compile>
     <Compile Include="View\ContactPersonsView\EditContactPerson.xaml.cs">
       <DependentUpon>EditContactPerson.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dashboard\ManageDashboard.xaml.cs">
+      <DependentUpon>ManageDashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Inspections\AddInspection.xaml.cs">
       <DependentUpon>AddInspection.xaml</DependentUpon>
@@ -274,6 +278,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ContactPersonsView\EditContactPerson.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dashboard\ManageDashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

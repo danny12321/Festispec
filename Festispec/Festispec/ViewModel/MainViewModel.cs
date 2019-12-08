@@ -66,6 +66,10 @@ namespace Festispec.ViewModel
                     FrameContent = new View.Schedule.Schedule();
                     PageTitle = "Planning";
                     break;
+                case "ManageDashboard":
+                    FrameContent = new View.Dashboard.ManageDashboard();
+                    PageTitle = "Management Dashboard";
+                    break;
                 case "Festival":
                     FrameContent = new View.FestivalViews.Festivals();
                     PageTitle = "Festival beheer";
