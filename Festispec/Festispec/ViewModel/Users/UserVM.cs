@@ -10,6 +10,11 @@ namespace Festispec.ViewModel.Users
     {
         private Domain.Users _user { get; set; }
 
+        public UserVM()
+        {
+            _user = new Domain.Users();
+        }
+
         public UserVM(Domain.Users user)
         {
             _user = user;

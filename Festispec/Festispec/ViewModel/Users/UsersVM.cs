@@ -1,4 +1,5 @@
 ﻿using Festispec.Domain;
+using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
@@ -14,17 +15,21 @@ namespace Festispec.ViewModel.Users
     {
         public ObservableCollection<UserVM> Users { get; set; }
 
-        public MainViewModel _main;
+        private MainViewModel _main;
+        private IDataService _dataService;
 
         public ICommand NavigateAddUserCommand { get; set; }
+        public ICommand NavigateEditUserCommand { get; set; }
 
-        public UsersVM(MainViewModel main)
+        public UsersVM(MainViewModel main, IDataService dataService)
         {
+            _main = main;
+            _dataService = dataService;
+
             Users = new ObservableCollection<UserVM>(GetUsers());
 
-            _main = main;
-
             NavigateAddUserCommand = new RelayCommand(NavigateAddUser);
+            NavigateEditUserCommand = new RelayCommand<UserVM>(NavigateEditUser);
         }
 
         private IEnumerable<UserVM> GetUsers()
@@ -38,6 +43,12 @@ namespace Festispec.ViewModel.Users
         private void NavigateAddUser()
         {
             _main.SetPage("AddUser", false);
+        }
+
+        private void NavigateEditUser(UserVM user)
+        {
+            _dataService.SelectedUser = user;
+            _main.SetPage("EditUser", false);
         }
     }
 }

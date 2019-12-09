@@ -253,14 +253,22 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new UsersVM(Main);
+                return new UsersVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
         public AddUserVM AddUserVM
         {
             get
             {
-                return new AddUserVM();
+                return new AddUserVM(Main);
+            }
+        }
+
+        public EditUserVM EditUserVM
+        {
+            get
+            {
+                return new EditUserVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
 

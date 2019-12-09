@@ -147,6 +147,8 @@
     <Compile Include="ViewModel\ScheduleVM\ScheduleColumnVM.cs" />
     <Compile Include="ViewModel\ScheduleVM\ScheduleVM.cs" />
     <Compile Include="ViewModel\Users\AddUserVM.cs" />
+    <Compile Include="ViewModel\Users\EditUserVM.cs" />
+    <Compile Include="ViewModel\Users\UserRollVM.cs" />
     <Compile Include="ViewModel\Users\UsersVM.cs" />
     <Compile Include="ViewModel\Users\UserVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -242,6 +244,9 @@
     </Compile>
     <Compile Include="View\Users\AddUser.xaml.cs">
       <DependentUpon>AddUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Users\EditUser.xaml.cs">
+      <DependentUpon>EditUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Users\Users.xaml.cs">
       <DependentUpon>Users.xaml</DependentUpon>
@@ -395,6 +400,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Users\AddUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Users\EditUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
