@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FestispecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FestispecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Answers">
           <Key>
             <PropertyRef Name="id" />
@@ -19,10 +19,11 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="postalcode" Type="nvarchar" MaxLength="6" Nullable="false" />
-          <Property Name="street" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="housenumber" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="country" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="postalcode" Type="nvarchar" MaxLength="6" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
+          <Property Name="street" Type="nvarchar" MaxLength="50" />
+          <Property Name="housenumber" Type="nvarchar" MaxLength="50" />
           <Property Name="phone" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Contactpersons">
@@ -32,10 +33,10 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
           <Property Name="client_id" Type="int" />
-          <Property Name="type_contact" Type="int" Nullable="false" />
+          <Property Name="type_contact" Type="int" />
         </EntityType>
         <EntityType Name="Festival_contacts">
           <Key>
@@ -51,17 +52,17 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="postalcode" Type="nvarchar" MaxLength="6" Nullable="false" />
-          <Property Name="street" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="housenumber" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="country" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="postalcode" Type="nvarchar" MaxLength="6" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
+          <Property Name="street" Type="nvarchar" MaxLength="50" />
+          <Property Name="housenumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" />
           <Property Name="start_date" Type="datetime" Nullable="false" />
           <Property Name="end_date" Type="datetime" Nullable="false" />
           <Property Name="client_id" Type="int" Nullable="false" />
           <Property Name="municipality_id" Type="int" />
-          <Property Name="latitude" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="longitude" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="city" Type="nvarchar" MaxLength="50" />
+          <Property Name="latitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="longitude" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Inspections">
           <Key>
@@ -81,10 +82,13 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="birthday" Type="datetime" Nullable="false" />
-          <Property Name="postalcode" Type="nvarchar" MaxLength="6" Nullable="false" />
-          <Property Name="street" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="housenumber" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="birthday" Type="datetime" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="postalcode" Type="nvarchar" MaxLength="6" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
+          <Property Name="street" Type="nvarchar" MaxLength="50" />
+          <Property Name="housenumber" Type="nvarchar" MaxLength="10" />
           <Property Name="phone" Type="nvarchar" MaxLength="50" />
           <Property Name="active" Type="datetime" />
           <Property Name="latitude" Type="nvarchar" MaxLength="50" />
@@ -107,6 +111,7 @@
           <Property Name="start_date" Type="datetime" Nullable="false" />
           <Property Name="end_date" Type="datetime" Nullable="false" />
           <Property Name="inspector_id" Type="int" Nullable="false" />
+          <Property Name="text" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="Laws">
           <Key>
@@ -212,19 +217,19 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contactpersons_Clients">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
-          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clients">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Contactpersons">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="client_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contactpersons_Type_contacts">
-          <End Role="Type_contacts" Type="Self.Type_contacts" Multiplicity="1" />
+          <End Role="Type_contacts" Type="Self.Type_contacts" Multiplicity="0..1" />
           <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Type_contacts">
@@ -296,7 +301,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Inspectors_at_inspection_Inspections">
-          <End Role="Inspections" Type="Self.Inspections" Multiplicity="1" />
+          <End Role="Inspections" Type="Self.Inspections" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Inspectors_at_inspection" Type="Self.Inspectors_at_inspection" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inspections">
@@ -308,7 +315,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Inspectors_at_inspection_Inspectors">
-          <End Role="Inspectors" Type="Self.Inspectors" Multiplicity="1" />
+          <End Role="Inspectors" Type="Self.Inspectors" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Inspectors_at_inspection" Type="Self.Inspectors_at_inspection" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inspectors">
@@ -545,8 +554,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FestispecModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -565,10 +573,11 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="housenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="housenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Contactpersons" Relationship="Self.FK_Contactpersons_Clients" FromRole="Clients" ToRole="Contactpersons" />
           <NavigationProperty Name="Festivals" Relationship="Self.FK_Festivals_Clients" FromRole="Clients" ToRole="Festivals" />
@@ -581,10 +590,10 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="client_id" Type="Int32" />
-          <Property Name="type_contact" Type="Int32" Nullable="false" />
+          <Property Name="type_contact" Type="Int32" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_Contactpersons_Clients" FromRole="Contactpersons" ToRole="Clients" />
           <NavigationProperty Name="Type_contacts" Relationship="Self.FK_Contactpersons_Type_contacts" FromRole="Contactpersons" ToRole="Type_contacts" />
           <NavigationProperty Name="Festivals" Relationship="Self.Festival_contacts" FromRole="Contactpersons" ToRole="Festivals" />
@@ -595,17 +604,17 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="housenumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="housenumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="client_id" Type="Int32" Nullable="false" />
           <Property Name="municipality_id" Type="Int32" />
-          <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_Festivals_Clients" FromRole="Festivals" ToRole="Clients" />
           <NavigationProperty Name="Municipalities" Relationship="Self.FK_Festivals_Municipalities" FromRole="Festivals" ToRole="Municipalities" />
           <NavigationProperty Name="Inspections" Relationship="Self.FK_Inspections_Festivals" FromRole="Festivals" ToRole="Inspections" />
@@ -631,10 +640,13 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="birthday" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="housenumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="birthday" Type="DateTime" Precision="3" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="housenumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="active" Type="DateTime" Precision="3" />
           <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -664,6 +676,7 @@
           <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="inspector_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Inspectors" Relationship="Self.FK_Inspectors_availability_Inspectors" FromRole="Inspectors_availability" ToRole="Inspectors" />
+          <Property Name="text" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Laws">
           <Key>
@@ -777,14 +790,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contactpersons_Clients">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
-          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clients">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Contactpersons">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="client_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -813,7 +826,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contactpersons_Type_contacts">
-          <End Role="Type_contacts" Type="Self.Type_contacts" Multiplicity="1" />
+          <End Role="Type_contacts" Type="Self.Type_contacts" Multiplicity="0..1" />
           <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Type_contacts">
@@ -849,7 +862,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Inspectors_at_inspection_Inspections">
-          <End Role="Inspections" Type="Self.Inspections" Multiplicity="1" />
+          <End Role="Inspections" Type="Self.Inspections" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Inspectors_at_inspection" Type="Self.Inspectors_at_inspection" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inspections">
@@ -861,7 +876,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Inspectors_at_inspection_Inspectors">
-          <End Role="Inspectors" Type="Self.Inspectors" Multiplicity="1" />
+          <End Role="Inspectors" Type="Self.Inspectors" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Inspectors_at_inspection" Type="Self.Inspectors_at_inspection" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inspectors">
@@ -1081,9 +1098,10 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="postalcode" ColumnName="postalcode" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="street" ColumnName="street" />
                 <ScalarProperty Name="housenumber" ColumnName="housenumber" />
-                <ScalarProperty Name="country" ColumnName="country" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1107,6 +1125,7 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="postalcode" ColumnName="postalcode" />
+                <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="street" ColumnName="street" />
                 <ScalarProperty Name="housenumber" ColumnName="housenumber" />
                 <ScalarProperty Name="country" ColumnName="country" />
@@ -1116,7 +1135,6 @@
                 <ScalarProperty Name="municipality_id" ColumnName="municipality_id" />
                 <ScalarProperty Name="latitude" ColumnName="latitude" />
                 <ScalarProperty Name="longitude" ColumnName="longitude" />
-                <ScalarProperty Name="city" ColumnName="city" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1139,7 +1157,10 @@
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="lastname" ColumnName="lastname" />
                 <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="postalcode" ColumnName="postalcode" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="street" ColumnName="street" />
                 <ScalarProperty Name="housenumber" ColumnName="housenumber" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
@@ -1161,6 +1182,7 @@
           <EntitySetMapping Name="Inspectors_availability">
             <EntityTypeMapping TypeName="FestispecModel.Inspectors_availability">
               <MappingFragment StoreEntitySet="Inspectors_availability">
+                <ScalarProperty Name="text" ColumnName="text" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="start_date" ColumnName="start_date" />
                 <ScalarProperty Name="end_date" ColumnName="end_date" />

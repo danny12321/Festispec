@@ -11,12 +11,14 @@
 GO
 ALTER TABLE [dbo].[Inspectors_at_inspection]  WITH CHECK ADD  CONSTRAINT [FK_Inspectors_at_inspection_Inspections] FOREIGN KEY([inspection_id])
 REFERENCES [dbo].[Inspections] ([id])
+ON DELETE CASCADE
 GO
 
 ALTER TABLE [dbo].[Inspectors_at_inspection] CHECK CONSTRAINT [FK_Inspectors_at_inspection_Inspections]
 GO
 ALTER TABLE [dbo].[Inspectors_at_inspection]  WITH CHECK ADD  CONSTRAINT [FK_Inspectors_at_inspection_Inspectors] FOREIGN KEY([inpector_id])
 REFERENCES [dbo].[Inspectors] ([id])
+ON DELETE CASCADE
 GO
 
 ALTER TABLE [dbo].[Inspectors_at_inspection] CHECK CONSTRAINT [FK_Inspectors_at_inspection_Inspectors]
