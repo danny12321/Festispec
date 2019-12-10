@@ -30,12 +30,12 @@
             @if (Model[i].Question.type_question == 1)
             {
                 @Html.EditorFor(model => Model[i].Answers.answer)
-            @*<input name="@Model[i].Answers.answer" />*@
             }
             else if (Model[i].Question.type_question == 2)
             {
                 foreach (var pasnwer in Model[i].Question.Possible_answer)
                 {
+                    @*@Html.CheckBoxFor(model => pasnwer.answer)*@
                     @*<input type="checkbox" name="@Model[i].Answers.answer" /> @pasnwer.answer <br />*@
                 }
             }
@@ -43,16 +43,17 @@
             {
                 foreach (var pasnwer in Model[i].Question.Possible_answer)
                 {
-            @*<input type="radio" name="@Model[i].Answers.answer" />  @pasnwer.answer  <br />*@
+                    <input type="radio" name="@Model[i].Answers.answer" /> @pasnwer.answer <br />
                 }
             }
             else if (Model[i].Question.type_question == 4)
             {
-                @*<input type="file" name="@Model[i].Answers.answer" accept="image/x-png,image/gif,image/jpeg" />  <br />*@
+                @Html.
+                <input type="file" name="@Model[i].Answers.answer" accept="image/x-png,image/gif,image/jpeg" /> <br />
             }
             else
             {
-            <div>question type not found</div>
+                <div>question type not found</div>
             }
         </div>
         }
