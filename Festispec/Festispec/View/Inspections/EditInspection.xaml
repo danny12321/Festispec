@@ -131,7 +131,7 @@
                                     <Border BorderThickness="5">
                                         <DockPanel HorizontalAlignment="Stretch">
 
-                                            <TextBlock Text="{Binding Id}" VerticalAlignment="Center"></TextBlock>
+                                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center"></TextBlock>
                                             <Button 
                                                 HorizontalAlignment="Right"
                                                 Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.OpenQuestionnaireCommand}"

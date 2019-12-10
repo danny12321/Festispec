@@ -29,7 +29,11 @@ namespace Festispec.ViewModel.Questionnaires
             }
         }
 
-        private InspectionVM _inspection;
+        public string Name
+        {
+            get { return Questionnaire.name; }
+            set { Questionnaire.name = value; SaveChanges(); }
+        }
 
         public ObservableCollection<QuestionTypeViewModel> QuestionTypes { get; set; }
 
@@ -86,8 +90,6 @@ namespace Festispec.ViewModel.Questionnaires
 
         public QuestionnairesViewModel(Inspections.InspectionVM inspection)
         {
-            _inspection = inspection;
-
             // TODO: make inspector id nullable
             Questionnaire = new Domain.Questionnaires() { inspection_id = inspection.Id };
 
@@ -117,7 +119,6 @@ namespace Festispec.ViewModel.Questionnaires
 
         private void Init(Domain.Questionnaires questionnaire)
         {
-            Console.WriteLine("INIT " + questionnaire.id);
             Questionnaire = questionnaire;
             AddQuestionCommand = new RelayCommand(AddQuestion);
 
@@ -170,5 +171,13 @@ namespace Festispec.ViewModel.Questionnaires
             Questions.Add(newQuestion);
         }
 
+        private void SaveChanges()
+        {
+            using (var context = new FestispecEntities())
+            {
+                context.Entry(Questionnaire).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
     }
 }
