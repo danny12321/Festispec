@@ -2,6 +2,7 @@
 using FestispecWeb.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -12,9 +13,6 @@ namespace FestispecWeb.Controllers
     public class InspectionController : Controller
     {
         FestispecEntities db = new FestispecEntities();
-        InspectionVM InspectionVM;
-        AnswersVM AnswersVM;
-
 
         public ActionResult Inspections()
         {
@@ -23,7 +21,7 @@ namespace FestispecWeb.Controllers
 
         public ActionResult Questionnaires(int? id)
         {
-            InspectionVM = new InspectionVM();
+            InspectionVM InspectionVM = new InspectionVM();
 
             if (id == null)
             {
@@ -46,6 +44,8 @@ namespace FestispecWeb.Controllers
         public ActionResult questionnaire(int? id)
         {
 
+            IEnumerable<AnswersVM> answerVM = new ObservableCollection<AnswersVM>();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -57,13 +57,18 @@ namespace FestispecWeb.Controllers
                 return HttpNotFound();
             }
 
-            return View(db.Questions.ToList().Where(s => s.questionnaire_id == id));
+            var qa = questionaires.Questions.Select(q => new AnswersVM() { Question = q });
+            answerVM = new ObservableCollection<AnswersVM>(qa);
+
+            return View(answerVM);
         }
 
-        public ContentResult SaveAnswers()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveAnswers([Bind(Include = "Answers, Question")] IEnumerable<AnswersVM> answerVMs)
         {
 
-            return null;
+            return View(db.Questions.ToList());
         }
     }
 }

@@ -9,16 +9,14 @@ namespace FestispecWeb.Models
 {
     public class AnswersVM
     {
-        public IEnumerable<Questions> Questions { get; set; }
-        public Answers Answers { get; set; }
-        public IEnumerable<Questionnaires> Questionnaires { get; set; }
+        public Questions Question { get; set; }
 
+        public Answers Answers { get; set; }     
+        
         public AnswersVM()
         {
-            Questions = new ObservableCollection<Questions>();
-            Questionnaires = new ObservableCollection<Questionnaires>();
+            Question = new Questions();
             Answers = new Answers();
         }
-        
     }
 }
