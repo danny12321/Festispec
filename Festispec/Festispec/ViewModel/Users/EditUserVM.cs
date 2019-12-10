@@ -10,10 +10,12 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Data.Entity.Migrations;
 using System.Data.Entity;
+using Festispec.Utils;
+using GalaSoft.MvvmLight;
 
 namespace Festispec.ViewModel.Users
 {
-    public class EditUserVM
+    public class EditUserVM : ViewModelBase
     {
         private MainViewModel _main;
         private IDataService _serviceProvider;
@@ -23,6 +25,8 @@ namespace Festispec.ViewModel.Users
         public ObservableCollection<UserRollVM> Rolles { get; set; }
 
         public UserVM User { get; set; }
+
+        public string ErrorMessage { get; set; }
 
         public ICommand EditUserCommand { get; set; }
 
@@ -36,6 +40,8 @@ namespace Festispec.ViewModel.Users
             _userId = _serviceProvider.SelectedUser.Id;
 
             User = GetUser().ToList().First();
+
+            User.Password = "";
 
             _userRoles = GetUserRoles().ToList();
 
@@ -84,32 +90,87 @@ namespace Festispec.ViewModel.Users
 
         private void EditUser()
         {
-
-            List<int> newRolsIds = new List<int>();
-            Rolles.ToList().ForEach(r =>
+            if (InputIsCorrect())
             {
-                if (r.Checked)
+                List<int> newRolsIds = new List<int>();
+                Rolles.ToList().ForEach(r =>
                 {
-                    newRolsIds.Add(r.Id);
+                    if (r.Checked)
+                    {
+                        newRolsIds.Add(r.Id);
+                    }
+                });
+
+                using (var context = new FestispecEntities())
+                {
+                    var user = context.Users.Include("Rolls")
+                    .Single(u => u.id == User.Id);
+
+                    user.email = User.Email;
+
+                    if (PasswordIsCorrect())
+                    {
+                        var passwordHasher = new PasswordHasher();
+                        user.password = passwordHasher.ComputeSha256Hash(User.Password);
+                    }
+
+                    var newRoles = context.Rolls
+                        .Where(r => newRolsIds.Contains(r.id))
+                        .ToList();
+
+                    user.Rolls.Clear();
+                    foreach (var newRole in newRoles)
+                        user.Rolls.Add(newRole);
+
+                    context.SaveChanges();
                 }
-            });
 
-            using (var context = new FestispecEntities())
+                _main.SetPage("Users", false);
+            } else
             {
-                var user = context.Users.Include("Rolls")
-                .Single(u => u.id == User.Id);
-
-                var newRoles = context.Rolls
-                    .Where(r => newRolsIds.Contains(r.id))
-                    .ToList();
-
-                user.Rolls.Clear();
-                foreach (var newRole in newRoles)
-                    user.Rolls.Add(newRole);
-
-                context.SaveChanges();
+                // Incorrect input -- Show error message
+                ErrorMessage = "Email moet ingevult zijn\nWachtwoord moet minimaal 6 karakters hebben";
+                RaisePropertyChanged("ErrorMessage");
             }
 
+        }
+
+        private bool InputIsCorrect()
+        {
+            if (!EmailIsCorrect())
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool EmailIsCorrect()
+        {
+            if (User.Email == null)
+            {
+                return false;
+            }
+            if (User.Email.Length < 1)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool PasswordIsCorrect()
+        {
+            if (User.Password == null)
+            {
+                return false;
+            }
+            if (User.Password.Length < 6)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

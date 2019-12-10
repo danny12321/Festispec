@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Festispec.Utils;
 
 namespace Festispec.ViewModel.Users
 {
@@ -44,6 +45,10 @@ namespace Festispec.ViewModel.Users
         {
             if (InputIsCorrect())
             {
+                var passwordHasher = new PasswordHasher();
+
+                User.Password = passwordHasher.ComputeSha256Hash(User.Password);
+
                 using (var context = new FestispecEntities())
                 {
                     Rolles.ToList().ForEach(r =>
@@ -90,7 +95,7 @@ namespace Festispec.ViewModel.Users
             {
                 return false;
             }
-            if (User.Email.Length < 0)
+            if (User.Email.Length < 1)
             {
                 return false;
             }
