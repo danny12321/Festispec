@@ -44,8 +44,6 @@ namespace FestispecWeb.Controllers
         public ActionResult questionnaire(int? id)
         {
 
-            IEnumerable<AnswersVM> answerVM = new ObservableCollection<AnswersVM>();
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -58,16 +56,24 @@ namespace FestispecWeb.Controllers
             }
 
             var qa = questionaires.Questions.Select(q => new AnswersVM() { Question = q });
-            answerVM = new ObservableCollection<AnswersVM>(qa);
+            List<AnswersVM> answerVM = new List<AnswersVM>(qa);
 
             return View(answerVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveAnswers([Bind(Include = "Answers, Question")] IEnumerable<AnswersVM> answerVMs)
+        public ActionResult SaveAnswers(List<AnswersVM> answerVMs)
         {
 
+            if (ModelState.IsValid)
+            {
+                foreach(var i in answerVMs)
+                {
+                    db.Answers.Add(i.Answers);
+                }
+                db.SaveChanges();
+            }
             return View(db.Questions.ToList());
         }
     }

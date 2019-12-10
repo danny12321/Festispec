@@ -11,12 +11,7 @@ namespace FestispecWeb.Models
     {
         public Questions Question { get; set; }
 
-        public Answers Answers { get; set; }     
-        
-        public AnswersVM()
-        {
-            Question = new Questions();
-            Answers = new Answers();
-        }
+        public Answers Answers { get; set; } = new Answers();
+
     }
 }
