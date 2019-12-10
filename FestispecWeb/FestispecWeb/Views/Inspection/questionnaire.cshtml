@@ -35,21 +35,20 @@
             {
                 foreach (var pasnwer in Model[i].Question.Possible_answer)
                 {
-                    @*@Html.CheckBoxFor(model => pasnwer.answer)*@
-                    @*<input type="checkbox" name="@Model[i].Answers.answer" /> @pasnwer.answer <br />*@
+                   // @Html.CheckBoxFor(x => pasnwer.answer)
+                    <input type="checkbox" name="@Model[i].Answers.answer"  @Html.EditorForModel()/> @pasnwer.answer <br />
                 }
             }
             else if (Model[i].Question.type_question == 3)
             {
                 foreach (var pasnwer in Model[i].Question.Possible_answer)
                 {
-                    <input type="radio" name="@Model[i].Answers.answer" /> @pasnwer.answer <br />
+                    <input type="radio" name="@Model[i].Answers.answer"  @Html.EditorForModel()/> @pasnwer.answer <br />
                 }
             }
             else if (Model[i].Question.type_question == 4)
             {
-                @Html.
-                <input type="file" name="@Model[i].Answers.answer" accept="image/x-png,image/gif,image/jpeg" /> <br />
+                <input type="file" name="@Model[i].Answers.answer" accept="image/x-png,image/gif,image/jpeg"  @Html.EditorForModel()/> <br />
             }
             else
             {
