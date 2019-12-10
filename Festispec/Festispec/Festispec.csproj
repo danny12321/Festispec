@@ -133,6 +133,7 @@
     <Compile Include="ViewModel\Questionnaires\QuestionnairesViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionTypeViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionViewModel.cs" />
+    <Compile Include="ViewModel\Questionnaires\Types\ImageQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Types\MultipleChoiseQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Types\OpenQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Types\SelectQuestion.cs" />
@@ -190,6 +191,12 @@
     </Compile>
     <Compile Include="View\Questionnaires\Questionnaires.xaml.cs">
       <DependentUpon>Questionnaires.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\ImageEdit.xaml.cs">
+      <DependentUpon>ImageEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\ImagePreview.xaml.cs">
+      <DependentUpon>ImagePreview.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Questionnaires\Types\MultipleChoiseEdit.xaml.cs">
       <DependentUpon>MultipleChoiseEdit.xaml</DependentUpon>
@@ -309,6 +316,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PopUpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\ImageEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\ImagePreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
