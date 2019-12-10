@@ -1,0 +1,61 @@
+﻿@model FestispecWeb.Models.LoginModel
+@{
+    ViewBag.Title = "Login";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Festispec log in</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li>@Html.ActionLink("Festispec", "Index", "Login")</li>
+        </ul>
+    </div>
+    <div class="container body-content">
+      
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+        {
+            <fieldset>
+                <legend>Meld u aan</legend>
+
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @if (@ViewBag.Message != null)
+                {
+                    <div style="border: 1px solid red">
+                        @ViewBag.Message
+                    </div>
+                }
+            <table>
+                <tr>
+                    <td>@Html.LabelFor(a => a.UserName)</td>
+                    <td>@Html.TextBoxFor(a => a.UserName)</td>
+                    <td>@Html.ValidationMessageFor(a => a.UserName)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(a => a.Password)</td>
+                    <td>@Html.TextBoxFor(a => a.Password,  new { @type = "password" })</td>
+                    <td>@Html.ValidationMessageFor(a => a.Password)</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Login" />
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+            </fieldset>
+        }
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Festispec application</p>
+            </footer>
+        </div>
+    </body>
+</html>
