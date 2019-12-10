@@ -1,9 +1,11 @@
 ﻿using Festispec.Domain;
 using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight.CommandWpf;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +39,8 @@ namespace Festispec.ViewModel.Inspections
                 Inspections = new ObservableCollection<InspectionVM>(inspections);
                 Console.WriteLine();
             }
+
+            CreateOfflineInspectionData();
         }
 
         private void NavigateAddInspection()
@@ -48,6 +52,21 @@ namespace Festispec.ViewModel.Inspections
         {
             _service.SelectedInspection = inspection;
             _main.SetPage("EditInspection", false);
+        }
+        private void CreateOfflineInspectionData()
+        {
+            // TODO When login is up to date make user dynamic
+            string fileContent = JsonConvert.SerializeObject(Inspections);
+
+            string fileName = "Inspections.json";
+            string path = Path.Combine(Environment.CurrentDirectory, @"Offline\", fileName);
+
+            Directory.CreateDirectory("Offline");
+
+            using (StreamWriter outputFile = new StreamWriter(path))
+            {
+                outputFile.WriteLine(fileContent);
+            }
         }
     }
 }

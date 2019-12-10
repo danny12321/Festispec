@@ -3,9 +3,11 @@ using Festispec.View.FestivalViews;
 using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,6 +50,8 @@ namespace Festispec.ViewModel.FestivalVMs
             }
             ShowFestival = new RelayCommand(ShowFestivalInfo);
             ShowAddInspection = new RelayCommand(NavigateInspection);
+
+            CreateOfflineFestivalData();
         }
 
         private void ShowFestivalInfo()
@@ -58,6 +62,22 @@ namespace Festispec.ViewModel.FestivalVMs
         private void NavigateInspection()
         {
             _main.SetPage("Inspections", false);
+        }
+
+        private void CreateOfflineFestivalData()
+        {
+            // TODO When login is up to date make user dynamic
+            string fileContent = JsonConvert.SerializeObject(FestivalList.ToList());
+
+            string fileName = "Festivals.json";
+            string path = Path.Combine(Environment.CurrentDirectory, @"Offline\", fileName);
+
+            Directory.CreateDirectory("Offline");
+
+            using (StreamWriter outputFile = new StreamWriter(path))
+            {
+                outputFile.WriteLine(fileContent);
+            }
         }
     }
 }

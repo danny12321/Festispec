@@ -3,10 +3,13 @@ using Festispec.Utils;
 using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -145,6 +148,8 @@ namespace Festispec.ViewModel.Inspections
             {
                 FestivalMaps = Festival;
             }
+
+            CreateOfflineInspectionData();
         }
 
         private void EditInspection()
@@ -285,6 +290,39 @@ namespace Festispec.ViewModel.Inspections
 
         private void Debug()
         {
+            Console.WriteLine();
+        }
+
+        private void CreateOfflineInspectionData()
+        {
+            string fileName = "Inspections.json";
+            string path = Path.Combine(Environment.CurrentDirectory, @"Offline\", fileName);
+            string jsonInspectionsData = File.ReadAllText(path);
+            JArray parsedInspectionJson = JArray.Parse(jsonInspectionsData);
+
+            JObject chaningItem = null;
+
+            foreach (JObject item in parsedInspectionJson)
+            {
+                int id = int.Parse(item.GetValue("Id").ToString());
+                if (id == _inspetionId)
+                {
+                    chaningItem = item;
+                }
+            }
+
+            chaningItem.AddAfterSelf(JObject.FromObject(SelectedInspectors));
+
+            //var inspections = new { JsonConvert.DeserializeObject(jsonInspectionsData) };
+            //var anonObject = new { inspections };
+
+            //anonObject.ForEach(a =>
+            //{
+            //    if (i.Id == _inspetionId)
+            //    {
+            //        a.newdata = "s";
+            //    }
+            //});
             Console.WriteLine();
         }
     }

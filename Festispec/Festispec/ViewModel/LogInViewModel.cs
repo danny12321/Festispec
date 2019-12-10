@@ -2,9 +2,11 @@
 using Festispec.View;
 using Festispec.ViewModel.AccountsVM;
 using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
@@ -30,9 +32,16 @@ namespace Festispec.ViewModel
         public string Password { get; set; }
 
 
+        public bool ShowOfflineButton { get; set; }
         public LoginViewModel()
         {
             LoginCommand = new RelayCommand(Login);
+            ShowOfflineButton = false;
+
+            if (HasInternetConnection() && HasOfflineData())
+            {
+                ShowOfflineButton = true;
+            }
         }
 
         public string CalculateMD5Hash(string input)
@@ -91,6 +100,47 @@ namespace Festispec.ViewModel
                 // inloggegevens zijn fout
                 new PopUpWindow().Show();
             }
+
+            CreateOfflineUserData();
         }
+
+        private bool HasInternetConnection()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                using (client.OpenRead("http://google.com/generate_204"))
+                    return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private bool HasOfflineData()
+        {
+            string fileName = "User.json";
+            string path = Path.Combine(Environment.CurrentDirectory, @"Offline\", fileName);
+
+            return File.Exists(path);
+        }
+
+        private void CreateOfflineUserData()
+        {
+            // TODO When login is up to date make user dynamic
+            string fileContent = JsonConvert.SerializeObject(new { Firstname = "Testname", Lastname = "Testlastname", Roles = new string[] { "Admin" } }); ;
+            
+            string fileName = "User.json";
+            string path = Path.Combine(Environment.CurrentDirectory, @"Offline\", fileName);
+
+            Directory.CreateDirectory("Offline");
+
+            using (StreamWriter outputFile = new StreamWriter(path))
+            {
+                outputFile.WriteLine(fileContent);
+            }
+        }
+
     }
 }
