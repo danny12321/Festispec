@@ -18,16 +18,20 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
+        <Border BorderBrush="Black" BorderThickness="2" ></Border>
         <StackPanel Margin="40,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock FontSize="30" Text="{Binding RevenueAmount}" HorizontalAlignment="Center"/>
             <TextBlock FontSize="25" Text="Omzet deze maand" HorizontalAlignment="Center"/>
             <TextBlock FontSize="10" Text="Berekent van de offertes" HorizontalAlignment="Center"/>
         </StackPanel>
+        <Border Grid.Column="1" BorderBrush="Black" BorderThickness="2" ></Border>
         <StackPanel Grid.Column="1" Margin="40,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock FontSize="30" Text="{Binding Inspectors.Count}" HorizontalAlignment="Center"/>
             <TextBlock FontSize="25" Text="Inspecteurs in dienst"/>
         </StackPanel>
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="2" ></Border>
         <StackPanel Grid.Row="1" Margin="40,0,0,0" >
+            <TextBlock FontSize="30" Text="{Binding CurrentYear}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Left" Height="400">
                 <lvc:CartesianChart.AxisX>
                     <lvc:Axis Title="Maand" Labels="{Binding Labels}"></lvc:Axis>
@@ -37,7 +41,9 @@
                 </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>
         </StackPanel>
+        <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="2" ></Border>
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="40,0,0,0" >
+            <TextBlock FontSize="30" Text="{Binding CurrentYear}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <lvc:CartesianChart Series="{Binding SeriesCollection2}" LegendLocation="Right" Height="400" >
                 <lvc:CartesianChart.AxisY>
                     <lvc:Axis Title="Opbrengst" LabelFormatter="{Binding YFormatter}"></lvc:Axis>

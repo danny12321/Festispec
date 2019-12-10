@@ -40,6 +40,7 @@ namespace Festispec.ViewModel.DashboardVM
         private double _november2;
         private double _december2;
 
+        public string CurrentYear { get; set; }
         public ObservableCollection<InspectorviewModel> Inspectors { get; set; }
         public string RevenueAmount { get; set; }
         public SeriesCollection SeriesCollection { get; set; }
@@ -50,46 +51,43 @@ namespace Festispec.ViewModel.DashboardVM
 
         public ManageDashboardVM()
         {
+            CurrentYear = DateTime.Now.Year.ToString();
             using (var context = new FestispecEntities())
             {
-
                 var inspectors = context.Inspectors.ToList();
                 var quotation = context.Quotations.ToList();
                 var inspections = context.Inspections.ToList();
 
                 Inspectors = new ObservableCollection<InspectorviewModel>(inspectors.Select(i => new InspectorviewModel(i)).Where(i => i.Active != null));
-                // check voor deze maand en of ze accepted zijn
-                var sum = quotation.Select(q => q.price).Sum();
+                var sum = quotation.Where(q => q.approved.Month == DateTime.Now.Month).Select(q => q.price).Sum();
                 var text = (double)sum;
                 RevenueAmount = "€" + text.ToString();
 
-                // check voor elke maand inspecties en effe kijken wat te doen met jaar
-                _january = inspections.Select(i => i.id).Count();
-                _february = inspections.Select(i => i.id).Count();
-                _march = inspections.Select(i => i.id).Count();
-                _april = inspections.Select(i => i.id).Count();
-                _may = inspections.Select(i => i.id).Count();
-                _june = inspections.Select(i => i.id).Count();
-                _july = inspections.Select(i => i.id).Count();
-                _august = inspections.Select(i => i.id).Count();
-                _september = inspections.Select(i => i.id).Count();
-                _october = inspections.Select(i => i.id).Count();
-                _november = inspections.Select(i => i.id).Count();
-                _december = inspections.Select(i => i.id).Count();
+                _january = inspections.Where(i => i.start_date.Month == 1 && i.start_date.Year == DateTime.Now.Year).Select(i => i.id).Count();
+                _february = inspections.Where(i => i.start_date.Month == 2 && i.start_date.Year == DateTime.Now.Year).Select(i => i.id).Count();
+                _march = inspections.Where(i => i.start_date.Month == 3 && i.start_date.Year == DateTime.Now.Year).Select(i => i.id).Count();
+                _april = inspections.Where(i => i.start_date.Month == 4 && i.start_date.Year == DateTime.Now.Year).Select(i => i.id).Count();
+                _may = inspections.Where(i => i.start_date.Month == 5 && i.start_date.Year == DateTime.Now.Year).Select(i => i.id).Count();
+                _june = inspections.Where(i => i.start_date.Month == 6 && i.start_date.Year == DateTime.Now.Year).Select(i => i.id).Count();
+                _july = inspections.Where(i => i.start_date.Month == 7 && i.start_date.Year == DateTime.Now.Year).Select(i => i.id).Count();
+                _august = inspections.Where(i => i.start_date.Month == 8 && i.start_date.Year == DateTime.Now.Year).Select(i => i.id).Count();
+                _september = inspections.Where(i => i.start_date.Month == 9 && i.start_date.Year == DateTime.Now.Year).Select(i => i.id).Count();
+                _october = inspections.Where(i => i.start_date.Month == 10 && i.start_date.Year == DateTime.Now.Year).Select(i => i.id).Count();
+                _november = inspections.Where(i => i.start_date.Month == 11 && i.start_date.Year == DateTime.Now.Year).Select(i => i.id).Count();
+                _december = inspections.Where(i => i.start_date.Month == 12 && i.start_date.Year == DateTime.Now.Year).Select(i => i.id).Count();
 
-                // check voor elke maand offertes en effe kijken wat te doen met jaar
-                _january2 = (double)quotation.Select(q => q.price).Sum();
-                _february2 = (double)quotation.Select(q => q.price).Sum();
-                _march2 = (double)quotation.Select(q => q.price).Sum();
-                _april2 = (double)quotation.Select(q => q.price).Sum();
-                _may2 = (double)quotation.Select(q => q.price).Sum();
-                _june2 = (double)quotation.Select(q => q.price).Sum();
-                _july2 = (double)quotation.Select(q => q.price).Sum();
-                _august2 = (double)quotation.Select(q => q.price).Sum();
-                _september2 = (double)quotation.Select(q => q.price).Sum();
-                _october2 = (double)quotation.Select(q => q.price).Sum();
-                _november2 = (double)quotation.Select(q => q.price).Sum();
-                _december2 = (double)quotation.Select(q => q.price).Sum();
+                _january2 = (double)quotation.Where(q => q.approved.Month == 1 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
+                _february2 = (double)quotation.Where(q => q.approved.Month == 2 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
+                _march2 = (double)quotation.Where(q => q.approved.Month == 3 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
+                _april2 = (double)quotation.Where(q => q.approved.Month == 4 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
+                _may2 = (double)quotation.Where(q => q.approved.Month == 5 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
+                _june2 = (double)quotation.Where(q => q.approved.Month == 6 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
+                _july2 = (double)quotation.Where(q => q.approved.Month == 7 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
+                _august2 = (double)quotation.Where(q => q.approved.Month == 8 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
+                _september2 = (double)quotation.Where(q => q.approved.Month == 9 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
+                _october2 = (double)quotation.Where(q => q.approved.Month == 10 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
+                _november2 = (double)quotation.Where(q => q.approved.Month == 11 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
+                _december2 = (double)quotation.Where(q => q.approved.Month == 12 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
 
             }
 
@@ -106,7 +104,7 @@ namespace Festispec.ViewModel.DashboardVM
             {
                 new LineSeries
                 {
-                    Title = "Series 1",
+                    Title = "Opbrengst",
                     Values = new ChartValues<double> { _january2, _february2, _march2, _april2, _may2, _june2, _july2, _august2, _september2, _october2, _november2, _december2 }
                 },
             };
