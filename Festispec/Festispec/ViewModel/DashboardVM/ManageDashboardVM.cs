@@ -12,10 +12,10 @@ namespace Festispec.ViewModel.DashboardVM
 {
     public class ManageDashboardVM : ViewModelBase
     {
-        private int _amountOfDays = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
+        private int _amountOfDays;
 
         public ObservableCollection<InspectorviewModel> Inspectors { get; set; }
-        public double RevenueAmount { get; set; }
+        public string RevenueAmount { get; set; }
         public ManageDashboardVM()
         {
             using (var context = new FestispecEntities())
@@ -26,7 +26,8 @@ namespace Festispec.ViewModel.DashboardVM
 
                 Inspectors = new ObservableCollection<InspectorviewModel>(inspectors.Select(i => new InspectorviewModel(i)).Where(i => i.Active != null));
                 var sum = quotation.Select(q => q.price).Sum();
-                RevenueAmount = (double)sum;
+                var text = (double)sum;
+                RevenueAmount = "€" + text.ToString();
             }
         }
     }
