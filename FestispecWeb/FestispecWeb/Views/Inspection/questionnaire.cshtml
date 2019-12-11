@@ -26,29 +26,30 @@
         {
         <div class="form__question">
             <h2>@Html.DisplayFor(modelItem => Model[i].Question.question)</h2>
+            <input type="hidden" name="[@i].Answers.question_id" value="@Model[i].Question.id" />
+
 
             @if (Model[i].Question.type_question == 1)
             {
-                @Html.EditorFor(model => Model[i].Answers.answer)
+                <input type="text" name="[@i].Answers.answer" />
             }
             else if (Model[i].Question.type_question == 2)
             {
                 foreach (var pasnwer in Model[i].Question.Possible_answer)
                 {
-                   // @Html.CheckBoxFor(x => pasnwer.answer)
-                    <input type="checkbox" name="@Model[i].Answers.answer"  @Html.EditorForModel()/> @pasnwer.answer <br />
+                    <input type="checkbox" name="@Model[i].Answers.answer" /> @pasnwer.answer <br />
                 }
             }
             else if (Model[i].Question.type_question == 3)
             {
                 foreach (var pasnwer in Model[i].Question.Possible_answer)
                 {
-                    <input type="radio" name="@Model[i].Answers.answer"  @Html.EditorForModel()/> @pasnwer.answer <br />
+                    <input type="radio" name="[@i].Answers.answer" /> @pasnwer.answer <br />
                 }
             }
             else if (Model[i].Question.type_question == 4)
             {
-                <input type="file" name="@Model[i].Answers.answer" accept="image/x-png,image/gif,image/jpeg"  @Html.EditorForModel()/> <br />
+                <input type="file" name="@Model[i].Answers.answer" accept="image/x-png,image/gif,image/jpeg" /> <br />
             }
             else
             {

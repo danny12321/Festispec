@@ -29,7 +29,7 @@ namespace FestispecWeb.Controllers
             }
             var inspection = db.Inspections.Find(id);
 
-            if(inspection == null)
+            if (inspection == null)
             {
                 return HttpNotFound();
             }
@@ -50,7 +50,7 @@ namespace FestispecWeb.Controllers
             }
             var questionaires = db.Questionnaires.Find(id);
 
-            if(questionaires == null)
+            if (questionaires == null)
             {
                 return HttpNotFound();
             }
@@ -68,13 +68,17 @@ namespace FestispecWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                foreach(var i in answerVMs)
+                foreach (var answerVM in answerVMs)
                 {
-                    db.Answers.Add(i.Answers);
+                    if (answerVM.Answers.answer != null)
+                    {
+                        db.Answers.Add(answerVM.Answers);
+                    }
                 }
                 db.SaveChanges();
             }
-            return View(db.Questions.ToList());
+
+            return Redirect("/");
         }
     }
 }
