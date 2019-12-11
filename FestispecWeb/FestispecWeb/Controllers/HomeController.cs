@@ -16,11 +16,6 @@ namespace FestispecWeb.Controllers
             return View();
         }
 
-        public ActionResult Planning()
-        {
-            return View();
-        }
-
         public ActionResult Questionnaires()
         {
             return View();

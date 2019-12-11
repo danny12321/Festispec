@@ -25,7 +25,6 @@ namespace FestispecWeb.Controllers
 
         public ContentResult Data()
         {
-            
             return (new SchedulerAjaxData(
                 new FestispecEntities().Inspectors_availability.
                     Select(e => new { e.id, e.start_date, e.end_date, e.inspector_id, e.text })
