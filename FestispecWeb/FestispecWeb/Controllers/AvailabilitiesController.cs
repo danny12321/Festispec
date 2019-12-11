@@ -12,6 +12,7 @@ namespace FestispecWeb.Controllers
 {
     public class AvailabilitiesController : Controller
     {
+        FestispecEntities db = new FestispecEntities();
         // GET: Availabilities
         public ActionResult Index()
         {
@@ -39,16 +40,17 @@ namespace FestispecWeb.Controllers
             var changedEvent = DHXEventsHelper.Bind<Inspectors_availability>(actionValues);
             
             var entities = new FestispecEntities();
-            var uemail = Session["username"];
-            var id1 = entities.Users.Where(u => u.email.Equals(uemail)).FirstOrDefault();
-            var id2 = (int)id1.inspector_id;
-            changedEvent.inspector_id = (int)entities.Users.Where(u => u.email.Equals(uemail)).Select(u => u.inspector_id).FirstOrDefault();
+            var uemail = (string)Session["username"];
+            
+
+           
+            
             try
             {
                 switch (action.Type)
                 {
                     case DataActionTypes.Insert:
-                        
+                        changedEvent.inspector_id = (int)entities.Users.Where(u => u.email.Equals(uemail)).Select(u => u.inspector_id).FirstOrDefault();
                         entities.Inspectors_availability.Add(changedEvent);
                         break;
                     case DataActionTypes.Delete:
