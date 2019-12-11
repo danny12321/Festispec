@@ -28,6 +28,11 @@ namespace FestispecWeb.Controllers
             
             return View(user);
         }
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login");
+        }
         public ActionResult Login()
         {
             return View();

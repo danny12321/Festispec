@@ -33,12 +33,12 @@
                 }
             <table>
                 <tr>
-                    <td>@Html.LabelFor(a => a.UserName)</td>
+                    <td>@Html.Label("Email")</td>
                     <td>@Html.TextBoxFor(a => a.UserName)</td>
                     <td>@Html.ValidationMessageFor(a => a.UserName)</td>
                 </tr>
                 <tr>
-                    <td>@Html.LabelFor(a => a.Password)</td>
+                    <td>@Html.Label("Wachtwoord")</td>
                     <td>@Html.TextBoxFor(a => a.Password,  new { @type = "password" })</td>
                     <td>@Html.ValidationMessageFor(a => a.Password)</td>
                 </tr>
@@ -52,10 +52,7 @@
             </table>
             </fieldset>
         }
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - Festispec application</p>
-            </footer>
+         
         </div>
     </body>
 </html>
