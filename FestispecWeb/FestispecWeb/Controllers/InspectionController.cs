@@ -55,7 +55,11 @@ namespace FestispecWeb.Controllers
                 return HttpNotFound();
             }
 
-            var qa = questionaires.Questions.Select(q => new AnswersVM() { Question = q });
+            var qa = questionaires.Questions.Select(q =>
+            {
+                var question = new AnswersVM() { Question = q };
+                return question;
+            });
             List<AnswersVM> answerVM = new List<AnswersVM>(qa);
 
             return View(answerVM);
@@ -70,11 +74,37 @@ namespace FestispecWeb.Controllers
             {
                 foreach (var answerVM in answerVMs)
                 {
-                    if (answerVM.Answers.answer != null)
-                    {
-                        db.Answers.Add(answerVM.Answers);
-                    }
+                    answerVM.Question = db.Questions.FirstOrDefault(q => q.id == answerVM.question_id);
+                    if (answerVM.Question == null) continue;
+
+                    var question = 1;
+
+                    //switch (Question.type_question)
+                    //{
+                    //    case 1:
+                    //        // Open vraag
+                    //        //db.Answers.Add(Answers[0]);
+                    //        break;
+                    //
+                    //    case 2:
+                    //        // Multiple choise vraag
+                    //        //db.Answers.Add(answerVM.Answers);
+                    //        //Answers.ForEach(answer =>
+                    //        //{
+                    //        //    Console.WriteLine(answer);
+                    //        //});
+                    //
+                    //
+                    //        break;
+                    //
+                    //    case 3:
+                    //        // Select vraag
+                    //        //db.Answers.Add(Answers[0]);
+                    //        break;
+                    //
+                    //}
                 }
+
                 db.SaveChanges();
             }
 

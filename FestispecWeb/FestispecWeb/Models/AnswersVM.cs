@@ -11,7 +11,8 @@ namespace FestispecWeb.Models
     {
         public Questions Question { get; set; }
 
-        public Answers Answers { get; set; } = new Answers();
+        public Answers[] Answers { get; set; } = new Answers[900];
 
+        public int question_id { get; set; }
     }
 }

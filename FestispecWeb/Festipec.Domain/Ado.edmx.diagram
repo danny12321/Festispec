@@ -20,7 +20,7 @@
         <EntityTypeShape EntityType="FestispecModel.Questions" Width="1.5" PointX="14.25" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Quotations" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Rolls" Width="1.5" PointX="7.5" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestispecModel.Type_contacts" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestispecModel.Type_contacts" Width="1.5" PointX="1" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Type_questions" Width="1.5" PointX="12" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Users" Width="1.5" PointX="9.75" PointY="7.5" IsExpanded="true" />
         <AssociationConnector Association="FestispecModel.FK_Answers_Questions" ManuallyRouted="false" />
