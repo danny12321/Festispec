@@ -120,7 +120,7 @@ namespace Festispec.ViewModel.Inspections
                 {
                     if (i.inspection_id == _inspetionId)
                     {
-                        var tempInspector = Inspectors.ToList().First(j => j.Inspector.id == i.inpector_id);
+                        var tempInspector = Inspectors.ToList().First(j => j.id == i.inpector_id);
 
                         if (tempInspector.HasPos)
                         {
@@ -167,7 +167,7 @@ namespace Festispec.ViewModel.Inspections
             {
                 SelectedInspectors.ToList().ForEach(i => {
                     var inspector_at_inspection = new Inspectors_at_inspection();
-                    inspector_at_inspection.inpector_id = i.Inspector.id;
+                    inspector_at_inspection.inpector_id = i.id;
                     inspector_at_inspection.inspection_id = _inspetionId;
                     InspectorsAtInspection.Add(new InspectorAtInspectionVM(inspector_at_inspection));
                 });
@@ -285,7 +285,7 @@ namespace Festispec.ViewModel.Inspections
         private async Task<TimeSpan> CalculateRouteDurationForInspector(InspectorsVM inspector)
         {
             RouteDurationCalculator routeDurationCalculator = new RouteDurationCalculator();
-            return await routeDurationCalculator.CalculateRoute(inspector.Inspector.longitude + "," + inspector.Inspector.latitude, Festival.Festivals.longitude + "," + Festival.Festivals.latitude).ConfigureAwait(false);
+            return await routeDurationCalculator.CalculateRoute(inspector.longitude + "," + inspector.latitude, Festival.Festivals.longitude + "," + Festival.Festivals.latitude).ConfigureAwait(false);
         }
 
         private void Debug()
@@ -296,22 +296,39 @@ namespace Festispec.ViewModel.Inspections
         private void CreateOfflineInspectionData()
         {
             string fileName = "Inspections.json";
-            string path = Path.Combine(Environment.CurrentDirectory, @"Offline\", fileName);
+            string path = Path.Combine(Environment.CurrentDirectory, @"Offline\", fileName); 
             string jsonInspectionsData = File.ReadAllText(path);
             JArray parsedInspectionJson = JArray.Parse(jsonInspectionsData);
 
             JObject chaningItem = null;
 
-            foreach (JObject item in parsedInspectionJson)
-            {
-                int id = int.Parse(item.GetValue("Id").ToString());
-                if (id == _inspetionId)
-                {
-                    chaningItem = item;
-                }
-            }
+            //foreach (JObject item in parsedInspectionJson)
+            //{
+            //    int id = int.Parse(item.GetValue("Id").ToString());
+            //    if (id == _inspetionId)
+            //    {
+            //        chaningItem = item;
+            //    }
+            //}
 
-            chaningItem.AddAfterSelf(JObject.FromObject(SelectedInspectors));
+            var item = parsedInspectionJson[0];
+            item["inspectors"] = JArray.FromObject(SelectedInspectors);
+            //parsedInspectionJson[0]["inspectors"].Add();
+
+            //parsedInspectionJson[0].AddAfterSelf("inspectors",);
+
+            //string fileContent = JsonConvert.SerializeObject(Inspections);
+            string fileContent = parsedInspectionJson.ToString();
+
+            string fileName1 = "Inspections.json";
+            string path1 = Path.Combine(Environment.CurrentDirectory, @"Offline\", fileName1);
+
+            Directory.CreateDirectory("Offline");
+
+            using (StreamWriter outputFile = new StreamWriter(path1))
+            {
+                outputFile.WriteLine(fileContent);
+            }
 
             //var inspections = new { JsonConvert.DeserializeObject(jsonInspectionsData) };
             //var anonObject = new { inspections };

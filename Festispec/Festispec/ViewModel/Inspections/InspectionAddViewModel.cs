@@ -143,7 +143,7 @@ namespace Festispec.ViewModel.Inspections
 
                 SelectedInspectors.ToList().ForEach(i => {
                     var inspector_at_inspection = new Inspectors_at_inspection();
-                    inspector_at_inspection.inpector_id = i.Inspector.id;
+                    inspector_at_inspection.inpector_id = i.id;
                     inspector_at_inspection.inspection_id = Inspection.Id;
                     InspectorsAtInspection.Add(new InspectorAtInspectionVM(inspector_at_inspection));
                 });
@@ -239,7 +239,7 @@ namespace Festispec.ViewModel.Inspections
         private async Task<TimeSpan> CalculateRouteDurationForInspector(InspectorsVM inspector)
         {
             RouteDurationCalculator routeDurationCalculator = new RouteDurationCalculator();
-            return await routeDurationCalculator.CalculateRoute(inspector.Inspector.longitude + "," + inspector.Inspector.latitude, Festival.Festivals.longitude + "," + Festival.Festivals.latitude).ConfigureAwait(false);
+            return await routeDurationCalculator.CalculateRoute(inspector.longitude + "," + inspector.latitude, Festival.Festivals.longitude + "," + Festival.Festivals.latitude).ConfigureAwait(false);
         }
 
         private void Debug()
