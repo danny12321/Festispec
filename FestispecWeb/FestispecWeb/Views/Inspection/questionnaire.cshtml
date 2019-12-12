@@ -17,42 +17,45 @@
     </div>
 </div>
 
-@using (Html.BeginForm("SaveAnswers", "Inspection", FormMethod.Post))
+@using (Html.BeginForm("SaveAnswers", "Inspection", 
+                        FormMethod.Post,  
+                        new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     <div>
-        @for(int i = 0; i < Model.Count; i++)
+        @for (int i = 0; i < Model.Count; i++)
         {
-        <div class="form__question">
+        <div class="form__question type_@Model[i].Question.type_question">
             <h2>@Html.DisplayFor(modelItem => Model[i].Question.question)</h2>
             <input type="hidden" name="[@i].Answers.question_id" value="@Model[i].Question.id" />
-            <input type="hidden" name="[@i].question_id" value="@Model[i].Question.id" />
+            <input type="hidden" name="[@i].question_id" value="@Model[i].Question.id" />   
 
 
             @if (Model[i].Question.type_question == 1)
             {
-                <input type="text" name="[@i].Answers.answer[0]" />
+                <input type="text" name="[@i].Answers[0].answer" />
             }
             else if (Model[i].Question.type_question == 2)
             {
 
                 for (int pa = 0; pa < Model[i].Question.Possible_answer.Count; pa++)
                 {
-                    //<input type="checkbox" name="@Model[i].Answers[pa].answer" /> <span>@Model[i].Question.Possible_answer.ElementAt(pa).answer</span> <br />
+                    <input class="checkbox_helper" type="hidden" name="[@i].Answers[@pa].answer" />
+                    <input class="checkbox" type="checkbox" data-string-value="@Model[i].Question.Possible_answer.ElementAt(pa).answer" /> <span>@Model[i].Question.Possible_answer.ElementAt(pa).answer</span> <br />
                 }
 
             }
             else if (Model[i].Question.type_question == 3)
             {
-                foreach (var pasnwer in Model[i].Question.Possible_answer)
+                for (int pa = 0; pa < Model[i].Question.Possible_answer.Count; pa++)
                 {
-                    <input type="radio" name="[@i].Answers.answer[0]" value="@pasnwer.answer" /> @pasnwer.answer <br />
+                    <input type="radio" name="[@i].Answers[0].answer" value="@Model[i].Question.Possible_answer.ElementAt(pa).answer" /> <span>@Model[i].Question.Possible_answer.ElementAt(pa).answer</span> <br />
                 }
             }
             else if (Model[i].Question.type_question == 4)
             {
-                // <input type="file" name="@Model[i].Answers.answer[0]" accept="image/x-png,image/gif,image/jpeg" /> <br />
+                <input class="image" type="file" name="[@i].Attachment" multiple accept="image/x-png,image/gif,image/jpeg" /> <br />
             }
             else
             {
@@ -69,6 +72,8 @@
 }
 
 
+
+@Scripts.Render("~/bundles/questionnaire")
 
 <style>
     .container2 {

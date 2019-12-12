@@ -3,6 +3,7 @@ using FestispecWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -58,8 +59,11 @@ namespace FestispecWeb.Controllers
             var qa = questionaires.Questions.Select(q =>
             {
                 var question = new AnswersVM() { Question = q };
+
+                db.Answers.Where(a => a.question_id == question.question_id).ToList().ForEach(answer => question.Answers.Add(answer));
                 return question;
             });
+
             List<AnswersVM> answerVM = new List<AnswersVM>(qa);
 
             return View(answerVM);
@@ -75,37 +79,63 @@ namespace FestispecWeb.Controllers
                 foreach (var answerVM in answerVMs)
                 {
                     answerVM.Question = db.Questions.FirstOrDefault(q => q.id == answerVM.question_id);
+                    if (answerVM.Answers != null)
+                        answerVM.Answers.ForEach(answer => answer.question_id = answerVM.question_id);
+                    else
+                        answerVM.Answers = new List<Answers>();
+
                     if (answerVM.Question == null) continue;
 
-                    var question = 1;
 
-                    //switch (Question.type_question)
-                    //{
-                    //    case 1:
-                    //        // Open vraag
-                    //        //db.Answers.Add(Answers[0]);
-                    //        break;
-                    //
-                    //    case 2:
-                    //        // Multiple choise vraag
-                    //        //db.Answers.Add(answerVM.Answers);
-                    //        //Answers.ForEach(answer =>
-                    //        //{
-                    //        //    Console.WriteLine(answer);
-                    //        //});
-                    //
-                    //
-                    //        break;
-                    //
-                    //    case 3:
-                    //        // Select vraag
-                    //        //db.Answers.Add(Answers[0]);
-                    //        break;
-                    //
-                    //}
+                    switch (answerVM.Question.type_question)
+                    {
+                        case 1: // Open vraag
+                            if (answerVM.Answers[0].answer != null)
+                                db.Answers.Add(answerVM.Answers[0]);
+                            break;
+
+                        case 2: // Multiple choise vraag
+                            answerVM.Answers.ForEach(answer =>
+                            {
+                                if (answer.answer != null)
+                                    db.Answers.Add(answer);
+                            });
+                            break;
+
+                        case 3: // Select vraag
+                            if (answerVM.Answers[0].answer != null)
+                                db.Answers.Add(answerVM.Answers[0]);
+                            break;
+
+                        case 4: // Images
+                            answerVM.Attachment.ForEach(attachment =>
+                            {
+                                MemoryStream target = new MemoryStream();
+                                attachment.InputStream.CopyTo(target);
+                                Byte[] bytes = target.ToArray();
+                                String file = Convert.ToBase64String(bytes);
+
+                                var a = new Answers()
+                                {
+                                    question_id = answerVM.Question.id,
+                                    answer = file
+                                };
+
+                                db.Answers.Add(a);
+                            });
+                            break;
+
+                    }
                 }
 
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
 
             return Redirect("/");

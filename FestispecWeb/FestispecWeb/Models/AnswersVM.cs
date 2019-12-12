@@ -11,7 +11,9 @@ namespace FestispecWeb.Models
     {
         public Questions Question { get; set; }
 
-        public Answers[] Answers { get; set; } = new Answers[900];
+        public List<Answers> Answers { get; set; } = new List<Answers>();
+
+        public List<HttpPostedFileBase> Attachment { get; set; }
 
         public int question_id { get; set; }
     }
