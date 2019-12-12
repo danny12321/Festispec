@@ -12,8 +12,6 @@ namespace FestispecWeb.Controllers
 {
     public class AvailabilitiesController : Controller
     {
-        FestispecEntities db = new FestispecEntities();
-        // GET: Availabilities
         public ActionResult Index()
         {
             var sched = new DHXScheduler(this);

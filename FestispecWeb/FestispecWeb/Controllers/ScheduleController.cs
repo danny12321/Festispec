@@ -12,7 +12,6 @@ namespace FestispecWeb.Controllers
 {
     public class ScheduleController : Controller
     {
-        // GET: Availabilities
         public ActionResult Index()
         {
             var sched = new DHXScheduler(this);
@@ -28,10 +27,11 @@ namespace FestispecWeb.Controllers
         {
             var uemail = (string)Session["username"];
             var entities = new FestispecEntities();
-            return (new SchedulerAjaxData(entities.Inspections.Select(e => new { e.id, e.start_date, e.end_date, e.description })
+            var user = (int)entities.Users.Where(u => u.email.Equals(uemail)).Select(u => u.inspector_id).FirstOrDefault();
+            var userinspectionid = entities.Inspectors_at_inspection.ToList().Where(i => i.inpector_id == user).Select(e => e.inspection_id);
+            return (new SchedulerAjaxData(entities.Inspections.Select(e => new { e.id, e.start_date, e.end_date, text = e.description}).Where(e => userinspectionid.Contains(e.id)).ToList()
                 )
             );
-
         }
     }
 }
