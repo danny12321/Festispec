@@ -26,12 +26,13 @@ namespace FestispecWeb.Controllers
 
         public ContentResult Data()
         {
-            
-            return (new SchedulerAjaxData(
-                new FestispecEntities().Inspectors_availability.
-                    Select(e => new { e.id, e.start_date, e.end_date, e.inspector_id, e.text })
+            var uemail = (string)Session["username"];
+            var entities = new FestispecEntities();
+            var user = (int)entities.Users.Where(u => u.email.Equals(uemail)).Select(u => u.inspector_id).FirstOrDefault();
+            return (new SchedulerAjaxData(entities.Inspectors_availability.
+                    Select(e => new { e.id, e.start_date, e.end_date, e.inspector_id, e.text }).Where(e => e.inspector_id == user)
                 )
-            );
+            ) ;
         } 
 
         public ContentResult Save(int? id, FormCollection actionValues)
