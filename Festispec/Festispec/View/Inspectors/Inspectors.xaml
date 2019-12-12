@@ -29,7 +29,7 @@
 
             <Button  Command="{Binding ShowAddInspector}"
                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                 ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                 ToolTip="Inspecteur toevoegen">
                 <materialDesign:PackIcon
                 Kind="Add"
                 Height="24"
@@ -49,7 +49,7 @@
                             <DataTemplate>
                                 <Button Command="{Binding DataContext.ShowEditInspector, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
-                                  ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                                  ToolTip="Inspecteur tonen">
                                     <materialDesign:PackIcon
                                     Kind="About"
                                     Height="24"

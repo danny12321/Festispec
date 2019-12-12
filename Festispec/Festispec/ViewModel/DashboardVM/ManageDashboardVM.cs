@@ -109,8 +109,8 @@ namespace Festispec.ViewModel.DashboardVM
                 },
             };
 
-            Labels = new[] { "Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "October", "November", "December", };
-            Formatter = value => value.ToString("N");
+            Labels = new[] { "Jan", "Feb", "Maart", "April", "Mei", "Juni", "Juli", "Aug", "Sept", "Oct", "Nov", "Dec", };
+            Formatter = value => value.ToString("N2");
             YFormatter = value => value.ToString("C");
 
         }

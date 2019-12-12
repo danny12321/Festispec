@@ -34,10 +34,18 @@
             <TextBlock FontSize="30" Text="{Binding CurrentYear}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Left" Height="400">
                 <lvc:CartesianChart.AxisX>
-                    <lvc:Axis FontSize="20" Title="Maand" Labels="{Binding Labels}"></lvc:Axis>
+                    <lvc:Axis FontSize="20" Title="Maand" Labels="{Binding Labels}">
+                        <lvc:Axis.Separator>
+                            <lvc:Separator Step="1" />
+                        </lvc:Axis.Separator>
+                    </lvc:Axis>
                 </lvc:CartesianChart.AxisX>
                 <lvc:CartesianChart.AxisY>
-                    <lvc:Axis FontSize="20" Title="Aantal inspecties" LabelFormatter="{Binding Formatter}"></lvc:Axis>
+                    <lvc:Axis MaxValue="50" FontSize="20" Title="Aantal inspecties" LabelFormatter="{Binding Formatter}">
+                        <lvc:Axis.Separator>
+                            <lvc:Separator Step="5" />
+                        </lvc:Axis.Separator>
+                    </lvc:Axis>
                 </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>
         </StackPanel>
@@ -46,10 +54,15 @@
             <TextBlock FontSize="30" Text="{Binding CurrentYear}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <lvc:CartesianChart Series="{Binding SeriesCollection2}" LegendLocation="Right" Height="400" >
                 <lvc:CartesianChart.AxisY>
-                    <lvc:Axis FontSize="20" Title="Opbrengst" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                    <lvc:Axis FontSize="20" Title="Opbrengst" LabelFormatter="{Binding YFormatter}">
+                    </lvc:Axis>
                 </lvc:CartesianChart.AxisY>
                 <lvc:CartesianChart.AxisX>
-                    <lvc:Axis FontSize="20" Title="Maand" Labels="{Binding Labels}"></lvc:Axis>
+                    <lvc:Axis FontSize="20" Title="Maand" Labels="{Binding Labels}">
+                        <lvc:Axis.Separator>
+                            <lvc:Separator Step="1" />
+                        </lvc:Axis.Separator>
+                    </lvc:Axis>
                 </lvc:CartesianChart.AxisX>
             </lvc:CartesianChart>
         </StackPanel>

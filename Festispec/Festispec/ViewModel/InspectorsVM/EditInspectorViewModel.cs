@@ -46,8 +46,7 @@ namespace Festispec.ViewModel.InspectorsVM
 
         public bool CanEditInspector()
         {
-            if (!IsEmptyField(_inspectorViewModel.SelectedInspector.Housenumber) && !IsEmptyField(_inspectorViewModel.SelectedInspector.InspectorFirstName) && !IsEmptyField(_inspectorViewModel.SelectedInspector.InspectorLastName) && !IsEmptyField(_inspectorViewModel.SelectedInspector.InspectorFirstName)
-                 && !IsEmptyField(_inspectorViewModel.SelectedInspector.Phone) && !IsEmptyField(_inspectorViewModel.SelectedInspector.PostalCode) && !IsEmptyField(_inspectorViewModel.SelectedInspector.Street))
+            if (!IsEmptyField(_inspectorViewModel.SelectedInspector.InspectorFirstName) && !IsEmptyField(_inspectorViewModel.SelectedInspector.InspectorLastName))
             {
                 return true;
             }

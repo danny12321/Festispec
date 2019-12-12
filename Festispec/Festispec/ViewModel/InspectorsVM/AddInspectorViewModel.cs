@@ -85,7 +85,7 @@ namespace Festispec.ViewModel.InspectorsVM
 
         private bool IsMatch()
         {
-            if (!IsEmptyField(Inspector.InspectorFirstName) && !IsEmptyField(Inspector.InspectorLastName) && !IsEmptyField(Inspector.PostalCode) && !IsEmptyField(Inspector.Street) && !IsEmptyField(Inspector.Housenumber))
+            if (!IsEmptyField(Inspector.InspectorFirstName) && !IsEmptyField(Inspector.InspectorLastName) && !IsEmptyField(Password))
             {
                 return true;
             }
