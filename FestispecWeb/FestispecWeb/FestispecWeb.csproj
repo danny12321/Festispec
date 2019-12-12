@@ -138,6 +138,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AnswersVM.cs" />
     <Compile Include="Models\InspectionVM.cs" />
     <Compile Include="Models\InspectorAvailability.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -397,13 +398,14 @@
     <Content Include="Views\Inspection\Inspections.cshtml" />
     <Content Include="Views\Inspection\Questionnaires.cshtml" />
     <Content Include="Views\Home\Questionnaires.cshtml" />
-    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Availabilities\Index.cshtml" />
     <Content Include="Views\Inspection\questionnaire.cshtml" />
     <Content Include="Views\Schedule\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

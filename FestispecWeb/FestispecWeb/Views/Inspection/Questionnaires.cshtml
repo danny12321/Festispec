@@ -22,6 +22,7 @@
 <h4><b>Inspectie gegevens:</b></h4>
 <p>Datum: @Model.Inspections.start_date.ToShortDateString()</p>
 <p>Tijd: @Model.Inspections.start_date.TimeOfDay</p>
+<p>Plek: @Model.Inspections.Festivals.country, @Model.Inspections.Festivals.city</p>
 <p>Locatie: @Model.Inspections.Festivals.street @Model.Inspections.Festivals.housenumber, @Model.Inspections.Festivals.postalcode</p>
 <br />
 
@@ -45,8 +46,6 @@
 
 </table>
 
-<button class="Afmelden"><p>Afmelden</p></button>
-
 <style>
     .container2 {
         background-color: #4B4B4B;
@@ -57,10 +56,4 @@
         margin-left: 10px;
     }
 
-    .Afmelden{
-        color: red;
-        width: 100px;
-        height: 30px;
-        float:right;
-    }
 </style>
