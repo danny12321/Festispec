@@ -2,7 +2,7 @@
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[version] [nvarchar](50) NULL,
 	[inspector_id] [int] NULL,
-	[inspection_id] [int] NOT NULL,
+	[inspection_id] [int] NULL,
 	[name] [nvarchar](50) NULL,
  CONSTRAINT [PK_Questionnaires] PRIMARY KEY CLUSTERED 
 (

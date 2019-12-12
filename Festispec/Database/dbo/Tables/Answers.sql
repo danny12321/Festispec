@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Answers](
 	[id] [int] IDENTITY(1,1) NOT NULL,
-	[answer] [nvarchar](200) NOT NULL,
+	[answer] NVARCHAR(MAX) NOT NULL,
 	[question_id] [int] NULL,
  CONSTRAINT [PK_Answers] PRIMARY KEY CLUSTERED 
 (
