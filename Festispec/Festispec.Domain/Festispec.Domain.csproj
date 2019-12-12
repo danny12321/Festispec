@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0-preview2-19525-03\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0-preview2-19525-03\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FA06CF98-785A-4EE0-A423-FD20CDC9DDDF}</ProjectGuid>
+    <ProjectGuid>{26F92110-69A7-4DFA-B246-625D32F30297}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Festispec.Domain</RootNamespace>
@@ -12,6 +13,8 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,10 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.0-preview2-19525-03\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.0-preview2-19525-03\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -55,21 +58,77 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ado.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="ado.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
     <Compile Include="ado.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ado.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Answers.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Clients.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contactpersons.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Festivals.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inspections.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inspectors.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inspectors_at_inspection.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inspectors_availability.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Laws.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Municipalities.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Possible_answer.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Questionnaires.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Questions.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Quotations.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rolls.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Type_contacts.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Type_questions.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Users.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="ado.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ado.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="ado.edmx.diagram">
       <DependentUpon>ado.edmx</DependentUpon>
     </None>
@@ -77,13 +136,27 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ado.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ado.Context.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="ado.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ado.edmx</DependentUpon>
+      <LastGenOutput>ado.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ado.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ado.edmx</DependentUpon>
+      <LastGenOutput>ado.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0-preview2-19525-03\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0-preview2-19525-03\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0-preview2-19525-03\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0-preview2-19525-03\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0-preview2-19525-03\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0-preview2-19525-03\build\EntityFramework.targets')" />
 </Project>

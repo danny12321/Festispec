@@ -1,0 +1,204 @@
+﻿      <Page x:Class="Festispec.View.Inspections.AddInspection"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Festispec.View.Inspections"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddInspection"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:System="clr-namespace:System;assembly=mscorlib"
+      xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+      DataContext="{Binding InspectionAdd, Source={StaticResource Locator}}">
+
+    <Page.Resources>
+        <DataTemplate x:Key="LogoTemplate">
+
+            <Canvas
+                m:MapLayer.Position="{Binding Pos}"
+                m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30"
+               >
+                <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type m:MapItemsControl}}, Path=DataContext.SelectInspectorCommand}"
+                        CommandParameter="{Binding}"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        BorderThickness="0" 
+                        Padding="0"
+                        ToolTip="{Binding Fullname}"
+                        >
+                    <materialDesign:PackIcon Kind="Location" Width="30" Height="30" Foreground="#FF3C3C3C"/>
+                </Button>
+            </Canvas>
+        </DataTemplate>
+        <DataTemplate x:Key="LogoTemplate1">
+
+            <Canvas
+                m:MapLayer.Position="{Binding Pos}"
+                m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30"
+               >
+                <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type m:MapItemsControl}}, Path=DataContext.DelectInspectorCommand}"
+                        CommandParameter="{Binding}"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        BorderThickness="0" 
+                        Padding="0"
+                        ToolTip="{Binding Fullname}"
+                        >
+                    <materialDesign:PackIcon Kind="Location" Width="30" Height="30" Foreground="#00a0f0"/>
+                </Button>
+            </Canvas>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Width="300" Grid.Column="0" Grid.Row="0" Height="500">
+            <Border BorderThickness="10">
+                <TextBox TextWrapping="Wrap"
+                            VerticalAlignment="Stretch"
+                            MinWidth="280"
+                            AcceptsReturn="True"
+                            VerticalScrollBarVisibility="Auto"
+                            SpellCheck.IsEnabled="True"
+                            materialDesign:HintAssist.Hint="Beschrijving"
+                            Height="80"
+                            Text="{Binding Inspection.Description}"></TextBox>
+            </Border>
+            <!--Begin time-->
+            <Border BorderThickness="10">
+                <StackPanel>
+                    <TextBlock>Start datum en tijd</TextBlock>
+
+                    <StackPanel Orientation="Horizontal">
+                        <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding StartDate}"/>
+                        <materialDesign:TimePicker
+                              Is24Hours="True"
+                              Margin="10,0,0,0"
+                              x:Name="PresetBeginTimePicker"
+                              Width="100"
+                              Text="{Binding StartTime}"
+                               />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border BorderThickness="10">
+                <StackPanel>
+                    <TextBlock>Eind datum en tijd</TextBlock>
+
+                    <StackPanel Orientation="Horizontal">
+                        <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding EndDate}"/>
+                        <materialDesign:TimePicker
+                              Is24Hours="True"
+                              Margin="10,0,0,0"
+                              x:Name="PresetEindTimePicker"
+                              Width="100"
+                              Text="{Binding EndTime}"
+                               />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Button Command="{Binding AddInspectionCommand}">Maak aan</Button>
+
+        </StackPanel>
+
+        <Border Grid.Column="1" Grid.Row="0">
+            <StackPanel>
+                <TextBlock FontSize="25">
+                    Inspecteurs
+                </TextBlock>
+                <ItemsControl
+                        ItemsSource="{Binding Inspectors}"
+                        VerticalContentAlignment="Top"  
+                        Width="300"
+                        ScrollViewer.VerticalScrollBarVisibility="Visible"
+                        ScrollViewer.CanContentScroll="False"
+                        x:Name="InspectorListBox"
+                        MaxHeight="800">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Grid.Column="1" FontSize="10" BorderBrush="Gray" Background="Transparent" Command="{Binding SetViewToSelectedPersonCommand}" CommandParameter="{Binding ElementName=MijnMap}" Content="{Binding Fullname}"></Button>
+                                <Button
+                                      Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                                      HorizontalAlignment="Left"
+                                      ToolTip="Selecteer inspecteur"
+                                      Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.SelectInspectorCommand}" CommandParameter="{Binding }">
+                                    <materialDesign:PackIcon Kind="ArrowRight" />
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Border>
+        <Border Grid.Column="2" Grid.Row="0">
+            <StackPanel>
+                <TextBlock FontSize="25">
+                    Geselecteerde inspecteurs
+                </TextBlock>
+                <ItemsControl
+                        ItemsSource="{Binding SelectedInspectors}"
+                        VerticalContentAlignment="Top"  
+                        Width="300"
+                        ScrollViewer.VerticalScrollBarVisibility="Visible"
+                        ScrollViewer.CanContentScroll="False"
+                        MaxHeight="800">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                
+                                <Button
+                                          Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                                          HorizontalAlignment="Left"
+                                         ToolTip="Selecteer inspecteur"
+                                          Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.DelectInspectorCommand}" CommandParameter="{Binding }">
+                                    <materialDesign:PackIcon Kind="ArrowLeft" />
+                                </Button>
+                                <Button Grid.Column="1" FontSize="10" BorderBrush="Gray" Background="Transparent" Command="{Binding SetViewToSelectedPersonCommand}" CommandParameter="{Binding ElementName=MijnMap}" Content="{Binding Fullname}"></Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Border>
+        <m:Map Grid.Column="3" Grid.Row="0" x:Name="MijnMap" CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo" Mode="Road" ZoomLevel="6" Center="52.0753513,5.7688085">
+            <m:Map.Children>
+
+                <m:MapItemsControl ItemTemplate="{StaticResource LogoTemplate}" ItemsSource="{Binding Inspectors}" >
+                </m:MapItemsControl>
+
+                <m:MapItemsControl ItemTemplate="{StaticResource LogoTemplate1}" ItemsSource="{Binding SelectedInspectors}" >
+                </m:MapItemsControl>
+
+                <!--Het festival-->
+                <Canvas
+                    m:MapLayer.Position="{Binding Festival.Pos}"
+                    m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30"
+                    >
+                    <Button
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        BorderThickness="0" 
+                        Padding="0"
+                        >
+                        <materialDesign:PackIcon Kind="Location" Width="30" Height="30" Foreground="#02e840"/>
+                    </Button>
+                </Canvas>
+
+            </m:Map.Children>
+        </m:Map>
+    </Grid>
+
+</Page>

@@ -1,0 +1,62 @@
+﻿<Page x:Class="Festispec.View.Inspectors.EditInspector"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Festispec.View.Inspectors"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      DataContext="{Binding EditInspector, Source={StaticResource Locator}}"
+      Title="EditInspector"
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
+    
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Border Padding="20">
+            <StackPanel>
+
+                <TextBlock Text="Inspecteur Bewerken" FontSize="25" Padding="0,10"/>
+
+                <TextBlock Text="Voornaam:"></TextBlock>
+                <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.InspectorFirstName, Mode=TwoWay}"></TextBox>
+                <TextBlock Text="Achternaam:"></TextBlock>
+                <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.InspectorLastName, Mode=TwoWay}"></TextBox>
+                <TextBlock Text="Geboorte Datum:"></TextBlock>
+                <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding  InspectorViewModel.SelectedInspector.Birthday,Mode=TwoWay}"/>
+                <TextBlock Text="Postcode:"></TextBlock>
+                <TextBox MaxLength="6" Text="{Binding InspectorViewModel.SelectedInspector.PostalCode, Mode=TwoWay}"></TextBox>
+                <TextBlock Text="Straat:"></TextBlock>
+                <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.Street, Mode=TwoWay}"></TextBox>
+                <TextBlock Text="Huisnummer:"></TextBlock>
+                <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.Housenumber, Mode=TwoWay}"></TextBox>
+                <TextBlock Text="TelefoonNummer:"></TextBlock>
+                <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.Phone, Mode=TwoWay}"></TextBox>
+                <TextBlock Text="Actief:"></TextBlock>
+                <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding  InspectorViewModel.SelectedInspector.Active,Mode=TwoWay}"/>
+
+
+                <Border Padding="10">
+                    <Button HorizontalAlignment="Right" Command="{Binding EditInspectorCommand}" CommandParameter="{Binding EditInspectorCommand}"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Width="100"
+                    ToolTip="Resource name: MaterialDesignRaisedButton">
+                        Opslaan
+                    </Button>
+                </Border>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>
