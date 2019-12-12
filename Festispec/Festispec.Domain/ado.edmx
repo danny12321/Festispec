@@ -154,6 +154,7 @@
           <Property Name="inspector_id" Type="int" />
           <Property Name="inspection_id" Type="int" />
           <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="finished" Type="datetime" />
         </EntityType>
         <EntityType Name="Questions">
           <Key>
@@ -732,6 +733,7 @@
           <Property Name="inspector_id" Type="Int32" />
           <Property Name="inspection_id" Type="Int32" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="finished" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Inspectors_at_inspection" Relationship="Self.FK_Questionnaires_Inspectors_at_inspection" FromRole="Questionnaires" ToRole="Inspectors_at_inspection" />
           <NavigationProperty Name="Questions" Relationship="Self.FK_Questions_Questionnaires" FromRole="Questionnaires" ToRole="Questions" />
         </EntityType>
@@ -1251,6 +1253,7 @@
                 <ScalarProperty Name="inspector_id" ColumnName="inspector_id" />
                 <ScalarProperty Name="inspection_id" ColumnName="inspection_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="finished" ColumnName="finished" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

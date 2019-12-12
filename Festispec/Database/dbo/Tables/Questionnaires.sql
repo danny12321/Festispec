@@ -4,7 +4,8 @@
 	[inspector_id] [int] NULL,
 	[inspection_id] [int] NULL,
 	[name] [nvarchar](50) NULL,
- CONSTRAINT [PK_Questionnaires] PRIMARY KEY CLUSTERED 
+ [finished] DATETIME NULL, 
+    CONSTRAINT [PK_Questionnaires] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
