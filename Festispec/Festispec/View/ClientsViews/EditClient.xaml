@@ -24,14 +24,8 @@
 
                 <TextBlock FontSize="20" Text="Bedrijfsnaam:"></TextBlock>
                 <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedClient.ClientName, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="20" Text="Postcode:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="6" Text="{Binding SelectedClient.PostalCode, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="20" Text="Straat:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedClient.Street, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="20" Text="Huisnummer:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedClient.Housenumber, Mode=TwoWay}"></TextBox>
                 <TextBlock FontSize="20" Text="Land:"></TextBlock>
-                <ComboBox
+                <ComboBox Width="100"
                         SelectedValue="{Binding Path=SelectedClient.Country}"
                         Margin="0 8 0 8"
                         HorizontalAlignment="Left">
@@ -44,6 +38,12 @@
                 </ComboBox>
                 <TextBlock FontSize="20" Text="Plaats:"></TextBlock>
                 <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedClient.City, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="20" Text="Postcode:"></TextBlock>
+                <TextBox FontSize="16" MaxLength="6" Text="{Binding SelectedClient.PostalCode, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="20" Text="Straat:"></TextBlock>
+                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedClient.Street, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="20" Text="Huisnummer:"></TextBlock>
+                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedClient.Housenumber, Mode=TwoWay}"></TextBox>
                 <TextBlock FontSize="20" Text="Telefoonnummer:"></TextBlock>
                 <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedClient.Phone, Mode=TwoWay}"></TextBox>
 

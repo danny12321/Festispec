@@ -23,16 +23,8 @@
 
                 <TextBlock FontSize="15" Text="Festival naam:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.FestivalName, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="15" Text="Postcode:"></TextBlock>
-                <TextBox FontSize="15" MaxLength="6" Text="{Binding SelectedFestival.PostalCode, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="15" Text="Plaats:"></TextBlock>
-                <TextBox FontSize="15" MaxLength="6" Text="{Binding SelectedFestival.City, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="15" Text="Straat:"></TextBlock>
-                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.Street, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="15" Text="Huisnummer:"></TextBlock>
-                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.HouseNumber, Mode=TwoWay}"></TextBox>
                 <TextBlock FontSize="20" Text="Land:"></TextBlock>
-                <ComboBox
+                <ComboBox Width="100"
                         SelectedValue="{Binding Path=SelectedFestival.Country}"
                         Margin="0 8 0 8"
                         HorizontalAlignment="Left">
@@ -43,6 +35,14 @@
                         België
                     </ComboBoxItem>
                 </ComboBox>
+                <TextBlock FontSize="15" Text="Plaats:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="6" Text="{Binding SelectedFestival.City, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Postcode:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="6" Text="{Binding SelectedFestival.PostalCode, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Straat:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.Street, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Huisnummer:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.HouseNumber, Mode=TwoWay}"></TextBox>
                 <TextBlock FontSize="15" Text="Begin datum:"></TextBlock>
                 <DatePicker Width="100" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="Locale Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" SelectedDate="{Binding StartDateBegin}" Text="{Binding StartDateBegin}"/>
                 <materialDesign:TimePicker materialDesign:HintAssist.Hint="Selecteer tijd" Is24Hours="True" SelectedTime="{Binding StartTime}"
