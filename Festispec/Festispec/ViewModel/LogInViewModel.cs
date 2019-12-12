@@ -1,8 +1,10 @@
 ﻿using Festispec.Domain;
 using Festispec.View;
 using Festispec.ViewModel.AccountsVM;
+using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,16 +28,20 @@ namespace Festispec.ViewModel
     public class LoginViewModel
     {
         public ICommand LoginCommand { get; set; }
+        public ICommand GoOfflineCommand { get; set; }
 
         public string Email { get; set; }
 
         public string Password { get; set; }
 
-
+        private IDataService _dataService;
         public bool ShowOfflineButton { get; set; }
-        public LoginViewModel()
+        public LoginViewModel(IDataService dataService)
         {
+            _dataService = dataService;
+
             LoginCommand = new RelayCommand(Login);
+            GoOfflineCommand = new RelayCommand(GoOffline);
             ShowOfflineButton = false;
 
             if (HasInternetConnection() && HasOfflineData())
@@ -129,7 +135,7 @@ namespace Festispec.ViewModel
         private void CreateOfflineUserData()
         {
             // TODO When login is up to date make user dynamic
-            string fileContent = JsonConvert.SerializeObject(new { Firstname = "Testname", Lastname = "Testlastname", Roles = new string[] { "Admin" } }); ;
+            string fileContent = JsonConvert.SerializeObject(new {Id = 1, Email = "email@mail.com", Firstname = "Testname", Lastname = "Testlastname", Roles = new string[] { "Admin" } }); ;
             
             string fileName = "User.json";
             string path = Path.Combine(Environment.CurrentDirectory, @"Offline\", fileName);
@@ -140,6 +146,27 @@ namespace Festispec.ViewModel
             {
                 outputFile.WriteLine(fileContent);
             }
+        }
+
+        private void GoOffline()
+        {
+            _dataService.IsOffline = true;
+
+            // Get old JSON
+            string fileName = "User.json";
+            string path = Path.Combine(Environment.CurrentDirectory, @"Offline\", fileName);
+            string jsonInspectionsData = File.ReadAllText(path);
+
+            // Parse JSON to object
+            JObject parsedUserJson = JObject.Parse(jsonInspectionsData);
+
+            // Nothing is done with this yet
+            var userVM = new UsersVM();
+            userVM.id = parsedUserJson["Id"].Value<int>();
+            userVM.email = parsedUserJson["Email"].ToString();
+
+            new BaseWindow().Show();
+            Application.Current.Windows[0].Close();
         }
 
     }

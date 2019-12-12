@@ -32,7 +32,11 @@ namespace Festispec.ViewModel.Inspections
                 return false;
             } 
         }
-
+        public InspectorsVM()
+        {
+            SetViewToSelectedPersonCommand = new RelayCommand<Map>(SetViewToSelectedPerson);
+            _inspector = new Inspectors();
+        }
         public InspectorsVM(Inspectors inspectors)
         {
             SetViewToSelectedPersonCommand = new RelayCommand<Map>(SetViewToSelectedPerson);

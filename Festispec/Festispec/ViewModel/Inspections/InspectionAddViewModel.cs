@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Microsoft.Maps.MapControl.WPF;
+using Newtonsoft.Json.Linq;
 
 namespace Festispec.ViewModel.Inspections
 {
@@ -19,7 +21,8 @@ namespace Festispec.ViewModel.Inspections
         private bool _useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt = false;
 
         private int _festivalId;
-    
+        private int _inspetionId;
+
         public ObservableCollection<InspectorsVM> Inspectors { get; set; }
         public ObservableCollection<InspectorsVM> InspectorsMaps { get; set; }
 
@@ -139,6 +142,7 @@ namespace Festispec.ViewModel.Inspections
                 {
                     context.Inspections.Add(Inspection.ToModel());
                     context.SaveChanges();
+                    _inspetionId = Inspection.ToModel().id;
                 }
 
                 SelectedInspectors.ToList().ForEach(i => {
@@ -157,6 +161,7 @@ namespace Festispec.ViewModel.Inspections
                     context.SaveChanges();
                 }
 
+                CreateOfflineInspectionData();
                 _main.SetPage("Inspections", false);
             } else
             {
@@ -165,6 +170,7 @@ namespace Festispec.ViewModel.Inspections
                 RaisePropertyChanged("ErrorMessage");
                 Console.WriteLine("Wrong input");
             }
+
 
         }
 
@@ -245,6 +251,45 @@ namespace Festispec.ViewModel.Inspections
         private void Debug()
         {
             Console.WriteLine();
+        }
+
+        private void CreateOfflineInspectionData()
+        {
+            // Get old JSON
+            string fileName = "Inspections.json";
+            string path = Path.Combine(Environment.CurrentDirectory, @"Offline\", fileName);
+            string jsonInspectionsData = File.ReadAllText(path);
+
+            // Parse JSON to object
+            JArray parsedInspectionJson = JArray.Parse(jsonInspectionsData);
+
+            // Check wich inspection are allready in json file
+            // And add the one who is not in there
+
+            parsedInspectionJson.Add(JObject.FromObject(Inspection));
+            // Change the active inspection
+            //for (int i = 0; i < parsedInspectionJson.Count; i++)
+            //{
+            //    var item = parsedInspectionJson[i];
+            //    if (int.Parse(item["Id"].ToString()) == _inspetionId)
+            //    {
+            //        item["notSelectedInspectors"] = JArray.FromObject(Inspectors);
+            //        item["selectedInspectors"] = JArray.FromObject(SelectedInspectors);
+            //    }
+            //}
+            parsedInspectionJson[parsedInspectionJson.Count - 1]["notSelectedInspectors"] = JArray.FromObject(Inspectors);
+            parsedInspectionJson[parsedInspectionJson.Count - 1]["selectedInspectors"] = JArray.FromObject(SelectedInspectors);
+
+            // Save JSON
+            string fileContent = parsedInspectionJson.ToString();
+
+            Directory.CreateDirectory("Offline");
+
+            using (StreamWriter outputFile = new StreamWriter(path))
+            {
+                outputFile.WriteLine(fileContent);
+            }
+
         }
     }
 }
