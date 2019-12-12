@@ -41,10 +41,7 @@ namespace FestispecWeb.Controllers
             
             var entities = new FestispecEntities();
             var uemail = (string)Session["username"];
-            
-
-           
-            
+              
             try
             {
                 switch (action.Type)
@@ -58,8 +55,12 @@ namespace FestispecWeb.Controllers
                         entities.Inspectors_availability.Remove(changedEvent);
                         break;
                     default:// "update"
-                        var target = entities.Inspectors_availability.Single(e => e.id == changedEvent.id);
-                        DHXEventsHelper.Update(target, changedEvent, new List<string> { "id" });
+                        var eventToUpdate = entities.Inspectors_availability.SingleOrDefault(ev => ev.id == action.SourceId);
+                        eventToUpdate.id = changedEvent.id;
+                        eventToUpdate.start_date = changedEvent.start_date;
+                        eventToUpdate.end_date = changedEvent.end_date;
+                        eventToUpdate.text = changedEvent.text;
+                        entities.SaveChanges();
                         break;
                 }
                 entities.SaveChanges();
