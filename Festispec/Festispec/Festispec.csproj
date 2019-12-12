@@ -151,6 +151,8 @@
     <Compile Include="ViewModel\Questionnaires\Types\MultipleChoiseQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Types\OpenQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Types\SelectQuestion.cs" />
+    <Compile Include="ViewModel\QuotationsVM\QuotationListViewModel.cs" />
+    <Compile Include="ViewModel\QuotationsVM\QuotationViewModel.cs" />
     <Compile Include="ViewModel\ScheduleVM\ScheduleColumnVM.cs" />
     <Compile Include="ViewModel\ScheduleVM\ScheduleVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -243,6 +245,18 @@
     </Compile>
     <Compile Include="View\Questionnaires\Types\SelectPreview.xaml.cs">
       <DependentUpon>SelectPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Quotations\AddQuotation.xaml.cs">
+      <DependentUpon>AddQuotation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Quotations\EditQuotation.xaml.cs">
+      <DependentUpon>EditQuotation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Quotations\Quotation.xaml.cs">
+      <DependentUpon>Quotation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Quotations\Quotations.xaml.cs">
+      <DependentUpon>Quotations.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Schedule\Schedule.xaml.cs">
       <DependentUpon>Schedule.xaml</DependentUpon>
@@ -392,6 +406,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Questionnaires\Types\SelectPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Quotations\AddQuotation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Quotations\EditQuotation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Quotations\Quotation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Quotations\Quotations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

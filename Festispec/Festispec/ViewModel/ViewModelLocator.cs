@@ -11,6 +11,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Festispec.ViewModel.ContactPersonsVM;
 using Festispec.ViewModel.DashboardVM;
+using Festispec.ViewModel.QuotationsVM;
 
 namespace Festispec.ViewModel
 {
@@ -256,6 +257,14 @@ namespace Festispec.ViewModel
                 return new ManageDashboardVM();
             }
         }
+        public QuotationListViewModel QuotationListVM
+        {
+            get
+            {
+                return new QuotationListViewModel(ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+
 
         public static void Cleanup()
         {
