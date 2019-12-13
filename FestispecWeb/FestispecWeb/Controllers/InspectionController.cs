@@ -59,8 +59,19 @@ namespace FestispecWeb.Controllers
             var qa = questionaires.Questions.Select(q =>
             {
                 var question = new AnswersVM() { Question = q };
+                //var answers = db.Answers.Where(a => a.question_id == q.id).GroupBy(o => o.insertdate).ToList().LastOrDefault().ToList();
+                var answers = new List<Answers>();
 
-                db.Answers.Where(a => a.question_id == question.question_id).ToList().ForEach(answer => question.Answers.Add(answer));
+                if (q.type_question == 4)
+                {
+                    answers = db.Answers.Where(a => a.question_id == q.id).ToList();
+                }
+                else
+                {
+                    answers = db.Answers.Where(a => a.question_id == q.id).GroupBy(o => o.insertdate).ToList().LastOrDefault().ToList();
+                }
+
+                answers.ForEach(answer => question.Answers.Add(answer));
                 return question;
             });
 
@@ -73,6 +84,7 @@ namespace FestispecWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SaveAnswers(List<AnswersVM> answerVMs)
         {
+            var dateNow = DateTime.Now;
 
             if (ModelState.IsValid)
             {
@@ -80,7 +92,7 @@ namespace FestispecWeb.Controllers
                 {
                     answerVM.Question = db.Questions.FirstOrDefault(q => q.id == answerVM.question_id);
                     if (answerVM.Answers != null)
-                        answerVM.Answers.ForEach(answer => answer.question_id = answerVM.question_id);
+                        answerVM.Answers.ForEach(answer => { answer.question_id = answerVM.question_id; answer.insertdate = dateNow; });
                     else
                         answerVM.Answers = new List<Answers>();
 
@@ -90,7 +102,7 @@ namespace FestispecWeb.Controllers
                     switch (answerVM.Question.type_question)
                     {
                         case 1: // Open vraag
-                            if (answerVM.Answers[0].answer != null)
+                            if (answerVM.Answers.Count > 0 && answerVM.Answers[0].answer != null)
                                 db.Answers.Add(answerVM.Answers[0]);
                             break;
 
@@ -103,13 +115,15 @@ namespace FestispecWeb.Controllers
                             break;
 
                         case 3: // Select vraag
-                            if (answerVM.Answers[0].answer != null)
+                            if (answerVM.Answers.Count > 0 && answerVM.Answers[0].answer != null)
                                 db.Answers.Add(answerVM.Answers[0]);
                             break;
 
                         case 4: // Images
-                            answerVM.Attachment.ForEach(attachment =>
+                            foreach(var attachment in answerVM.Attachment)
                             {
+                                if (attachment == null) continue;
+                                
                                 MemoryStream target = new MemoryStream();
                                 attachment.InputStream.CopyTo(target);
                                 Byte[] bytes = target.ToArray();
@@ -118,11 +132,12 @@ namespace FestispecWeb.Controllers
                                 var a = new Answers()
                                 {
                                     question_id = answerVM.Question.id,
-                                    answer = file
+                                    answer = file,
+                                    insertdate = dateNow
                                 };
 
                                 db.Answers.Add(a);
-                            });
+                            };
                             break;
 
                     }

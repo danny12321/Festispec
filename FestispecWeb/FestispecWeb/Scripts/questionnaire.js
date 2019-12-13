@@ -24,7 +24,6 @@ function questionnaireHandleTypeMultipleChoise(question) {
 
     function handleCheckbox(checkbox, helper) {
         checkbox.addEventListener("change", function () {
-            console.log(checkbox.getAttribute("data-string-value"), checkbox)
             if (checkbox.checked) helper.value = checkbox.getAttribute("data-string-value");
             else helper.value = null;
         });

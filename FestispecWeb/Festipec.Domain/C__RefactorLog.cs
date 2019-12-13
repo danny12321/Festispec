@@ -12,13 +12,8 @@ namespace Festipec.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Answers
+    public partial class C__RefactorLog
     {
-        public int id { get; set; }
-        public string answer { get; set; }
-        public Nullable<int> question_id { get; set; }
-        public System.DateTime insertdate { get; set; }
-    
-        public virtual Questions Questions { get; set; }
+        public System.Guid OperationKey { get; set; }
     }
 }
