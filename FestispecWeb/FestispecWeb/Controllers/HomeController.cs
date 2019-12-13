@@ -46,11 +46,6 @@ namespace FestispecWeb.Controllers
             return RedirectToAction("Login");
         }
 
-        public ActionResult Planning()
-        {
-            return View();
-        }
-
         public ActionResult Questionnaires()
         {
             return View();

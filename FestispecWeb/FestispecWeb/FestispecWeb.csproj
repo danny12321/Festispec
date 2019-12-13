@@ -134,6 +134,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InspectionController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -148,6 +149,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\dhtmlxScheduler\dhtmlxscheduler-responsive-classic.css" />
+    <Content Include="Content\dhtmlxScheduler\dhtmlxscheduler-responsive.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -155,6 +158,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler-responsive.js" />
     <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler.css" />
     <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler.js" />
     <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler_contrast_black.css" />
@@ -392,13 +396,13 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Planning.cshtml" />
     <Content Include="Views\Inspection\Inspections.cshtml" />
     <Content Include="Views\Inspection\Questionnaires.cshtml" />
     <Content Include="Views\Home\Questionnaires.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Availabilities\Index.cshtml" />
     <Content Include="Views\Inspection\questionnaire.cshtml" />
+    <Content Include="Views\Schedule\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
