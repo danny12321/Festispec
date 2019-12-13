@@ -19,9 +19,12 @@ namespace FestispecWeb.Controllers
         {
             var uemail = (string)Session["username"];
             var user = (int)db.Users.Where(u => u.email.Equals(uemail)).Select(u => u.inspector_id).FirstOrDefault();
-            var userinspectionid = db.Inspectors_at_inspection.ToList().Where(i => i.inpector_id == user).Select(e => e.inspection_id);
+            var userinspectionid = db.Inspectors_at_inspection.ToList().Where(i => i.inpector_id == user).Select(e => e.inspection_id).ToList();
 
-            return View(db.Inspections.Where(i => userinspectionid.Contains(i.id)).ToList());
+            
+            var inspections = db.Inspections.ToList().Where(i => userinspectionid.Contains(i.id)).ToList();
+
+            return View(inspections);
         }
 
         public ActionResult Questionnaires(int? id)
