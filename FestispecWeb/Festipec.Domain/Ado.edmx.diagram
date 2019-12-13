@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1d22a8ff9a6044c1a83da99e306b6130" Name="Diagram1">
+      <Diagram DiagramId="d6a286e790404a909482410f86c310fd" Name="Diagram1">
         <EntityTypeShape EntityType="FestispecModel.C__RefactorLog" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Answers" Width="1.5" PointX="16.5" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Clients" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
@@ -17,7 +17,7 @@
         <EntityTypeShape EntityType="FestispecModel.Laws" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Municipalities" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Possible_answer" Width="1.5" PointX="16.5" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestispecModel.Questionnaires" Width="1.5" PointX="12" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FestispecModel.Questionnaires" Width="1.5" PointX="12" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Questions" Width="1.5" PointX="14.25" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Quotations" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Rolls" Width="1.5" PointX="7.5" PointY="1.875" IsExpanded="true" />

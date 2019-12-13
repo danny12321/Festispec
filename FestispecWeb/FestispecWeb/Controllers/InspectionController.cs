@@ -35,7 +35,7 @@ namespace FestispecWeb.Controllers
                 return HttpNotFound();
             }
 
-            InspectionVM.Questionnaires = db.Questionnaires.ToList().Where(s => s.inspection_id == id);
+            InspectionVM.Questionnaires = db.Questionnaires.ToList().Where(s => (s.inspection_id == id) && (s.finished == null));
             InspectionVM.Inspections = inspection;
 
 
