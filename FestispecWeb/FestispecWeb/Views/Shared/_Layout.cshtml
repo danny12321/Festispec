@@ -17,16 +17,22 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Festispec", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
             </div>
+
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Werkrooster", "Planning", "Home")</li>
                     <li>@Html.ActionLink("Inspecties", "Inspections", "Inspection")</li>
                     <li>@Html.ActionLink("Beschikbaarheid", "Index", "Availabilities")</li>
+                    <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+                    <li><a>@Session["username"]</a></li>
                 </ul>
             </div>
+            
         </div>
+        
     </div>
     <div class="container body-content">
         @RenderBody()

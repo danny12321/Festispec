@@ -9,17 +9,17 @@ namespace FestispecWeb.Controllers
 {
     public class LoginController : Controller
     {
-       [ HttpPost]  
-
-       
-        public ActionResult Login()
+       [HttpPost]  
+        public ActionResult Login(LoginModel user)
         {
-            return View();
+            Session["username"] = user.UserName;
+            return View(user);
         }
 
         //This action will be called when the login is successful
         public ActionResult UserLandingView()
         {
+            
             return View();
         }
     }
