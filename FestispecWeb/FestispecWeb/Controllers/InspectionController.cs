@@ -42,7 +42,13 @@ namespace FestispecWeb.Controllers
                 return HttpNotFound();
             }
 
-            InspectionVM.Questionnaires = db.Questionnaires.ToList().Where(s => (s.inspection_id == id) && (s.finished == null));
+            var uemail = (string)Session["username"];
+            var user = (int)db.Users.Where(u => u.email.Equals(uemail)).Select(u => u.inspector_id).FirstOrDefault();
+            var userinspectionid = db.Inspectors_at_inspection.ToList().Where(i => i.inpector_id == user).Select(e => e.inspection_id).ToList();
+
+            var temp = db.Questionnaires.ToList().Where(s => (s.inspection_id == id) && (!userinspectionid.Contains((int)s.inspector_id)) && (s.finished == null)).ToList();
+
+            InspectionVM.Questionnaires = temp;
             InspectionVM.Inspections = inspection;
 
 
@@ -75,7 +81,10 @@ namespace FestispecWeb.Controllers
                 }
                 else
                 {
-                    answers = db.Answers.Where(a => a.question_id == q.id).GroupBy(o => o.insertdate).ToList().LastOrDefault().ToList();
+                    if(answers != null)
+                    {
+                        answers = db.Answers.Where(a => a.question_id == q.id).GroupBy(o => o.insertdate).ToList().LastOrDefault().ToList();
+                    }
                 }
 
                 answers.ForEach(answer => question.Answers.Add(answer));
