@@ -81,10 +81,7 @@ namespace FestispecWeb.Controllers
                 }
                 else
                 {
-                    if(answers != null)
-                    {
                         answers = db.Answers.Where(a => a.question_id == q.id).GroupBy(o => o.insertdate).ToList().LastOrDefault().ToList();
-                    }
                 }
 
                 answers.ForEach(answer => question.Answers.Add(answer));
