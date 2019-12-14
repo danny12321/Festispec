@@ -23,7 +23,7 @@
 
                 <TextBlock FontSize="15" Text="Festival naam:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.FestivalName, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="20" Text="Land:"></TextBlock>
+                <TextBlock FontSize="15" Text="Land:"></TextBlock>
                 <ComboBox Width="100"
                         SelectedValue="{Binding Path=SelectedFestival.Country}"
                         Margin="0 8 0 8"
@@ -71,7 +71,7 @@
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="150"
                     ToolTip="Wijzigingen opslaan">
-                        Save changes
+                        Opslaan
                     </Button>
                 </Border>
 

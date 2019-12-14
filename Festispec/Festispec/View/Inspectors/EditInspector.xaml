@@ -27,7 +27,7 @@
         <Border Padding="20">
             <StackPanel>
 
-                <TextBlock Text="Inspecteur Bewerken" FontSize="25" Padding="0,10"/>
+                <TextBlock Text="Inspecteur bewerken" FontSize="25" Padding="0,10"/>
 
                 <TextBlock Text="Voornaam:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.InspectorFirstName, Mode=TwoWay}"></TextBox>
@@ -75,7 +75,7 @@
                     <Button HorizontalAlignment="Right" Command="{Binding EditInspectorCommand}" CommandParameter="{Binding EditInspectorCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="100"
-                    ToolTip="Resource name: MaterialDesignRaisedButton">
+                    ToolTip="Wijzigingen opslaan">
                         Opslaan
                     </Button>
                 </Border>

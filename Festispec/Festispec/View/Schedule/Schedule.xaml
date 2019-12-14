@@ -15,8 +15,8 @@
         <DockPanel Margin="10" DockPanel.Dock="Top">
 
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Left">
-                <Button Command="{Binding MinWeek}" Content="-"></Button>
-                <Button Command="{Binding AddWeek}" Content="+"></Button>
+                <Button Command="{Binding MinWeek}" Content="◄"></Button>
+                <Button Command="{Binding AddWeek}" Content="►"></Button>
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Right" Orientation="Horizontal">

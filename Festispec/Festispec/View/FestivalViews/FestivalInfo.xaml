@@ -22,28 +22,28 @@
 
                 <TextBlock Text="Festival gegevens" FontSize="28" Padding="0,10"/>
 
-                <TextBlock FontSize="20" Text="Festival naam:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.FestivalName}" IsReadOnly="True"></TextBox>
-                <TextBlock FontSize="20" Text="Land:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.Country}" IsReadOnly="True"></TextBox>
-                <TextBlock FontSize="20" Text="Plaats:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="6" Text="{Binding SelectedFestival.City}" IsReadOnly="True"></TextBox>
-                <TextBlock FontSize="20" Text="Postcode:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="6" Text="{Binding SelectedFestival.PostalCode}" IsReadOnly="True"></TextBox>
-                <TextBlock FontSize="20" Text="Straat:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.Street}" IsReadOnly="True"></TextBox>
-                <TextBlock FontSize="20" Text="Huisnummer:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.HouseNumber}" IsReadOnly="True"></TextBox>
-                <TextBlock FontSize="20" Text="Begin datum:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.StartDate}" IsReadOnly="True"></TextBox>
-                <TextBlock FontSize="20" Text="Eind datum:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.EndDate}" IsReadOnly="True"></TextBox>
-                <TextBlock FontSize="20" Text="Gemeente id:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.MunicipalityId}" IsReadOnly="True"></TextBox>
-                <TextBlock FontSize="20" Text="Breedtegraad:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.Latitude}" IsReadOnly="True"></TextBox>
-                <TextBlock FontSize="20" Text="Hoogtegraad:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding SelectedFestival.Longitude}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="15" Text="Festival naam:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.FestivalName}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="15" Text="Land:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.Country}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="15" Text="Plaats:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="6" Text="{Binding SelectedFestival.City}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="15" Text="Postcode:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="6" Text="{Binding SelectedFestival.PostalCode}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="15" Text="Straat:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.Street}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="15" Text="Huisnummer:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.HouseNumber}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="15" Text="Begin datum:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.StartDate}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="15" Text="Eind datum:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.EndDate}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="15" Text="Gemeente id:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.MunicipalityId}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="15" Text="Breedtegraad:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.Latitude}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="15" Text="Hoogtegraad:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.Longitude}" IsReadOnly="True"></TextBox>
 
             </StackPanel>
         </Border>
@@ -61,7 +61,7 @@
 
                     <Button Grid.Column="1" Command="{Binding ShowContactCommand}"
                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
-                        ToolTip="contactpersoon koppelen aan festival">
+                        ToolTip="Contactpersoon koppelen aan festival">
                         <materialDesign:PackIcon
                             Kind="Add"
                             Height="20"

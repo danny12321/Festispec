@@ -21,7 +21,7 @@
         <Border Padding="20">
             <StackPanel>
 
-                <TextBlock Text="Voeg een nieuw Festival toe" FontSize="25" Padding="0,10"/>
+                <TextBlock Text="Voeg een nieuwe festival toe" FontSize="25" Padding="0,10"/>
 
                 <TextBlock FontSize="15" Text="Festival naam:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding Festival.FestivalName, Mode=TwoWay}"></TextBox>
