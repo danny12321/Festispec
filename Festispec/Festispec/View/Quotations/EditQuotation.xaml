@@ -37,7 +37,7 @@
 
                 <TextBlock Text="Geaccepteerd:"></TextBlock>
 
-                <DatePicker HorizontalAlignment="Left" Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding Inspector.Birthday,Mode=OneWayToSource}" DisplayDate=""/>
+                <DatePicker HorizontalAlignment="Left" Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding SelectedQuotation.Approved,Mode=OneWayToSource}" DisplayDate=""/>
                 <TextBlock Text="PDF Locatie:"/>
                 <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Prijs" MaxLength="20" Text="{Binding FilePath, Mode=TwoWay}" Margin="0,0,195,0" RenderTransformOrigin="0.523,0.622"/>
                 <Border Padding="10" Margin="213,0,0,0">
