@@ -17,7 +17,14 @@ namespace FestispecWeb.Controllers
 
         public ActionResult Inspections()
         {
-            return View(db.Inspections.ToList());
+            var uemail = (string)Session["username"];
+            var user = (int)db.Users.Where(u => u.email.Equals(uemail)).Select(u => u.inspector_id).FirstOrDefault();
+            var userinspectionid = db.Inspectors_at_inspection.ToList().Where(i => i.inpector_id == user).Select(e => e.inspection_id).ToList();
+
+            
+            var inspections = db.Inspections.ToList().Where(i => userinspectionid.Contains(i.id)).ToList();
+
+            return View(inspections);
         }
 
         public ActionResult Questionnaires(int? id)
@@ -35,7 +42,13 @@ namespace FestispecWeb.Controllers
                 return HttpNotFound();
             }
 
-            InspectionVM.Questionnaires = db.Questionnaires.ToList().Where(s => s.inspection_id == id);
+            var uemail = (string)Session["username"];
+            var user = (int)db.Users.Where(u => u.email.Equals(uemail)).Select(u => u.inspector_id).FirstOrDefault();
+            var userinspectionid = db.Inspectors_at_inspection.ToList().Where(i => i.inpector_id == user).Select(e => e.inspection_id).ToList();
+
+            var questionnaires = db.Questionnaires.ToList().Where(s => (s.inspection_id == id) && (!userinspectionid.Contains((int)s.inspector_id)) && (s.finished == null)).ToList();
+
+            InspectionVM.Questionnaires = questionnaires;
             InspectionVM.Inspections = inspection;
 
 
