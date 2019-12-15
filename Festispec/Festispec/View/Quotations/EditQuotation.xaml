@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EditQuotation"
-            DataContext="{Binding AddInspector, Source={StaticResource Locator}}"
+            DataContext="{Binding EditQuotation, Source={StaticResource Locator}}"
       
        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -30,7 +30,7 @@
 
                 <TextBlock Text="Pas offerte aan" FontSize="25" Padding="0,10"/>
 
-                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Prijs" MaxLength="20" Text="{Binding Inspector.InspectorFirstName, Mode=TwoWay}"></TextBox>
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Prijs" MaxLength="20" Text="{Binding SelectedQuotation.Price, Mode=TwoWay}" Margin="0,0,195,0"></TextBox>
 
 
 
@@ -38,15 +38,19 @@
                 <TextBlock Text="Geaccepteerd:"></TextBlock>
 
                 <DatePicker HorizontalAlignment="Left" Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding Inspector.Birthday,Mode=OneWayToSource}" DisplayDate=""/>
-
-
-
-
+                <TextBlock Text="PDF Locatie:"/>
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Prijs" MaxLength="20" Text="{Binding FilePath, Mode=TwoWay}" Margin="0,0,195,0" RenderTransformOrigin="0.523,0.622"/>
+                <Border Padding="10" Margin="213,0,0,0">
+                    <Button HorizontalAlignment="Right" Command="{Binding ToPdf}" CommandParameter="{Binding AddInspectorCommand}"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Width="100"
+                        ToolTip="Resource name: MaterialDesignRaisedButton" Content="Download PDF" RenderTransformOrigin="0.534,-0.149" Margin="-207,0,234,0"/>
+                </Border>
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding AddInspectorCommand}" CommandParameter="{Binding AddInspectorCommand}"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         Width="100"
-                        ToolTip="Resource name: MaterialDesignRaisedButton" Content="Opslaan"/>
+                        ToolTip="Resource name: MaterialDesignRaisedButton" Content="Opslaan" Margin="0,0,8,0"/>
                 </Border>
 
             </StackPanel>

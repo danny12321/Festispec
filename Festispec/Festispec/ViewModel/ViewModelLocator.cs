@@ -261,7 +261,21 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new QuotationListViewModel(ServiceLocator.Current.GetInstance<IDataService>());
+                return new QuotationListViewModel(ServiceLocator.Current.GetInstance<IDataService>(),Main);
+            }
+        }
+        public AddQuotationViewModel AddQuotation
+        {
+            get
+            {
+                return new AddQuotationViewModel(ServiceLocator.Current.GetInstance<IDataService>(), Main);
+            }
+        }
+        public EditQuotationViewModel EditQuotation
+        {
+            get
+            {
+                return new EditQuotationViewModel(ServiceLocator.Current.GetInstance<IDataService>(), Main);
             }
         }
 

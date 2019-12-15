@@ -158,6 +158,18 @@ namespace Festispec.ViewModel
                     FrameContent = new View.ContactPersonsView.AddFestivalContact();
                     PageTitle = "Contactpersoon toevoegen aan festival";
                     break;
+                case "ShowQuotations":
+                    FrameContent = new View.Quotations.Quotations();
+                    PageTitle = "Offerte Overzicht";
+                    break;
+                case "EditQuotation":
+                    FrameContent = new View.Quotations.EditQuotation();
+                    PageTitle = "Offerte Aanpassen";
+                    break;
+                case "AddQuotation":
+                    FrameContent = new View.Quotations.AddQuotation();
+                    PageTitle = "Offerte Toevoegen";
+                    break;
                 case "Logout":
                     closeWindow();
                     break;

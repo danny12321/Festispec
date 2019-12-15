@@ -23,6 +23,11 @@ namespace Festispec.ViewModel.QuotationsVM
             get { return _q.id; }
             set { _q.id = value; }
         }
+        public double Price
+        {
+            get { return (double)_q.price; }
+            set { _q.price = (decimal?)value; }
+        }
         public int FestivalId
         {
             get { return _q.id; }
