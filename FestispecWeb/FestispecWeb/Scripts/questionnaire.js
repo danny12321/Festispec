@@ -35,38 +35,5 @@ function questionnaireHandleTypeSelect() {
 }
 
 function questionnaireHandleTypeImage(question) {
-    //var helper = question.querySelector('.image_helper');
-    //var image = question.querySelector('.image');
 
-    //image.addEventListener("change", async function () {
-    //    console.log("change")
-    //    helper.value = "";
-
-    //    for (var i = 0; i < image.files.length; i++) {
-    //        var base64 = await getBase64(image.files[i]);
-    //        helper.value += base64 + "--image_divider--";
-    //        var img = document.createElement("img");
-    //        img.src = base64;
-    //        img.width = 100;
-    //        insertAfter(image, img);
-    //    }
-    //});
-
-    //function insertAfter(referenceNode, newNode) {
-    //    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-    //}
-
-    //function getBase64(file) {
-    //    return new Promise(function (resolve) {
-    //        console.log(file)
-    //        var reader = new FileReader();
-    //        reader.readAsDataURL(file);
-    //        reader.onload = function () {
-    //            resolve(reader.result);
-    //        };
-    //        reader.onerror = function (error) {
-    //            console.log('Error: ', error);
-    //        };
-    //    })
-    //}
 }

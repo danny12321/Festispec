@@ -3,6 +3,7 @@ using FestispecWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -118,25 +119,67 @@ namespace FestispecWeb.Controllers
 
                     if (answerVM.Question == null) continue;
 
+                    var Existinganswer = db.Answers.ToList().Where(i => i.question_id == answerVM.question_id).Select(i => i.answer).ToList().LastOrDefault();
+                    var MultipleExistinganswer = db.Answers.ToList().Where(i => i.question_id == answerVM.question_id).Select(i => i.answer).ToList();
 
                     switch (answerVM.Question.type_question)
                     {
                         case 1: // Open vraag
                             if (answerVM.Answers.Count > 0 && answerVM.Answers[0].answer != null)
-                                db.Answers.Add(answerVM.Answers[0]);
+                            {
+                                if(Existinganswer == null)
+                                {
+                                    db.Answers.Add(answerVM.Answers[0]);
+                                }
+                                else
+                                {
+                                    if (answerVM.Answers[0].answer != Existinganswer)
+                                    {
+                                        db.Answers.Add(answerVM.Answers[0]);
+                                    }
+                                }
+                            }
+                               
                             break;
 
                         case 2: // Multiple choise vraag
                             answerVM.Answers.ForEach(answer =>
                             {
                                 if (answer.answer != null)
-                                    db.Answers.Add(answer);
+                                {
+                                    if(MultipleExistinganswer == null)
+                                    {
+                                        db.Answers.Add(answer);
+                                    }
+                                    else
+                                    {
+                                        if (!MultipleExistinganswer.Contains(answer.answer))
+                                        {
+                                            db.Answers.Add(answer);
+                                        }
+                                    }
+                                }
                             });
                             break;
 
                         case 3: // Select vraag
+
                             if (answerVM.Answers.Count > 0 && answerVM.Answers[0].answer != null)
-                                db.Answers.Add(answerVM.Answers[0]);
+                            {
+                                if(Existinganswer == null)
+                                {
+                                    db.Answers.Add(answerVM.Answers[0]);
+                                }
+                                else
+                                {
+                                    if (answerVM.Answers[0].answer != Existinganswer)
+                                    {
+                                        db.Answers.Add(answerVM.Answers[0]);
+                                    }
+                                }
+
+                            }
+
                             break;
 
                         case 4: // Images
@@ -173,7 +216,7 @@ namespace FestispecWeb.Controllers
                 }
             }
 
-            return Redirect("/");
+            return Redirect("Inspections");
         }
     }
 }
