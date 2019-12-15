@@ -1,6 +1,7 @@
 ﻿@model FestispecWeb.Models.LoginModel
 @{
     ViewBag.Title = "Login";
+    Layout = null;
 }
 <!DOCTYPE html>
 <html>
@@ -11,13 +12,23 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <li>@Html.ActionLink("Festispec", "Index", "Login")</li>
-        </ul>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Festispec", null, null, new { area = "" }, new { @class = "navbar-brand" })
+
+            </div>
+
+        </div>
+
     </div>
     <div class="container body-content">
-      
+
         @using (Html.BeginForm("Login", "Home", FormMethod.Post))
         {
             <fieldset>
@@ -31,28 +42,34 @@
                         @ViewBag.Message
                     </div>
                 }
-            <table>
-                <tr>
-                    <td>@Html.Label("Email")</td>
-                    <td>@Html.TextBoxFor(a => a.UserName)</td>
-                    <td>@Html.ValidationMessageFor(a => a.UserName)</td>
-                </tr>
-                <tr>
-                    <td>@Html.Label("Wachtwoord")</td>
-                    <td>@Html.TextBoxFor(a => a.Password,  new { @type = "password" })</td>
-                    <td>@Html.ValidationMessageFor(a => a.Password)</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="submit" value="Login" />
-                    </td>
-                    <td></td>
-                </tr>
-            </table>
+                <table>
+                    <tr>
+                        <td>@Html.Label("Email")</td>
+                        <td>@Html.TextBoxFor(a => a.UserName)</td>
+                        <td>@Html.ValidationMessageFor(a => a.UserName)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.Label("Wachtwoord")</td>
+                        <td>@Html.TextBoxFor(a => a.Password, new { @type = "password" })</td>
+                        <td>@Html.ValidationMessageFor(a => a.Password)</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" value="Login" />
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
             </fieldset>
         }
-         
-        </div>
-    </body>
+
+    </div>
+    <div class="container body-content">
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Festispec application</p>
+        </footer>
+    </div>
+</body>
 </html>

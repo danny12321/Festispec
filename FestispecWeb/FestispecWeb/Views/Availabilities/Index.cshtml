@@ -33,9 +33,17 @@
             }
         </style>
     </head>
-<body>
-    <div style="height:700px;margin:0 auto">
-        @Html.Raw(Model.Render())
-    </div>
-</body>
+    <body>
+        <div style="height:700px;margin:0 auto">
+            @Html.Raw(Model.Render())
+        </div>
+        <div class="container body-content">
+            <hr />
+            <h2>Ter informatie:</h2>
+            <h4>Als je niks invult, betekent dat dat je beschikbaar bent.</h4>
+            <h4>Alleen een nieuw beschikbaarheid event aanmaken wanneer je zeker weet dat je die bepaalde dag en tijd niet kan.</h4>
+            <h5>Probeer de tekst binnen de beschikbaarheid event te houden op "niet beschikbaar" of "ziek".</h5>
+            <h5>Tekst die hier op lijkt accepteren we ook.</h5>
+        </div>
+    </body>
 </html>
