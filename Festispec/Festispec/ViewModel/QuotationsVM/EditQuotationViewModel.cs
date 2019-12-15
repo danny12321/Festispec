@@ -65,6 +65,7 @@ namespace Festispec.ViewModel.QuotationsVM
                 context.Entry(_service.SelectedQuotation.ToModel()).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
             }
+            _mainViewModel.SetPage("ShowQuotations", false);
         }
     }
 }
