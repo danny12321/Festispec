@@ -23,7 +23,7 @@ namespace Festispec.Domain
         public int id { get; set; }
         public string version { get; set; }
         public Nullable<int> inspector_id { get; set; }
-        public Nullable<int> inspection_id { get; set; }
+        public int inspection_id { get; set; }
         public string name { get; set; }
         public Nullable<System.DateTime> finished { get; set; }
     
