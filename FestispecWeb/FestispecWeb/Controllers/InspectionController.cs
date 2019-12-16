@@ -62,7 +62,7 @@ namespace FestispecWeb.Controllers
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            } 
             var questionaires = db.Questionnaires.Find(id);
 
             if (questionaires == null)
@@ -73,7 +73,6 @@ namespace FestispecWeb.Controllers
             var qa = questionaires.Questions.Select(q =>
             {
                 var question = new AnswersVM() { Question = q };
-                //var answers = db.Answers.Where(a => a.question_id == q.id).GroupBy(o => o.insertdate).ToList().LastOrDefault().ToList();
                 var answers = new List<Answers>();
 
                 if (q.type_question == 4)
@@ -91,7 +90,6 @@ namespace FestispecWeb.Controllers
                         answers.Add(new Answers());
                     }
                 }
-
                 answers.ForEach(answer => question.Answers.Add(answer));
                 return question;
             });
@@ -111,6 +109,7 @@ namespace FestispecWeb.Controllers
             {
                 foreach (var answerVM in answerVMs)
                 {
+                    var isDone = answerVMs[0].IsDone;
                     answerVM.Question = db.Questions.FirstOrDefault(q => q.id == answerVM.question_id);
                     if (answerVM.Answers != null)
                         answerVM.Answers.ForEach(answer => { answer.question_id = answerVM.question_id; answer.insertdate = dateNow; });
@@ -119,90 +118,28 @@ namespace FestispecWeb.Controllers
 
                     if (answerVM.Question == null) continue;
 
-                    var Existinganswer = db.Answers.ToList().Where(i => i.question_id == answerVM.question_id).Select(i => i.answer).ToList().LastOrDefault();
-                    var MultipleExistinganswer = db.Answers.ToList().Where(i => i.question_id == answerVM.question_id).Select(i => i.answer).ToList();
-
                     switch (answerVM.Question.type_question)
                     {
                         case 1: // Open vraag
-                            if (answerVM.Answers.Count > 0 && answerVM.Answers[0].answer != null)
-                            {
-                                if(Existinganswer == null)
-                                {
-                                    db.Answers.Add(answerVM.Answers[0]);
-                                }
-                                else
-                                {
-                                    if (answerVM.Answers[0].answer != Existinganswer)
-                                    {
-                                        db.Answers.Add(answerVM.Answers[0]);
-                                    }
-                                }
-                            }
-                               
+                            SaveOpenQuestion(answerVM);
                             break;
 
                         case 2: // Multiple choise vraag
-                            answerVM.Answers.ForEach(answer =>
-                            {
-                                if (answer.answer != null)
-                                {
-                                    if(MultipleExistinganswer == null)
-                                    {
-                                        db.Answers.Add(answer);
-                                    }
-                                    else
-                                    {
-                                        if (!MultipleExistinganswer.Contains(answer.answer))
-                                        {
-                                            db.Answers.Add(answer);
-                                        }
-                                    }
-                                }
-                            });
+                            SaveMultipleQuestion(answerVM);
                             break;
 
                         case 3: // Select vraag
-
-                            if (answerVM.Answers.Count > 0 && answerVM.Answers[0].answer != null)
-                            {
-                                if(Existinganswer == null)
-                                {
-                                    db.Answers.Add(answerVM.Answers[0]);
-                                }
-                                else
-                                {
-                                    if (answerVM.Answers[0].answer != Existinganswer)
-                                    {
-                                        db.Answers.Add(answerVM.Answers[0]);
-                                    }
-                                }
-
-                            }
-
+                            SaveSelectQuestion(answerVM);
                             break;
 
                         case 4: // Images
-                            foreach(var attachment in answerVM.Attachment)
-                            {
-                                if (attachment == null) continue;
-                                
-                                MemoryStream target = new MemoryStream();
-                                attachment.InputStream.CopyTo(target);
-                                Byte[] bytes = target.ToArray();
-                                String file = Convert.ToBase64String(bytes);
-
-                                var a = new Answers()
-                                {
-                                    question_id = answerVM.Question.id,
-                                    answer = file,
-                                    insertdate = dateNow
-                                };
-
-                                db.Answers.Add(a);
-                            };
+                            SaveImageQuestion(answerVM);
                             break;
+                    }
 
+                    if(isDone != null)
+                    {
+                        answerVM.Question.Questionnaires.finished = dateNow;
                     }
                 }
 
@@ -218,5 +155,90 @@ namespace FestispecWeb.Controllers
 
             return Redirect("Inspections");
         }
+
+        private void SaveOpenQuestion(AnswersVM answerVM)
+        {
+            var Existinganswer = db.Answers.ToList().Where(i => i.question_id == answerVM.question_id).Select(i => i.answer).ToList().LastOrDefault();
+            if (answerVM.Answers.Count > 0 && answerVM.Answers[0].answer != null)
+            {
+                if (Existinganswer == null)
+                {
+                    db.Answers.Add(answerVM.Answers[0]);
+                }
+                else
+                {
+                    if (answerVM.Answers[0].answer != Existinganswer)
+                    {
+                        db.Answers.Add(answerVM.Answers[0]);
+                    }
+                }
+            }
+        }
+
+        private void SaveMultipleQuestion(AnswersVM answerVM)
+        {
+            var MultipleExistinganswer = db.Answers.ToList().Where(i => i.question_id == answerVM.question_id).Select(i => i.answer).ToList();
+            answerVM.Answers.ForEach(answer =>
+            {
+                if (answer.answer != null)
+                {
+                    if (MultipleExistinganswer == null)
+                    {
+                        db.Answers.Add(answer);
+                    }
+                    else
+                    {
+                        if (!MultipleExistinganswer.Contains(answer.answer))
+                        {
+                            db.Answers.Add(answer);
+                        }
+                    }
+                }
+            });
+        }
+
+        private void SaveSelectQuestion(AnswersVM answerVM)
+        {
+            var Existinganswer = db.Answers.ToList().Where(i => i.question_id == answerVM.question_id).Select(i => i.answer).ToList().LastOrDefault();
+            if (answerVM.Answers.Count > 0 && answerVM.Answers[0].answer != null)
+            {
+                if (Existinganswer == null)
+                {
+                    db.Answers.Add(answerVM.Answers[0]);
+                }
+                else
+                {
+                    if (answerVM.Answers[0].answer != Existinganswer)
+                    {
+                        db.Answers.Add(answerVM.Answers[0]);
+                    }
+                }
+
+            }
+        }
+
+        private void SaveImageQuestion(AnswersVM answerVM)
+        {
+            var dateNow = DateTime.Now;
+            foreach (var attachment in answerVM.Attachment)
+            {
+                if (attachment == null) continue;
+
+                MemoryStream target = new MemoryStream();
+                attachment.InputStream.CopyTo(target);
+                Byte[] bytes = target.ToArray();
+                String file = Convert.ToBase64String(bytes);
+
+                var a = new Answers()
+                {
+                    question_id = answerVM.Question.id,
+                    answer = file,
+                    insertdate = dateNow
+                };
+
+                db.Answers.Add(a);
+            };
+        }
+
     }
 }

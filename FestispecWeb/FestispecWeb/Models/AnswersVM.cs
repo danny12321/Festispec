@@ -16,5 +16,7 @@ namespace FestispecWeb.Models
         public List<HttpPostedFileBase> Attachment { get; set; }
 
         public int question_id { get; set; }
+
+        public string IsDone { get; set; }
     }
 }
