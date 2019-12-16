@@ -104,12 +104,12 @@ namespace FestispecWeb.Controllers
         public ActionResult SaveAnswers(List<AnswersVM> answerVMs)
         {
             var dateNow = DateTime.Now;
+            var isDone = answerVMs[0].IsDone;
 
             if (ModelState.IsValid)
             {
                 foreach (var answerVM in answerVMs)
                 {
-                    var isDone = answerVMs[0].IsDone;
                     answerVM.Question = db.Questions.FirstOrDefault(q => q.id == answerVM.question_id);
                     if (answerVM.Answers != null)
                         answerVM.Answers.ForEach(answer => { answer.question_id = answerVM.question_id; answer.insertdate = dateNow; });
