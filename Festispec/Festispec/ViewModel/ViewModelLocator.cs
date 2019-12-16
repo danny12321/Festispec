@@ -45,7 +45,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new LoginViewModel();
+                return new LoginViewModel(ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
 
@@ -237,6 +237,14 @@ namespace Festispec.ViewModel
             get
             {
                 return new InspectionEditViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+
+        public ScheduleVM.ScheduleVM Schedule
+        {
+            get
+            {
+                return new ScheduleVM.ScheduleVM();
             }
         }
 

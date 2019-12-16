@@ -16,5 +16,6 @@ namespace Festispec.ViewModel.DataService
         public FestivalVM.FestivalVM SelectedFestival { get; set; }
         public ContactPersonVM SelectedContactPerson { get; set; }
         public InspectionVM SelectedInspection { get; set; }
+        public bool IsOffline { get; set; } = false;
     }
 }

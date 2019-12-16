@@ -144,6 +144,8 @@
     <Compile Include="ViewModel\Questionnaires\Types\MultipleChoiseQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Types\OpenQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Types\SelectQuestion.cs" />
+    <Compile Include="ViewModel\ScheduleVM\ScheduleColumnVM.cs" />
+    <Compile Include="ViewModel\ScheduleVM\ScheduleVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\ContactPersonsView\AddContactPerson.xaml.cs">
       <DependentUpon>AddContactPerson.xaml</DependentUpon>
@@ -232,7 +234,7 @@
     <Compile Include="View\Questionnaires\Types\SelectPreview.xaml.cs">
       <DependentUpon>SelectPreview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Schedule.xaml.cs">
+    <Compile Include="View\Schedule\Schedule.xaml.cs">
       <DependentUpon>Schedule.xaml</DependentUpon>
     </Compile>
     <Page Include="View\BaseWindow.xaml">
@@ -379,7 +381,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Schedule.xaml">
+    <Page Include="View\Schedule\Schedule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

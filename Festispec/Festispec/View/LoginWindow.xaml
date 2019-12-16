@@ -48,12 +48,25 @@
                 <PasswordBox Name="txtPassword" Margin="20,0,20,10" materialDesign:HintAssist.Hint="Wachtwoord" Cursor="IBeam" Background="{x:Null}" PasswordChanged="PasswordBox_PasswordChanged" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"> </PasswordBox>
 
                 <Button
-                    Margin="20,20,0,20"
+                    Margin="20,20,0,0"
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Width="100"
                     ToolTip="Resource name: MaterialDesignRaisedLightButton"
                     Command="{Binding LoginCommand}"
                     Content="Log in" HorizontalAlignment="Left"/>
+
+                <Button Content="Go offline" Margin="20,20,0,20" HorizontalAlignment="Left" Command="{Binding GoOfflineCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedLightButton}">
+                            <Setter Property="Visibility" Value="Hidden"></Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ShowOfflineButton}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </StackPanel>
         </Border>
     </Grid>

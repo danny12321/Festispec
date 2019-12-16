@@ -3,10 +3,13 @@ using Festispec.Utils;
 using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,76 +78,174 @@ namespace Festispec.ViewModel.Inspections
             _inspetionId = service.SelectedInspection.Id;
 
             TestButton = new RelayCommand(Debug);
-            EditInspectionCommand = new RelayCommand(EditInspection);
-            SelectInspectorCommand = new RelayCommand<InspectorsVM>(SelectInspector);
-            DelectInspectorCommand = new RelayCommand<InspectorsVM>(DelectInspector);
 
-            //Does not work problem with on delete cascade in database :(
-            DeleteInspectionCommand = new RelayCommand(DeleteInspection);
-
-            using (var context = new FestispecEntities())
+            if (_service.IsOffline)
             {
-                //Get inspectors
-                var inspectors = context.Inspectors.ToList()
-                    .Select(i => new InspectorsVM(i));
+                GetFromJsonData();
+            } else
+            {
+                EditInspectionCommand = new RelayCommand(EditInspection);
+                SelectInspectorCommand = new RelayCommand<InspectorsVM>(SelectInspector);
+                DelectInspectorCommand = new RelayCommand<InspectorsVM>(DelectInspector);
+                DeleteInspectionCommand = new RelayCommand(DeleteInspection);
 
-                Inspectors = new ObservableCollection<InspectorsVM>(inspectors);
-                SelectedInspectors = new ObservableCollection<InspectorsVM>();
-                SelectedInspectorsMaps = new ObservableCollection<InspectorsVM>();
-                InspectorsMaps = new ObservableCollection<InspectorsVM>();
-
-                //Used for posistion of festival in bing maps
-                Festival = new FestivalVM(context.Festivals.ToList().First(f => f.id == _festivalId));
-
-                //Get the inspection
-                Inspection = new InspectionVM(context.Inspections.ToList().First(i => i.id == _inspetionId));
-                StartDate = Inspection.Start_date;
-                StartTime = Inspection.Start_date.TimeOfDay;
-
-                EndDate = Inspection.End_date;
-                EndTime = Inspection.End_date.TimeOfDay;
-
-                //Calc Travel Time
-                if (_useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt)
+                using (var context = new FestispecEntities())
                 {
-                    Inspectors.ToList().ForEach(i => {
-                        var timespan = CalculateRouteDurationForInspector(i).GetAwaiter().GetResult();
-                        i.TravelTime = timespan;
+                    //Get inspectors
+                    var inspectors = context.Inspectors.ToList()
+                        .Select(i => new InspectorsVM(i));
+
+                    Inspectors = new ObservableCollection<InspectorsVM>(inspectors);
+                    SelectedInspectors = new ObservableCollection<InspectorsVM>();
+                    SelectedInspectorsMaps = new ObservableCollection<InspectorsVM>();
+                    InspectorsMaps = new ObservableCollection<InspectorsVM>();
+
+                    //Used for posistion of festival in bing maps
+                    Festival = new FestivalVM(context.Festivals.ToList().First(f => f.id == _festivalId));
+
+                    //Get the inspection
+                    Inspection = new InspectionVM(context.Inspections.ToList().First(i => i.id == _inspetionId));
+                    StartDate = Inspection.Start_date;
+                    StartTime = Inspection.Start_date.TimeOfDay;
+
+                    EndDate = Inspection.End_date;
+                    EndTime = Inspection.End_date.TimeOfDay;
+
+                    //Calc Travel Time
+                    if (_useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt)
+                    {
+                        Inspectors.ToList().ForEach(i => {
+                            var timespan = CalculateRouteDurationForInspector(i).GetAwaiter().GetResult();
+                            i.TravelTime = timespan;
+                        });
+                    }
+
+                    context.Inspectors_at_inspection.ToList().ForEach(i =>
+                    {
+                        if (i.inspection_id == _inspetionId)
+                        {
+                            var tempInspector = Inspectors.ToList().First(j => j.id == i.inpector_id);
+
+                            if (tempInspector.HasPos)
+                            {
+                                SelectedInspectorsMaps.Add(tempInspector);
+                                InspectorsMaps.Remove(tempInspector);
+                            }
+                            SelectedInspectors.Add(tempInspector);
+                            Inspectors.Remove(tempInspector);
+                        }
                     });
+
+                    RaisePropertyChanged();
                 }
 
-                context.Inspectors_at_inspection.ToList().ForEach(i =>
-                {
-                    if (i.inspection_id == _inspetionId)
+                Inspectors.ToList().ForEach(i => {
+                    if (i.HasPos)
                     {
-                        var tempInspector = Inspectors.ToList().First(j => j.Inspector.id == i.inpector_id);
-
-                        if (tempInspector.HasPos)
-                        {
-                            SelectedInspectorsMaps.Add(tempInspector);
-                            InspectorsMaps.Remove(tempInspector);
-                        }
-                        SelectedInspectors.Add(tempInspector);
-                        Inspectors.Remove(tempInspector);
+                        InspectorsMaps.Add(i);
                     }
                 });
 
-                RaisePropertyChanged();
-            }
-
-            
-
-            Inspectors.ToList().ForEach(i => {
-                if (i.HasPos)
+                if (Festival.HasPos)
                 {
-                    InspectorsMaps.Add(i);
+                    FestivalMaps = Festival;
                 }
-            });
 
-            if (Festival.HasPos)
-            {
-                FestivalMaps = Festival;
+                CreateOfflineInspectionData();
             }
+        }
+
+        private void GetFromJsonData()
+        {
+            // Get old JSON
+            string fileName = "Inspections.json";
+            string path = Path.Combine(Environment.CurrentDirectory, @"Offline\", fileName);
+            string jsonInspectionsData = File.ReadAllText(path);
+
+            // Parse JSON to object
+            JArray parsedInspectionJson = JArray.Parse(jsonInspectionsData);
+
+
+            JObject inspectionJson = null;
+
+            // Get selected inspection
+            for (int i = 0; i < parsedInspectionJson.Count; i++)
+            {
+                if (parsedInspectionJson[i]["Id"].Value<int>() == _inspetionId)
+                {
+                    inspectionJson = JObject.Parse(parsedInspectionJson[i].ToString());
+                }
+            }
+
+            Inspection = new InspectionVM();
+
+            Inspection.Id = inspectionJson["Id"].Value<int>();
+            Inspection.Description = inspectionJson["Description"].ToString();
+            Inspection.Start_date = inspectionJson["Start_date"].Value<DateTime>();
+            Inspection.End_date = inspectionJson["End_date"].Value<DateTime>();
+            Inspection.Finished = inspectionJson["Finished"].Value<DateTime?>();
+            Inspection.Festival_id = inspectionJson["Festival_id"].Value<int>();
+
+            Inspectors = new ObservableCollection<InspectorsVM>();
+
+            if (inspectionJson["notSelectedInspectors"] != null)
+            {
+                JArray notSelectedInspectors = JArray.Parse(inspectionJson["notSelectedInspectors"].ToString());
+                for (int i = 0; i < notSelectedInspectors.Count; i++)
+                {
+                    var inspectorVM = new InspectorsVM();
+                    inspectorVM.id = notSelectedInspectors[i]["id"].Value<int>();
+                    inspectorVM.name = notSelectedInspectors[i]["name"].ToString();
+                    inspectorVM.lastname = notSelectedInspectors[i]["lastname"].ToString();
+                    inspectorVM.birthday = notSelectedInspectors[i]["birthday"].Value<DateTime>();
+                    inspectorVM.email = notSelectedInspectors[i]["email"].ToString();
+                    inspectorVM.postalcode = notSelectedInspectors[i]["postalcode"].ToString();
+                    inspectorVM.country = notSelectedInspectors[i]["country"].ToString();
+                    inspectorVM.city = notSelectedInspectors[i]["city"].ToString();
+                    inspectorVM.street = notSelectedInspectors[i]["street"].ToString();
+                    inspectorVM.housenumber = notSelectedInspectors[i]["housenumber"].ToString();
+                    inspectorVM.phone = notSelectedInspectors[i]["phone"].ToString();
+                    inspectorVM.active = notSelectedInspectors[i]["active"].Value<DateTime>();
+                    inspectorVM.latitude = notSelectedInspectors[i]["latitude"].ToString();
+                    inspectorVM.longitude = notSelectedInspectors[i]["longitude"].ToString();
+
+                    Inspectors.Add(inspectorVM);
+                }
+            }
+
+            SelectedInspectors = new ObservableCollection<InspectorsVM>();
+
+            if (inspectionJson["selectedInspectors"] != null)
+            {
+
+                JArray selectedInspectors = JArray.Parse(inspectionJson["selectedInspectors"].ToString());
+                for (int i = 0; i < selectedInspectors.Count; i++)
+                {
+                    var inspectorVM = new InspectorsVM();
+                    inspectorVM.id = selectedInspectors[i]["id"].Value<int>();
+                    inspectorVM.name = selectedInspectors[i]["name"].ToString();
+                    inspectorVM.lastname = selectedInspectors[i]["lastname"].ToString();
+                    inspectorVM.birthday = selectedInspectors[i]["birthday"].Value<DateTime>();
+                    inspectorVM.email = selectedInspectors[i]["email"].ToString();
+                    inspectorVM.postalcode = selectedInspectors[i]["postalcode"].ToString();
+                    inspectorVM.country = selectedInspectors[i]["country"].ToString();
+                    inspectorVM.city = selectedInspectors[i]["city"].ToString();
+                    inspectorVM.street = selectedInspectors[i]["street"].ToString();
+                    inspectorVM.housenumber = selectedInspectors[i]["housenumber"].ToString();
+                    inspectorVM.phone = selectedInspectors[i]["phone"].ToString();
+                    inspectorVM.active = selectedInspectors[i]["active"].Value<DateTime>();
+                    inspectorVM.latitude = selectedInspectors[i]["latitude"].ToString();
+                    inspectorVM.longitude = selectedInspectors[i]["longitude"].ToString();
+
+                    SelectedInspectors.Add(inspectorVM);
+                }
+            }
+
+            StartDate = Inspection.Start_date;
+            StartTime = Inspection.Start_date.TimeOfDay;
+
+            EndDate = Inspection.End_date;
+            EndTime = Inspection.End_date.TimeOfDay;
         }
 
         private void EditInspection()
@@ -162,7 +263,7 @@ namespace Festispec.ViewModel.Inspections
             {
                 SelectedInspectors.ToList().ForEach(i => {
                     var inspector_at_inspection = new Inspectors_at_inspection();
-                    inspector_at_inspection.inpector_id = i.Inspector.id;
+                    inspector_at_inspection.inpector_id = i.id;
                     inspector_at_inspection.inspection_id = _inspetionId;
                     InspectorsAtInspection.Add(new InspectorAtInspectionVM(inspector_at_inspection));
                 });
@@ -280,12 +381,45 @@ namespace Festispec.ViewModel.Inspections
         private async Task<TimeSpan> CalculateRouteDurationForInspector(InspectorsVM inspector)
         {
             RouteDurationCalculator routeDurationCalculator = new RouteDurationCalculator();
-            return await routeDurationCalculator.CalculateRoute(inspector.Inspector.longitude + "," + inspector.Inspector.latitude, Festival.Festivals.longitude + "," + Festival.Festivals.latitude).ConfigureAwait(false);
+            return await routeDurationCalculator.CalculateRoute(inspector.longitude + "," + inspector.latitude, Festival.Festivals.longitude + "," + Festival.Festivals.latitude).ConfigureAwait(false);
         }
 
         private void Debug()
         {
             Console.WriteLine();
+        }
+
+        private void CreateOfflineInspectionData()
+        {
+            // Get old JSON
+            string fileName = "Inspections.json";
+            string path = Path.Combine(Environment.CurrentDirectory, @"Offline\", fileName); 
+            string jsonInspectionsData = File.ReadAllText(path);
+            
+            // Parse JSON to object
+            JArray parsedInspectionJson = JArray.Parse(jsonInspectionsData);
+
+            // Change the active inspection
+            for (int i = 0; i < parsedInspectionJson.Count; i++)
+            {
+                var item = parsedInspectionJson[i];
+                if (int.Parse(item["Id"].ToString()) == _inspetionId)
+                {
+                    item["notSelectedInspectors"] = JArray.FromObject(Inspectors);
+                    item["selectedInspectors"] = JArray.FromObject(SelectedInspectors);
+                }
+            }
+
+            // Save JSON
+            string fileContent = parsedInspectionJson.ToString();
+
+            Directory.CreateDirectory("Offline");
+
+            using (StreamWriter outputFile = new StreamWriter(path))
+            {
+                outputFile.WriteLine(fileContent);
+            }
+
         }
     }
 }

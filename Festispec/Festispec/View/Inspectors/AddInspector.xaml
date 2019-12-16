@@ -35,6 +35,7 @@
                 <TextBox MaxLength="50" Text="{Binding Inspector.InspectorLastName, Mode=TwoWay}"></TextBox>
                     
                 <TextBlock Text="Geboorte Datum:"></TextBlock>
+
                 <DatePicker HorizontalAlignment="Left" Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding Inspector.Birthday,Mode=OneWayToSource}" DisplayDate="2019-11-19"/>
                     
                 <TextBlock Text="Postcode:"></TextBlock>
@@ -79,6 +80,6 @@
 
             </StackPanel>
         </Border>
-        
+
     </Grid>
 </Page>
