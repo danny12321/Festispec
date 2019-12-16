@@ -137,6 +137,7 @@
     <Compile Include="ViewModel\Inspections\InspectorsVM.cs" />
     <Compile Include="ViewModel\InspectorsVM\AddInspectorViewModel.cs" />
     <Compile Include="ViewModel\InspectorsVM\EditInspectorViewModel.cs" />
+    <Compile Include="ViewModel\InspectorsVM\InspectorInfoViewModel.cs" />
     <Compile Include="ViewModel\InspectorsVM\InspectorListViewModel.cs" />
     <Compile Include="ViewModel\InspectorsVM\InspectorviewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
@@ -186,6 +187,9 @@
     </Compile>
     <Compile Include="View\ClientsViews\Client.xaml.cs">
       <DependentUpon>Client.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Inspectors\InspectorInfo.xaml.cs">
+      <DependentUpon>InspectorInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Municipality\AddMunicipality.xaml.cs">
       <DependentUpon>AddMunicipality.xaml</DependentUpon>
@@ -328,6 +332,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Inspectors\EditInspector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspectors\InspectorInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

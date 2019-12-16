@@ -1,0 +1,64 @@
+﻿<Page x:Class="Festispec.View.Inspectors.InspectorInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Festispec.View.Inspectors"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      DataContext="{Binding inspectorinfo, Source={StaticResource Locator}}"
+      Background="White"
+      Title="Inspector Informatie">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Border Padding="20">
+            <StackPanel>
+
+                <TextBlock Text="Inspecteur informatie" FontSize="25" Padding="0,10"/>
+
+                <TextBlock FontSize="15" Text="Voornaam:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.InspectorFirstName, Mode=TwoWay}" IsReadOnly="True"> </TextBox>
+
+                <TextBlock FontSize="15" Text="Achternaam:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.InspectorLastName, Mode=TwoWay}" IsReadOnly="True"></TextBox>
+
+                <TextBlock FontSize="15" Text="Geboorte Datum:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.Birthday, Mode=TwoWay}" IsReadOnly="True"></TextBox>
+
+                <TextBlock FontSize="15" Text="Postcode:"></TextBlock>
+                <TextBox FontSize="15" HorizontalAlignment="Left" MaxLength="6" Text="{Binding SelectedInspector.PostalCode, Mode=TwoWay}" IsReadOnly="True"></TextBox>
+
+                <TextBlock FontSize="15" Text="Land:"></TextBlock>
+                <TextBox FontSize="15"  MaxLength="50" Text="{Binding SelectedInspector.Country, Mode=TwoWay}" IsReadOnly="True"></TextBox>
+
+                <TextBlock FontSize="15" Text="Plaats:"></TextBlock>
+                <TextBox FontSize="15"  MaxLength="50" Text="{Binding SelectedInspector.City, Mode=TwoWay}" IsReadOnly="True"></TextBox>
+
+                <TextBlock FontSize="15" Text="Straat:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.Street, Mode=TwoWay}" IsReadOnly="True"></TextBox>
+
+                <TextBlock FontSize="15" Text="Huisnummer:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.Housenumber, Mode=TwoWay}" IsReadOnly="True"></TextBox>
+
+                <TextBlock FontSize="15" Text="TelefoonNummer:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.Phone, Mode=TwoWay}" IsReadOnly="True"></TextBox>
+
+                <TextBlock FontSize="15" Text="Actief:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.Active, Mode=TwoWay}" IsReadOnly="True"></TextBox>
+
+                <TextBlock FontSize="15" Margin="0,10,0,0" Text="Breedtegraad:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.Latitude, Mode=TwoWay}" IsReadOnly="True"></TextBox>
+
+                <TextBlock FontSize="15" Text="Hoogtegraad:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.Longitude, Mode=TwoWay}" IsReadOnly="True"></TextBox>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

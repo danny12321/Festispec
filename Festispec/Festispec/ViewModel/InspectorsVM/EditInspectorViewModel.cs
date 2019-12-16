@@ -1,5 +1,6 @@
 ﻿using Festispec.Domain;
 using Festispec.Utils;
+using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -14,17 +15,22 @@ namespace Festispec.ViewModel.InspectorsVM
     public class EditInspectorViewModel : ViewModelBase
     {
         private InspectorListViewModel _inspectorViewModel;
+        private MainViewModel _main;
+        private IDataService _service;
         public ICommand EditInspectorCommand { get; set; }
         public ICommand GenerateLatLongBasedOnAdressCommand { get; set; }
-        public InspectorListViewModel InspectorViewModel
+        
+        public InspectorviewModel SelectedInspector
         {
             get
             {
-                return _inspectorViewModel;
+                return _service.SelectedInspector;
             }
         }
-        public EditInspectorViewModel(InspectorListViewModel i)
+        public EditInspectorViewModel(InspectorListViewModel i, DataService.IDataService dataService, MainViewModel main)
         {
+            _main = main;
+            _service = dataService;
             _inspectorViewModel = i;
             EditInspectorCommand = new RelayCommand(EditInspectorMethod);
             GenerateLatLongBasedOnAdressCommand = new RelayCommand(GenerateLatLongBasedOnAdress);
@@ -53,51 +59,6 @@ namespace Festispec.ViewModel.InspectorsVM
             return false;
         }
 
-        //private bool IsMatch()
-        //{
-        //    if (IsLetter(Inspector.InspectorName) && IsLetterNumber(Inspector.PostalCode) && IsLetter(Inspector.Street) && IsNumber(Inspector.Housenumber) && IsLetter(Inspector.Country) && IsPhoneNumber(Inspector.Phone))
-        //    {
-        //        return true;
-        //    }
-        //    return false;
-        //}
-
-        //private bool IsLetter(string input)
-        //{
-        //    if (!IsEmptyField(input))
-        //    {
-        //        if (Regex.IsMatch(input, @"^^(?! )[A-Za-z\s]+$"))
-        //        {
-        //            return true;
-        //        }
-        //    }
-        //    return false;
-        //}
-
-        //private bool IsNumber(string input)
-        //{
-        //    if (!IsEmptyField(input))
-        //    {
-        //        if (Regex.IsMatch(input, @"^^(?! )[0-9\s]+$"))
-        //        {
-        //            return true;
-        //        }
-        //    }
-        //    return false;
-        //}
-
-        //private bool IsLetterNumber(string input)
-        //{
-        //    if (!IsEmptyField(input))
-        //    {
-        //        if (Regex.IsMatch(input, @"^^(?! )[A-Za-z0-9\s]+$"))
-        //        {
-        //            return true;
-        //        }
-        //    }
-        //    return false;
-        //}
-
         private bool IsEmptyField(string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -109,15 +70,15 @@ namespace Festispec.ViewModel.InspectorsVM
         private async void GenerateLatLongBasedOnAdress()
         {
             //You need atleast a country and a city to get a good result
-            if (InspectorViewModel.SelectedInspector.Country != null || InspectorViewModel.SelectedInspector.City != null)
+            if (SelectedInspector.Country != null || SelectedInspector.City != null)
             {
                 LatLongGenerator latLongGenerator = new LatLongGenerator();
 
-                Task<string> latLongGeneratorAwait = latLongGenerator.GenerateLatLong(InspectorViewModel.SelectedInspector.Country, InspectorViewModel.SelectedInspector.City, InspectorViewModel.SelectedInspector.Street, InspectorViewModel.SelectedInspector.Housenumber);
+                Task<string> latLongGeneratorAwait = latLongGenerator.GenerateLatLong(SelectedInspector.Country, SelectedInspector.City, SelectedInspector.Street, SelectedInspector.Housenumber);
                 string latlong = await latLongGeneratorAwait;
 
-                InspectorViewModel.SelectedInspector.Latitude = latlong.Split(',')[0];
-                InspectorViewModel.SelectedInspector.Longitude = latlong.Split(',')[1];
+                SelectedInspector.Latitude = latlong.Split(',')[0];
+                SelectedInspector.Longitude = latlong.Split(',')[1];
                 RaisePropertyChanged("InspectorViewModel");
             }
         }

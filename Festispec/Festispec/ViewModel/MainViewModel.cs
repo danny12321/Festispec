@@ -138,6 +138,10 @@ namespace Festispec.ViewModel
                     FrameContent = new View.Inspectors.EditInspector();
                     PageTitle = "Inspecteur bewerken";
                     break;
+                case "InspectorInfo":
+                    FrameContent = new View.Inspectors.InspectorInfo();
+                    PageTitle = "Inspecteur informatie";
+                    break;
                 case "ShowAddContactPerson":
                     FrameContent = new View.ContactPersonsView.AddContactPerson();
                     PageTitle = "contactpersoon toevoegen";

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Festispec.ViewModel.InspectorsVM;
 
 namespace Festispec.ViewModel.DataService
 {
@@ -18,5 +19,7 @@ namespace Festispec.ViewModel.DataService
 
         ContactPersonVM SelectedContactPerson { get; set; }
         InspectionVM SelectedInspection { get; set; }
+
+        InspectorviewModel SelectedInspector { get; set; }
     }
 }
