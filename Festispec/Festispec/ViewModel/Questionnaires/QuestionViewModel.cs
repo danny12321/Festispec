@@ -30,10 +30,13 @@ namespace Festispec.ViewModel.Questionnaires
             }
             set
             {
-                _question.Type_questions = value.ToModel();
-                _question.type_question = value.Id;
-                SaveChanges();
-                Questionnaires.ChangeType(this);
+                if (value.Id != _question.type_question)
+                {
+                    _question.Type_questions = value.ToModel();
+                    _question.type_question = value.Id;
+                    SaveChanges();
+                    Questionnaires.ChangeType(this);
+                }
             }
         }
 
@@ -101,10 +104,21 @@ namespace Festispec.ViewModel.Questionnaires
 
         public void SaveChanges()
         {
-            using (var context = new FestispecEntities())
+            try
             {
-                context.Entry(_question).State = System.Data.Entity.EntityState.Modified;
-                context.SaveChanges();
+                // IDK why but this can't be set or the weak action will appear more often
+                _question.Questionnaires = null;
+
+                using (var context = new FestispecEntities())
+                {
+                    _question.Type_questions = context.Type_questions.FirstOrDefault(t => t.id == _question.type_question);
+                    context.Entry(_question).State = System.Data.Entity.EntityState.Modified;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
         }
 
