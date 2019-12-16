@@ -151,7 +151,7 @@ namespace Festispec.ViewModel.Inspections
                     context.SaveChanges();
                 }
 
-                _main.SetPage("Inspections", false);
+                _main.SetPage("Inspections");
             }
             else
             {
@@ -213,7 +213,6 @@ namespace Festispec.ViewModel.Inspections
 
         private void AddQuestionnaire()
         {
-            Console.WriteLine("Add quest");
             var questionnaire = new QuestionnairesViewModel(Inspection);
             Questionnaires.Add(questionnaire);
         }
@@ -222,8 +221,7 @@ namespace Festispec.ViewModel.Inspections
         {
             // TODO: check if alles is opgeslagen
             _service.SelectedQuestionnaire = questionnaire;
-            Console.WriteLine("Open " + questionnaire.Questionnaire.id);
-            _main.SetPage("Vragenlijsten", false);
+            _main.SetPage("Vragenlijsten");
         }
 
         private void Debug()

@@ -39,13 +39,13 @@ namespace Festispec.ViewModel.Inspections
 
         private void NavigateAddInspection()
         {
-            _main.SetPage("AddInspection", false);
+            _main.SetPage("AddInspection");
         }
 
         private void NavigateEditInspection(InspectionVM inspection)
         {
             _service.SelectedInspection = inspection;
-            _main.SetPage("EditInspection", false);
+            _main.SetPage("EditInspection");
         }
     }
 }

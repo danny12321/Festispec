@@ -84,7 +84,6 @@ namespace Festispec.ViewModel.Questionnaires
 
         private void SetType(QuestionTypeViewModel type)
         {
-            Console.WriteLine("Set type");
             Type = type;
         }
 
