@@ -8,6 +8,28 @@
       DataContext="{Binding Templates, Source={StaticResource Locator}}"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Templates">
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="10" Grid.Row="0" Orientation="Horizontal">
+            <Button Command="{Binding AddTemplateCommand}">Nieuw sjabloon</Button>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1">
+        <ItemsControl ItemsSource="{Binding Templates}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="20" Margin="10 0" Text="{Binding name}" />
+                        <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ItemsControl}, Path=DataContext.OpenTemplateCommand}" CommandParameter="{Binding}">Open</Button>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </ScrollViewer>
     </Grid>
 </Page>

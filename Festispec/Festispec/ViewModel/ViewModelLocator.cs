@@ -11,6 +11,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using System;
 using Festispec.Domain;
+using Festispec.ViewModel.Templates;
 
 namespace Festispec.ViewModel
 {
@@ -197,6 +198,16 @@ namespace Festispec.ViewModel
             get
             {
                 return new InspectionEditViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+
+
+
+        public TemplatesVM Templates
+        {
+            get
+            {
+                return new TemplatesVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
 

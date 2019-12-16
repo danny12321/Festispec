@@ -213,8 +213,16 @@ namespace Festispec.ViewModel.Inspections
 
         private void AddQuestionnaire()
         {
-            var questionnaire = new QuestionnairesViewModel(Inspection);
-            Questionnaires.Add(questionnaire);
+            var questionnaire = new Domain.Questionnaires() { inspection_id = _inspetionId };
+
+            using (var context = new FestispecEntities())
+            {
+                context.Questionnaires.Add(questionnaire);
+                context.SaveChanges();
+            }
+
+            var questionnaireVM = new QuestionnairesViewModel(questionnaire);
+            Questionnaires.Add(questionnaireVM);
         }
 
         public void OpenQuestionnaire(QuestionnairesViewModel questionnaire)

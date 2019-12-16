@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight.Ioc;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -88,24 +89,6 @@ namespace Festispec.ViewModel.Questionnaires
 
         public ICommand AddQuestionCommand { get; set; }
 
-        public QuestionnairesViewModel(Inspections.InspectionVM inspection)
-        {
-            // TODO: make inspector id nullable
-            Questionnaire = new Domain.Questionnaires() { inspection_id = inspection.Id };
-
-            using (var context = new FestispecEntities())
-            {
-                context.Questionnaires.Add(Questionnaire);
-                context.SaveChanges();
-
-                var questionTypes = context.Type_questions.ToList()
-                    .Select(qt => new QuestionTypeViewModel(qt));
-
-                QuestionTypes = new ObservableCollection<QuestionTypeViewModel>(questionTypes);
-                Questions = new ObservableCollection<QuestionViewModel>();
-            }
-        }
-
         public QuestionnairesViewModel(Domain.Questionnaires questionnaire)
         {
             Init(questionnaire);
@@ -122,13 +105,15 @@ namespace Festispec.ViewModel.Questionnaires
             Questionnaire = questionnaire;
             AddQuestionCommand = new RelayCommand(AddQuestion);
 
-            var questions = questionnaire.Questions.ToList()
-                .Select(q => GetQuestionClass(q));
-
-            Questions = new ObservableCollection<QuestionViewModel>(questions);
-
             using (var context = new FestispecEntities())
             {
+                //context.Questionnaires.Attach(Questionnaire);
+
+                var questions = Questionnaire.Questions.ToList()
+                    .Select(q => GetQuestionClass(q));
+
+                Questions = new ObservableCollection<QuestionViewModel>(questions);
+
                 var questionTypes = context.Type_questions.ToList()
                     .Select(qt => new QuestionTypeViewModel(qt));
 
