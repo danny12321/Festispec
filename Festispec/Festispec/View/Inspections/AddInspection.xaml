@@ -145,6 +145,7 @@
                                     <materialDesign:PackIcon Kind="ArrowRight" />
                                 </Button>
                                 <TextBlock Margin="10,10,0,0" Text="{Binding TravelTime}"></TextBlock>
+                                <TextBlock Margin="10,10,0,0" Text="{Binding Available}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

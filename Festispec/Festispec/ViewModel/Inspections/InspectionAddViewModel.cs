@@ -40,13 +40,16 @@ namespace Festispec.ViewModel.Inspections
         public InspectionVM InspectionMaps { get; set; }
 
         private DateTime _startDate;
-        public DateTime StartDate { get { return _startDate; } set { _startDate = value; EndDate = value; RaisePropertyChanged("EndDate"); } }
+        public DateTime StartDate { get { return _startDate; } set { _startDate = value; EndDate = value; RaisePropertyChanged("EndDate"); CheckInspectorAvailability(); } }
 
         private TimeSpan _startTime;
-        public TimeSpan StartTime { get { return _startTime; } set { _startTime = value; EndTime = TimeSpan.FromMinutes(value.TotalMinutes + 60); RaisePropertyChanged("EndTime"); } }
+        public TimeSpan StartTime { get { return _startTime; } set { _startTime = value; EndTime = TimeSpan.FromMinutes(value.TotalMinutes + 60); RaisePropertyChanged("EndTime"); CheckInspectorAvailability(); } }
 
-        public DateTime EndDate { get; set; }
-        public TimeSpan EndTime { get; set; }
+        private DateTime _endDate;
+        public DateTime EndDate { get { return _endDate; } set { _endDate = value; CheckInspectorAvailability(); } }
+
+        private TimeSpan _endTime;
+        public TimeSpan EndTime { get { return _endTime; } set { _endTime = value; CheckInspectorAvailability(); } }
 
         public DateTime EndDateTimeCombined
         {
@@ -97,7 +100,7 @@ namespace Festispec.ViewModel.Inspections
             using (var context = new FestispecEntities())
             {
                 //Get inspectors
-                var inspectors = context.Inspectors.ToList().Select(i => new InspectorsVM(i));
+                var inspectors = context.Inspectors.Include("Inspectors_availability").ToList().Select(i => new InspectorsVM(i));
 
                 Inspectors = new ObservableCollection<InspectorsVM>(inspectors);
                    
@@ -290,6 +293,44 @@ namespace Festispec.ViewModel.Inspections
                 outputFile.WriteLine(fileContent);
             }
 
+        }
+
+        private void CheckInspectorAvailability()
+        {
+            if (Inspectors != null)
+            {
+
+                Inspectors.ToList().ForEach(i =>
+                {
+                    if (InspectorIsAvailable(i))
+                    {
+                        i.Available = true;
+                        i.RaisePropertyChanged("Available");
+                    }
+                });
+            }
+            Console.WriteLine();
+        }
+
+        private bool InspectorIsAvailable(InspectorsVM inspector)
+        {
+            bool returnValue = false;
+
+            inspector.ToModel().Inspectors_availability.ToList().ForEach(ia =>
+            {
+                if (HasAvailability(ia))
+                {
+                    returnValue = true;
+                }
+            });
+
+            return returnValue;
+        }
+
+        private bool HasAvailability(Inspectors_availability availability)
+        {
+            var temp = availability.start_date < StartDateTimeCombined && availability.end_date > EndDateTimeCombined;
+            return temp;
         }
     }
 }

@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Festispec.Domain;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Microsoft.Maps.MapControl.WPF;
 
 namespace Festispec.ViewModel.Inspections
 {
-    public class InspectorsVM
+    public class InspectorsVM : ViewModelBase
     {
 
         private Inspectors _inspector;
@@ -18,6 +19,8 @@ namespace Festispec.ViewModel.Inspections
         public string Fullname { get { return _inspector.name + " " + _inspector.lastname; } }
 
         public string Pos { get { return _inspector.latitude + "," + _inspector.longitude; } }
+
+        public bool Available { get; set; } = false;
 
         public TimeSpan TravelTime { get; set; }
 
