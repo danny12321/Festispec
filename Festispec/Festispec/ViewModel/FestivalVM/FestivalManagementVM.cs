@@ -52,12 +52,12 @@ namespace Festispec.ViewModel.FestivalVMs
 
         private void ShowFestivalInfo()
         {
-            _main.SetPage("FestivalInfo", false);
+            _main.SetPage("FestivalInfo");
         }
 
         private void NavigateInspection()
         {
-            _main.SetPage("Inspections", false);
+            _main.SetPage("Inspections");
         }
     }
 }

@@ -29,7 +29,6 @@ namespace Festispec.ViewModel
 
         public string Password { get; set; }
 
-
         public LoginViewModel()
         {
             LoginCommand = new RelayCommand(Login);

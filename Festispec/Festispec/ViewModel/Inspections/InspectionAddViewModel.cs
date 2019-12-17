@@ -157,7 +157,7 @@ namespace Festispec.ViewModel.Inspections
                     context.SaveChanges();
                 }
 
-                _main.SetPage("Inspections", false);
+                _main.SetPage("Inspections");
             } else
             {
                 // Show wrong input error message

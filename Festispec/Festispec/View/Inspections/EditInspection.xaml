@@ -103,6 +103,44 @@
                               Width="100"
                               Text="{Binding EndTime}"
                                />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border BorderThickness="10">
+                    <Button Command="{Binding EditInspectionCommand}">Opslaan</Button>
+                </Border>
+
+                <Border BorderThickness="10" Margin="0, 20, 0, 0">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="20">Vragenlijsten</TextBlock>
+                            <Button Margin="20, 0,0,0" Command="{Binding AddQuestionnaireCommand}">Toevoegen</Button>
+                        </StackPanel>
+
+                        <ItemsControl
+                        ItemsSource="{Binding Questionnaires}"
+                        >
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderThickness="5">
+                                        <DockPanel HorizontalAlignment="Stretch">
+
+                                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center"></TextBlock>
+                                            <Button 
+                                                HorizontalAlignment="Right"
+                                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.OpenQuestionnaireCommand}"
+                                                CommandParameter="{Binding}"
+                                                Background="Transparent"
+                                            >
+                                                <materialDesign:PackIcon Kind="OpenInNew"></materialDesign:PackIcon>
+                                            </Button>
+                                        </DockPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+
+                        </ItemsControl>
                     </StackPanel>
                     <Button Margin="0,10,0,0" Command="{Binding EditInspectionCommand}">Verander inspectie</Button>
                     <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" TextWrapping="Wrap"></TextBlock>

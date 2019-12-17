@@ -53,84 +53,87 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ado.Context.cs">
+    <Compile Include="Ado.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ado.Context.tt</DependentUpon>
+      <DependentUpon>Ado.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ado.cs">
+    <Compile Include="Ado.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ado.tt</DependentUpon>
+      <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
-    <Compile Include="ado.Designer.cs">
+    <Compile Include="Ado.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ado.edmx</DependentUpon>
+      <DependentUpon>Ado.edmx</DependentUpon>
     </Compile>
     <Compile Include="Answers.cs">
-      <DependentUpon>ado.tt</DependentUpon>
+      <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Clients.cs">
-      <DependentUpon>ado.tt</DependentUpon>
+      <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Contactpersons.cs">
-      <DependentUpon>ado.tt</DependentUpon>
+      <DependentUpon>Ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C__RefactorLog.cs">
+      <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Festivals.cs">
-      <DependentUpon>ado.tt</DependentUpon>
+      <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Inspections.cs">
-      <DependentUpon>ado.tt</DependentUpon>
+      <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Inspectors.cs">
-      <DependentUpon>ado.tt</DependentUpon>
+      <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Inspectors_at_inspection.cs">
-      <DependentUpon>ado.tt</DependentUpon>
+      <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Inspectors_availability.cs">
-      <DependentUpon>ado.tt</DependentUpon>
+      <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Laws.cs">
-      <DependentUpon>ado.tt</DependentUpon>
+      <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Municipalities.cs">
-      <DependentUpon>ado.tt</DependentUpon>
+      <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Possible_answer.cs">
-      <DependentUpon>ado.tt</DependentUpon>
+      <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Questionnaires.cs">
-      <DependentUpon>ado.tt</DependentUpon>
+      <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Questions.cs">
-      <DependentUpon>ado.tt</DependentUpon>
+      <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Quotations.cs">
-      <DependentUpon>ado.tt</DependentUpon>
+      <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Rolls.cs">
-      <DependentUpon>ado.tt</DependentUpon>
+      <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Type_contacts.cs">
-      <DependentUpon>ado.tt</DependentUpon>
+      <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Type_questions.cs">
-      <DependentUpon>ado.tt</DependentUpon>
+      <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Users.cs">
-      <DependentUpon>ado.tt</DependentUpon>
+      <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="ado.edmx">
+    <EntityDeploy Include="Ado.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ado.Designer.cs</LastGenOutput>
+      <LastGenOutput>Ado.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ado.edmx.diagram">
-      <DependentUpon>ado.edmx</DependentUpon>
+    <None Include="Ado.edmx.diagram">
+      <DependentUpon>Ado.edmx</DependentUpon>
     </None>
     <None Include="App.Config" />
     <None Include="packages.config" />
@@ -139,15 +142,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ado.Context.tt">
+    <Content Include="Ado.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ado.edmx</DependentUpon>
-      <LastGenOutput>ado.Context.cs</LastGenOutput>
+      <DependentUpon>Ado.edmx</DependentUpon>
+      <LastGenOutput>Ado.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="ado.tt">
+    <Content Include="Ado.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ado.edmx</DependentUpon>
-      <LastGenOutput>ado.cs</LastGenOutput>
+      <DependentUpon>Ado.edmx</DependentUpon>
+      <LastGenOutput>Ado.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

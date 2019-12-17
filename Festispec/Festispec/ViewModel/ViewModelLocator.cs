@@ -12,6 +12,9 @@ using GalaSoft.MvvmLight.Ioc;
 using Festispec.ViewModel.ContactPersonsVM;
 using Festispec.ViewModel.DashboardVM;
 using Festispec.ViewModel.QuotationsVM;
+using System;
+using Festispec.Domain;
+using Festispec.ViewModel.Templates;
 
 namespace Festispec.ViewModel
 {
@@ -30,6 +33,11 @@ namespace Festispec.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register<MainViewModel>();
+
+            SimpleIoc.Default.Register<IDataService, DataService.DataService>();
+
+            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<LoginViewModel>();
 
             SimpleIoc.Default.Register<IDataService, DataService.DataService>();
             SimpleIoc.Default.Register<PopUpViewModel>();
@@ -255,6 +263,13 @@ namespace Festispec.ViewModel
             get
             {
                 return new ManageDashboardVM();
+
+
+        public TemplatesVM Templates
+        {
+            get
+            {
+                return new TemplatesVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
         public QuotationListViewModel QuotationListVM

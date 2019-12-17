@@ -10,8 +10,9 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="answer" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="answer" Type="nvarchar(max)" Nullable="false" />
           <Property Name="question_id" Type="int" />
+          <Property Name="insertdate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
@@ -111,7 +112,7 @@
           <Property Name="start_date" Type="datetime" Nullable="false" />
           <Property Name="end_date" Type="datetime" Nullable="false" />
           <Property Name="inspector_id" Type="int" Nullable="false" />
-          <Property Name="text" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="text" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="Laws">
           <Key>
@@ -145,8 +146,9 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="nvarchar" MaxLength="50" />
           <Property Name="inspector_id" Type="int" />
-          <Property Name="inspection_id" Type="int" Nullable="false" />
+          <Property Name="inspection_id" Type="int" />
           <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="finished" Type="datetime" />
         </EntityType>
         <EntityType Name="Questions">
           <Key>
@@ -453,6 +455,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="FestispecModelStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Answers" EntityType="Self.Answers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contactpersons" EntityType="Self.Contactpersons" Schema="dbo" store:Type="Tables" />
@@ -559,13 +562,20 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FestispecModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
         <EntityType Name="Answers">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="answer" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="question_id" Type="Int32" />
+          <Property Name="insertdate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Questions" Relationship="Self.FK_Answers_Questions" FromRole="Answers" ToRole="Questions" />
         </EntityType>
         <EntityType Name="Clients">
@@ -676,7 +686,7 @@
           <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="inspector_id" Type="Int32" Nullable="false" />
-          <Property Name="text" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="text" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Inspectors" Relationship="Self.FK_Inspectors_availability_Inspectors" FromRole="Inspectors_availability" ToRole="Inspectors" />
         </EntityType>
         <EntityType Name="Laws">
@@ -715,8 +725,9 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="inspector_id" Type="Int32" />
-          <Property Name="inspection_id" Type="Int32" Nullable="false" />
+          <Property Name="inspection_id" Type="Int32" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="finished" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Inspectors_at_inspection" Relationship="Self.FK_Questionnaires_Inspectors_at_inspection" FromRole="Questionnaires" ToRole="Inspectors_at_inspection" />
           <NavigationProperty Name="Questions" Relationship="Self.FK_Questions_Questionnaires" FromRole="Questionnaires" ToRole="Questions" />
         </EntityType>
@@ -987,6 +998,7 @@
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
         </Association>
         <EntityContainer Name="FestispecEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
           <EntitySet Name="Answers" EntityType="Self.Answers" />
           <EntitySet Name="Clients" EntityType="Self.Clients" />
           <EntitySet Name="Contactpersons" EntityType="Self.Contactpersons" />
@@ -1084,12 +1096,20 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="FestispecModelStoreContainer" CdmEntityContainer="FestispecEntities">
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="FestispecModel.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Answers">
             <EntityTypeMapping TypeName="FestispecModel.Answers">
               <MappingFragment StoreEntitySet="Answers">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="answer" ColumnName="answer" />
                 <ScalarProperty Name="question_id" ColumnName="question_id" />
+                <ScalarProperty Name="insertdate" ColumnName="insertdate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1227,6 +1247,7 @@
                 <ScalarProperty Name="inspector_id" ColumnName="inspector_id" />
                 <ScalarProperty Name="inspection_id" ColumnName="inspection_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="finished" ColumnName="finished" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
