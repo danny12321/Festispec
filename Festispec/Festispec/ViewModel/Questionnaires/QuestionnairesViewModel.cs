@@ -190,11 +190,17 @@ namespace Festispec.ViewModel.Questionnaires
             {
                 context.Questions.RemoveRange(context.Questions.Where(q => q.questionnaire_id == Questionnaire.id).ToList());
 
-                var questions = context.Questions.Where(q => q.questionnaire_id == template.id).ToList();
-                questions.ForEach(q => { q.questionnaire_id = Questionnaire.id; });
-                context.Questions.AddRange(questions);
+                var questions = context.Questions.AsNoTracking().Include(q => q.Possible_answer).Where(q => q.questionnaire_id == template.id).ToList();
+                var pAnswers = new List<Domain.Possible_answer>();
 
+                questions.ForEach(q =>
+                {
+                    q.questionnaire_id = Questionnaire.id;
+                });
+
+                context.Questions.AddRange(questions);
                 context.SaveChanges();
+
 
                 questions.ForEach(q =>
                 {
