@@ -23,6 +23,7 @@ namespace Festispec.ViewModel.FestivalVM
         private ClientInfoVM _clients;
 
         public ICommand EditFestivalCommand { get; set; }
+        public ICommand ShowQuotations { get; set; }
 
         public FestivalVM SelectedFestival
         {
@@ -60,7 +61,7 @@ namespace Festispec.ViewModel.FestivalVM
             this._clients = clients;
 
             EditFestivalCommand = new RelayCommand(SaveClient, CanSaveClient);
-
+            ShowQuotations = new RelayCommand(ShowQuotation);
             StartDateBegin = SelectedFestival.StartDate.Date;
             StartTime = SelectedFestival.StartDate.TimeOfDay;
             EndDateEnd = SelectedFestival.EndDate.Date;
@@ -74,6 +75,10 @@ namespace Festispec.ViewModel.FestivalVM
                 return true;
             }
             return false;
+        }
+        private void ShowQuotation()
+        {
+            _main.SetPage("ShowQuotations",false);
         }
 
         private void SaveClient()

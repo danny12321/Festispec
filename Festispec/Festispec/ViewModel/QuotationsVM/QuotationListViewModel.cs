@@ -40,7 +40,7 @@ namespace Festispec.ViewModel.QuotationsVM
             using (var context = new FestispecEntities())
             {
 
-                var quotations = context.Quotations.Where(q => q.client_id == _service.SelectedFestival.FestivalId).ToList();
+                var quotations = context.Quotations.Where(q => q.festival_id == _service.SelectedFestival.FestivalId).ToList();
 
                 context.SaveChanges();
                 Quotations = new ObservableCollection<QuotationViewModel>(quotations.Select(i => new QuotationViewModel(i)));

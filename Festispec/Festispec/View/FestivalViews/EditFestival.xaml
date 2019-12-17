@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec.View.FestivalViews"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EditFestival"
@@ -71,6 +72,14 @@
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="150"
                     ToolTip="Wijzigingen opslaan">
+                        Save changes
+                    </Button>
+                </Border>
+                <Border Padding="10">
+                    <Button HorizontalAlignment="Right" Command="{Binding ShowQuotations}"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Width="150"
+                    ToolTip="Offertes">
                         Save changes
                     </Button>
                 </Border>

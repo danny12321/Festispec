@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="FestispecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="FestispecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Answers">
           <Key>
             <PropertyRef Name="id" />
@@ -164,7 +164,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="price" Type="decimal" Precision="10" Scale="2" />
           <Property Name="approved" Type="datetime" Nullable="false" />
-          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="festival_id" Type="int" />
         </EntityType>
         <EntityType Name="Rolls">
           <Key>
@@ -404,15 +404,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Quotations_Clients">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
-          <End Role="Quotations" Type="Self.Quotations" Multiplicity="0..1" />
+        <Association Name="FK_Quotations_Festival">
+          <End Role="Festivals" Type="Self.Festivals" Multiplicity="0..1" />
+          <End Role="Quotations" Type="Self.Quotations" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Clients">
+            <Principal Role="Festivals">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Quotations">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="festival_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -537,8 +537,8 @@
             <End Role="Type_questions" EntitySet="Type_questions" />
             <End Role="Questions" EntitySet="Questions" />
           </AssociationSet>
-          <AssociationSet Name="FK_Quotations_Clients" Association="Self.FK_Quotations_Clients">
-            <End Role="Clients" EntitySet="Clients" />
+          <AssociationSet Name="FK_Quotations_Festival" Association="Self.FK_Quotations_Festival">
+            <End Role="Festivals" EntitySet="Festivals" />
             <End Role="Quotations" EntitySet="Quotations" />
           </AssociationSet>
           <AssociationSet Name="FK_User_rolls_Rolls" Association="Self.FK_User_rolls_Rolls">
@@ -554,7 +554,8 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FestispecModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -581,7 +582,6 @@
           <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Contactpersons" Relationship="Self.FK_Contactpersons_Clients" FromRole="Clients" ToRole="Contactpersons" />
           <NavigationProperty Name="Festivals" Relationship="Self.FK_Festivals_Clients" FromRole="Clients" ToRole="Festivals" />
-          <NavigationProperty Name="Quotations" Relationship="Self.FK_Quotations_Clients" FromRole="Clients" ToRole="Quotations" />
         </EntityType>
         <EntityType Name="Contactpersons">
           <Key>
@@ -618,6 +618,7 @@
           <NavigationProperty Name="Clients" Relationship="Self.FK_Festivals_Clients" FromRole="Festivals" ToRole="Clients" />
           <NavigationProperty Name="Municipalities" Relationship="Self.FK_Festivals_Municipalities" FromRole="Festivals" ToRole="Municipalities" />
           <NavigationProperty Name="Inspections" Relationship="Self.FK_Inspections_Festivals" FromRole="Festivals" ToRole="Inspections" />
+          <NavigationProperty Name="Quotations" Relationship="Self.FK_Quotations_Festival" FromRole="Festivals" ToRole="Quotations" />
           <NavigationProperty Name="Contactpersons" Relationship="Self.Festival_contacts" FromRole="Festivals" ToRole="Contactpersons" />
         </EntityType>
         <EntityType Name="Inspections">
@@ -675,8 +676,8 @@
           <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="inspector_id" Type="Int32" Nullable="false" />
+          <Property Name="text" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Inspectors" Relationship="Self.FK_Inspectors_availability_Inspectors" FromRole="Inspectors_availability" ToRole="Inspectors" />
-          <Property Name="text" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Laws">
           <Key>
@@ -739,8 +740,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="price" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="approved" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="client_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Clients" Relationship="Self.FK_Quotations_Clients" FromRole="Quotations" ToRole="Clients" />
+          <Property Name="festival_id" Type="Int32" />
+          <NavigationProperty Name="Festivals" Relationship="Self.FK_Quotations_Festival" FromRole="Quotations" ToRole="Festivals" />
         </EntityType>
         <EntityType Name="Rolls">
           <Key>
@@ -813,18 +814,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Quotations_Clients">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
-          <End Role="Quotations" Type="Self.Quotations" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Quotations">
-              <PropertyRef Name="id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Contactpersons_Type_contacts">
           <End Role="Type_contacts" Type="Self.Type_contacts" Multiplicity="0..1" />
           <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
@@ -857,6 +846,18 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Inspections">
+              <PropertyRef Name="festival_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quotations_Festival">
+          <End Role="Festivals" Type="Self.Festivals" Multiplicity="0..1" />
+          <End Role="Quotations" Type="Self.Quotations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Festivals">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Quotations">
               <PropertyRef Name="festival_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -1016,10 +1017,6 @@
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Festivals" EntitySet="Festivals" />
           </AssociationSet>
-          <AssociationSet Name="FK_Quotations_Clients" Association="Self.FK_Quotations_Clients">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Quotations" EntitySet="Quotations" />
-          </AssociationSet>
           <AssociationSet Name="FK_Contactpersons_Type_contacts" Association="Self.FK_Contactpersons_Type_contacts">
             <End Role="Type_contacts" EntitySet="Type_contacts" />
             <End Role="Contactpersons" EntitySet="Contactpersons" />
@@ -1031,6 +1028,10 @@
           <AssociationSet Name="FK_Inspections_Festivals" Association="Self.FK_Inspections_Festivals">
             <End Role="Festivals" EntitySet="Festivals" />
             <End Role="Inspections" EntitySet="Inspections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quotations_Festival" Association="Self.FK_Quotations_Festival">
+            <End Role="Festivals" EntitySet="Festivals" />
+            <End Role="Quotations" EntitySet="Quotations" />
           </AssociationSet>
           <AssociationSet Name="FK_Inspectors_at_inspection_Inspections" Association="Self.FK_Inspectors_at_inspection_Inspections">
             <End Role="Inspections" EntitySet="Inspections" />
@@ -1182,11 +1183,11 @@
           <EntitySetMapping Name="Inspectors_availability">
             <EntityTypeMapping TypeName="FestispecModel.Inspectors_availability">
               <MappingFragment StoreEntitySet="Inspectors_availability">
-                <ScalarProperty Name="text" ColumnName="text" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="start_date" ColumnName="start_date" />
                 <ScalarProperty Name="end_date" ColumnName="end_date" />
                 <ScalarProperty Name="inspector_id" ColumnName="inspector_id" />
+                <ScalarProperty Name="text" ColumnName="text" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1245,7 +1246,7 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="approved" ColumnName="approved" />
-                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="festival_id" ColumnName="festival_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
