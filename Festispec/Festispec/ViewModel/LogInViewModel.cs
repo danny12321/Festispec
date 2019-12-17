@@ -74,7 +74,7 @@ namespace Festispec.ViewModel
                 return;
             }
 
-            List<Users> user;
+            List<Domain.Users> user;
 
             // Voor testen
             if (autoLogin)

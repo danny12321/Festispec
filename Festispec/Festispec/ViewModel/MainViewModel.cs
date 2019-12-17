@@ -154,6 +154,18 @@ namespace Festispec.ViewModel
                     FrameContent = new View.ContactPersonsView.AddFestivalContact();
                     PageTitle = "Contactpersoon toevoegen aan festival";
                     break;
+                case "Users":
+                    FrameContent = new View.Users.Users();
+                    PageTitle = "Gebruikers";
+                    break;
+                case "AddUser":
+                    FrameContent = new View.Users.AddUser();
+                    PageTitle = "Voeg gebruiker toe";
+                    break;
+                case "EditUser":
+                    FrameContent = new View.Users.EditUser();
+                    PageTitle = "Verander gebruiker";
+                    break;
                 case "Logout":
                     closeWindow();
                     break;

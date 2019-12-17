@@ -18,7 +18,7 @@ namespace Festispec.ViewModel.DataService
 
         ContactPersonVM SelectedContactPerson { get; set; }
         InspectionVM SelectedInspection { get; set; }
-
+        ViewModel.Users.UserVM SelectedUser { get; set; }
         bool IsOffline { get; set; }
     }
 }
