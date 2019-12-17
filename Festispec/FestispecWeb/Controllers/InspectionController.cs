@@ -19,6 +19,7 @@ namespace FestispecWeb.Controllers
         public ActionResult Inspections()
         {
             var uemail = (string)Session["username"];
+
             var user = (int)db.Users.Where(u => u.email.Equals(uemail)).Select(u => u.inspector_id).FirstOrDefault();
             var userinspectionid = db.Inspectors_at_inspection.ToList().Where(i => i.inpector_id == user).Select(e => e.inspection_id).ToList();
 
@@ -28,7 +29,7 @@ namespace FestispecWeb.Controllers
             return View(inspections);
         }
 
-        public ActionResult Questionnaires(int? id)
+        public ActionResult Questionnaires(int? id) 
         {
             InspectionVM InspectionVM = new InspectionVM();
 
