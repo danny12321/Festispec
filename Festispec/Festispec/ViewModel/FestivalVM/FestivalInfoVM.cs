@@ -22,9 +22,10 @@ namespace Festispec.ViewModel.FestivalVM
         private MainViewModel _main;
 
         public ObservableCollection<FestivalVM> Festivals { get; set; }
-
+        public ICommand ShowQuotations { get; set; }
         public FestivalVM SelectedFestival
         {
+
             get { return _service.SelectedFestival; }
             set
             {
@@ -32,9 +33,13 @@ namespace Festispec.ViewModel.FestivalVM
                 RaisePropertyChanged();
             }
         }
-
+        private void QuotationsList()
+        {
+            _main.SetPage("ShowQuotations");
+        }
         public FestivalInfoVM(MainViewModel main, IDataService service, FestivalManagementVM festivals)
         {
+            ShowQuotations = new RelayCommand(QuotationsList);
             this._main = main;
             _service = service;
             this._festivals = festivals;

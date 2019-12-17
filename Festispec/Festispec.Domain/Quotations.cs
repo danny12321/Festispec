@@ -16,9 +16,9 @@ namespace Festispec.Domain
     {
         public int id { get; set; }
         public Nullable<decimal> price { get; set; }
-        public System.DateTime approved { get; set; }
-        public int client_id { get; set; }
+        public System.DateTime? approved { get; set; }
+        public Nullable<int> festival_id { get; set; }
     
-        public virtual Clients Clients { get; set; }
+        public virtual Festivals Festivals { get; set; }
     }
 }

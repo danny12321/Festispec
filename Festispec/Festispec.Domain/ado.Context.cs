@@ -25,7 +25,6 @@ namespace Festispec.Domain
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
         public virtual DbSet<Answers> Answers { get; set; }
         public virtual DbSet<Clients> Clients { get; set; }
         public virtual DbSet<Contactpersons> Contactpersons { get; set; }

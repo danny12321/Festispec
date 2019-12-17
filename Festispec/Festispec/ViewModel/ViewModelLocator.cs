@@ -12,6 +12,7 @@ using GalaSoft.MvvmLight.Ioc;
 using System;
 using Festispec.Domain;
 using Festispec.ViewModel.Templates;
+using Festispec.ViewModel.QuotationsVM;
 
 namespace Festispec.ViewModel
 {
@@ -198,6 +199,27 @@ namespace Festispec.ViewModel
             get
             {
                 return new InspectionEditViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+        public QuotationListViewModel QuotationListVM
+        {
+            get
+            {
+                return new QuotationListViewModel(ServiceLocator.Current.GetInstance<IDataService>(), Main);
+            }
+        }
+        public AddQuotationViewModel AddQuotation
+        {
+            get
+            {
+                return new AddQuotationViewModel(ServiceLocator.Current.GetInstance<IDataService>(), Main);
+            }
+        }
+        public EditQuotationViewModel EditQuotation
+        {
+            get
+            {
+                return new EditQuotationViewModel(ServiceLocator.Current.GetInstance<IDataService>(), Main);
             }
         }
 

@@ -138,6 +138,19 @@ namespace Festispec.ViewModel
                     FrameContent = new View.Templates.Templates();
                     PageTitle = "Sjablonen";
                     break;
+                case "ShowQuotations":
+                    FrameContent = new View.Quotations.QuotationsList();
+                    PageTitle = "Offerte Overzicht";
+                    break;
+                case "EditQuotation":
+                    FrameContent = new View.Quotations.EditQuotation();
+                    PageTitle = "Offerte Aanpassen";
+                    break;
+                case "AddQuotation":
+                    FrameContent = new View.Quotations.AddQuotation();
+                    PageTitle = "Offerte Toevoegen";
+                    break;
+ 
                 case "Logout":
                     closeWindow();
                     break;

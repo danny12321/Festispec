@@ -77,9 +77,6 @@
     <Compile Include="Contactpersons.cs">
       <DependentUpon>Ado.tt</DependentUpon>
     </Compile>
-    <Compile Include="C__RefactorLog.cs">
-      <DependentUpon>Ado.tt</DependentUpon>
-    </Compile>
     <Compile Include="Festivals.cs">
       <DependentUpon>Ado.tt</DependentUpon>
     </Compile>

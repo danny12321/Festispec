@@ -34,6 +34,5 @@ namespace Festispec.Domain
         public virtual ICollection<Contactpersons> Contactpersons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Festivals> Festivals { get; set; }
-        public virtual Quotations Quotations { get; set; }
     }
 }
