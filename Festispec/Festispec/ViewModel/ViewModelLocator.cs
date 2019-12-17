@@ -45,7 +45,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new LoginViewModel();
+                return new LoginViewModel(ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
 

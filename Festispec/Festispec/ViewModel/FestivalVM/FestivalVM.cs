@@ -138,7 +138,14 @@ namespace Festispec.ViewModel.FestivalVM
         {
             get
             {
-                return _festival.Contactpersons.Select(c => new ContactPersonVM(c)).ToList();
+                try
+                {
+                    return _festival.Contactpersons.Select(c => new ContactPersonVM(c)).ToList();
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
             }
         }
 
