@@ -1,0 +1,115 @@
+﻿@model List<FestispecWeb.Models.AnswersVM>
+
+@{
+    ViewBag.Title = "questionnaire";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2> </h2>
+
+<div class="container2">
+    <div class="row">
+        <div class="box">
+            <div class="col-md-6">
+                <h2 class="Text">Vragenlijst</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("SaveAnswers", "Inspection",
+                        FormMethod.Post,
+                        new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <div class="form__question type_@Model[i].Question.type_question">
+                <h2>@Html.DisplayFor(modelItem => Model[i].Question.question)</h2>
+                <input type="hidden" name="[@i].Answers.question_id" value="@Model[i].Question.id" />
+                <input type="hidden" name="[@i].question_id" value="@Model[i].Question.id" />
+
+
+                @if (Model[i].Question.type_question == 1)
+                {
+                    <input type="text" name="[@i].Answers[0].answer" value="@Model[i].Answers[0].answer" />
+                }
+                else if (Model[i].Question.type_question == 2)
+                {
+
+                    for (int pa = 0; pa < Model[i].Question.Possible_answer.Count; pa++)
+                    {
+                        <input class="checkbox_helper" type="hidden"  name="[@i].Answers[@pa].answer" />
+                        <input
+                            class="checkbox" 
+                            @(Model[i].Answers.FirstOrDefault(a => a.answer == Model[i].Question.Possible_answer.ElementAt(pa).answer) != null ? "checked" : "")
+                            id="checkbox-@i-@pa" 
+                            type="checkbox"
+                            data-string-value="@Model[i].Question.Possible_answer.ElementAt(pa).answer" /> <label for="checkbox-@i-@pa">@Model[i].Question.Possible_answer.ElementAt(pa).answer</label> <br />
+                    }
+
+                }
+                else if (Model[i].Question.type_question == 3)
+                {
+                    for (int pa = 0; pa < Model[i].Question.Possible_answer.Count; pa++)
+                    {
+                        <input type="radio"
+                               id="checkbox-@i-@pa"
+                               name="[@i].Answers[0].answer"
+                               value="@Model[i].Question.Possible_answer.ElementAt(pa).answer"
+                               @(Model[i].Question.Possible_answer.ElementAt(pa).answer == Model[i].Answers[0].answer ? "checked" : "") /> <label for="checkbox-@i-@pa">@Model[i].Question.Possible_answer.ElementAt(pa).answer</label> <br />
+                        }
+                    }
+                    else if (Model[i].Question.type_question == 4)
+                    {
+                        <input class="image" type="file" name="[@i].Attachment" multiple accept="image/x-png,image/gif,image/jpeg" /> <br />
+
+                        <h3>Al geuploade foto's</h3>
+                        for (int a = 0; a < Model[i].Answers.Count; a++)
+                        {
+                            <img src="data:image/png;base64,@Model[i].Answers[a].answer" width="100" />
+                        }
+                    }
+                    else
+                    {
+                        <div>question type not found</div>
+                    }
+
+            </div>
+
+        }
+
+    </div>
+
+    <input type="checkbox" name="[0].IsDone" /><span>Klaar</span>
+    <br>
+    <input type="submit" value="Opslaan" class="btn btn-default" />
+}
+
+
+
+@Scripts.Render("~/bundles/questionnaire")
+
+<style>
+    .container2 {
+        background-color: #4B4B4B;
+    }
+
+    .Text {
+        color: white;
+        margin-left: 10px;
+    }
+
+    .checkbox {
+        display: inline-block;
+    }
+
+    .form {
+    }
+
+    .form__question {
+        margin: 30px 0;
+    }
+</style>

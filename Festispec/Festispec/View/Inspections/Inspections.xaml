@@ -34,7 +34,8 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button HorizontalAlignment="Left" Width="100" Command="{Binding NavigateAddInspectionCommand}">Add</Button>
+        <Button Margin="10,10,0,0" HorizontalAlignment="Left" Command="{Binding NavigateAddInspectionCommand}">Add</Button>
+
     </StackPanel>
     
     

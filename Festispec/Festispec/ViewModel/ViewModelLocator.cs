@@ -12,6 +12,7 @@ using GalaSoft.MvvmLight.Ioc;
 using Festispec.ViewModel.ContactPersonsVM;
 using Festispec.ViewModel.DashboardVM;
 using Festispec.ViewModel.InspectorsVM;
+using Festispec.ViewModel.Users;
 
 namespace Festispec.ViewModel
 {
@@ -47,7 +48,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new LoginViewModel();
+                return new LoginViewModel(ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
 
@@ -261,6 +262,28 @@ namespace Festispec.ViewModel
             get
             {
                 return new ManageDashboardVM();
+            }
+        }
+        public UsersVM UsersViewModel
+        {
+            get
+            {
+                return new UsersVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+        public AddUserVM AddUserVM
+        {
+            get
+            {
+                return new AddUserVM(Main);
+            }
+        }
+
+        public EditUserVM EditUserVM
+        {
+            get
+            {
+                return new EditUserVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
 

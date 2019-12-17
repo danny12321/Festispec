@@ -77,6 +77,9 @@
     <Compile Include="Contactpersons.cs">
       <DependentUpon>ado.tt</DependentUpon>
     </Compile>
+    <Compile Include="C__RefactorLog.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
     <Compile Include="Festivals.cs">
       <DependentUpon>ado.tt</DependentUpon>
     </Compile>

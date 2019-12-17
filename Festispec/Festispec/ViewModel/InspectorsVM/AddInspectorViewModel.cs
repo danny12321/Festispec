@@ -54,6 +54,7 @@ namespace Festispec.ViewModel.InspectorsVM
             _inspectors.Inspectors.Add(Inspector);
             var newuser = new Users();
             newuser.email = Inspector.InspectorEmail;
+
             newuser.password = ComputeSha256Hash(Password);
 
 
