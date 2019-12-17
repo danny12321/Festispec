@@ -18,6 +18,9 @@ namespace FestispecWeb.Controllers
 
         public ActionResult Inspections()
         {
+            if (Session["username"] == null)
+                return Redirect("/");
+
             var uemail = (string)Session["username"];
 
             var user = (int)db.Users.Where(u => u.email.Equals(uemail)).Select(u => u.inspector_id).FirstOrDefault();
@@ -31,6 +34,9 @@ namespace FestispecWeb.Controllers
 
         public ActionResult Questionnaires(int? id)
         {
+            if (Session["username"] == null)
+                return Redirect("/");
+
             InspectionVM InspectionVM = new InspectionVM();
 
             if (id == null)
@@ -53,6 +59,8 @@ namespace FestispecWeb.Controllers
 
         public ActionResult questionnaire(int? id)
         {
+            if (Session["username"] == null)
+                return Redirect("/");
 
             if (id == null)
             {
@@ -99,6 +107,9 @@ namespace FestispecWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SaveAnswers(List<AnswersVM> answerVMs)
         {
+            if (Session["username"] == null)
+                return Redirect("/");
+
             var dateNow = DateTime.Now;
             var isDone = answerVMs[0].IsDone;
 

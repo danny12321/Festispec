@@ -33,10 +33,12 @@ namespace FestispecWeb.Controllers
             Session.Clear();
             return RedirectToAction("Login");
         }
+
         public ActionResult Login()
         {
             return View();
         }
+
         public ActionResult Index()
         {
             if (Session["username"] != null)
@@ -44,11 +46,6 @@ namespace FestispecWeb.Controllers
                 return View();
             }
             return RedirectToAction("Login");
-        }
-
-        public ActionResult Questionnaires()
-        {
-            return View();
         }
 
     }

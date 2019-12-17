@@ -14,6 +14,9 @@ namespace FestispecWeb.Controllers
     {
         public ActionResult Index()
         {
+            if (Session["username"] == null)
+                return Redirect("/")
+
             var sched = new DHXScheduler(this);
             sched.Skin = DHXScheduler.Skins.Terrace;
             sched.LoadData = true;
@@ -25,6 +28,9 @@ namespace FestispecWeb.Controllers
 
         public ContentResult Data()
         {
+            if (Session["username"] == null)
+                return null;
+
             var uemail = (string)Session["username"];
             var entities = new FestispecEntities();
             var user = (int)entities.Users.Where(u => u.email.Equals(uemail)).Select(u => u.inspector_id).FirstOrDefault();
