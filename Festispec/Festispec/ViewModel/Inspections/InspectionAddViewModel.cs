@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Microsoft.Maps.MapControl.WPF;
+using Newtonsoft.Json.Linq;
 
 namespace Festispec.ViewModel.Inspections
 {
@@ -19,7 +21,8 @@ namespace Festispec.ViewModel.Inspections
         private bool _useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt = false;
 
         private int _festivalId;
-    
+        private int _inspetionId;
+
         public ObservableCollection<InspectorsVM> Inspectors { get; set; }
         public ObservableCollection<InspectorsVM> InspectorsMaps { get; set; }
 
@@ -37,13 +40,16 @@ namespace Festispec.ViewModel.Inspections
         public InspectionVM InspectionMaps { get; set; }
 
         private DateTime _startDate;
-        public DateTime StartDate { get { return _startDate; } set { _startDate = value; EndDate = value; RaisePropertyChanged("EndDate"); } }
+        public DateTime StartDate { get { return _startDate; } set { _startDate = value; EndDate = value; RaisePropertyChanged("EndDate"); CheckInspectorAvailability(); } }
 
         private TimeSpan _startTime;
-        public TimeSpan StartTime { get { return _startTime; } set { _startTime = value; EndTime = TimeSpan.FromMinutes(value.TotalMinutes + 60); RaisePropertyChanged("EndTime"); } }
+        public TimeSpan StartTime { get { return _startTime; } set { _startTime = value; EndTime = TimeSpan.FromMinutes(value.TotalMinutes + 60); RaisePropertyChanged("EndTime"); CheckInspectorAvailability(); } }
 
-        public DateTime EndDate { get; set; }
-        public TimeSpan EndTime { get; set; }
+        private DateTime _endDate;
+        public DateTime EndDate { get { return _endDate; } set { _endDate = value; CheckInspectorAvailability(); } }
+
+        private TimeSpan _endTime;
+        public TimeSpan EndTime { get { return _endTime; } set { _endTime = value; CheckInspectorAvailability(); } }
 
         public DateTime EndDateTimeCombined
         {
@@ -94,7 +100,7 @@ namespace Festispec.ViewModel.Inspections
             using (var context = new FestispecEntities())
             {
                 //Get inspectors
-                var inspectors = context.Inspectors.ToList().Select(i => new InspectorsVM(i));
+                var inspectors = context.Inspectors.Include("Inspectors_availability").ToList().Select(i => new InspectorsVM(i));
 
                 Inspectors = new ObservableCollection<InspectorsVM>(inspectors);
                    
@@ -139,11 +145,12 @@ namespace Festispec.ViewModel.Inspections
                 {
                     context.Inspections.Add(Inspection.ToModel());
                     context.SaveChanges();
+                    _inspetionId = Inspection.ToModel().id;
                 }
 
                 SelectedInspectors.ToList().ForEach(i => {
                     var inspector_at_inspection = new Inspectors_at_inspection();
-                    inspector_at_inspection.inpector_id = i.Inspector.id;
+                    inspector_at_inspection.inpector_id = i.id;
                     inspector_at_inspection.inspection_id = Inspection.Id;
                     InspectorsAtInspection.Add(new InspectorAtInspectionVM(inspector_at_inspection));
                 });
@@ -157,6 +164,7 @@ namespace Festispec.ViewModel.Inspections
                     context.SaveChanges();
                 }
 
+                CreateOfflineInspectionData();
                 _main.SetPage("Inspections", false);
             } else
             {
@@ -165,6 +173,7 @@ namespace Festispec.ViewModel.Inspections
                 RaisePropertyChanged("ErrorMessage");
                 Console.WriteLine("Wrong input");
             }
+
 
         }
 
@@ -239,12 +248,99 @@ namespace Festispec.ViewModel.Inspections
         private async Task<TimeSpan> CalculateRouteDurationForInspector(InspectorsVM inspector)
         {
             RouteDurationCalculator routeDurationCalculator = new RouteDurationCalculator();
-            return await routeDurationCalculator.CalculateRoute(inspector.Inspector.longitude + "," + inspector.Inspector.latitude, Festival.Festivals.longitude + "," + Festival.Festivals.latitude).ConfigureAwait(false);
+            return await routeDurationCalculator.CalculateRoute(inspector.longitude + "," + inspector.latitude, Festival.Festivals.longitude + "," + Festival.Festivals.latitude).ConfigureAwait(false);
         }
 
         private void Debug()
         {
             Console.WriteLine();
+        }
+
+        private void CreateOfflineInspectionData()
+        {
+            // Get old JSON
+            string fileName = "Inspections.json";
+            string path = Path.Combine(Environment.CurrentDirectory, @"Offline\", fileName);
+            string jsonInspectionsData = File.ReadAllText(path);
+
+            // Parse JSON to object
+            JArray parsedInspectionJson = JArray.Parse(jsonInspectionsData);
+
+            // Check wich inspection are allready in json file
+            // And add the one who is not in there
+            parsedInspectionJson.Add(JObject.FromObject(Inspection));
+
+            parsedInspectionJson[parsedInspectionJson.Count - 1]["notSelectedInspectors"] = JArray.FromObject(Inspectors);
+            parsedInspectionJson[parsedInspectionJson.Count - 1]["selectedInspectors"] = JArray.FromObject(SelectedInspectors);
+
+            // Save JSON
+            string fileContent = parsedInspectionJson.ToString();
+
+            Directory.CreateDirectory("Offline");
+
+            using (StreamWriter outputFile = new StreamWriter(path))
+            {
+                outputFile.WriteLine(fileContent);
+            }
+
+        }
+
+        private void CheckInspectorAvailability()
+        {
+            if (Inspectors != null)
+            {
+
+                Inspectors.ToList().ForEach(i =>
+                {
+                    if (InspectorIsNotAvailable(i))
+                    {
+                        i.Available = "Niet beschikbaar";
+                        i.RaisePropertyChanged("Available");
+                    } else
+                    {
+                        i.Available = "Beschikbaar";
+                        i.RaisePropertyChanged("Available");
+                    }
+                });
+            }
+
+            if (SelectedInspectors != null)
+            {
+
+                SelectedInspectors.ToList().ForEach(i =>
+                {
+                    if (InspectorIsNotAvailable(i))
+                    {
+                        i.Available = "Niet beschikbaar";
+                        i.RaisePropertyChanged("Available");
+                    }
+                    else
+                    {
+                        i.Available = "Beschikbaar";
+                        i.RaisePropertyChanged("Available");
+                    }
+                });
+            }
+        }
+
+        private bool InspectorIsNotAvailable(InspectorsVM inspector)
+        {
+            bool returnValue = false;
+
+            inspector.ToModel().Inspectors_availability.ToList().ForEach(ia =>
+            {
+                if (HasAvailability(ia))
+                {
+                    returnValue = true;
+                }
+            });
+
+            return returnValue;
+        }
+
+        private bool HasAvailability(Inspectors_availability availability)
+        {
+            return availability.start_date < StartDateTimeCombined && availability.end_date > EndDateTimeCombined;
         }
     }
 }
