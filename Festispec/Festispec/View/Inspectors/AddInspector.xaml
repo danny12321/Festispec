@@ -33,7 +33,10 @@
 
                 <TextBlock Text="Achternaam:"></TextBlock>
                 <TextBox MaxLength="50" Text="{Binding Inspector.InspectorLastName, Mode=TwoWay}"></TextBox>
-                    
+
+                <TextBlock Text="Email:"></TextBlock>
+                <TextBox MaxLength="50" Text="{Binding Inspector.InspectorEmail, Mode=TwoWay}"></TextBox>
+
                 <TextBlock Text="Geboorte Datum:"></TextBlock>
 
                 <DatePicker HorizontalAlignment="Left" Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding Inspector.Birthday,Mode=OneWayToSource}" DisplayDate="2019-11-19"/>

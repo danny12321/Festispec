@@ -35,6 +35,9 @@
                 <TextBlock FontSize="15" Text="Achternaam:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.InspectorLastName, Mode=TwoWay}"></TextBox>
 
+                <TextBlock FontSize="15" Text="Email:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.InspectorEmail, Mode=TwoWay}"></TextBox>
+
                 <TextBlock FontSize="15" Text="Geboorte Datum:"></TextBlock>
                 <DatePicker FontSize="15" HorizontalAlignment="Left" Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding  SelectedInspector.Birthday,Mode=TwoWay}"/>
 

@@ -53,7 +53,7 @@ namespace Festispec.ViewModel.InspectorsVM
             Inspector.Active = DateTime.Now;
             _inspectors.Inspectors.Add(Inspector);
             var newuser = new Users();
-            newuser.email = Inspector.InspectorFirstName + Inspector.InspectorLastName.Replace(" ", string.Empty);
+            newuser.email = Inspector.InspectorEmail;
             newuser.password = ComputeSha256Hash(Password);
            
            
@@ -85,7 +85,7 @@ namespace Festispec.ViewModel.InspectorsVM
 
         private bool IsMatch()
         {
-            if (!IsEmptyField(Inspector.InspectorFirstName) && !IsEmptyField(Inspector.InspectorLastName) && !IsEmptyField(Password))
+            if (!IsEmptyField(Inspector.InspectorFirstName) && !IsEmptyField(Inspector.InspectorLastName) && !IsEmptyField(Password) && !IsEmptyField(Inspector.InspectorEmail))
             {
                 return true;
             }

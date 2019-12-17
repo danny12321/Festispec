@@ -28,11 +28,14 @@
                 <TextBlock FontSize="15" Text="Achternaam:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.InspectorLastName, Mode=TwoWay}" IsReadOnly="True"></TextBox>
 
+                <TextBlock FontSize="15" Text="Email:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.InspectorEmail, Mode=TwoWay}" IsReadOnly="True"></TextBox>
+
                 <TextBlock FontSize="15" Text="Geboorte Datum:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.Birthday, Mode=TwoWay}" IsReadOnly="True"></TextBox>
 
                 <TextBlock FontSize="15" Text="Postcode:"></TextBlock>
-                <TextBox FontSize="15" HorizontalAlignment="Left" MaxLength="6" Text="{Binding SelectedInspector.PostalCode, Mode=TwoWay}" IsReadOnly="True"></TextBox>
+                <TextBox FontSize="15" HorizontalAlignment="Left" Text="{Binding SelectedInspector.PostalCode, Mode=TwoWay}" IsReadOnly="True"></TextBox>
 
                 <TextBlock FontSize="15" Text="Land:"></TextBlock>
                 <TextBox FontSize="15"  MaxLength="50" Text="{Binding SelectedInspector.Country, Mode=TwoWay}" IsReadOnly="True"></TextBox>
