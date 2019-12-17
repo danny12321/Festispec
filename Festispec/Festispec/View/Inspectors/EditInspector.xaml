@@ -42,7 +42,7 @@
                 <DatePicker FontSize="15" HorizontalAlignment="Left" Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding  SelectedInspector.Birthday,Mode=TwoWay}"/>
 
                 <TextBlock FontSize="15" Text="Postcode:"></TextBlock>
-                <TextBox FontSize="15" HorizontalAlignment="Left" MaxLength="6" Text="{Binding SelectedInspector.PostalCode, Mode=TwoWay}"></TextBox>
+                <TextBox FontSize="15" MaxLength="6" Text="{Binding SelectedInspector.PostalCode, Mode=TwoWay}"></TextBox>
 
                 <TextBlock FontSize="15" Text="Land:"></TextBlock>
                 <TextBox FontSize="15"  MaxLength="50" Text="{Binding SelectedInspector.Country, Mode=TwoWay}"></TextBox>

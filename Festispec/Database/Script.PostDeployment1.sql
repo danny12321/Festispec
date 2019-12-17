@@ -11,6 +11,7 @@ Post-Deployment Script Template
 */
 
 INSERT [dbo].[Rolls] ([role]) VALUES (N'Admin')
+INSERT [dbo].[Rolls] ([role]) VALUES (N'Inspector')
 INSERT [dbo].[Users] ([email], [password], [inspector_id]) VALUES (N'admin@admin.com', N'admin', NULL)
 INSERT [dbo].[User_rolls] ([user_id], [role_id]) VALUES (1, 1)
 INSERT [dbo].[Municipalities] ([name]) VALUES (N'Utrecht')
