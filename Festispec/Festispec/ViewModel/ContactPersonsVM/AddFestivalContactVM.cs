@@ -81,7 +81,7 @@ namespace Festispec.ViewModel.ContactPersonsVM
                 }
                 base.RaisePropertyChanged();
 
-                _main.SetPage("FestivalInfo", false);
+                _main.SetPage("FestivalInfo");
             }
         }
     }

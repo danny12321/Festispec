@@ -42,13 +42,13 @@ namespace Festispec.ViewModel.Users
 
         private void NavigateAddUser()
         {
-            _main.SetPage("AddUser", false);
+            _main.SetPage("AddUser");
         }
 
         private void NavigateEditUser(UserVM user)
         {
             _dataService.SelectedUser = user;
-            _main.SetPage("EditUser", false);
+            _main.SetPage("EditUser");
         }
     }
 }

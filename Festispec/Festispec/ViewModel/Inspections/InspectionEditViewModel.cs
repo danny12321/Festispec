@@ -398,7 +398,7 @@ namespace Festispec.ViewModel.Inspections
                 context.SaveChanges();
             }
 
-            _main.SetPage("Inspections", false);
+            _main.SetPage("Inspections");
         }
 
         private async Task<TimeSpan> CalculateRouteDurationForInspector(InspectorsVM inspector)

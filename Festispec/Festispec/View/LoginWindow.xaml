@@ -51,7 +51,6 @@
                     Margin="20,20,0,0"
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Width="100"
-                    ToolTip="Resource name: MaterialDesignRaisedLightButton"
                     Command="{Binding LoginCommand}"
                     Content="Log in" HorizontalAlignment="Left"/>
 

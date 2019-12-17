@@ -87,7 +87,7 @@ namespace Festispec.ViewModel.FestivalVM
 
         private void ShowContact()
         {
-            _main.SetPage("AddContactFestival", false);
+            _main.SetPage("AddContactFestival");
         }
     }
 }
