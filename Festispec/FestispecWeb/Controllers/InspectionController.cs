@@ -23,13 +23,13 @@ namespace FestispecWeb.Controllers
             var user = (int)db.Users.Where(u => u.email.Equals(uemail)).Select(u => u.inspector_id).FirstOrDefault();
             var userinspectionid = db.Inspectors_at_inspection.ToList().Where(i => i.inpector_id == user).Select(e => e.inspection_id).ToList();
 
-            
+
             var inspections = db.Inspections.ToList().Where(i => userinspectionid.Contains(i.id)).ToList();
 
             return View(inspections);
         }
 
-        public ActionResult Questionnaires(int? id) 
+        public ActionResult Questionnaires(int? id)
         {
             InspectionVM InspectionVM = new InspectionVM();
 
@@ -57,7 +57,7 @@ namespace FestispecWeb.Controllers
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            } 
+            }
             var questionaires = db.Questionnaires.Find(id);
 
             if (questionaires == null)
@@ -70,17 +70,18 @@ namespace FestispecWeb.Controllers
                 var question = new AnswersVM() { Question = q };
                 var answers = new List<Answers>();
 
-                if (q.type_question == 4)
+                if (q.type_question == 4) // If image then all the data
                 {
                     answers = db.Answers.Where(a => a.question_id == q.id).ToList();
                 }
-                else
+                else // else get online the last
                 {
-                    var b =  db.Answers.Where(a => a.question_id == q.id).GroupBy(o => o.insertdate).ToList().LastOrDefault();
-                    if(b != null)
+                    var b = db.Answers.Where(a => a.question_id == q.id).GroupBy(o => o.insertdate).ToList().LastOrDefault();
+                    if (b != null)
                     {
-                        answers = b.ToList() ;
-                    } else
+                        answers = b.ToList();
+                    }
+                    else
                     {
                         answers.Add(new Answers());
                     }
@@ -132,7 +133,7 @@ namespace FestispecWeb.Controllers
                             break;
                     }
 
-                    if(isDone != null)
+                    if (isDone != null)
                     {
                         answerVM.Question.Questionnaires.finished = dateNow;
                     }
@@ -172,24 +173,44 @@ namespace FestispecWeb.Controllers
 
         private void SaveMultipleQuestion(AnswersVM answerVM)
         {
-            var MultipleExistinganswer = db.Answers.ToList().Where(i => i.question_id == answerVM.question_id).Select(i => i.answer).ToList();
-            answerVM.Answers.ForEach(answer =>
+            var Existinganswer = db.Answers.ToList().Where(i => i.question_id == answerVM.question_id).GroupBy(o => o.insertdate).ToList().LastOrDefault()?.ToList();
+
+            bool shouldSave = false;
+
+            answerVM.Answers.ForEach(a =>
             {
-                if (answer.answer != null)
+                var answer = Existinganswer.FirstOrDefault(ea => ea.answer == a.answer);
+
+                if (answer == null) shouldSave = true;
+            });
+
+            Existinganswer.ForEach(ea =>
+            {
+                var answer = answerVM.Answers.FirstOrDefault(a => ea.answer == a.answer);
+
+                if (answer == null) shouldSave = true;
+            });
+
+
+            if (shouldSave)
+            {
+                bool everythingNull = true;
+
+                answerVM.Answers.ForEach(answer =>
                 {
-                    if (MultipleExistinganswer == null)
+                    if (answer.answer != null)
                     {
+                        everythingNull = false;
                         db.Answers.Add(answer);
                     }
-                    else
-                    {
-                        if (!MultipleExistinganswer.Contains(answer.answer))
-                        {
-                            db.Answers.Add(answer);
-                        }
-                    }
+                });
+
+                if (everythingNull)
+                {
+                    answerVM.Answers[0].answer = "";
+                    db.Answers.Add(answerVM.Answers[0]);
                 }
-            });
+            }
         }
 
         private void SaveSelectQuestion(AnswersVM answerVM)

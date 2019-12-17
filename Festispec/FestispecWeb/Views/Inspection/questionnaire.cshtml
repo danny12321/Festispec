@@ -41,8 +41,13 @@
 
                     for (int pa = 0; pa < Model[i].Question.Possible_answer.Count; pa++)
                     {
-                        <input class="checkbox_helper" type="hidden" name="[@i].Answers[@pa].answer" />
-                        <input class="checkbox" id="checkbox-@i-@pa" type="checkbox" data-string-value="@Model[i].Question.Possible_answer.ElementAt(pa).answer" /> <label for="checkbox-@i-@pa">@Model[i].Question.Possible_answer.ElementAt(pa).answer</label> <br />
+                        <input class="checkbox_helper" type="hidden"  name="[@i].Answers[@pa].answer" />
+                        <input
+                            class="checkbox" 
+                            @(Model[i].Answers.FirstOrDefault(a => a.answer == Model[i].Question.Possible_answer.ElementAt(pa).answer) != null ? "checked" : "")
+                            id="checkbox-@i-@pa" 
+                            type="checkbox"
+                            data-string-value="@Model[i].Question.Possible_answer.ElementAt(pa).answer" /> <label for="checkbox-@i-@pa">@Model[i].Question.Possible_answer.ElementAt(pa).answer</label> <br />
                     }
 
                 }
@@ -95,6 +100,10 @@
     .Text {
         color: white;
         margin-left: 10px;
+    }
+
+    .checkbox {
+        display: inline-block;
     }
 
     .form {

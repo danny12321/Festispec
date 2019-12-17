@@ -20,6 +20,7 @@ function questionnaireHandleTypeMultipleChoise(question) {
 
     for (var i = 0; i < checkboxs.length; i++) {
         handleCheckbox(checkboxs[i], helpers[i]);
+        console.log(checkboxs[i], helpers[i])
     }
 
     function handleCheckbox(checkbox, helper) {
