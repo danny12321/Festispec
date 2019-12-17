@@ -125,7 +125,7 @@ namespace Festispec.ViewModel.Users
                     context.SaveChanges();
                 }
 
-                _main.SetPage("Users", false);
+                _main.SetPage("Users");
             } else
             {
                 // Incorrect input -- Show error message

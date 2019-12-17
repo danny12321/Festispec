@@ -59,21 +59,21 @@ namespace Festispec.ViewModel.ContactPersonsVM
 
         private void ShowAddContactPerson()
         {
-            _main.SetPage("ShowAddContactPerson", false);
+            _main.SetPage("ShowAddContactPerson");
         }
 
         public void ShowManagementPage()
         {
-            _main.SetPage("ContactPersonManagement", false);
+            _main.SetPage("ContactPersonManagement");
         }
 
         private void ShowEditContactPerson()
         {
-            _main.SetPage("ShowEditContactPerson", false);
+            _main.SetPage("ShowEditContactPerson");
         }
         private void ShowContactPersonInfo()
         {
-            _main.SetPage("ShowContactPersonInfo", false);
+            _main.SetPage("ShowContactPersonInfo");
         }
     }
 }

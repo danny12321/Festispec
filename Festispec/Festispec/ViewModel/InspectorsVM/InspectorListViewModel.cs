@@ -64,7 +64,7 @@ namespace Festispec.ViewModel.InspectorsVM
 
         public void InspectorInfo()
         {
-            _mainViewModel.SetPage("InspectorInfo", false);
+            _mainViewModel.SetPage("InspectorInfo");
         }
 
     }

@@ -64,9 +64,9 @@
         </Grid.ColumnDefinitions>
         <ScrollViewer  Grid.Column="0" Grid.Row="0" VerticalAlignment="Top">
 
-        <StackPanel Width="300" Grid.Column="0" Grid.Row="0">
-            <Border BorderThickness="10">
-                <TextBox TextWrapping="Wrap"
+            <StackPanel Width="300" Grid.Column="0" Grid.Row="0">
+                <Border BorderThickness="10">
+                    <TextBox TextWrapping="Wrap"
                             VerticalAlignment="Stretch"
                             MinWidth="280"
                             AcceptsReturn="True"
@@ -74,15 +74,15 @@
                             SpellCheck.IsEnabled="True"
                             materialDesign:HintAssist.Hint="Beschrijving"
                             Text="{Binding Inspection.Description}"></TextBox>
-            </Border>
-            <!--Begin time-->
-            <Border BorderThickness="10">
-                <StackPanel>
-                    <TextBlock>Start datum en tijd</TextBlock>
+                </Border>
+                <!--Begin time-->
+                <Border BorderThickness="10">
+                    <StackPanel>
+                        <TextBlock>Start datum en tijd</TextBlock>
 
-                    <StackPanel Orientation="Horizontal">
-                        <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding StartDate}"/>
-                        <materialDesign:TimePicker
+                        <StackPanel Orientation="Horizontal">
+                            <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding StartDate}"/>
+                            <materialDesign:TimePicker
                               Is24Hours="True"
                               Margin="10,0,0,0"
                               x:Name="PresetBeginTimePicker"
@@ -109,9 +109,8 @@
                     </StackPanel>
                 </Border>
 
-                <Border BorderThickness="10">
-                    <Button Command="{Binding EditInspectionCommand}">Opslaan</Button>
-                </Border>
+                <Button Margin="10" Command="{Binding EditInspectionCommand}">Opslaan</Button>
+                <Button Margin="10" Background="Red" BorderThickness="0" Command="{Binding DeleteInspectionCommand}">Verwijder inspectie</Button>
 
                 <Border BorderThickness="10" Margin="0, 20, 0, 0">
                     <StackPanel>
@@ -138,7 +137,7 @@
                                             >
                                                 <materialDesign:PackIcon Kind="OpenInNew"></materialDesign:PackIcon>
                                             </Button>
-                                            
+
                                             <Button 
                                                 DockPanel.Dock="Right"
                                                 BorderBrush="Red"
@@ -156,14 +155,10 @@
                             </ItemsControl.ItemTemplate>
 
                         </ItemsControl>
+                        
+                        <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" TextWrapping="Wrap"></TextBlock>
                     </StackPanel>
-
-                    <Button Margin="0,10,0,0" Command="{Binding EditInspectionCommand}">Verander inspectie</Button>
-                    <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" TextWrapping="Wrap"></TextBlock>
-                    <Button Margin="0,30,0,0" Background="Red" BorderThickness="0" Command="{Binding DeleteInspectionCommand}">Verwijder inspectie</Button>
-                </StackPanel>
-            </Border>
-
+                </Border>
             </StackPanel>
         </ScrollViewer>
 

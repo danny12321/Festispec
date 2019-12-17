@@ -57,7 +57,7 @@ namespace Festispec.ViewModel.ClientVM
 
         private void ShowContactPage()
         {
-            _main.SetPage("ContactPersonManagement", false);
+            _main.SetPage("ContactPersonManagement");
         }
 
         private void ShowEditPage()
