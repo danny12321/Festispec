@@ -64,7 +64,7 @@ namespace Festispec.ViewModel.InspectorsVM
                 context.SaveChanges();
                 var newinspector = context.Inspectors.Attach(Inspector.ToModel());
                 newuser.inspector_id = newinspector.id;
-                var role = context.Rolls.Find(2);
+                var role = context.Rolls.Where(r => r.role == "Inspector").FirstOrDefault();
                 newuser.Rolls.Add(role);
                 context.Users.Add(newuser);
                 
