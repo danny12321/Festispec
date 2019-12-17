@@ -66,6 +66,10 @@ namespace Festispec.ViewModel
                     FrameContent = new View.Schedule.Schedule();
                     PageTitle = "Planning";
                     break;
+                case "ManageDashboard":
+                    FrameContent = new View.Dashboard.ManageDashboard();
+                    PageTitle = "Management Dashboard";
+                    break;
                 case "Festival":
                     FrameContent = new View.FestivalViews.Festivals();
                     PageTitle = "Festival beheer";
@@ -133,6 +137,10 @@ namespace Festispec.ViewModel
                 case "EditInspector":
                     FrameContent = new View.Inspectors.EditInspector();
                     PageTitle = "Inspecteur bewerken";
+                    break;
+                case "InspectorInfo":
+                    FrameContent = new View.Inspectors.InspectorInfo();
+                    PageTitle = "Inspecteur informatie";
                     break;
                 case "ShowAddContactPerson":
                     FrameContent = new View.ContactPersonsView.AddContactPerson();

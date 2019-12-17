@@ -27,55 +27,56 @@
         <Border Padding="20">
             <StackPanel>
 
-                <TextBlock Text="Inspecteur Bewerken" FontSize="25" Padding="0,10"/>
+                <TextBlock Text="Inspecteur bewerken" FontSize="25" Padding="0,10"/>
 
-                <TextBlock Text="Voornaam:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.InspectorFirstName, Mode=TwoWay}"></TextBox>
-                
-                <TextBlock Text="Achternaam:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.InspectorLastName, Mode=TwoWay}"></TextBox>
-                
-                <TextBlock Text="Geboorte Datum:"></TextBlock>
+                <TextBlock FontSize="15" Text="Voornaam:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.InspectorFirstName, Mode=TwoWay}"></TextBox>
 
-                <DatePicker HorizontalAlignment="Left" Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding  InspectorViewModel.SelectedInspector.Birthday,Mode=TwoWay}"/>
-                
-                <TextBlock Text="Postcode:"></TextBlock>
-                <TextBox HorizontalAlignment="Left" MaxLength="6" Text="{Binding InspectorViewModel.SelectedInspector.PostalCode, Mode=TwoWay}"></TextBox>
-                
-                <TextBlock Text="Land:"></TextBlock>
-                <TextBox  MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.Country, Mode=TwoWay}"></TextBox>
-                
-                <TextBlock Text="Plaats:"></TextBlock>
-                <TextBox  MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.City, Mode=TwoWay}"></TextBox>
-                
-                <TextBlock Text="Straat:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.Street, Mode=TwoWay}"></TextBox>
-                
-                <TextBlock Text="Huisnummer:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.Housenumber, Mode=TwoWay}"></TextBox>
-                
-                <TextBlock Text="TelefoonNummer:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.Phone, Mode=TwoWay}"></TextBox>
-                
-                <TextBlock Text="Actief:"></TextBlock>
+                <TextBlock FontSize="15" Text="Achternaam:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.InspectorLastName, Mode=TwoWay}"></TextBox>
 
-                <DatePicker HorizontalAlignment="Left" Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding  InspectorViewModel.SelectedInspector.Active,Mode=TwoWay}"/>
+                <TextBlock FontSize="15" Text="Email:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.InspectorEmail, Mode=TwoWay}"></TextBox>
 
-                <TextBlock Margin="0,10,0,0" Text="Breedtegraad:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.Latitude, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Geboorte Datum:"></TextBlock>
+                <DatePicker FontSize="15" HorizontalAlignment="Left" Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding  SelectedInspector.Birthday,Mode=TwoWay}"/>
 
-                <TextBlock Text="Hoogtegraad:"></TextBlock>
-                <TextBox MaxLength="50" Text="{Binding InspectorViewModel.SelectedInspector.Longitude, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Postcode:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="6" Text="{Binding SelectedInspector.PostalCode, Mode=TwoWay}"></TextBox>
+
+                <TextBlock FontSize="15" Text="Land:"></TextBlock>
+                <TextBox FontSize="15"  MaxLength="50" Text="{Binding SelectedInspector.Country, Mode=TwoWay}"></TextBox>
+
+                <TextBlock FontSize="15" Text="Plaats:"></TextBlock>
+                <TextBox FontSize="15"  MaxLength="50" Text="{Binding SelectedInspector.City, Mode=TwoWay}"></TextBox>
+
+                <TextBlock FontSize="15" Text="Straat:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.Street, Mode=TwoWay}"></TextBox>
+
+                <TextBlock FontSize="15" Text="Huisnummer:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.Housenumber, Mode=TwoWay}"></TextBox>
+
+                <TextBlock FontSize="15" Text="TelefoonNummer:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.Phone, Mode=TwoWay}"></TextBox>
+
+                <TextBlock FontSize="15" Text="Actief:"></TextBlock>
+                <DatePicker FontSize="15" HorizontalAlignment="Left" Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding  SelectedInspector.Active,Mode=TwoWay}"/>
+
+                <TextBlock FontSize="15" Margin="0,10,0,0" Text="Breedtegraad:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.Latitude, Mode=TwoWay}"></TextBox>
+
+                <TextBlock FontSize="15" Text="Hoogtegraad:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedInspector.Longitude, Mode=TwoWay}"></TextBox>
 
                 <Border Padding="10">
-                    <Button HorizontalAlignment="Left" Command="{Binding GenerateLatLongBasedOnAdressCommand}">Genereer op adres gegvens</Button>
+                    <Button HorizontalAlignment="Left" Command="{Binding GenerateLatLongBasedOnAdressCommand}">Genereer Adres Gegevens</Button>
                 </Border>
                 
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding EditInspectorCommand}" CommandParameter="{Binding EditInspectorCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="100"
-                    ToolTip="Resource name: MaterialDesignRaisedButton">
+                    ToolTip="Wijzigingen opslaan">
                         Opslaan
                     </Button>
                 </Border>

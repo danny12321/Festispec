@@ -10,6 +10,8 @@ using Festispec.ViewModel.MunicipalityVM;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Festispec.ViewModel.ContactPersonsVM;
+using Festispec.ViewModel.DashboardVM;
+using Festispec.ViewModel.InspectorsVM;
 using Festispec.ViewModel.Users;
 
 namespace Festispec.ViewModel
@@ -147,7 +149,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                _inspectors = new InspectorsVM.InspectorListViewModel(Main);
+                _inspectors = new InspectorsVM.InspectorListViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
                 return _inspectors;
             }
         }
@@ -203,7 +205,15 @@ namespace Festispec.ViewModel
             get
             {
 
-                return new ViewModel.InspectorsVM.EditInspectorViewModel(_inspectors);
+                return new ViewModel.InspectorsVM.EditInspectorViewModel(_inspectors, ServiceLocator.Current.GetInstance<IDataService>(), Main);
+            }
+        }
+
+        public InspectorInfoViewModel inspectorinfo
+        {
+            get
+            {
+                return new InspectorInfoViewModel(ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
 
@@ -215,8 +225,6 @@ namespace Festispec.ViewModel
                 return _municipality;
             }
         }
-
-
 
         public InspectionsViewModel Inspections
         {
@@ -249,6 +257,13 @@ namespace Festispec.ViewModel
             }
         }
 
+        public ManageDashboardVM Dashboard
+        {
+            get
+            {
+                return new ManageDashboardVM();
+            }
+        }
         public UsersVM UsersViewModel
         {
             get
