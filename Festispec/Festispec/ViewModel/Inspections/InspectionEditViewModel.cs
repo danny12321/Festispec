@@ -167,7 +167,6 @@ namespace Festispec.ViewModel.Inspections
             // Parse JSON to object
             JArray parsedInspectionJson = JArray.Parse(jsonInspectionsData);
 
-
             JObject inspectionJson = null;
 
             // Get selected inspection
@@ -436,14 +435,14 @@ namespace Festispec.ViewModel.Inspections
             {
                 Inspectors.ToList().ForEach(i =>
                 {
-                    if (InspectorIsAvailable(i))
+                    if (InspectorIsNotAvailable(i))
                     {
-                        i.Available = "Beschikbaar";
+                        i.Available = "Niet beschikbaar";
                         i.RaisePropertyChanged("Available");
                     }
                     else
                     {
-                        i.Available = "Niet beschikbaar";
+                        i.Available = "Beschikbaar";
                         i.RaisePropertyChanged("Available");
                     }
                 });
@@ -454,21 +453,21 @@ namespace Festispec.ViewModel.Inspections
 
                 SelectedInspectors.ToList().ForEach(i =>
                 {
-                    if (InspectorIsAvailable(i))
+                    if (InspectorIsNotAvailable(i))
                     {
-                        i.Available = "Beschikbaar";
+                        i.Available = "Niet beschikbaar";
                         i.RaisePropertyChanged("Available");
                     }
                     else
                     {
-                        i.Available = "Niet beschikbaar";
+                        i.Available = "Beschikbaar";
                         i.RaisePropertyChanged("Available");
                     }
                 });
             }
         }
 
-        private bool InspectorIsAvailable(InspectorsVM inspector)
+        private bool InspectorIsNotAvailable(InspectorsVM inspector)
         {
             bool returnValue = false;
 
@@ -478,7 +477,7 @@ namespace Festispec.ViewModel.Inspections
                 {
                     returnValue = true;
                 }
-            });
+            }); 
 
             return returnValue;
         }
