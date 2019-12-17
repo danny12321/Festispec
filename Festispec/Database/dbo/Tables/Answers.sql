@@ -11,6 +11,7 @@
 GO
 ALTER TABLE [dbo].[Answers]  WITH CHECK ADD  CONSTRAINT [FK_Answers_Questions] FOREIGN KEY([question_id])
 REFERENCES [dbo].[Questions] ([id])
+ON DELETE CASCADE
 GO
 
 ALTER TABLE [dbo].[Answers] CHECK CONSTRAINT [FK_Answers_Questions]
