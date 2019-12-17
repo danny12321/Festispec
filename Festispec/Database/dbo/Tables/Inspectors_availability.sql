@@ -3,7 +3,7 @@
 	[start_date] [datetime] NOT NULL,
 	[end_date] [datetime] NOT NULL,
 	[inspector_id] [int] NOT NULL,
- [text] NVARCHAR(256) NOT NULL, 
+ [text] NVARCHAR(256) NULL, 
     CONSTRAINT [PK_Inspectors_availability] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC

@@ -4,21 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FestispecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__RefactorLog">
-          <Key>
-            <PropertyRef Name="OperationKey" />
-          </Key>
-          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
-        </EntityType>
+    <Schema Namespace="FestispecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Answers">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="answer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="answer" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="question_id" Type="int" />
-          <Property Name="insertdate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
@@ -152,7 +145,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="nvarchar" MaxLength="50" />
           <Property Name="inspector_id" Type="int" />
-          <Property Name="inspection_id" Type="int" />
+          <Property Name="inspection_id" Type="int" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Questions">
@@ -460,7 +453,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="FestispecModelStoreContainer">
-          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Answers" EntityType="Self.Answers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contactpersons" EntityType="Self.Contactpersons" Schema="dbo" store:Type="Tables" />
@@ -562,8 +554,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FestispecModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -578,7 +569,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="answer" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="question_id" Type="Int32" />
           <Property Name="insertdate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Questions" Relationship="Self.FK_Answers_Questions" FromRole="Answers" ToRole="Questions" />
@@ -730,8 +721,9 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="inspector_id" Type="Int32" />
-          <Property Name="inspection_id" Type="Int32" />
+          <Property Name="inspection_id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="finished" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Inspectors_at_inspection" Relationship="Self.FK_Questionnaires_Inspectors_at_inspection" FromRole="Questionnaires" ToRole="Inspectors_at_inspection" />
           <NavigationProperty Name="Questions" Relationship="Self.FK_Questions_Questionnaires" FromRole="Questionnaires" ToRole="Questions" />
         </EntityType>
@@ -1100,20 +1092,12 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="FestispecModelStoreContainer" CdmEntityContainer="FestispecEntities">
-          <EntitySetMapping Name="C__RefactorLog">
-            <EntityTypeMapping TypeName="FestispecModel.C__RefactorLog">
-              <MappingFragment StoreEntitySet="__RefactorLog">
-                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Answers">
             <EntityTypeMapping TypeName="FestispecModel.Answers">
               <MappingFragment StoreEntitySet="Answers">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="answer" ColumnName="answer" />
                 <ScalarProperty Name="question_id" ColumnName="question_id" />
-                <ScalarProperty Name="insertdate" ColumnName="insertdate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
