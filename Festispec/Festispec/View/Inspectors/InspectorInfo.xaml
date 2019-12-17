@@ -60,5 +60,28 @@
 
             </StackPanel>
         </Border>
+        <Border Grid.Column="1" Padding="20">
+            <StackPanel>
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="400"/>
+                        <ColumnDefinition Width="50"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Ingeplande inspecties" FontSize="28" Grid.Column="0" />
+
+                </Grid>
+
+                <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedInspection, Mode=TwoWay}" ItemsSource="{Binding Inspections}" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Naam" Binding="{Binding Description}" Foreground="#FF1D1616" Width="200"/>
+                        <DataGridTextColumn Header="Start datum" Binding="{Binding Start_date}" Foreground="#FF1D1616" Width="200"/>
+                        <DataGridTextColumn Header="Eind datum" Binding="{Binding End_date}" Foreground="#FF1D1616" Width="200"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>

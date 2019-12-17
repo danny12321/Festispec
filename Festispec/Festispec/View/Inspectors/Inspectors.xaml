@@ -64,7 +64,7 @@
                         <DataTemplate>
                             <Button Command="{Binding DataContext.ShowInspectorInfo, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
-                                  ToolTip="Klant tonen">
+                                  ToolTip="Inspecteur tonen">
                                 <materialDesign:PackIcon
                                     Kind="About"
                                     Height="20"
