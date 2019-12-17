@@ -20,7 +20,7 @@ namespace Festispec.ViewModel.Inspections
 
         public string Pos { get { return _inspector.latitude + "," + _inspector.longitude; } }
 
-        public bool Available { get; set; } = false;
+        public string Available { get; set; }
 
         public TimeSpan TravelTime { get; set; }
 

@@ -268,18 +268,8 @@ namespace Festispec.ViewModel.Inspections
 
             // Check wich inspection are allready in json file
             // And add the one who is not in there
-
             parsedInspectionJson.Add(JObject.FromObject(Inspection));
-            // Change the active inspection
-            //for (int i = 0; i < parsedInspectionJson.Count; i++)
-            //{
-            //    var item = parsedInspectionJson[i];
-            //    if (int.Parse(item["Id"].ToString()) == _inspetionId)
-            //    {
-            //        item["notSelectedInspectors"] = JArray.FromObject(Inspectors);
-            //        item["selectedInspectors"] = JArray.FromObject(SelectedInspectors);
-            //    }
-            //}
+
             parsedInspectionJson[parsedInspectionJson.Count - 1]["notSelectedInspectors"] = JArray.FromObject(Inspectors);
             parsedInspectionJson[parsedInspectionJson.Count - 1]["selectedInspectors"] = JArray.FromObject(SelectedInspectors);
 
@@ -304,12 +294,33 @@ namespace Festispec.ViewModel.Inspections
                 {
                     if (InspectorIsAvailable(i))
                     {
-                        i.Available = true;
+                        i.Available = "Beschikbaar";
+                        i.RaisePropertyChanged("Available");
+                    } else
+                    {
+                        i.Available = "Niet beschikbaar";
                         i.RaisePropertyChanged("Available");
                     }
                 });
             }
-            Console.WriteLine();
+
+            if (SelectedInspectors != null)
+            {
+
+                SelectedInspectors.ToList().ForEach(i =>
+                {
+                    if (InspectorIsAvailable(i))
+                    {
+                        i.Available = "Beschikbaar";
+                        i.RaisePropertyChanged("Available");
+                    }
+                    else
+                    {
+                        i.Available = "Niet beschikbaar";
+                        i.RaisePropertyChanged("Available");
+                    }
+                });
+            }
         }
 
         private bool InspectorIsAvailable(InspectorsVM inspector)
@@ -329,8 +340,7 @@ namespace Festispec.ViewModel.Inspections
 
         private bool HasAvailability(Inspectors_availability availability)
         {
-            var temp = availability.start_date < StartDateTimeCombined && availability.end_date > EndDateTimeCombined;
-            return temp;
+            return availability.start_date < StartDateTimeCombined && availability.end_date > EndDateTimeCombined;
         }
     }
 }

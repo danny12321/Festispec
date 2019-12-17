@@ -144,8 +144,10 @@
                                       Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.SelectInspectorCommand}" CommandParameter="{Binding }">
                                     <materialDesign:PackIcon Kind="ArrowRight" />
                                 </Button>
-                                <TextBlock Margin="10,10,0,0" Text="{Binding TravelTime}"></TextBlock>
-                                <TextBlock Margin="10,10,0,0" Text="{Binding Available}"></TextBlock>
+                                <StackPanel>
+                                    <TextBlock Margin="10,10,0,0" Text="{Binding TravelTime}"></TextBlock>
+                                    <TextBlock Margin="10,0,0,0" Text="{Binding Available}"></TextBlock>
+                                </StackPanel>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -177,7 +179,10 @@
                                     <materialDesign:PackIcon Kind="ArrowLeft" />
                                 </Button>
                                 <Button Grid.Column="1" FontSize="10" BorderBrush="Gray" Background="Transparent" Command="{Binding SetViewToSelectedPersonCommand}" CommandParameter="{Binding ElementName=MijnMap}" Content="{Binding Fullname}"></Button>
-                                <TextBlock Margin="10,10,0,0" Text="{Binding TravelTime}"></TextBlock>
+                                <StackPanel>
+                                    <TextBlock Margin="10,10,0,0" Text="{Binding TravelTime}"></TextBlock>
+                                    <TextBlock Margin="10,0,0,0" Text="{Binding Available}"></TextBlock>
+                                </StackPanel>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
