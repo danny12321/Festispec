@@ -38,13 +38,15 @@ namespace Festispec.ViewModel.Inspections
         public InspectionVM Inspection { get; set; }
 
         private DateTime _startDate;
-        public DateTime StartDate { get { return _startDate; } set { _startDate = value; EndDate = value; } }
+        public DateTime StartDate { get { return _startDate; } set { _startDate = value; EndDate = value; CheckInspectorAvailability(); } }
 
         private TimeSpan _startTime;
-        public TimeSpan StartTime { get { return _startTime; } set { _startTime = value; EndTime = value; } }
+        public TimeSpan StartTime { get { return _startTime; } set { _startTime = value; EndTime = value; CheckInspectorAvailability(); } }
 
-        public DateTime EndDate { get; set; }
-        public TimeSpan EndTime { get; set; }
+        private DateTime _endDate;
+        public DateTime EndDate { get { return _endDate; } set { _endDate = value; CheckInspectorAvailability(); } }
+        private TimeSpan _endTime;
+        public TimeSpan EndTime { get { return _endTime; } set { _endTime = value; CheckInspectorAvailability(); } }
 
         public DateTime EndDateTimeCombined
         {
@@ -92,7 +94,7 @@ namespace Festispec.ViewModel.Inspections
                 using (var context = new FestispecEntities())
                 {
                     //Get inspectors
-                    var inspectors = context.Inspectors.ToList()
+                    var inspectors = context.Inspectors.Include("Inspectors_availability").ToList()
                         .Select(i => new InspectorsVM(i));
 
                     Inspectors = new ObservableCollection<InspectorsVM>(inspectors);
@@ -165,7 +167,6 @@ namespace Festispec.ViewModel.Inspections
             // Parse JSON to object
             JArray parsedInspectionJson = JArray.Parse(jsonInspectionsData);
 
-
             JObject inspectionJson = null;
 
             // Get selected inspection
@@ -197,6 +198,7 @@ namespace Festispec.ViewModel.Inspections
                     inspectorVM.id = notSelectedInspectors[i]["id"].Value<int>();
                     inspectorVM.name = notSelectedInspectors[i]["name"].ToString();
                     inspectorVM.lastname = notSelectedInspectors[i]["lastname"].ToString();
+                    inspectorVM.Available = notSelectedInspectors[i]["Available"].ToString();
                     inspectorVM.birthday = notSelectedInspectors[i]["birthday"].Value<DateTime>();
                     inspectorVM.email = notSelectedInspectors[i]["email"].ToString();
                     inspectorVM.postalcode = notSelectedInspectors[i]["postalcode"].ToString();
@@ -226,6 +228,7 @@ namespace Festispec.ViewModel.Inspections
                     inspectorVM.name = selectedInspectors[i]["name"].ToString();
                     inspectorVM.lastname = selectedInspectors[i]["lastname"].ToString();
                     inspectorVM.birthday = selectedInspectors[i]["birthday"].Value<DateTime>();
+                    inspectorVM.Available = selectedInspectors[i]["Available"].ToString();
                     inspectorVM.email = selectedInspectors[i]["email"].ToString();
                     inspectorVM.postalcode = selectedInspectors[i]["postalcode"].ToString();
                     inspectorVM.country = selectedInspectors[i]["country"].ToString();
@@ -281,7 +284,7 @@ namespace Festispec.ViewModel.Inspections
 
                     context.SaveChanges();
                 }
-
+                CreateOfflineInspectionData();
                 _main.SetPage("Inspections", false);
             }
             else
@@ -289,7 +292,6 @@ namespace Festispec.ViewModel.Inspections
                 // Show wrong input error message
                 ErrorMessage = "Beschrijving mag niet leeg zijn\nStart datum en tijd moet in de toekomst liggen\nEind datum en tijd moet na de start zijn";
                 RaisePropertyChanged("ErrorMessage");
-                Console.WriteLine("Wrong input");
             }
 
         }
@@ -300,11 +302,11 @@ namespace Festispec.ViewModel.Inspections
             {
                 return false;
             }
-            if(IsStartDateTimeInFuture(inspection.Start_date))
+            if(!IsStartDateTimeInFuture(inspection.Start_date))
             {
                 return false;
             }
-            if(IsEndDateAfterTheStartDate(inspection.Start_date, inspection.End_date))
+            if(!IsEndDateAfterTheStartDate(inspection.Start_date, inspection.End_date))
             {
                 return false;
             }
@@ -402,11 +404,11 @@ namespace Festispec.ViewModel.Inspections
             // Change the active inspection
             for (int i = 0; i < parsedInspectionJson.Count; i++)
             {
-                var item = parsedInspectionJson[i];
-                if (int.Parse(item["Id"].ToString()) == _inspetionId)
+                if (int.Parse(parsedInspectionJson[i]["Id"].ToString()) == _inspetionId)
                 {
-                    item["notSelectedInspectors"] = JArray.FromObject(Inspectors);
-                    item["selectedInspectors"] = JArray.FromObject(SelectedInspectors);
+                    parsedInspectionJson[i] = JObject.FromObject(Inspection);
+                    parsedInspectionJson[i]["notSelectedInspectors"] = JArray.FromObject(Inspectors);
+                    parsedInspectionJson[i]["selectedInspectors"] = JArray.FromObject(SelectedInspectors);
                 }
             }
 
@@ -420,6 +422,69 @@ namespace Festispec.ViewModel.Inspections
                 outputFile.WriteLine(fileContent);
             }
 
+        }
+
+        private void CheckInspectorAvailability()
+        {
+            if (_service.IsOffline)
+            {
+                return;
+            }
+
+            if (Inspectors != null)
+            {
+                Inspectors.ToList().ForEach(i =>
+                {
+                    if (InspectorIsNotAvailable(i))
+                    {
+                        i.Available = "Niet beschikbaar";
+                        i.RaisePropertyChanged("Available");
+                    }
+                    else
+                    {
+                        i.Available = "Beschikbaar";
+                        i.RaisePropertyChanged("Available");
+                    }
+                });
+            }
+
+            if (SelectedInspectors != null)
+            {
+
+                SelectedInspectors.ToList().ForEach(i =>
+                {
+                    if (InspectorIsNotAvailable(i))
+                    {
+                        i.Available = "Niet beschikbaar";
+                        i.RaisePropertyChanged("Available");
+                    }
+                    else
+                    {
+                        i.Available = "Beschikbaar";
+                        i.RaisePropertyChanged("Available");
+                    }
+                });
+            }
+        }
+
+        private bool InspectorIsNotAvailable(InspectorsVM inspector)
+        {
+            bool returnValue = false;
+
+            inspector.ToModel().Inspectors_availability.ToList().ForEach(ia =>
+            {
+                if (HasAvailability(ia))
+                {
+                    returnValue = true;
+                }
+            }); 
+
+            return returnValue;
+        }
+
+        private bool HasAvailability(Inspectors_availability availability)
+        {
+            return availability.start_date < StartDateTimeCombined && availability.end_date > EndDateTimeCombined;
         }
     }
 }

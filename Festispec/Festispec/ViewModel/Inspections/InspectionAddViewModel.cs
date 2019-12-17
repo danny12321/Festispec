@@ -40,13 +40,16 @@ namespace Festispec.ViewModel.Inspections
         public InspectionVM InspectionMaps { get; set; }
 
         private DateTime _startDate;
-        public DateTime StartDate { get { return _startDate; } set { _startDate = value; EndDate = value; RaisePropertyChanged("EndDate"); } }
+        public DateTime StartDate { get { return _startDate; } set { _startDate = value; EndDate = value; RaisePropertyChanged("EndDate"); CheckInspectorAvailability(); } }
 
         private TimeSpan _startTime;
-        public TimeSpan StartTime { get { return _startTime; } set { _startTime = value; EndTime = TimeSpan.FromMinutes(value.TotalMinutes + 60); RaisePropertyChanged("EndTime"); } }
+        public TimeSpan StartTime { get { return _startTime; } set { _startTime = value; EndTime = TimeSpan.FromMinutes(value.TotalMinutes + 60); RaisePropertyChanged("EndTime"); CheckInspectorAvailability(); } }
 
-        public DateTime EndDate { get; set; }
-        public TimeSpan EndTime { get; set; }
+        private DateTime _endDate;
+        public DateTime EndDate { get { return _endDate; } set { _endDate = value; CheckInspectorAvailability(); } }
+
+        private TimeSpan _endTime;
+        public TimeSpan EndTime { get { return _endTime; } set { _endTime = value; CheckInspectorAvailability(); } }
 
         public DateTime EndDateTimeCombined
         {
@@ -97,7 +100,7 @@ namespace Festispec.ViewModel.Inspections
             using (var context = new FestispecEntities())
             {
                 //Get inspectors
-                var inspectors = context.Inspectors.ToList().Select(i => new InspectorsVM(i));
+                var inspectors = context.Inspectors.Include("Inspectors_availability").ToList().Select(i => new InspectorsVM(i));
 
                 Inspectors = new ObservableCollection<InspectorsVM>(inspectors);
                    
@@ -265,18 +268,8 @@ namespace Festispec.ViewModel.Inspections
 
             // Check wich inspection are allready in json file
             // And add the one who is not in there
-
             parsedInspectionJson.Add(JObject.FromObject(Inspection));
-            // Change the active inspection
-            //for (int i = 0; i < parsedInspectionJson.Count; i++)
-            //{
-            //    var item = parsedInspectionJson[i];
-            //    if (int.Parse(item["Id"].ToString()) == _inspetionId)
-            //    {
-            //        item["notSelectedInspectors"] = JArray.FromObject(Inspectors);
-            //        item["selectedInspectors"] = JArray.FromObject(SelectedInspectors);
-            //    }
-            //}
+
             parsedInspectionJson[parsedInspectionJson.Count - 1]["notSelectedInspectors"] = JArray.FromObject(Inspectors);
             parsedInspectionJson[parsedInspectionJson.Count - 1]["selectedInspectors"] = JArray.FromObject(SelectedInspectors);
 
@@ -290,6 +283,64 @@ namespace Festispec.ViewModel.Inspections
                 outputFile.WriteLine(fileContent);
             }
 
+        }
+
+        private void CheckInspectorAvailability()
+        {
+            if (Inspectors != null)
+            {
+
+                Inspectors.ToList().ForEach(i =>
+                {
+                    if (InspectorIsNotAvailable(i))
+                    {
+                        i.Available = "Niet beschikbaar";
+                        i.RaisePropertyChanged("Available");
+                    } else
+                    {
+                        i.Available = "Beschikbaar";
+                        i.RaisePropertyChanged("Available");
+                    }
+                });
+            }
+
+            if (SelectedInspectors != null)
+            {
+
+                SelectedInspectors.ToList().ForEach(i =>
+                {
+                    if (InspectorIsNotAvailable(i))
+                    {
+                        i.Available = "Niet beschikbaar";
+                        i.RaisePropertyChanged("Available");
+                    }
+                    else
+                    {
+                        i.Available = "Beschikbaar";
+                        i.RaisePropertyChanged("Available");
+                    }
+                });
+            }
+        }
+
+        private bool InspectorIsNotAvailable(InspectorsVM inspector)
+        {
+            bool returnValue = false;
+
+            inspector.ToModel().Inspectors_availability.ToList().ForEach(ia =>
+            {
+                if (HasAvailability(ia))
+                {
+                    returnValue = true;
+                }
+            });
+
+            return returnValue;
+        }
+
+        private bool HasAvailability(Inspectors_availability availability)
+        {
+            return availability.start_date < StartDateTimeCombined && availability.end_date > EndDateTimeCombined;
         }
     }
 }
