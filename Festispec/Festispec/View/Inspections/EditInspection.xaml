@@ -131,14 +131,27 @@
                                     <Border BorderThickness="5">
                                         <DockPanel HorizontalAlignment="Stretch">
 
-                                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center"></TextBlock>
+                                            <TextBlock DockPanel.Dock="Left" Text="{Binding Name}" VerticalAlignment="Center"></TextBlock>
                                             <Button 
+                                                 DockPanel.Dock="Right"
                                                 HorizontalAlignment="Right"
                                                 Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.OpenQuestionnaireCommand}"
                                                 CommandParameter="{Binding}"
                                                 Background="Transparent"
                                             >
                                                 <materialDesign:PackIcon Kind="OpenInNew"></materialDesign:PackIcon>
+                                            </Button>
+                                            
+                                            <Button 
+                                                DockPanel.Dock="Right"
+                                                BorderBrush="Red"
+                                                HorizontalAlignment="Right"
+                                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.DeleteQuestionnaireCommand}"
+                                                CommandParameter="{Binding}"
+                                                ToolTip="Verwijder vragenlijsten"
+                                                Background="Transparent"
+                                            >
+                                                <materialDesign:PackIcon Kind="DeleteOutline"></materialDesign:PackIcon>
                                             </Button>
                                         </DockPanel>
                                     </Border>

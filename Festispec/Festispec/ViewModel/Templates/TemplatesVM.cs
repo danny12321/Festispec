@@ -20,6 +20,8 @@ namespace Festispec.ViewModel.Templates
 
         public ICommand AddTemplateCommand { get; set; }
 
+        public ICommand DeleteTemplateCommand { get; set; }
+
         private MainViewModel _main;
 
         private DataService.IDataService _service;
@@ -30,8 +32,9 @@ namespace Festispec.ViewModel.Templates
             _service = service;
 
             OpenTemplateCommand = new RelayCommand<Domain.Questionnaires>(OpenTemplate);
+            DeleteTemplateCommand = new RelayCommand<Domain.Questionnaires>(DeleteTemplate);
             AddTemplateCommand = new RelayCommand(AddTemplate);
-
+            
             using (var context = new FestispecEntities())
             {
                 var templates = context.Questionnaires.Where(q => q.inspection_id == null).ToList();
@@ -60,6 +63,18 @@ namespace Festispec.ViewModel.Templates
 
             _service.SelectedQuestionnaire = new Questionnaires.QuestionnairesViewModel(questionnaire);
             _main.SetPage("Vragenlijsten");
+        }
+
+        private void DeleteTemplate(Domain.Questionnaires template)
+        {
+            using(var context = new FestispecEntities())
+            {
+                context.Questionnaires.Attach(template);
+                context.Questionnaires.Remove(template);
+                context.SaveChanges();
+
+                Templates.Remove(template);
+            }
         }
 
     }

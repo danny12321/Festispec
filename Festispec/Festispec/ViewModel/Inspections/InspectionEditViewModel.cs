@@ -60,6 +60,8 @@ namespace Festispec.ViewModel.Inspections
         public ICommand DelectInspectorCommand { get; set; }
         public ICommand AddQuestionnaireCommand { get; set; }
         public ICommand OpenQuestionnaireCommand { get; set; }
+        public ICommand DeleteQuestionnaireCommand { get; set; }
+
         private IDataService _service;
 
         public InspectionEditViewModel(MainViewModel main, IDataService service)
@@ -77,7 +79,8 @@ namespace Festispec.ViewModel.Inspections
             DelectInspectorCommand = new RelayCommand<InspectorsVM>(DelectInspector);
             AddQuestionnaireCommand = new RelayCommand(AddQuestionnaire);
             OpenQuestionnaireCommand = new RelayCommand<QuestionnairesViewModel>(OpenQuestionnaire);
-
+            DeleteQuestionnaireCommand = new RelayCommand<QuestionnairesViewModel>(DeleteQuestionnaire);
+            
             using (var context = new FestispecEntities())
             {
                 //Get inspectors
@@ -231,6 +234,19 @@ namespace Festispec.ViewModel.Inspections
             {
                 _service.SelectedQuestionnaire = new QuestionnairesViewModel(context.Questionnaires.FirstOrDefault(q => q.id == questionnaire.Id));
                 _main.SetPage("Vragenlijsten");
+            }
+        }
+
+
+        private void DeleteQuestionnaire(QuestionnairesViewModel questionnaire)
+        {
+            using (var context = new FestispecEntities())
+            {
+                context.Questionnaires.Attach(questionnaire.Questionnaire);
+                context.Questionnaires.Remove(questionnaire.Questionnaire);
+                context.SaveChanges();
+
+                Questionnaires.Remove(questionnaire);
             }
         }
 
