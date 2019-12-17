@@ -1,4 +1,5 @@
 ﻿using Festispec.Domain;
+using Festispec.ViewModel.Questionnaires;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
@@ -13,7 +14,6 @@ namespace Festispec.ViewModel.Templates
 {
     public class TemplatesVM
     {
-
         public ObservableCollection<Festispec.Domain.Questionnaires> Templates { get; set; }
 
         public ICommand OpenTemplateCommand { get; set; }
@@ -41,8 +41,11 @@ namespace Festispec.ViewModel.Templates
 
         private void OpenTemplate(Domain.Questionnaires questionnaire)
         {
-            _service.SelectedQuestionnaire = new Questionnaires.QuestionnairesViewModel(questionnaire);
-            _main.SetPage("Vragenlijsten");
+            using (var context = new FestispecEntities())
+            {
+                _service.SelectedQuestionnaire = new QuestionnairesViewModel(context.Questionnaires.FirstOrDefault(q => q.id == questionnaire.id));
+                _main.SetPage("Vragenlijsten");
+            }
         }
 
         private void AddTemplate()

@@ -227,9 +227,11 @@ namespace Festispec.ViewModel.Inspections
 
         public void OpenQuestionnaire(QuestionnairesViewModel questionnaire)
         {
-            // TODO: check if alles is opgeslagen
-            _service.SelectedQuestionnaire = questionnaire;
-            _main.SetPage("Vragenlijsten");
+            using (var context = new FestispecEntities())
+            {
+                _service.SelectedQuestionnaire = new QuestionnairesViewModel(context.Questionnaires.FirstOrDefault(q => q.id == questionnaire.Id));
+                _main.SetPage("Vragenlijsten");
+            }
         }
 
         private void Debug()

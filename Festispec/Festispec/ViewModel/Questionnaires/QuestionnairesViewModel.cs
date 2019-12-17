@@ -40,6 +40,8 @@ namespace Festispec.ViewModel.Questionnaires
 
         public ObservableCollection<QuestionViewModel> Questions { get; set; }
 
+        public ObservableCollection<Domain.Questionnaires> Templates { get; set; }
+
         private QuestionViewModel _selectedQuestion;
 
         public QuestionViewModel SelectedQuestion
@@ -87,7 +89,15 @@ namespace Festispec.ViewModel.Questionnaires
             }
         }
 
+        private bool _templateDialogOpen;
+
+        public bool TemplateDialogOpen { get { return _templateDialogOpen; } set { _templateDialogOpen = value; RaisePropertyChanged("TemplateDialogOpen"); } }
+
         public ICommand AddQuestionCommand { get; set; }
+
+        public ICommand SelectTemplateCommand { get; set; }
+
+        public ICommand OpenTemplateDialogCommand { get; set; }
 
         public QuestionnairesViewModel(Domain.Questionnaires questionnaire)
         {
@@ -104,10 +114,14 @@ namespace Festispec.ViewModel.Questionnaires
         {
             Questionnaire = questionnaire;
             AddQuestionCommand = new RelayCommand(AddQuestion);
+            SelectTemplateCommand = new RelayCommand<Domain.Questionnaires>(SelectTemplate);
+            OpenTemplateDialogCommand = new RelayCommand(() => TemplateDialogOpen = true);
+
 
             using (var context = new FestispecEntities())
             {
-                //context.Questionnaires.Attach(Questionnaire);
+                var templates = context.Questionnaires.Where(q => q.inspection_id == null).ToList();
+                Templates = new ObservableCollection<Domain.Questionnaires>(templates);
 
                 var questions = Questionnaire.Questions.ToList()
                     .Select(q => GetQuestionClass(q));
@@ -166,6 +180,29 @@ namespace Festispec.ViewModel.Questionnaires
                 context.Entry(Questionnaire).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
             }
+        }
+
+        private void SelectTemplate(Domain.Questionnaires template)
+        {
+            Questions.Clear();
+
+            using (var context = new FestispecEntities())
+            {
+                context.Questions.RemoveRange(context.Questions.Where(q => q.questionnaire_id == Questionnaire.id).ToList());
+
+                var questions = context.Questions.Where(q => q.questionnaire_id == template.id).ToList();
+                questions.ForEach(q => { q.questionnaire_id = Questionnaire.id; });
+                context.Questions.AddRange(questions);
+
+                context.SaveChanges();
+
+                questions.ForEach(q =>
+                {
+                    Questions.Add(GetQuestionClass(q));
+                });
+            }
+
+            TemplateDialogOpen = false;
         }
     }
 }
