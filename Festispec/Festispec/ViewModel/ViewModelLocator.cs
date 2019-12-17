@@ -37,7 +37,7 @@ namespace Festispec.ViewModel
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<FestivalManagementVM>();
             SimpleIoc.Default.Register<QuestionnairesViewModel>();
-            SimpleIoc.Default.Register<InspectionEditViewModel>();
+           
 
             SimpleIoc.Default.Register<PopUpViewModel>();
         }
@@ -237,13 +237,7 @@ namespace Festispec.ViewModel
                 return new InspectionAddViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
-        public InspectionEditViewModel InspectionEdit
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<InspectionEditViewModel>();
-            }
-        }
+
         public ReportViewModel ReportVM
         {
             get

@@ -97,10 +97,7 @@ namespace Festispec.ViewModel
                     FrameContent = new View.Inspections.AddInspection();
                     PageTitle = "Add Inspection";
                     break;
-                case "EditInspection":
-                    FrameContent = new View.Inspections.EditInspection();
-                    PageTitle = "Edit Inspection";
-                    break;
+ 
                 case "Municipality":
                     FrameContent = new View.Municipality.Municipality();
                     PageTitle = "Gemeenten";
@@ -162,6 +159,7 @@ namespace Festispec.ViewModel
                 case "ReportPage":
                     FrameContent = new View.Inspections.Report();
                     PageTitle = "Rapportages";
+                    break;
                 case "ShowAddContactPerson":
                     FrameContent = new View.ContactPersonsView.AddContactPerson();
                     PageTitle = "contactpersoon toevoegen";

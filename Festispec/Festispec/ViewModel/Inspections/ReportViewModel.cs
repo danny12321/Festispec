@@ -7,6 +7,8 @@ using iText.IO.Image;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
+using PdfPrintingNet;
+using PdfViewerNet;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,21 +17,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.DataVisualization.Charting;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Festispec.ViewModel.Inspections
 {
     public class ReportViewModel : ViewModelBase
     {
+        public string FilePath { get; set; }
         public ICommand ToPDF { get; set; }
         private QuestionnairesViewModel _qvm;
         public int Inspection_ID { get; set; }
         public ReportViewModel()
         {
+            var exportFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            var exportFile = System.IO.Path.Combine(exportFolder, "Rapportage-FestivalNaam.pdf");
+            var exportFolder1 = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache);
+            var exportFile1 = System.IO.Path.Combine(exportFolder1, "TempChartImage.jpg");
+            GeneratePdf();
+            FilePath = exportFile;
 
-            _qvm = new QuestionnairesViewModel();
             ToPDF = new RelayCommand(GeneratePdf);
-   
+
         }
 
         private void GeneratePdf()
@@ -79,6 +88,7 @@ namespace Festispec.ViewModel.Inspections
             var exportFile = System.IO.Path.Combine(exportFolder, "Rapportage-FestivalNaam.pdf");
             var exportFolder1 = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache);
             var exportFile1 = System.IO.Path.Combine(exportFolder1, "TempChartImage.jpg");
+            FilePath = exportFile;
             using (var writer = new PdfWriter(exportFile))
             {
                 using (var pdf = new PdfDocument(writer))
