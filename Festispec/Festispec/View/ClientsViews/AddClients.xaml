@@ -22,16 +22,10 @@
 
                 <TextBlock Text="Voeg een nieuwe klant toe" FontSize="25" Padding="0,10"/>
 
-                <TextBlock FontSize="20" Text="Bedrijf naam:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding Client.ClientName, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="20" Text="Postcode:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="6" Text="{Binding Client.PostalCode, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="20" Text="Straat:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding Client.Street, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="20" Text="Huisnummer:"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding Client.Housenumber, Mode=TwoWay}"></TextBox>
-                <TextBlock FontSize="20" Text="Land:"></TextBlock>
-                <ComboBox
+                <TextBlock FontSize="15" Text="Bedrijfsnaam:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding Client.ClientName, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Land:"></TextBlock>
+                <ComboBox Width="100"
                         Margin="0 8 0 8"
                         HorizontalAlignment="Left"
                         Text="{Binding Client.Country, Mode=TwoWay}">
@@ -43,15 +37,23 @@
                         België
                     </ComboBoxItem>
                 </ComboBox>
-                <TextBlock FontSize="20" Text="Telefoon nummer(Optioneel):"></TextBlock>
-                <TextBox FontSize="16" MaxLength="50" Text="{Binding Client.Phone, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Plaats:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding Client.City, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Postcode:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="6" Text="{Binding Client.PostalCode, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Straat:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding Client.Street, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Huisnummer:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding Client.Housenumber, Mode=TwoWay}"></TextBox>
+                <TextBlock FontSize="15" Text="Telefoonnummer:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding Client.Phone, Mode=TwoWay}"></TextBox>
 
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding AddClientCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="100"
-                    ToolTip="Resource name: MaterialDesignRaisedButton">
-                        Save
+                    ToolTip="Klant opslaan">
+                        Opslaan
                     </Button>
                 </Border>
 

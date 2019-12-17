@@ -1,4 +1,5 @@
 ﻿using Festispec.Domain;
+using Festispec.Utils;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
@@ -21,6 +22,7 @@ namespace Festispec.ViewModel.InspectorsVM
 
         public ICommand AddInspectorCommand { get; set; }
         public ICommand CreatePass { get; set; }
+        public ICommand GenerateLatLongBasedOnAdressCommand { get; set; }
 
         public String Password
         {
@@ -40,18 +42,22 @@ namespace Festispec.ViewModel.InspectorsVM
             this._inspectors = Inspectors;
             this.Inspector = new InspectorviewModel();
 
+            GenerateLatLongBasedOnAdressCommand = new RelayCommand(GenerateLatLongBasedOnAdress);
             AddInspectorCommand = new RelayCommand(AddInspectorMethod, CanAddInspector);
             CreatePass = new RelayCommand(GeneratePassword);
         }
 
         private void AddInspectorMethod()
         {
+
             Inspector.Active = DateTime.Now;
             _inspectors.Inspectors.Add(Inspector);
-            var newuser = new Users();
-            newuser.email = Inspector.InspectorFirstName + Inspector.InspectorLastName.Replace(" ", string.Empty);
-            newuser.password = CalculateMD5Hash(Password);
-           
+            var newuser = new Domain.Users();
+            newuser.email = Inspector.InspectorEmail;
+
+            newuser.password = ComputeSha256Hash(Password);
+
+
             using (var context = new FestispecEntities())
             {
                 context.Inspectors.Add(Inspector.ToModel());
@@ -59,8 +65,10 @@ namespace Festispec.ViewModel.InspectorsVM
                 context.SaveChanges();
                 var newinspector = context.Inspectors.Attach(Inspector.ToModel());
                 newuser.inspector_id = newinspector.id;
+                var role = context.Rolls.Where(r => r.role == "Inspector").FirstOrDefault();
+                newuser.Rolls.Add(role);
                 context.Users.Add(newuser);
-                
+
                 context.SaveChanges();
             }
             _inspectors.ShowInspectorPage();
@@ -78,7 +86,7 @@ namespace Festispec.ViewModel.InspectorsVM
 
         private bool IsMatch()
         {
-            if (!IsEmptyField(Inspector.InspectorFirstName) && !IsEmptyField(Inspector.InspectorLastName) && !IsEmptyField(Inspector.PostalCode) && !IsEmptyField(Inspector.Street) && !IsEmptyField(Inspector.Housenumber))
+            if (!IsEmptyField(Inspector.InspectorFirstName) && !IsEmptyField(Inspector.InspectorLastName) && !IsEmptyField(Password) && !IsEmptyField(Inspector.InspectorEmail))
             {
                 return true;
             }
@@ -137,6 +145,40 @@ namespace Festispec.ViewModel.InspectorsVM
             return sb.ToString();
 
         }
+        private string ComputeSha256Hash(string rawData)
+        {
+            // Create a SHA256   
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // ComputeHash - returns byte array  
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convert byte array to a string   
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
+
+        private async void GenerateLatLongBasedOnAdress()
+        {
+            //You need atleast a country and a city to get a good result
+            if (Inspector.Country != null || Inspector.City != null)
+            {
+                LatLongGenerator latLongGenerator = new LatLongGenerator();
+
+                Task<string> latLongGeneratorAwait = latLongGenerator.GenerateLatLong(Inspector.Country, Inspector.City, Inspector.Street, Inspector.Housenumber);
+                string latlong = await latLongGeneratorAwait;
+
+                Inspector.Latitude = latlong.Split(',')[0];
+                Inspector.Longitude = latlong.Split(',')[1];
+                RaisePropertyChanged("Inspector");
+            }
+        }
+
 
 
     }

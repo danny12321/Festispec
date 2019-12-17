@@ -61,6 +61,12 @@
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.2.0.325, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.2.0\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -68,7 +74,10 @@
       <HintPath>..\packages\MaterialDesignThemes.2.6.0\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Maps.MapControl.WPF">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Bing Maps WPF Control\V1\Libraries\Microsoft.Maps.MapControl.WPF.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Downloads\Microsoft.Maps.MapControl.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -98,6 +107,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Utils\LatLongGenerator.cs" />
+    <Compile Include="Utils\PasswordHasher.cs" />
+    <Compile Include="Utils\RouteDurationCalculator.cs" />
     <Compile Include="ViewModel\AccountsVM\UsersRollsVM.cs" />
     <Compile Include="ViewModel\AccountsVM\UsersVM.cs" />
     <Compile Include="ViewModel\ClientVM\AddClientsVM.cs" />
@@ -105,6 +116,14 @@
     <Compile Include="ViewModel\ClientVM\ClientManageVM.cs" />
     <Compile Include="ViewModel\ClientVM\ClientsVM.cs" />
     <Compile Include="ViewModel\ClientVM\EditClientVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\AddContactPersonVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\AddFestivalContactVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\ContactPersonInfoVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\ContactPersonManageVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\ContactPersonVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\EditContactPersonVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\TypeContactVM.cs" />
+    <Compile Include="ViewModel\DashboardVM\ManageDashboardVM.cs" />
     <Compile Include="ViewModel\DataService\DataService.cs" />
     <Compile Include="ViewModel\DataService\IDataService.cs" />
     <Compile Include="ViewModel\FestivalVM\AddFestivalVM.cs" />
@@ -122,6 +141,7 @@
     <Compile Include="ViewModel\Inspections\InspectorsVM.cs" />
     <Compile Include="ViewModel\InspectorsVM\AddInspectorViewModel.cs" />
     <Compile Include="ViewModel\InspectorsVM\EditInspectorViewModel.cs" />
+    <Compile Include="ViewModel\InspectorsVM\InspectorInfoViewModel.cs" />
     <Compile Include="ViewModel\InspectorsVM\InspectorListViewModel.cs" />
     <Compile Include="ViewModel\InspectorsVM\InspectorviewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
@@ -138,7 +158,32 @@
     <Compile Include="ViewModel\Questionnaires\Types\OpenQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Types\SelectQuestion.cs" />
     <Compile Include="ViewModel\Templates\TemplatesVM.cs" />
+    <Compile Include="ViewModel\ScheduleVM\ScheduleColumnVM.cs" />
+    <Compile Include="ViewModel\ScheduleVM\ScheduleVM.cs" />
+    <Compile Include="ViewModel\Users\AddUserVM.cs" />
+    <Compile Include="ViewModel\Users\EditUserVM.cs" />
+    <Compile Include="ViewModel\Users\UserRollVM.cs" />
+    <Compile Include="ViewModel\Users\UsersVM.cs" />
+    <Compile Include="ViewModel\Users\UserVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\ContactPersonsView\AddContactPerson.xaml.cs">
+      <DependentUpon>AddContactPerson.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactPersonsView\AddFestivalContact.xaml.cs">
+      <DependentUpon>AddFestivalContact.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactPersonsView\ContactPersonInfo.xaml.cs">
+      <DependentUpon>ContactPersonInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactPersonsView\ContactPersonsManage.xaml.cs">
+      <DependentUpon>ContactPersonsManage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactPersonsView\EditContactPerson.xaml.cs">
+      <DependentUpon>EditContactPerson.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dashboard\ManageDashboard.xaml.cs">
+      <DependentUpon>ManageDashboard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Inspections\AddInspection.xaml.cs">
       <DependentUpon>AddInspection.xaml</DependentUpon>
     </Compile>
@@ -153,6 +198,9 @@
     </Compile>
     <Compile Include="View\ClientsViews\Client.xaml.cs">
       <DependentUpon>Client.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Inspectors\InspectorInfo.xaml.cs">
+      <DependentUpon>InspectorInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Municipality\AddMunicipality.xaml.cs">
       <DependentUpon>AddMunicipality.xaml</DependentUpon>
@@ -220,11 +268,20 @@
     <Compile Include="View\Questionnaires\Types\SelectPreview.xaml.cs">
       <DependentUpon>SelectPreview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Schedule.xaml.cs">
+    <Compile Include="View\Schedule\Schedule.xaml.cs">
       <DependentUpon>Schedule.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Templates\Templates.xaml.cs">
       <DependentUpon>Templates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Users\AddUser.xaml.cs">
+      <DependentUpon>AddUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Users\EditUser.xaml.cs">
+      <DependentUpon>EditUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Users\Users.xaml.cs">
+      <DependentUpon>Users.xaml</DependentUpon>
     </Compile>
     <Page Include="View\BaseWindow.xaml">
       <SubType>Designer</SubType>
@@ -243,6 +300,30 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ClientsViews\EditClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactPersonsView\AddContactPerson.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactPersonsView\AddFestivalContact.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactPersonsView\ContactPersonInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactPersonsView\ContactPersonsManage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactPersonsView\EditContactPerson.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dashboard\ManageDashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -283,6 +364,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Inspectors\EditInspector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspectors\InspectorInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -362,7 +447,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Schedule.xaml">
+    <Page Include="View\Schedule\Schedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Users\AddUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Users\EditUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Users\Users.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

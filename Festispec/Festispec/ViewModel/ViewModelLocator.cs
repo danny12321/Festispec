@@ -12,6 +12,10 @@ using GalaSoft.MvvmLight.Ioc;
 using System;
 using Festispec.Domain;
 using Festispec.ViewModel.Templates;
+using Festispec.ViewModel.ContactPersonsVM;
+using Festispec.ViewModel.DashboardVM;
+using Festispec.ViewModel.InspectorsVM;
+using Festispec.ViewModel.Users;
 
 namespace Festispec.ViewModel
 {
@@ -50,7 +54,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new LoginViewModel();
+                return new LoginViewModel(ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
 
@@ -95,6 +99,46 @@ namespace Festispec.ViewModel
             }
         }
 
+        public ContactPersonManageVM contactManagement
+        {
+            get
+            {
+                return new ContactPersonManageVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+
+        public AddContactPersonVM addContactPerson
+        {
+            get
+            {
+                return new AddContactPersonVM(contactManagement, ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+
+        public ContactPersonInfoVM contactPersonInfo
+        {
+            get
+            {
+                return new ContactPersonInfoVM(ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+
+        public AddFestivalContactVM festcalContact
+        {
+            get
+            {
+                return new AddFestivalContactVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+
+        public EditContactPersonVM editContactPerson
+        {
+            get
+            {
+                return new EditContactPersonVM(ServiceLocator.Current.GetInstance<IDataService>(), contactManagement);
+            }
+        }
+
         public QuestionnairesViewModel Questionnaires
         {
             get
@@ -107,7 +151,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                _inspectors = new InspectorsVM.InspectorListViewModel(Main);
+                _inspectors = new InspectorsVM.InspectorListViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
                 return _inspectors;
             }
         }
@@ -163,7 +207,15 @@ namespace Festispec.ViewModel
             get
             {
 
-                return new ViewModel.InspectorsVM.EditInspectorViewModel(_inspectors);
+                return new ViewModel.InspectorsVM.EditInspectorViewModel(_inspectors, ServiceLocator.Current.GetInstance<IDataService>(), Main);
+            }
+        }
+
+        public InspectorInfoViewModel inspectorinfo
+        {
+            get
+            {
+                return new InspectorInfoViewModel(ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
 
@@ -175,8 +227,6 @@ namespace Festispec.ViewModel
                 return _municipality;
             }
         }
-
-
 
         public InspectionsViewModel Inspections
         {
@@ -201,13 +251,49 @@ namespace Festispec.ViewModel
             }
         }
 
-
-
         public TemplatesVM Templates
         {
             get
             {
                 return new TemplatesVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
+              }
+        }
+
+        public ScheduleVM.ScheduleVM Schedule
+        {
+            get
+            {
+                return new ScheduleVM.ScheduleVM();
+            }
+        }
+
+        public ManageDashboardVM Dashboard
+        {
+            get
+            {
+                return new ManageDashboardVM();
+            }
+        }
+        public UsersVM UsersViewModel
+        {
+            get
+            {
+                return new UsersVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+        public AddUserVM AddUserVM
+        {
+            get
+            {
+                return new AddUserVM(Main);
+            }
+        }
+
+        public EditUserVM EditUserVM
+        {
+            get
+            {
+                return new EditUserVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
 

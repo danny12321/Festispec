@@ -64,28 +64,25 @@
         </Grid.ColumnDefinitions>
         <ScrollViewer  Grid.Column="0" Grid.Row="0" VerticalAlignment="Top">
 
-            <StackPanel>
+        <StackPanel Width="300" Grid.Column="0" Grid.Row="0">
+            <Border BorderThickness="10">
+                <TextBox TextWrapping="Wrap"
+                            VerticalAlignment="Stretch"
+                            MinWidth="280"
+                            AcceptsReturn="True"
+                            VerticalScrollBarVisibility="Auto"
+                            SpellCheck.IsEnabled="True"
+                            materialDesign:HintAssist.Hint="Beschrijving"
+                            Text="{Binding Inspection.Description}"></TextBox>
+            </Border>
+            <!--Begin time-->
+            <Border BorderThickness="10">
+                <StackPanel>
+                    <TextBlock>Start datum en tijd</TextBlock>
 
-                <Border BorderThickness="10">
-                    <TextBox 
-                    TextWrapping="Wrap"
-                    VerticalAlignment="Stretch"
-                    MinWidth="280"
-                    AcceptsReturn="True"
-                    VerticalScrollBarVisibility="Auto"
-                    SpellCheck.IsEnabled="True"
-                    materialDesign:HintAssist.Hint="Beschrijving"
-                    materialDesign:HintAssist.IsFloating="True"
-                    Text="{Binding Inspection.Description}"></TextBox>
-                </Border>
-                <!--Begin time-->
-                <Border BorderThickness="10">
-                    <StackPanel>
-                        <TextBlock>Start datum en tijd</TextBlock>
-
-                        <StackPanel Orientation="Horizontal">
-                            <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding StartDate}"/>
-                            <materialDesign:TimePicker
+                    <StackPanel Orientation="Horizontal">
+                        <DatePicker Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding StartDate}"/>
+                        <materialDesign:TimePicker
                               Is24Hours="True"
                               Margin="10,0,0,0"
                               x:Name="PresetBeginTimePicker"
@@ -160,10 +157,12 @@
 
                         </ItemsControl>
                     </StackPanel>
-                </Border>
 
-
-
+                    <Button Margin="0,10,0,0" Command="{Binding EditInspectionCommand}">Verander inspectie</Button>
+                    <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" TextWrapping="Wrap"></TextBlock>
+                    <Button Margin="0,30,0,0" Background="Red" BorderThickness="0" Command="{Binding DeleteInspectionCommand}">Verwijder inspectie</Button>
+                </StackPanel>
+            </Border>
 
             </StackPanel>
         </ScrollViewer>
@@ -186,12 +185,17 @@
                             <StackPanel Orientation="Horizontal">
                                 <Button Grid.Column="1" FontSize="10" BorderBrush="Gray" Background="Transparent" Command="{Binding SetViewToSelectedPersonCommand}" CommandParameter="{Binding ElementName=MijnMap}" Content="{Binding Fullname}"></Button>
                                 <Button
+                                    Margin="10,0,0,0"
                                       Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                       HorizontalAlignment="Left"
                                       ToolTip="Selecteer inspecteur"
                                       Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.SelectInspectorCommand}" CommandParameter="{Binding }">
                                     <materialDesign:PackIcon Kind="ArrowRight" />
                                 </Button>
+                                <StackPanel>
+                                    <TextBlock Margin="10,10,0,0" Text="{Binding TravelTime}"></TextBlock>
+                                    <TextBlock Margin="10,0,0,0" Text="{Binding Available}"></TextBlock>
+                                </StackPanel>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -215,6 +219,7 @@
                             <StackPanel Orientation="Horizontal">
 
                                 <Button
+                                    Margin="0,0,10,0"
                                           Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                           HorizontalAlignment="Left"
                                          ToolTip="Selecteer inspecteur"
@@ -222,6 +227,10 @@
                                     <materialDesign:PackIcon Kind="ArrowLeft" />
                                 </Button>
                                 <Button Grid.Column="1" FontSize="10" BorderBrush="Gray" Background="Transparent" Command="{Binding SetViewToSelectedPersonCommand}" CommandParameter="{Binding ElementName=MijnMap}" Content="{Binding Fullname}"></Button>
+                                <StackPanel>
+                                    <TextBlock Margin="10,10,0,0" Text="{Binding TravelTime}"></TextBlock>
+                                    <TextBlock Margin="10,0,0,0" Text="{Binding Available}"></TextBlock>
+                                </StackPanel>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -231,10 +240,10 @@
         <m:Map Grid.Column="3" Grid.Row="0" x:Name="MijnMap" CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo" Mode="Road" ZoomLevel="6" Center="52.0753513,5.7688085">
             <m:Map.Children>
 
-                <m:MapItemsControl ItemTemplate="{StaticResource LogoTemplate}" ItemsSource="{Binding Inspectors}" >
+                <m:MapItemsControl ItemTemplate="{StaticResource LogoTemplate}" ItemsSource="{Binding InspectorsMaps}" >
                 </m:MapItemsControl>
 
-                <m:MapItemsControl ItemTemplate="{StaticResource LogoTemplate1}" ItemsSource="{Binding SelectedInspectors}" >
+                <m:MapItemsControl ItemTemplate="{StaticResource LogoTemplate1}" ItemsSource="{Binding SelectedInspectorsMaps}" >
                 </m:MapItemsControl>
 
                 <!--Het festival-->

@@ -22,5 +22,17 @@ namespace Festispec.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("7")]
+        public int Schedule_AmountOfDaysToShow {
+            get {
+                return ((int)(this["Schedule_AmountOfDaysToShow"]));
+            }
+            set {
+                this["Schedule_AmountOfDaysToShow"] = value;
+            }
+        }
     }
 }

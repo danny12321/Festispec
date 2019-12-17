@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec.View
+namespace Festispec.View.Users
 {
     /// <summary>
-    /// Interaction logic for Schedule.xaml
+    /// Interaction logic for Users.xaml
     /// </summary>
-    public partial class Schedule : Page
+    public partial class Users : Page
     {
-        public Schedule()
+        public Users()
         {
             InitializeComponent();
         }
