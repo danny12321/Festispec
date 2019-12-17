@@ -9,6 +9,9 @@ using Festispec.ViewModel.Questionnaires;
 using Festispec.ViewModel.MunicipalityVM;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using System;
+using Festispec.Domain;
+using Festispec.ViewModel.Templates;
 using Festispec.ViewModel.ContactPersonsVM;
 using Festispec.ViewModel.DashboardVM;
 using Festispec.ViewModel.InspectorsVM;
@@ -30,9 +33,12 @@ namespace Festispec.ViewModel
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-            SimpleIoc.Default.Register<MainViewModel>();
 
             SimpleIoc.Default.Register<IDataService, DataService.DataService>();
+
+            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<LoginViewModel>();
+
             SimpleIoc.Default.Register<PopUpViewModel>();
         }
 
@@ -137,14 +143,10 @@ namespace Festispec.ViewModel
         {
             get
             {
-                if(_clientManageVM == null)
-                {
-                    _clientManageVM = new ClientManageVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
-                }
-                return new QuestionnairesViewModel();
-
+                return new QuestionnairesViewModel(ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
+
         public InspectorsVM.InspectorListViewModel InspectorsVM
         {
             get
@@ -247,6 +249,14 @@ namespace Festispec.ViewModel
             {
                 return new InspectionEditViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
+        }
+
+        public TemplatesVM Templates
+        {
+            get
+            {
+                return new TemplatesVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
+              }
         }
 
         public ScheduleVM.ScheduleVM Schedule

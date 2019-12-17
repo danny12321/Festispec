@@ -1,4 +1,5 @@
 ﻿using Festispec.Domain;
+using Festispec.ViewModel.Questionnaires;
 using Festispec.Utils;
 using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight;
@@ -30,6 +31,9 @@ namespace Festispec.ViewModel.Inspections
         public ObservableCollection<InspectorAtInspectionVM> InspectorsAtInspection { get; set; }
 
         public ObservableCollection<InspectorsVM> SelectedInspectors { get; set; }
+
+        public ObservableCollection<QuestionnairesViewModel> Questionnaires { get; set; }
+
         public ObservableCollection<InspectorsVM> SelectedInspectorsMaps { get; set; }
 
         public FestivalVM Festival { get; set; }
@@ -67,12 +71,19 @@ namespace Festispec.ViewModel.Inspections
         public ICommand SetViewToSelectedPersonCommand { get; set; }
         public ICommand SelectInspectorCommand { get; set; }
         public ICommand DelectInspectorCommand { get; set; }
+
+        public ICommand AddQuestionnaireCommand { get; set; }
+        public ICommand OpenQuestionnaireCommand { get; set; }
+        public ICommand DeleteQuestionnaireCommand { get; set; }
+
         public ICommand DeleteInspectionCommand { get; set; }
+
 
         private IDataService _service;
 
         public InspectionEditViewModel(MainViewModel main, IDataService service)
         {
+            Console.WriteLine("EDITT");
             _main = main;
             _service = service;
 
@@ -90,6 +101,9 @@ namespace Festispec.ViewModel.Inspections
                 SelectInspectorCommand = new RelayCommand<InspectorsVM>(SelectInspector);
                 DelectInspectorCommand = new RelayCommand<InspectorsVM>(DelectInspector);
                 DeleteInspectionCommand = new RelayCommand(DeleteInspection);
+                AddQuestionnaireCommand = new RelayCommand(AddQuestionnaire);
+                OpenQuestionnaireCommand = new RelayCommand<QuestionnairesViewModel>(OpenQuestionnaire);
+                DeleteQuestionnaireCommand = new RelayCommand<QuestionnairesViewModel>(DeleteQuestionnaire);
 
                 using (var context = new FestispecEntities())
                 {
@@ -113,6 +127,7 @@ namespace Festispec.ViewModel.Inspections
                     EndDate = Inspection.End_date;
                     EndTime = Inspection.End_date.TimeOfDay;
 
+
                     //Calc Travel Time
                     if (_useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt)
                     {
@@ -121,6 +136,9 @@ namespace Festispec.ViewModel.Inspections
                             i.TravelTime = timespan;
                         });
                     }
+                    
+                    var questionnaires = context.Questionnaires.Where(q => q.inspection_id == _inspetionId).ToList().Select(q => new QuestionnairesViewModel(q));
+                Questionnaires = new ObservableCollection<QuestionnairesViewModel>(questionnaires);
 
                     context.Inspectors_at_inspection.ToList().ForEach(i =>
                     {
@@ -264,7 +282,8 @@ namespace Festispec.ViewModel.Inspections
 
             if (ValidateInput(Inspection))
             {
-                SelectedInspectors.ToList().ForEach(i => {
+                SelectedInspectors.ToList().ForEach(i =>
+                {
                     var inspector_at_inspection = new Inspectors_at_inspection();
                     inspector_at_inspection.inpector_id = i.id;
                     inspector_at_inspection.inspection_id = _inspetionId;
@@ -284,8 +303,9 @@ namespace Festispec.ViewModel.Inspections
 
                     context.SaveChanges();
                 }
+
                 CreateOfflineInspectionData();
-                _main.SetPage("Inspections", false);
+                _main.SetPage("Inspections");
             }
             else
             {
@@ -298,6 +318,7 @@ namespace Festispec.ViewModel.Inspections
 
         private bool ValidateInput(InspectionVM inspection)
         {
+
             if (!IsDescriptionValid(inspection.Description))
             {
                 return false;
@@ -384,6 +405,42 @@ namespace Festispec.ViewModel.Inspections
         {
             RouteDurationCalculator routeDurationCalculator = new RouteDurationCalculator();
             return await routeDurationCalculator.CalculateRoute(inspector.longitude + "," + inspector.latitude, Festival.Festivals.longitude + "," + Festival.Festivals.latitude).ConfigureAwait(false);
+        }
+
+        private void AddQuestionnaire()
+        {
+            var questionnaire = new Domain.Questionnaires() { inspection_id = _inspetionId };
+
+            using (var context = new FestispecEntities())
+            {
+                context.Questionnaires.Add(questionnaire);
+                context.SaveChanges();
+            }
+
+            var questionnaireVM = new QuestionnairesViewModel(questionnaire);
+            Questionnaires.Add(questionnaireVM);
+        }
+
+        public void OpenQuestionnaire(QuestionnairesViewModel questionnaire)
+        {
+            using (var context = new FestispecEntities())
+            {
+                _service.SelectedQuestionnaire = new QuestionnairesViewModel(context.Questionnaires.FirstOrDefault(q => q.id == questionnaire.Id));
+                _main.SetPage("Vragenlijsten");
+            }
+        }
+
+
+        private void DeleteQuestionnaire(QuestionnairesViewModel questionnaire)
+        {
+            using (var context = new FestispecEntities())
+            {
+                context.Questionnaires.Attach(questionnaire.Questionnaire);
+                context.Questionnaires.Remove(questionnaire.Questionnaire);
+                context.SaveChanges();
+
+                Questionnaires.Remove(questionnaire);
+            }
         }
 
         private void Debug()

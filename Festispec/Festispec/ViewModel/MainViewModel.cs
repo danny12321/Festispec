@@ -33,7 +33,7 @@ namespace Festispec.ViewModel
         public string PageTitle
         {
             get { return _pageTitle; }
-            set 
+            set
             {
                 _pageTitle = value;
                 RaisePropertyChanged("PageTitle");
@@ -44,16 +44,16 @@ namespace Festispec.ViewModel
 
         public ICommand BackCommand { get; set; }
 
-        private Stack<string> StackNavigator = new Stack<string>();
+        private Stack<Page> StackNavigator = new Stack<Page>();
 
         public MainViewModel()
         {
-            SetPage("Home", false);
+            SetPage("Home");
             BackCommand = new RelayCommand(Back, CanGoBack);
-            SetPageCommand = new RelayCommand<string>((page) => SetPage(page, false));
+            SetPageCommand = new RelayCommand<string>((page) => SetPage(page));
         }
 
-        public void SetPage(string page, bool navigator)
+        public void SetPage(string page)
         {
 
             switch (page)
@@ -86,7 +86,7 @@ namespace Festispec.ViewModel
                     FrameContent = new View.ClientsViews.ClientInfo();
                     PageTitle = "Klanten info";
                     break;
-                case "Vragenlijsten TEMP":
+                case "Vragenlijsten":
                     FrameContent = new View.Questionnaires.Questionnaires();
                     PageTitle = "Vragenlijsten";
                     break;
@@ -138,6 +138,10 @@ namespace Festispec.ViewModel
                     FrameContent = new View.Inspectors.EditInspector();
                     PageTitle = "Inspecteur bewerken";
                     break;
+                case "Templates":
+                    FrameContent = new View.Templates.Templates();
+                    PageTitle = "Sjablonen";
+                    break;
                 case "InspectorInfo":
                     FrameContent = new View.Inspectors.InspectorInfo();
                     PageTitle = "Inspecteur informatie";
@@ -183,10 +187,7 @@ namespace Festispec.ViewModel
                     break;
             }
 
-            if (!navigator)
-            {
-                StackNavigator.Push(page);
-            }
+            StackNavigator.Push(FrameContent);
         }
 
         private void Back()
@@ -194,7 +195,7 @@ namespace Festispec.ViewModel
             if (StackNavigator.Count >= 2)
             {
                 StackNavigator.Pop();
-                SetPage(StackNavigator.Peek(), true);
+                FrameContent = StackNavigator.Peek();
             }
         }
 

@@ -36,6 +36,7 @@ namespace Festispec.ViewModel
 
         private IDataService _dataService;
         public bool ShowOfflineButton { get; set; }
+      
         public LoginViewModel(IDataService dataService)
         {
             _dataService = dataService;

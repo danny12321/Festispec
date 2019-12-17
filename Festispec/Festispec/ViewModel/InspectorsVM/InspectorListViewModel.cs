@@ -51,15 +51,15 @@ namespace Festispec.ViewModel.InspectorsVM
         }
         public void ShowInspectorPage()
         {
-            _mainViewModel.SetPage("Inspectors", false);
+            _mainViewModel.SetPage("Inspectors");
         }
         public void AddInspector()
         {
-            _mainViewModel.SetPage("AddInspector", false);
+            _mainViewModel.SetPage("AddInspector");
         }
         public void EditInspector()
         {
-            _mainViewModel.SetPage("EditInspector", false);
+            _mainViewModel.SetPage("EditInspector");
         }
 
         public void InspectorInfo()

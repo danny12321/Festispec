@@ -79,6 +79,9 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -150,9 +153,11 @@
     <Compile Include="ViewModel\Questionnaires\QuestionnairesViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionTypeViewModel.cs" />
     <Compile Include="ViewModel\Questionnaires\QuestionViewModel.cs" />
+    <Compile Include="ViewModel\Questionnaires\Types\ImageQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Types\MultipleChoiseQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Types\OpenQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Types\SelectQuestion.cs" />
+    <Compile Include="ViewModel\Templates\TemplatesVM.cs" />
     <Compile Include="ViewModel\ScheduleVM\ScheduleColumnVM.cs" />
     <Compile Include="ViewModel\ScheduleVM\ScheduleVM.cs" />
     <Compile Include="ViewModel\Users\AddUserVM.cs" />
@@ -236,6 +241,15 @@
     <Compile Include="View\Questionnaires\Questionnaires.xaml.cs">
       <DependentUpon>Questionnaires.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Questionnaires\Template.xaml.cs">
+      <DependentUpon>Template.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\ImageEdit.xaml.cs">
+      <DependentUpon>ImageEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\ImagePreview.xaml.cs">
+      <DependentUpon>ImagePreview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Questionnaires\Types\MultipleChoiseEdit.xaml.cs">
       <DependentUpon>MultipleChoiseEdit.xaml</DependentUpon>
     </Compile>
@@ -256,6 +270,9 @@
     </Compile>
     <Compile Include="View\Schedule\Schedule.xaml.cs">
       <DependentUpon>Schedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Templates\Templates.xaml.cs">
+      <DependentUpon>Templates.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Users\AddUser.xaml.cs">
       <DependentUpon>AddUser.xaml</DependentUpon>
@@ -394,6 +411,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Questionnaires\Template.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\ImageEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\ImagePreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Questionnaires\Types\MultipleChoiseEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -434,6 +463,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Templates\Templates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -471,6 +504,7 @@
       <Name>Festispec.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
