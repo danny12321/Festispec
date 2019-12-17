@@ -1,7 +1,7 @@
 ﻿using DHTMLX.Common;
 using DHTMLX.Scheduler;
 using DHTMLX.Scheduler.Data;
-using Festipec.Domain;
+using Festispec.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;

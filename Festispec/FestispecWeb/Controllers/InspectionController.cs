@@ -1,4 +1,4 @@
-﻿using Festipec.Domain;
+﻿using Festispec.Domain;
 using FestispecWeb.Models;
 using System;
 using System.Collections.Generic;

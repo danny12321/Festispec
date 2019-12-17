@@ -426,6 +426,10 @@
       <Project>{43AD4381-D71B-4C58-A2E9-0A85053DAE2F}</Project>
       <Name>Festipec.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Festispec.Domain\Festispec.Domain.csproj">
+      <Project>{26F92110-69A7-4DFA-B246-625D32F30297}</Project>
+      <Name>Festispec.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
