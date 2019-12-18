@@ -14,8 +14,6 @@ namespace FestispecWeb.Controllers
     {
         public ActionResult Index()
         {
-            if (Session["username"] == null)
-                return Redirect("/");
 
             var sched = new DHXScheduler(this);
             sched.Skin = DHXScheduler.Skins.Terrace;
@@ -27,9 +25,6 @@ namespace FestispecWeb.Controllers
 
         public ContentResult Data()
         {
-            if (Session["username"] == null)
-                return null;
-
             var uemail = (string)Session["username"];
             var entities = new FestispecEntities();
             var user = (int)entities.Users.Where(u => u.email.Equals(uemail)).Select(u => u.inspector_id).FirstOrDefault();
@@ -41,9 +36,6 @@ namespace FestispecWeb.Controllers
 
         public ContentResult Save(int? id, FormCollection actionValues)
         {
-            if (Session["username"] == null)
-                return null;
-
             var action = new DataAction(actionValues);
             var changedEvent = DHXEventsHelper.Bind<Inspectors_availability>(actionValues);
             
