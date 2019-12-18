@@ -15,7 +15,7 @@ namespace FestispecWeb.Controllers
         public ActionResult Index()
         {
             if (Session["username"] == null)
-                return Redirect("/")
+                return Redirect("/");
 
             var sched = new DHXScheduler(this);
             sched.Skin = DHXScheduler.Skins.Terrace;
