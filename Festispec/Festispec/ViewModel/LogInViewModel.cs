@@ -34,6 +34,8 @@ namespace Festispec.ViewModel
 
         public string Password { get; set; }
 
+        private UsersVM _userVm;
+
         private IDataService _dataService;
         public bool ShowOfflineButton { get; set; }
       
@@ -72,7 +74,7 @@ namespace Festispec.ViewModel
 
         private void Login()
         {
-            var autoLogin = true;
+            var autoLogin = false;
 
             if ((string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Email)) && !autoLogin)
             {
@@ -80,41 +82,36 @@ namespace Festispec.ViewModel
                 return;
             }
 
-            List<Domain.Users> user;
-
             // Voor testen
             if (autoLogin)
             {
                 using (var context = new FestispecEntities())
                 {
-                    user = context.Users.ToList();
+                    _userVm = context.Users.Include("Rolls").ToList().Where(u => u.email == "admin@admin.com").Select(u => new UsersVM(u)).First();
                 }
             }
             else
             {
                 using (var context = new FestispecEntities())
                 {
-                    var hPass = ComputeSha256Hash(Password);
-                    Console.WriteLine(hPass);
-                    user = context.Users.Where(u => (u.email == Email && u.password == hPass)).ToList();
-                    Console.WriteLine(hPass);
+                    var hashedPass = ComputeSha256Hash(Password);
+                    _userVm = context.Users.Include("Rolls").ToList().Where(u => (u.email == Email && u.password == hashedPass)).Select(u => new UsersVM(u)).First();
                 }
             }
 
-            if (user.Count > 0)
+            if (_userVm != null)
             {
                 // user is ingelogd
-                new UsersVM(user[0]);
                 new BaseWindow().Show();
                 Application.Current.Windows[0].Close();
+                _dataService.LoggedInUser = _userVm;
+                CreateOfflineUserData();
             }
             else
             {
                 // inloggegevens zijn fout
                 new PopUpWindow().Show();
             }
-
-            CreateOfflineUserData();
         }
 
         private bool HasInternetConnection()
@@ -142,7 +139,7 @@ namespace Festispec.ViewModel
         private void CreateOfflineUserData()
         {
             // TODO When login is up to date make user dynamic
-            string fileContent = JsonConvert.SerializeObject(new {Id = 1, Email = "email@mail.com", Firstname = "Testname", Lastname = "Testlastname", Roles = new string[] { "Admin" } }); ;
+            string fileContent = JsonConvert.SerializeObject(_userVm);
             
             string fileName = "User.json";
             string path = Path.Combine(Environment.CurrentDirectory, @"Offline\", fileName);
