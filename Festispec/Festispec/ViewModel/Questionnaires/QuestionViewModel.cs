@@ -20,33 +20,23 @@ namespace Festispec.ViewModel.Questionnaires
 
         public int Id { get; private set; }
 
-        public QuestionTypeViewModel StringType
-        {
-            get
-            {
-                return new QuestionTypeViewModel(_question.Type_questions);
-            }
-            set
-            {
-                _question.Type_questions = value.ToModel();
-                _question.type_question = value.Id;
-                _question.Type_questions = value.ToModel();
-                Questionnaires.ChangeType(this);
-                SaveChanges();
-            }
-        }
+        private QuestionTypeViewModel _type;
 
-        public Type_questions Type
+        public QuestionTypeViewModel Type
         {
             get
             {
-                return _question.Type_questions;
+                return _type;
             }
             set
             {
-                _question.Type_questions = value;
-                _question.type_question = value.id;
-                Questionnaires.ChangeType(this);
+                if (value.Id != _question.type_question)
+                {
+                    _question.Type_questions = value.ToModel();
+                    _question.type_question = value.Id;
+                    SaveChanges();
+                    Questionnaires.ChangeType(this);
+                }
             }
         }
 
@@ -69,6 +59,8 @@ namespace Festispec.ViewModel.Questionnaires
 
         public ICommand DeleteQuestionCommand { get; set; }
 
+        public ICommand SetTypeCommand { get; set; }
+
         public virtual Page GetPreviewPage { get => null; }
 
         public virtual Page GetEditPage { get => null; }
@@ -79,12 +71,20 @@ namespace Festispec.ViewModel.Questionnaires
             _question = q;
 
             var possible_answers = _question.Possible_answer.ToList()
-                .Select(pa => new Possible_answerVM(pa,this));
+                .Select(pa => new Possible_answerVM(pa, this));
 
             Possible_answers = new ObservableCollection<Possible_answerVM>(possible_answers);
 
+            _type = new QuestionTypeViewModel(q.Type_questions);
+
             AddAnswerRowCommand = new RelayCommand(AddAnswerRow);
             DeleteQuestionCommand = new RelayCommand(DeleteQuestion);
+            SetTypeCommand = new RelayCommand<QuestionTypeViewModel>(SetType);
+        }
+
+        private void SetType(QuestionTypeViewModel type)
+        {
+            Type = type;
         }
 
         public void AddAnswerRow()
@@ -103,10 +103,21 @@ namespace Festispec.ViewModel.Questionnaires
 
         public void SaveChanges()
         {
-            using (var context = new FestispecEntities())
+            try
             {
-                context.Entry(_question).State = System.Data.Entity.EntityState.Modified;
-                context.SaveChanges();
+                // IDK why but this can't be set or the weak action will appear more often
+                _question.Questionnaires = null;
+
+                using (var context = new FestispecEntities())
+                {
+                    _question.Type_questions = context.Type_questions.FirstOrDefault(t => t.id == _question.type_question);
+                    context.Entry(_question).State = System.Data.Entity.EntityState.Modified;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
         }
 
@@ -123,7 +134,6 @@ namespace Festispec.ViewModel.Questionnaires
 
             Questionnaires.Questions.Remove(this);
             Questionnaires.SelectedQuestion = null;
-            Console.WriteLine("Selected question null");
         }
 
         internal Questions ToModel()

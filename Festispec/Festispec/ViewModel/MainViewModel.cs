@@ -33,7 +33,7 @@ namespace Festispec.ViewModel
         public string PageTitle
         {
             get { return _pageTitle; }
-            set 
+            set
             {
                 _pageTitle = value;
                 RaisePropertyChanged("PageTitle");
@@ -44,16 +44,16 @@ namespace Festispec.ViewModel
 
         public ICommand BackCommand { get; set; }
 
-        private Stack<string> StackNavigator = new Stack<string>();
+        private Stack<Page> StackNavigator = new Stack<Page>();
 
         public MainViewModel()
         {
-            SetPage("Home", false);
+            SetPage("Home");
             BackCommand = new RelayCommand(Back, CanGoBack);
-            SetPageCommand = new RelayCommand<string>((page) => SetPage(page, false));
+            SetPageCommand = new RelayCommand<string>((page) => SetPage(page));
         }
 
-        public void SetPage(string page, bool navigator)
+        public void SetPage(string page)
         {
 
             switch (page)
@@ -63,8 +63,12 @@ namespace Festispec.ViewModel
                     PageTitle = "Home";
                     break;
                 case "Schedule":
-                    FrameContent = new Schedule();
+                    FrameContent = new View.Schedule.Schedule();
                     PageTitle = "Planning";
+                    break;
+                case "ManageDashboard":
+                    FrameContent = new View.Dashboard.ManageDashboard();
+                    PageTitle = "Management Dashboard";
                     break;
                 case "Festival":
                     FrameContent = new View.FestivalViews.Festivals();
@@ -82,7 +86,7 @@ namespace Festispec.ViewModel
                     FrameContent = new View.ClientsViews.ClientInfo();
                     PageTitle = "Klanten info";
                     break;
-                case "Vragenlijsten TEMP":
+                case "Vragenlijsten":
                     FrameContent = new View.Questionnaires.Questionnaires();
                     PageTitle = "Vragenlijsten";
                     break;
@@ -134,6 +138,46 @@ namespace Festispec.ViewModel
                     FrameContent = new View.Inspectors.EditInspector();
                     PageTitle = "Inspecteur bewerken";
                     break;
+                case "Templates":
+                    FrameContent = new View.Templates.Templates();
+                    PageTitle = "Sjablonen";
+                    break;
+                case "InspectorInfo":
+                    FrameContent = new View.Inspectors.InspectorInfo();
+                    PageTitle = "Inspecteur informatie";
+                    break;
+                case "ShowAddContactPerson":
+                    FrameContent = new View.ContactPersonsView.AddContactPerson();
+                    PageTitle = "contactpersoon toevoegen";
+                    break;
+                case "ShowContactPersonInfo":
+                    FrameContent = new View.ContactPersonsView.ContactPersonInfo();
+                    PageTitle = "contactpersoon informatie";
+                    break;
+                case "ShowEditContactPerson":
+                    FrameContent = new View.ContactPersonsView.EditContactPerson();
+                    PageTitle = "contactpersoon wijzigen";
+                    break;
+                case "ContactPersonManagement":
+                    FrameContent = new View.ContactPersonsView.ContactPersonsManage();
+                    PageTitle = "Contactpersoon beheer";
+                    break;
+                case "AddContactFestival":
+                    FrameContent = new View.ContactPersonsView.AddFestivalContact();
+                    PageTitle = "Contactpersoon toevoegen aan festival";
+                    break;
+                case "Users":
+                    FrameContent = new View.Users.Users();
+                    PageTitle = "Gebruikers";
+                    break;
+                case "AddUser":
+                    FrameContent = new View.Users.AddUser();
+                    PageTitle = "Voeg gebruiker toe";
+                    break;
+                case "EditUser":
+                    FrameContent = new View.Users.EditUser();
+                    PageTitle = "Verander gebruiker";
+                    break;
                 case "Logout":
                     closeWindow();
                     break;
@@ -143,10 +187,7 @@ namespace Festispec.ViewModel
                     break;
             }
 
-            if (!navigator)
-            {
-                StackNavigator.Push(page);
-            }
+            StackNavigator.Push(FrameContent);
         }
 
         private void Back()
@@ -154,7 +195,7 @@ namespace Festispec.ViewModel
             if (StackNavigator.Count >= 2)
             {
                 StackNavigator.Pop();
-                SetPage(StackNavigator.Peek(), true);
+                FrameContent = StackNavigator.Peek();
             }
         }
 

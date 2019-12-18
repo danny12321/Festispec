@@ -41,10 +41,6 @@ namespace FestispecWeb.Controllers
 
         public ActionResult Index()
         {
-            if (Session["username"] != null)
-            {
-                return View();
-            }
             return RedirectToAction("Login");
         }
 
