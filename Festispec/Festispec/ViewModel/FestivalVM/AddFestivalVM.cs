@@ -57,8 +57,11 @@ namespace Festispec.ViewModel.Festival_VMs
 
             StartDateBegin = DateTime.Now;
             StartTime = DateTime.Now.TimeOfDay;
+            StartTime = TimeSpan.FromMinutes(Math.Round(StartTime.TotalMinutes));
+
             EndDateEnd = DateTime.Now;
             EndTime = DateTime.Now.TimeOfDay;
+            EndTime = TimeSpan.FromMinutes(Math.Round(EndTime.TotalMinutes));
         }
 
         private bool CanAddFestival()
