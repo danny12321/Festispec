@@ -106,6 +106,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utils\UserRole.cs" />
     <Compile Include="Utils\LatLongGenerator.cs" />
     <Compile Include="Utils\PasswordHasher.cs" />
     <Compile Include="Utils\RouteDurationCalculator.cs" />
