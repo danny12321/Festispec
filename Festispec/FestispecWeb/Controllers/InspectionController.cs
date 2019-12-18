@@ -183,12 +183,12 @@ namespace FestispecWeb.Controllers
 
             answerVM.Answers.ForEach(a =>
             {
-                var answer = Existinganswer.FirstOrDefault(ea => ea.answer == a.answer);
+                var answer = Existinganswer?.FirstOrDefault(ea => ea.answer == a.answer);
 
                 if (answer == null) shouldSave = true;
             });
 
-            Existinganswer.ForEach(ea =>
+            Existinganswer?.ForEach(ea =>
             {
                 var answer = answerVM.Answers.FirstOrDefault(a => ea.answer == a.answer);
 
