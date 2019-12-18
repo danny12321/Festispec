@@ -17,28 +17,29 @@ namespace Festispec.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Festivals()
         {
-            this.Contactpersons = new HashSet<Contactpersons>();
             this.Inspections = new HashSet<Inspections>();
+            this.Contactpersons = new HashSet<Contactpersons>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
         public string postalcode { get; set; }
+        public string city { get; set; }
         public string street { get; set; }
         public string housenumber { get; set; }
         public string country { get; set; }
         public System.DateTime start_date { get; set; }
         public System.DateTime end_date { get; set; }
         public int client_id { get; set; }
-        public int municipality_id { get; set; }
-        public double latitude { get; set; }
-        public double longitude { get; set; }
+        public Nullable<int> municipality_id { get; set; }
+        public string latitude { get; set; }
+        public string longitude { get; set; }
     
         public virtual Clients Clients { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contactpersons> Contactpersons { get; set; }
         public virtual Municipalities Municipalities { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspections> Inspections { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Contactpersons> Contactpersons { get; set; }
     }
 }
