@@ -67,7 +67,6 @@
           <Property Name="start_date" Type="datetime" Nullable="false" />
           <Property Name="end_date" Type="datetime" Nullable="false" />
           <Property Name="client_id" Type="int" Nullable="false" />
-          <Property Name="municipality_id" Type="int" />
           <Property Name="latitude" Type="nvarchar" MaxLength="50" />
           <Property Name="longitude" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -119,23 +118,6 @@
           <Property Name="end_date" Type="datetime" Nullable="false" />
           <Property Name="inspector_id" Type="int" Nullable="false" />
           <Property Name="text" Type="nvarchar" MaxLength="256" />
-        </EntityType>
-        <EntityType Name="Laws">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="municipality_id" Type="int" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="website" Type="nvarchar" MaxLength="200" />
-          <Property Name="description" Type="nvarchar" MaxLength="500" />
-        </EntityType>
-        <EntityType Name="Municipalities">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Possible_answer">
           <Key>
@@ -286,18 +268,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Festivals_Municipalities">
-          <End Role="Municipalities" Type="Self.Municipalities" Multiplicity="0..1" />
-          <End Role="Festivals" Type="Self.Festivals" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Municipalities">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Festivals">
-              <PropertyRef Name="municipality_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Inspections_Festivals">
           <End Role="Festivals" Type="Self.Festivals" Multiplicity="1" />
           <End Role="Inspections" Type="Self.Inspections" Multiplicity="*" />
@@ -349,18 +319,6 @@
             </Principal>
             <Dependent Role="Inspectors_availability">
               <PropertyRef Name="inspector_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Laws_Municipalities">
-          <End Role="Municipalities" Type="Self.Municipalities" Multiplicity="1" />
-          <End Role="Laws" Type="Self.Laws" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Municipalities">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Laws">
-              <PropertyRef Name="municipality_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -477,8 +435,6 @@
           <EntitySet Name="Inspectors" EntityType="Self.Inspectors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inspectors_at_inspection" EntityType="Self.Inspectors_at_inspection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inspectors_availability" EntityType="Self.Inspectors_availability" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Laws" EntityType="Self.Laws" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Municipalities" EntityType="Self.Municipalities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Possible_answer" EntityType="Self.Possible_answer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Questionnaires" EntityType="Self.Questionnaires" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
@@ -512,10 +468,6 @@
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Festivals" EntitySet="Festivals" />
           </AssociationSet>
-          <AssociationSet Name="FK_Festivals_Municipalities" Association="Self.FK_Festivals_Municipalities">
-            <End Role="Municipalities" EntitySet="Municipalities" />
-            <End Role="Festivals" EntitySet="Festivals" />
-          </AssociationSet>
           <AssociationSet Name="FK_Inspections_Festivals" Association="Self.FK_Inspections_Festivals">
             <End Role="Festivals" EntitySet="Festivals" />
             <End Role="Inspections" EntitySet="Inspections" />
@@ -531,10 +483,6 @@
           <AssociationSet Name="FK_Inspectors_availability_Inspectors" Association="Self.FK_Inspectors_availability_Inspectors">
             <End Role="Inspectors" EntitySet="Inspectors" />
             <End Role="Inspectors_availability" EntitySet="Inspectors_availability" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Laws_Municipalities" Association="Self.FK_Laws_Municipalities">
-            <End Role="Municipalities" EntitySet="Municipalities" />
-            <End Role="Laws" EntitySet="Laws" />
           </AssociationSet>
           <AssociationSet Name="FK_Possible_answer_Questions" Association="Self.FK_Possible_answer_Questions">
             <End Role="Questions" EntitySet="Questions" />
@@ -634,11 +582,9 @@
           <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="client_id" Type="Int32" Nullable="false" />
-          <Property Name="municipality_id" Type="Int32" />
           <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_Festivals_Clients" FromRole="Festivals" ToRole="Clients" />
-          <NavigationProperty Name="Municipalities" Relationship="Self.FK_Festivals_Municipalities" FromRole="Festivals" ToRole="Municipalities" />
           <NavigationProperty Name="Inspections" Relationship="Self.FK_Inspections_Festivals" FromRole="Festivals" ToRole="Inspections" />
           <NavigationProperty Name="Quotations" Relationship="Self.FK_Quotations_Festival" FromRole="Festivals" ToRole="Quotations" />
           <NavigationProperty Name="Contactpersons" Relationship="Self.Festival_contacts" FromRole="Festivals" ToRole="Contactpersons" />
@@ -700,26 +646,6 @@
           <Property Name="inspector_id" Type="Int32" Nullable="false" />
           <Property Name="text" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Inspectors" Relationship="Self.FK_Inspectors_availability_Inspectors" FromRole="Inspectors_availability" ToRole="Inspectors" />
-        </EntityType>
-        <EntityType Name="Laws">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="municipality_id" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="website" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Municipalities" Relationship="Self.FK_Laws_Municipalities" FromRole="Laws" ToRole="Municipalities" />
-        </EntityType>
-        <EntityType Name="Municipalities">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Festivals" Relationship="Self.FK_Festivals_Municipalities" FromRole="Municipalities" ToRole="Festivals" />
-          <NavigationProperty Name="Laws" Relationship="Self.FK_Laws_Municipalities" FromRole="Municipalities" ToRole="Laws" />
         </EntityType>
         <EntityType Name="Possible_answer">
           <Key>
@@ -851,18 +777,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Festivals_Municipalities">
-          <End Role="Municipalities" Type="Self.Municipalities" Multiplicity="0..1" />
-          <End Role="Festivals" Type="Self.Festivals" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Municipalities">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Festivals">
-              <PropertyRef Name="municipality_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Inspections_Festivals">
           <End Role="Festivals" Type="Self.Festivals" Multiplicity="1" />
           <End Role="Inspections" Type="Self.Inspections" Multiplicity="*" />
@@ -955,18 +869,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Laws_Municipalities">
-          <End Role="Municipalities" Type="Self.Municipalities" Multiplicity="1" />
-          <End Role="Laws" Type="Self.Laws" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Municipalities">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Laws">
-              <PropertyRef Name="municipality_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Possible_answer_Questions">
           <End Role="Questions" Type="Self.Questions" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1025,8 +927,6 @@
           <EntitySet Name="Inspectors" EntityType="Self.Inspectors" />
           <EntitySet Name="Inspectors_at_inspection" EntityType="Self.Inspectors_at_inspection" />
           <EntitySet Name="Inspectors_availability" EntityType="Self.Inspectors_availability" />
-          <EntitySet Name="Laws" EntityType="Self.Laws" />
-          <EntitySet Name="Municipalities" EntityType="Self.Municipalities" />
           <EntitySet Name="Possible_answer" EntityType="Self.Possible_answer" />
           <EntitySet Name="Questionnaires" EntityType="Self.Questionnaires" />
           <EntitySet Name="Questions" EntityType="Self.Questions" />
@@ -1050,10 +950,6 @@
           <AssociationSet Name="FK_Contactpersons_Type_contacts" Association="Self.FK_Contactpersons_Type_contacts">
             <End Role="Type_contacts" EntitySet="Type_contacts" />
             <End Role="Contactpersons" EntitySet="Contactpersons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Festivals_Municipalities" Association="Self.FK_Festivals_Municipalities">
-            <End Role="Municipalities" EntitySet="Municipalities" />
-            <End Role="Festivals" EntitySet="Festivals" />
           </AssociationSet>
           <AssociationSet Name="FK_Inspections_Festivals" Association="Self.FK_Inspections_Festivals">
             <End Role="Festivals" EntitySet="Festivals" />
@@ -1082,10 +978,6 @@
           <AssociationSet Name="FK_Questionnaires_Inspectors_at_inspection" Association="Self.FK_Questionnaires_Inspectors_at_inspection">
             <End Role="Inspectors_at_inspection" EntitySet="Inspectors_at_inspection" />
             <End Role="Questionnaires" EntitySet="Questionnaires" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Laws_Municipalities" Association="Self.FK_Laws_Municipalities">
-            <End Role="Municipalities" EntitySet="Municipalities" />
-            <End Role="Laws" EntitySet="Laws" />
           </AssociationSet>
           <AssociationSet Name="FK_Possible_answer_Questions" Association="Self.FK_Possible_answer_Questions">
             <End Role="Questions" EntitySet="Questions" />
@@ -1171,7 +1063,6 @@
                 <ScalarProperty Name="start_date" ColumnName="start_date" />
                 <ScalarProperty Name="end_date" ColumnName="end_date" />
                 <ScalarProperty Name="client_id" ColumnName="client_id" />
-                <ScalarProperty Name="municipality_id" ColumnName="municipality_id" />
                 <ScalarProperty Name="latitude" ColumnName="latitude" />
                 <ScalarProperty Name="longitude" ColumnName="longitude" />
               </MappingFragment>
@@ -1226,25 +1117,6 @@
                 <ScalarProperty Name="end_date" ColumnName="end_date" />
                 <ScalarProperty Name="inspector_id" ColumnName="inspector_id" />
                 <ScalarProperty Name="text" ColumnName="text" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Laws">
-            <EntityTypeMapping TypeName="FestispecModel.Laws">
-              <MappingFragment StoreEntitySet="Laws">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="municipality_id" ColumnName="municipality_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="website" ColumnName="website" />
-                <ScalarProperty Name="description" ColumnName="description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Municipalities">
-            <EntityTypeMapping TypeName="FestispecModel.Municipalities">
-              <MappingFragment StoreEntitySet="Municipalities">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

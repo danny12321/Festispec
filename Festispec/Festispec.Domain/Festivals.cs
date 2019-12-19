@@ -32,12 +32,10 @@ namespace Festispec.Domain
         public System.DateTime start_date { get; set; }
         public System.DateTime end_date { get; set; }
         public int client_id { get; set; }
-        public Nullable<int> municipality_id { get; set; }
         public string latitude { get; set; }
         public string longitude { get; set; }
     
         public virtual Clients Clients { get; set; }
-        public virtual Municipalities Municipalities { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspections> Inspections { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
