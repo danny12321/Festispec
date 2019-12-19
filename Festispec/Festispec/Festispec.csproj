@@ -147,6 +147,7 @@
     <Compile Include="ViewModel\InspectorsVM\InspectorviewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MenuItem.cs" />
     <Compile Include="ViewModel\Questionnaires\IQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Possible_answerVM.cs" />
     <Compile Include="ViewModel\MunicipalityVM\MunicipalityViewModel.cs" />

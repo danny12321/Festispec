@@ -101,10 +101,11 @@ namespace Festispec.ViewModel
 
             if (_userVm != null)
             {
+
                 // user is ingelogd
+                _dataService.LoggedInUser = _userVm;
                 new BaseWindow().Show();
                 Application.Current.Windows[0].Close();
-                _dataService.LoggedInUser = _userVm;
                 CreateOfflineUserData();
             }
             else
@@ -166,8 +167,8 @@ namespace Festispec.ViewModel
 
             // Nothing is done with this yet
             var userVM = new UsersVM();
-            userVM.id = parsedUserJson["Id"].Value<int>();
-            userVM.email = parsedUserJson["Email"].ToString();
+            userVM.id = parsedUserJson["id"].Value<int>();
+            userVM.email = parsedUserJson["email"].ToString();
 
             new BaseWindow().Show();
             Application.Current.Windows[0].Close();

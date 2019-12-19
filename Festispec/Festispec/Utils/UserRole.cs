@@ -9,11 +9,23 @@ namespace Festispec.Utils
 {
     public class UserRole
     {
-        public bool HasUserRole(UsersVM user, string[] roles)
+        private UsersVM _user;
+
+        public UserRole(UsersVM user)
+        {
+            _user = user;
+        }
+
+        public bool HasUserRole(string[] roles)
         {
             var hasRole = false;
 
-            user.ToModel().Rolls.ToList().ForEach(u =>
+            if (_user == null)
+            {
+                return false;
+            }
+
+            _user.ToModel().Rolls.ToList().ForEach(u =>
             {
                 for (int i = 0; i < roles.Length; i++)
                 {
