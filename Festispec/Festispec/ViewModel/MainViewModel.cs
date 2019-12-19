@@ -225,31 +225,27 @@ namespace Festispec.ViewModel
             MenuItems = new ObservableCollection<MenuItem>();
             Console.WriteLine();
 
-            if (userRole.HasUserRole(new string[] {"Admin", "ProjectManager", "Management", "Secretariat" }))
+            if (userRole.HasUserRole(new string[] {"Admin", "ProjectManager", "Secretariat", "Sales", "Management" }))
             {
                 MenuItems.Add(new MenuItem("Planning", "Schedule", "CalendarMonthOutline"));
             }
-            if (userRole.HasUserRole(new string[] { "Admin" }) || _service.IsOffline)
+            if (userRole.HasUserRole(new string[] { "Admin", "Secretariat", "Sales", "ProjectManager" }) || _service.IsOffline)
             {
                 MenuItems.Add(new MenuItem("Festivals", "Festival", "Camping"));
             }
-            if (userRole.HasUserRole(new string[] { "Admin" }))
+            if (userRole.HasUserRole(new string[] { "Admin", "Secretariat", "Sales", "ProjectManager" }))
             {
                 MenuItems.Add(new MenuItem("Klanten", "Clients", "AccountBoxOutline"));
             }
-            if (userRole.HasUserRole(new string[] { "Admin" }))
-            {
-                MenuItems.Add(new MenuItem("Gemeente", "Municipality", "CityVariant"));
-            }
-            if (userRole.HasUserRole(new string[] { "Admin" }))
+            if (userRole.HasUserRole(new string[] { "Admin", "Secretariat", "Sales", "ProjectManager" }))
             {
                 MenuItems.Add(new MenuItem("Offerte", "", "FileDocument"));
             }
-            if (userRole.HasUserRole(new string[] { "Admin" }))
+            if (userRole.HasUserRole(new string[] { "Admin", "Secretariat", "ProjectManager" }))
             {
                 MenuItems.Add(new MenuItem("Sjablonen", "Templates", "ArrangeSendBackward"));
             }
-            if (userRole.HasUserRole(new string[] { "Admin" }))
+            if (userRole.HasUserRole(new string[] { "Admin", "Sales", "Management" }))
             {
                 MenuItems.Add(new MenuItem("Dashboard", "ManageDashboard", "MonitorDashboard"));
             }
