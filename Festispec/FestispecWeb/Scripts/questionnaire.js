@@ -18,13 +18,15 @@ function questionnaireHandleTypeMultipleChoise(question) {
     var helpers = question.querySelectorAll('.checkbox_helper');
     var checkboxs = question.querySelectorAll('.checkbox');
 
-
     for (var i = 0; i < checkboxs.length; i++) {
         handleCheckbox(checkboxs[i], helpers[i]);
-        //console.log(checkboxs[i], helpers[i])
+        console.log(checkboxs[i], helpers[i])
     }
 
     function handleCheckbox(checkbox, helper) {
+        if (checkbox.checked) helper.value = checkbox.getAttribute("data-string-value");
+        else helper.value = null;
+
         checkbox.addEventListener("change", function() {
             if (checkbox.checked) helper.value = checkbox.getAttribute("data-string-value");
             else helper.value = null;
