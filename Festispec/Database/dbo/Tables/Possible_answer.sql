@@ -10,6 +10,7 @@
 GO
 ALTER TABLE [dbo].[Possible_answer]  WITH CHECK ADD  CONSTRAINT [FK_Possible_answer_Questions] FOREIGN KEY([question_id])
 REFERENCES [dbo].[Questions] ([id])
+ON DELETE CASCADE
 GO
 
 ALTER TABLE [dbo].[Possible_answer] CHECK CONSTRAINT [FK_Possible_answer_Questions]

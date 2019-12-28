@@ -24,7 +24,7 @@ namespace Festispec.ViewModel.MunicipalityVM
         public void AddMunicipality()
         {
             Console.WriteLine("woop");
-            _mainViewModel.SetPage("AddMunicipality", false);
+            _mainViewModel.SetPage("AddMunicipality");
         }
     }
 

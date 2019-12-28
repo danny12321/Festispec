@@ -24,6 +24,7 @@ namespace Festispec.ViewModel.ClientVM
         public ICommand showAddClient { get; set; }
         public ICommand ShowClientInfo { get; set; }
         public ICommand ShowEditClient { get; set; }
+        public ICommand ShowContactPerson { get; set; }
 
         public ClientsVM SelectedClient
         {
@@ -42,7 +43,7 @@ namespace Festispec.ViewModel.ClientVM
 
             using (var context = new FestispecEntities())
             {
-                var clients = context.Clients.ToList()
+                var clients = context.Clients.Include("Contactpersons").ToList()
                              .Select(client => new ClientsVM(client));
 
                 Clients = new ObservableCollection<ClientsVM>(clients);
@@ -51,26 +52,32 @@ namespace Festispec.ViewModel.ClientVM
             showAddClient = new RelayCommand(ShowAddPage);
             ShowClientInfo = new RelayCommand(showClient);
             ShowEditClient = new RelayCommand(ShowEditPage);
+            ShowContactPerson = new RelayCommand(ShowContactPage);
+        }
+
+        private void ShowContactPage()
+        {
+            _main.SetPage("ContactPersonManagement");
         }
 
         private void ShowEditPage()
         {
-            _main.SetPage("EditClient", false);
+            _main.SetPage("EditClient");
         }
 
         private void showClient()
         {
-            _main.SetPage("ClientInfo", false);
+            _main.SetPage("ClientInfo");
         }
 
         private void ShowAddPage()
         {
-            _main.SetPage("AddClient", false);
+            _main.SetPage("AddClient");
         }
 
         public void ShowClientPage()
         {
-            _main.SetPage("Clients", false);
+            _main.SetPage("Clients");
         }
     }
 }

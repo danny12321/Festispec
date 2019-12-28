@@ -213,7 +213,9 @@
           <Property Name="inspector_id" Type="int" />
         </EntityType>
         <Association Name="FK_Answers_Questions">
-          <End Role="Questions" Type="Self.Questions" Multiplicity="0..1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questions">
@@ -363,7 +365,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Possible_answer_Questions">
-          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Possible_answer" Type="Self.Possible_answer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questions">
@@ -389,7 +393,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Questions_Questionnaires">
-          <End Role="Questionnaires" Type="Self.Questionnaires" Multiplicity="1" />
+          <End Role="Questionnaires" Type="Self.Questionnaires" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questionnaires">
@@ -796,7 +802,9 @@
           <NavigationProperty Name="Rolls" Relationship="Self.User_rolls" FromRole="Users" ToRole="Rolls" />
         </EntityType>
         <Association Name="FK_Answers_Questions">
-          <End Role="Questions" Type="Self.Questions" Multiplicity="0..1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questions">
@@ -960,7 +968,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Possible_answer_Questions">
-          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Possible_answer" Type="Self.Possible_answer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questions">
@@ -972,7 +982,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Questions_Questionnaires">
-          <End Role="Questionnaires" Type="Self.Questionnaires" Multiplicity="1" />
+          <End Role="Questionnaires" Type="Self.Questionnaires" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questionnaires">
