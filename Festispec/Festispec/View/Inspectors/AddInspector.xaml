@@ -77,8 +77,7 @@
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding AddInspectorCommand}" CommandParameter="{Binding AddInspectorCommand}"
                         Style="{StaticResource MaterialDesignRaisedButton}"
-                        Width="100"
-                        ToolTip="Inspecteur toevoegen" Content="Opslaan"/>
+                        Width="100" Content="Opslaan"/>
                 </Border>
 
             </StackPanel>

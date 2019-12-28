@@ -48,7 +48,7 @@ namespace Festispec.ViewModel
 
         public MainViewModel()
         {
-            SetPage("Home");
+            SetPage("Schedule");
             BackCommand = new RelayCommand(Back, CanGoBack);
             SetPageCommand = new RelayCommand<string>((page) => SetPage(page));
         }
@@ -58,10 +58,6 @@ namespace Festispec.ViewModel
 
             switch (page)
             {
-                case "Home":
-                    FrameContent = new Home();
-                    PageTitle = "Home";
-                    break;
                 case "Schedule":
                     FrameContent = new View.Schedule.Schedule();
                     PageTitle = "Planning";
@@ -92,15 +88,15 @@ namespace Festispec.ViewModel
                     break;
                 case "Inspections":
                     FrameContent = new View.Inspections.Inspections();
-                    PageTitle = "Inspections";
+                    PageTitle = "Inspecties";
                     break;
                 case "AddInspection":
                     FrameContent = new View.Inspections.AddInspection();
-                    PageTitle = "Add Inspection";
+                    PageTitle = "Inspectie toevoegen";
                     break;
                 case "EditInspection":
                     FrameContent = new View.Inspections.EditInspection();
-                    PageTitle = "Edit Inspection";
+                    PageTitle = "Inspectie toevoegen";
                     break;
                 case "Municipality":
                     FrameContent = new View.Municipality.Municipality();
@@ -148,15 +144,15 @@ namespace Festispec.ViewModel
                     break;
                 case "ShowAddContactPerson":
                     FrameContent = new View.ContactPersonsView.AddContactPerson();
-                    PageTitle = "contactpersoon toevoegen";
+                    PageTitle = "Contactpersoon toevoegen";
                     break;
                 case "ShowContactPersonInfo":
                     FrameContent = new View.ContactPersonsView.ContactPersonInfo();
-                    PageTitle = "contactpersoon informatie";
+                    PageTitle = "Contactpersoon informatie";
                     break;
                 case "ShowEditContactPerson":
                     FrameContent = new View.ContactPersonsView.EditContactPerson();
-                    PageTitle = "contactpersoon wijzigen";
+                    PageTitle = "Contactpersoon wijzigen";
                     break;
                 case "ContactPersonManagement":
                     FrameContent = new View.ContactPersonsView.ContactPersonsManage();
@@ -182,8 +178,8 @@ namespace Festispec.ViewModel
                     closeWindow();
                     break;
                 default:
-                    FrameContent = new Home();
-                    PageTitle = "Home";
+                    FrameContent = new View.Schedule.Schedule();
+                    PageTitle = "Planning";
                     break;
             }
 

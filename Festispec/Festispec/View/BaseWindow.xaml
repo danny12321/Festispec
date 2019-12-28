@@ -19,7 +19,6 @@
         <Border Grid.Column="0" Background="#32385D" Padding="10,100,0,0" MinWidth="250">
             <ListBox FontSize="25" IsEnabled="{Binding IsChecked, ElementName=EnableListBox}" Background="#32385D">
 
-                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Home" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="HomeVariant" VerticalAlignment="Center"/>Home</Hyperlink></TextBlock>
                 <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Schedule" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="CalendarMonthOutline" VerticalAlignment="Center"/>Planning</Hyperlink></TextBlock>
                 <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Festival" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="Camping" VerticalAlignment="Center"/>Festival</Hyperlink></TextBlock>
                 <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Clients" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="AccountBoxOutline" VerticalAlignment="Center"/>Klanten</Hyperlink></TextBlock>
