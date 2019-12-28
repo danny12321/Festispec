@@ -41,7 +41,8 @@ namespace FestispecWeb.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction("Login");
+            return View();
+            //return RedirectToAction("Login");
         }
 
     }
