@@ -1,0 +1,339 @@
+/*nav bar*/
+.dhx_cal_tab {
+	float: right;
+}
+
+/*lightbox*/
+.dhx_cal_light .dhx_cal_light_wide {
+	top: 25% !important;
+}
+
+.dhx_btn_set {
+	margin-bottom: 20px !important;
+}
+
+.dhx_cal_light_wide .dhx_wrap_section .dhx_section_time {
+	height: auto !important;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.dhx_cal_light {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/*recurring events repeat event section in lightbox*/
+.dhx_cal_light_rec.dhx_cal_light_wide {
+	width: 738px !important;
+}
+
+.dhx_cal_light_rec.dhx_cal_light_wide .dhx_cal_larea {
+	width: 730px !important;
+}
+
+.dhx_repeat_center, .dhx_repeat_right {
+	width: auto !important;
+}
+
+.dhx_repeat_right {
+	float: left !important;
+}
+
+/*grid view*/
+tr.dhx_grid_event td {
+	line-height: 1.8 !important;
+}
+
+@media screen and (min-width: 768px) and (max-width : 992px) {
+	/*datetime of the scheduler in nav bar section*/
+	.dhx_cal_date {
+		font-size: 13px !important;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	/*buttons in dhx_cal_navline class*/
+	.dhx_cal_navline .dhx_cal_tab,
+	.dhx_cal_navline .dhx_cal_today_button,
+	.dhx_cal_navline .dhx_minical_icon {
+		position: relative !important;
+		right: auto !important;
+		left: auto !important;
+	}
+
+	.dhx_cal_tab:hover, .dhx_cal_today_button:hover {
+		text-decoration: none !important;
+	}
+
+	.dhx_cal_navline .dhx_minical_icon {
+		display: inline-block;
+		left: 80px !important;
+		top: 80px !important;
+	}
+
+	.dhx_cal_navline .dhx_cal_date {
+		display: block !important;
+		left: 0 !important;
+		width: 100% !important;
+		text-align: center !important;
+	}
+
+	.dhx_cal_navline .dhx_cal_prev_button,
+	.dhx_cal_navline .dhx_cal_next_button {
+		z-index: 1;
+	}
+
+	.dhx_cal_navline .dhx_cal_prev_button {
+		left: 0 !important;
+		right: auto;
+	}
+
+	.dhx_cal_navline .dhx_cal_next_button {
+		right: 0 !important;
+		left: auto;
+	}
+
+	.dhx_cal_navline .dhx_cal_tab, .dhx_cal_today_button {
+		top: 70px !important;
+	}
+
+	.dhx_cal_today_button {
+		right: 0 !important;
+		display: inline-block;
+		float: left;
+	}
+
+	.dhx_cal_today_button,
+	.dhx_cal_tab,
+	.dhx_cal_prev_button,
+	.dhx_cal_next_button,
+	.dhx_cal_tab_standalone {
+		width: 60px !important;
+		height: 40px !important;
+		-ms-border-radius: 4px !important;
+		border-radius: 4px !important;
+		margin: 4px 2px !important;
+		padding: 0 !important;
+		line-height: 40px !important;
+	}
+
+	/*lightbox*/
+	.dhx_cal_larea {
+		width: auto !important;
+		margin-left: 0 !important;
+		height: 100% !important;
+	}
+
+	.dhx_wrap_section, .dhx_cal_ltitle, .dhx_cal_larea {
+		position: relative !important;
+		display: block !important;
+		overflow: initial !important;
+	}
+
+	.dhx_wrap_section .dhx_section_time {
+		height: 100% !important;
+	}
+
+	/*time period section*/
+	.dhx_section_time {
+		display: inline-block;
+		vertical-align: middle;
+		min-height: 0;
+		position: relative;
+		width: inherit;
+		height: auto !important;
+		width: 100% !important;
+	}
+
+	.dhx_section_time select {
+		position: relative;
+		min-height: 1px;
+		float: left;
+		width: 25%;
+		margin-bottom: 5px !important;
+	}
+
+	/*scheduler data*/
+	.dhx_cal_data {
+		overflow-y: auto !important;
+	}
+
+	.grey_section, .red_section {
+		font-size: 14px !important;
+	}
+
+	/*recurring light box*/
+	.dhx_form_repeat {
+		overflow-y: auto !important;
+		width: 100% !important;
+	}
+
+	.dhx_repeat_left, .dhx_repeat_center, .dhx_repeat_right {
+		width: 100% !important;
+		display: block !important;
+		left: 0 !important;
+		margin-right: 0 !important;
+	}
+
+	.dhx_repeat_divider {
+		display: none;
+	}
+
+	/*grid view*/
+	.dhx_grid_line div {
+		width: 30% !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	.dhx_grid_area tr.dhx_grid_event td {
+		width: 30% !important;
+		border-left: 1px solid #CECECE;
+	}
+
+	.dhx_grid_area tr.dhx_grid_event td.dhx_grid_dummy {
+		border: none;
+	}
+
+	.dhx_grid_area table {
+		width: auto !important;
+	}
+
+	.dhx_grid_v_border {
+		display: none;
+	}
+
+	/*lightbox*/
+	.dhx_cal_light {
+		width: auto !important;
+		height: auto !important;
+	}
+
+	.dhx_cal_light_wide .dhx_cal_lsection {
+		text-align: left !important;
+	}
+
+	.dhx_cal_light_rec.dhx_cal_light_wide {
+		width: 100% !important;
+	}
+
+	.dhx_cal_light_rec.dhx_cal_light_wide .dhx_cal_larea {
+		width: 100% !important;
+	}
+
+	.dhx_form_repeat, .dhx_repeat_center {
+		padding-left: 0 !important;
+	}
+
+	.dhx_cal_ltext {
+		display: block;
+		width: 100%;
+		position: relative;
+		padding: 0 !important;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+
+	.dhx_btn_set {
+		position: relative !important;
+		display: inline-block !important;
+	}
+
+	/*time bar*/
+	.dhx_scale_bar {
+		font-size: 9px !important;
+	}
+
+	.dhx_cal_tab p {
+		display: inline-block;
+	}
+}
+
+@media screen and (orientation : landscape) and (max-width: 767px) {
+	/*lightbox*/
+	.dhx_cal_ltext {
+		height: auto !important;
+	}
+
+	.dhx_cal_ltext textarea {
+		height: 70px !important;
+	}
+}
+
+@media screen and (max-width : 450px) {
+	/*date in nav bar section*/
+	.dhx_cal_date {
+		font-size: 14px !important;
+		line-height: 3 !important;
+		height: 40px !important;
+		font-weight: normal !important;
+	}
+
+	/*lightbox time period section*/
+	.dhx_section_time span {
+		display: none;
+	}
+
+	.grey_section, .red_section {
+		font-size: 12px !important;
+	}
+
+	/*light box edit text*/
+	.dhx_cal_ltext {
+		display: block;
+		width: 100%;
+		position: relative;
+		padding: 0 !important;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+
+	/*buttons in dhx_cal_navline class*/
+	#scheduler_here div.dhx_cal_navline {
+		display: inline-block !important;
+		margin: 0 auto !important;
+	}
+
+	.dhx_cal_navline {
+		text-align: center !important;
+	}
+
+	/*grid view*/
+	.dhx_grid_event td {
+		width: auto !important;
+	}
+
+	.dhx_grid_event .dhx_grid_dummy {
+		width: 1px !important;
+	}
+
+	/*quick info extension*/
+	.dhx_cal_quick_info {
+		left: 0 !important;
+		padding-left: 0 !important;
+		width: auto !important;
+	}
+
+	.dhx_cal_navline .dhx_minical_icon {
+		left: 0 !important;
+	}
+
+	.dhx_cal_today_button,
+	.dhx_cal_tab,
+	.dhx_cal_prev_button,
+	.dhx_cal_next_button,
+	.dhx_cal_tab_standalone {
+		width: 50px !important;
+	}
+
+	/*year view - tooltip*/
+	.dhx_year_tooltip {
+		left: 0 !important;
+	}
+}
