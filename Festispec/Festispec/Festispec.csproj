@@ -157,6 +157,7 @@
     <Compile Include="ViewModel\Questionnaires\Types\MultipleChoiseQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Types\OpenQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Types\SelectQuestion.cs" />
+    <Compile Include="ViewModel\Questionnaires\Types\TableQuestion.cs" />
     <Compile Include="ViewModel\Templates\TemplatesVM.cs" />
     <Compile Include="ViewModel\ScheduleVM\ScheduleColumnVM.cs" />
     <Compile Include="ViewModel\ScheduleVM\ScheduleVM.cs" />
@@ -267,6 +268,12 @@
     </Compile>
     <Compile Include="View\Questionnaires\Types\SelectPreview.xaml.cs">
       <DependentUpon>SelectPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\TableEdit.xaml.cs">
+      <DependentUpon>TableEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\TablePreview.xaml.cs">
+      <DependentUpon>TablePreview.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Schedule\Schedule.xaml.cs">
       <DependentUpon>Schedule.xaml</DependentUpon>
@@ -444,6 +451,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Questionnaires\Types\SelectPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\TableEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\TablePreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

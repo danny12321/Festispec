@@ -62,8 +62,8 @@
                                @(Model[i].Question.Possible_answer.ElementAt(pa).answer == Model[i].Answers[0].answer ? "checked" : "") /> <label for="checkbox-@i-@pa">@Model[i].Question.Possible_answer.ElementAt(pa).answer</label> <br />
                         }
                     }
-                    else if (Model[i].Question.type_question == 4)
-                    {
+                else if (Model[i].Question.type_question == 4)
+                {
                         <input class="image" type="file" name="[@i].Attachment" multiple accept="image/x-png,image/gif,image/jpeg" /> <br />
 
                         <h3>Al geuploade foto's</h3>
@@ -71,11 +71,20 @@
                         {
                             <img src="data:image/png;base64,@Model[i].Answers[a].answer" width="100" />
                         }
-                    }
-                    else
-                    {
-                        <div>question type not found</div>
-                    }
+                }
+                else if(Model[i].Question.type_question == 5){
+                       
+                        <table>
+                            for(int t = 0; t < Model[i].Question.Possible_answer.Count; t++){
+                            <thead>@Model[i].Question.Possible_answer.ElementAt(t)</thead>
+                            }
+                        </table>            
+
+                }
+                else
+                {
+                    <div>question type not found</div>
+                }
 
             </div>
 
