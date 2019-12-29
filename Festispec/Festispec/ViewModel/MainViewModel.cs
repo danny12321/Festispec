@@ -10,9 +10,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Windows;
-using System.Windows.Media.Imaging;
-using System.Windows.Media;
-using System.IO;
 
 namespace Festispec.ViewModel
 {
@@ -36,7 +33,7 @@ namespace Festispec.ViewModel
         public string PageTitle
         {
             get { return _pageTitle; }
-            set 
+            set
             {
                 _pageTitle = value;
                 RaisePropertyChanged("PageTitle");
@@ -47,16 +44,16 @@ namespace Festispec.ViewModel
 
         public ICommand BackCommand { get; set; }
 
-        private Stack<string> StackNavigator = new Stack<string>();
+        private Stack<Page> StackNavigator = new Stack<Page>();
 
         public MainViewModel()
         {
-            SetPage("Home", false);
+            SetPage("Home");
             BackCommand = new RelayCommand(Back, CanGoBack);
-            SetPageCommand = new RelayCommand<string>((page) => SetPage(page, false));
+            SetPageCommand = new RelayCommand<string>((page) => SetPage(page));
         }
 
-        public void SetPage(string page, bool navigator)
+        public void SetPage(string page)
         {
 
             switch (page)
@@ -66,8 +63,12 @@ namespace Festispec.ViewModel
                     PageTitle = "Home";
                     break;
                 case "Schedule":
-                    FrameContent = new Schedule();
+                    FrameContent = new View.Schedule.Schedule();
                     PageTitle = "Planning";
+                    break;
+                case "ManageDashboard":
+                    FrameContent = new View.Dashboard.ManageDashboard();
+                    PageTitle = "Management Dashboard";
                     break;
                 case "Festival":
                     FrameContent = new View.FestivalViews.Festivals();
@@ -108,7 +109,6 @@ namespace Festispec.ViewModel
                     break;
                 case "AddClient":
                     FrameContent = new View.ClientsViews.AddClients();
-
                     PageTitle = "Klanten toevoegen";
                     break;
                 case "EditClient":
@@ -125,27 +125,6 @@ namespace Festispec.ViewModel
                     break;
                 case "Inspectors":
                     FrameContent = new View.Inspectors.Inspectors();
-                    RenderTargetBitmap renderTargetBitmap =
-    new RenderTargetBitmap(1000, 1000, 96, 96, PixelFormats.Pbgra32);
-                    renderTargetBitmap.Render(FrameContent);
-                    PngBitmapEncoder pngImage = new PngBitmapEncoder();
-                    
-                    var exportFolder1 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                    var exportFile1 = System.IO.Path.Combine(exportFolder1, "TempChartImage2.jpg");
-                    Image myImage = new Image();
-
-
-
-
-
-                    RenderTargetBitmap bmp = new RenderTargetBitmap(180, 180, 120, 96, PixelFormats.Pbgra32);
-                    bmp.Render(FrameContent);
-                    pngImage.Frames.Add(BitmapFrame.Create(bmp));
-                    myImage.Source = bmp;
-                    using (Stream fileStream = File.Create(exportFile1))
-                    {
-                        pngImage.Save(fileStream);
-                    }
                     PageTitle = "Inspecteurs beheer";
                     break;
                 case "AddInspector":
@@ -159,6 +138,13 @@ namespace Festispec.ViewModel
                 case "ReportPage":
                     FrameContent = new View.Inspections.Report();
                     PageTitle = "Rapportages";
+                case "Templates":
+                    FrameContent = new View.Templates.Templates();
+                    PageTitle = "Sjablonen";
+                    break;
+                case "InspectorInfo":
+                    FrameContent = new View.Inspectors.InspectorInfo();
+                    PageTitle = "Inspecteur informatie";
                     break;
                 case "ShowAddContactPerson":
                     FrameContent = new View.ContactPersonsView.AddContactPerson();
@@ -180,6 +166,18 @@ namespace Festispec.ViewModel
                     FrameContent = new View.ContactPersonsView.AddFestivalContact();
                     PageTitle = "Contactpersoon toevoegen aan festival";
                     break;
+                case "Users":
+                    FrameContent = new View.Users.Users();
+                    PageTitle = "Gebruikers";
+                    break;
+                case "AddUser":
+                    FrameContent = new View.Users.AddUser();
+                    PageTitle = "Voeg gebruiker toe";
+                    break;
+                case "EditUser":
+                    FrameContent = new View.Users.EditUser();
+                    PageTitle = "Verander gebruiker";
+                    break;
                 case "Logout":
                     closeWindow();
                     break;
@@ -189,10 +187,7 @@ namespace Festispec.ViewModel
                     break;
             }
 
-            if (!navigator)
-            {
-                StackNavigator.Push(page);
-            }
+            StackNavigator.Push(FrameContent);
         }
 
         private void Back()
@@ -200,7 +195,7 @@ namespace Festispec.ViewModel
             if (StackNavigator.Count >= 2)
             {
                 StackNavigator.Pop();
-                SetPage(StackNavigator.Peek(), true);
+                FrameContent = StackNavigator.Peek();
             }
         }
 

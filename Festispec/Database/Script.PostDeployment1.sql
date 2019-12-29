@@ -11,6 +11,7 @@ Post-Deployment Script Template
 */
 
 INSERT [dbo].[Rolls] ([role]) VALUES (N'Admin')
+INSERT [dbo].[Rolls] ([role]) VALUES (N'Inspector')
 INSERT [dbo].[Users] ([email], [password], [inspector_id]) VALUES (N'admin@admin.com', N'admin', NULL)
 INSERT [dbo].[User_rolls] ([user_id], [role_id]) VALUES (1, 1)
 INSERT [dbo].[Municipalities] ([name]) VALUES (N'Utrecht')
@@ -20,6 +21,8 @@ INSERT [dbo].[Inspectors] ([name], [lastname], [birthday], [country], [city], [p
 INSERT [dbo].[Type_questions] ([type]) VALUES (N'Open')
 INSERT [dbo].[Type_questions] ([type]) VALUES (N'Multiple Choise')
 INSERT [dbo].[Type_questions] ([type]) VALUES (N'Select')
+INSERT [dbo].[Type_questions] ([type]) VALUES (N'Image')
+INSERT [dbo].[Type_questions] ([type]) VALUES (N'Table')
 INSERT [dbo].[Type_contacts] ([type]) VALUES (N'Administratief')
 INSERT [dbo].[Type_contacts] ([type]) VALUES (N'Leidinggevend')
 INSERT [dbo].[Type_contacts] ([type]) VALUES (N'Commercieel')

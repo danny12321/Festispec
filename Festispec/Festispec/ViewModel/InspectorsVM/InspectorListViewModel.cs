@@ -17,9 +17,10 @@ namespace Festispec.ViewModel.InspectorsVM
         public ObservableCollection<InspectorviewModel> Inspectors { get; set; }
         private InspectorviewModel _selectedInspector;
         private MainViewModel _mainViewModel;
+        private IDataService _service;
         public ICommand ShowAddInspector { get; set; }
         public ICommand ShowEditInspector { get; set; }
-        private IDataService _service;
+        public ICommand ShowInspectorInfo { get; set; }
 
         public InspectorviewModel SelectedInspector
         {
@@ -33,35 +34,37 @@ namespace Festispec.ViewModel.InspectorsVM
                 base.RaisePropertyChanged();
             }
         }
-        public InspectorListViewModel(MainViewModel main,IDataService dataservice)
-
+        public InspectorListViewModel(MainViewModel main, IDataService dataService)
         {
-            _service = dataservice;
             _mainViewModel = main;
+            _service = dataService;
             ShowAddInspector = new RelayCommand(AddInspector);
             ShowEditInspector = new RelayCommand(EditInspector);
+            ShowInspectorInfo = new RelayCommand(InspectorInfo);
             using (var context = new FestispecEntities())
             {
-
                 var inspectors = context.Inspectors.ToList();
 
                 context.SaveChanges();
                 Inspectors = new ObservableCollection<InspectorviewModel>(inspectors.Select(i => new InspectorviewModel(i)));
-
-
             }
         }
         public void ShowInspectorPage()
         {
-            _mainViewModel.SetPage("Inspectors", false);
+            _mainViewModel.SetPage("Inspectors");
         }
         public void AddInspector()
         {
-            _mainViewModel.SetPage("AddInspector", false);
+            _mainViewModel.SetPage("AddInspector");
         }
         public void EditInspector()
         {
-            _mainViewModel.SetPage("EditInspector", false);
+            _mainViewModel.SetPage("EditInspector");
+        }
+
+        public void InspectorInfo()
+        {
+            _mainViewModel.SetPage("InspectorInfo");
         }
 
     }

@@ -52,7 +52,7 @@ namespace Festispec.ViewModel.ContactPersonsVM
                 ContactPersons = new ObservableCollection<ContactPersonVM>();
 
                 context.Festivals.Attach(SelectedFestival.ToModel());
-                context.Contactpersons.Where(s => s.client_id == SelectedClient.ClientId).ToList().Where(s => !s.Festivals.Contains(SelectedFestival.ToModel())).ToList().ForEach(s => ContactPersons.Add(new ContactPersonVM(s)));
+                context.Contactpersons.Where(s => s.client_id == SelectedFestival.ClientId).ToList().Where(s => !s.Festivals.Contains(SelectedFestival.ToModel())).ToList().ForEach(s => ContactPersons.Add(new ContactPersonVM(s)));
             }
 
             AddContactPersonToFestival = new RelayCommand(AddContactPerson, CanAddContact);
@@ -81,7 +81,7 @@ namespace Festispec.ViewModel.ContactPersonsVM
                 }
                 base.RaisePropertyChanged();
 
-                _main.SetPage("FestivalInfo", false);
+                _main.SetPage("FestivalInfo");
             }
         }
     }

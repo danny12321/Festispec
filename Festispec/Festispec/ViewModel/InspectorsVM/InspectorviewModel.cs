@@ -34,6 +34,12 @@ namespace Festispec.ViewModel.InspectorsVM
             get { return _i.lastname; }
             set { _i.lastname = value; }
         }
+
+        public string InspectorEmail
+        {
+            get { return _i.email; }
+            set { _i.email = value; }
+        }
         public DateTime? Birthday
         {
             get

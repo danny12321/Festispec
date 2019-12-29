@@ -78,18 +78,16 @@ namespace Festispec.ViewModel.FestivalVM
             {
                 context.Festivals.Attach(SelectedFestival.ToModel());
                 SelectedFestival.ToModel().Contactpersons.Remove(SelectedContactPerson.ToModel());
+                Contactpersons.Remove(SelectedContactPerson);
                 context.SaveChanges();
 
-                Contactpersons.Clear();
-                context.Festivals.Attach(SelectedFestival.ToModel());
-                Contactpersons = new ObservableCollection<ContactPersonVM>(SelectedFestival.ContactPersons);
             }
             base.RaisePropertyChanged();
         }
 
         private void ShowContact()
         {
-            _main.SetPage("AddContactFestival", false);
+            _main.SetPage("AddContactFestival");
         }
     }
 }

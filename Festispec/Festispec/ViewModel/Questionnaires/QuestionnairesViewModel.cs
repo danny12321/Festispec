@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight.Ioc;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,18 +22,25 @@ namespace Festispec.ViewModel.Questionnaires
     {
         public Domain.Questionnaires Questionnaire;
 
-        public int Id { get
+        public int Id
+        {
+            get
             {
                 return Questionnaire.id;
-            } }
+            }
+        }
 
-        private InspectionVM _inspection;
-
-        private FestispecEntities _context;
+        public string Name
+        {
+            get { return Questionnaire.name; }
+            set { Questionnaire.name = value; SaveChanges(); }
+        }
 
         public ObservableCollection<QuestionTypeViewModel> QuestionTypes { get; set; }
 
         public ObservableCollection<QuestionViewModel> Questions { get; set; }
+
+        public ObservableCollection<Domain.Questionnaires> Templates { get; set; }
 
         private QuestionViewModel _selectedQuestion;
 
@@ -81,58 +89,50 @@ namespace Festispec.ViewModel.Questionnaires
             }
         }
 
+        private bool _templateDialogOpen;
+
+        public bool TemplateDialogOpen { get { return _templateDialogOpen; } set { _templateDialogOpen = value; RaisePropertyChanged("TemplateDialogOpen"); } }
+
         public ICommand AddQuestionCommand { get; set; }
 
+        public ICommand SelectTemplateCommand { get; set; }
 
-        public QuestionnairesViewModel(Inspections.InspectionVM inspection, FestispecEntities context)
+        public ICommand OpenTemplateDialogCommand { get; set; }
+
+        public QuestionnairesViewModel(Domain.Questionnaires questionnaire)
         {
-            _inspection = inspection;
-            _context = context;
-
-            // TODO: make inspector id nullable
-            Questionnaire = new Domain.Questionnaires() { inspection_id = inspection.Id };
-
-
-            context.Questionnaires.Add(Questionnaire);
-            context.SaveChanges();
-
-            var questionTypes = context.Type_questions.ToList()
-                .Select(qt => new QuestionTypeViewModel(qt));
-
-            QuestionTypes = new ObservableCollection<QuestionTypeViewModel>(questionTypes);
-            Questions = new ObservableCollection<QuestionViewModel>();
-
-        }
-
-        public QuestionnairesViewModel(Domain.Questionnaires questionnaire, FestispecEntities context)
-        {
-            _context = context;
             Init(questionnaire);
         }
 
-        [PreferredConstructor]
-        public QuestionnairesViewModel(IDataService dataService, FestispecEntities context)
+        public QuestionnairesViewModel(IDataService dataService)
         {
-            _context = context;
             this.dataService = dataService;
             Init(dataService.SelectedQuestionnaire.Questionnaire);
         }
 
         private void Init(Domain.Questionnaires questionnaire)
         {
-            Console.WriteLine("INIT " + questionnaire.id);
             Questionnaire = questionnaire;
             AddQuestionCommand = new RelayCommand(AddQuestion);
+            SelectTemplateCommand = new RelayCommand<Domain.Questionnaires>(SelectTemplate);
+            OpenTemplateDialogCommand = new RelayCommand(() => TemplateDialogOpen = true);
 
-            var questions = questionnaire.Questions.ToList()
-                .Select(q => GetQuestionClass(q));
 
-            Questions = new ObservableCollection<QuestionViewModel>(questions);
+            using (var context = new FestispecEntities())
+            {
+                var templates = context.Questionnaires.Where(q => q.inspection_id == null).ToList();
+                Templates = new ObservableCollection<Domain.Questionnaires>(templates);
 
-            var questionTypes = _context.Type_questions.ToList()
-                .Select(qt => new QuestionTypeViewModel(qt));
+                var questions = Questionnaire.Questions.ToList()
+                    .Select(q => GetQuestionClass(q));
 
-            QuestionTypes = new ObservableCollection<QuestionTypeViewModel>(questionTypes);
+                Questions = new ObservableCollection<QuestionViewModel>(questions);
+
+                var questionTypes = context.Type_questions.ToList()
+                    .Select(qt => new QuestionTypeViewModel(qt));
+
+                QuestionTypes = new ObservableCollection<QuestionTypeViewModel>(questionTypes);
+            }
         }
 
         private QuestionViewModel GetQuestionClass(Questions q)
@@ -140,13 +140,19 @@ namespace Festispec.ViewModel.Questionnaires
             switch (q.type_question)
             {
                 case 1:
-                    return new OpenQuestion(this, q, _context);
+                    return new OpenQuestion(this, q);
 
                 case 2:
-                    return new MultipleChoiseQuestion(this, q, _context);
+                    return new MultipleChoiseQuestion(this, q);
 
                 case 3:
-                    return new SelectQuestion(this, q, _context);
+                    return new SelectQuestion(this, q);
+
+                case 4:
+                    return new ImageQuestion(this, q);
+
+                case 5:
+                    return new TableQuestion(this, q);
 
                 default:
                     return null;
@@ -157,15 +163,55 @@ namespace Festispec.ViewModel.Questionnaires
         {
             var question = new Questions() { question = "New question", type_question = 2, questionnaire_id = Questionnaire.id };
 
-            question.Type_questions = _context.Type_questions.First(tq => tq.id == question.type_question);
-            _context.Questions.Add(question);
+            using (var context = new FestispecEntities())
+            {
+                question.Type_questions = context.Type_questions.First(tq => tq.id == question.type_question);
+                context.Questions.Add(question);
 
-            _context.SaveChanges();
+                context.SaveChanges();
+            }
 
             var newQuestion = GetQuestionClass(question);
             SelectedQuestion = newQuestion;
             Questions.Add(newQuestion);
         }
 
+        private void SaveChanges()
+        {
+            using (var context = new FestispecEntities())
+            {
+                context.Entry(Questionnaire).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+
+        private void SelectTemplate(Domain.Questionnaires template)
+        {
+            Questions.Clear();
+
+            using (var context = new FestispecEntities())
+            {
+                context.Questions.RemoveRange(context.Questions.Where(q => q.questionnaire_id == Questionnaire.id).ToList());
+
+                var questions = context.Questions.AsNoTracking().Include(q => q.Possible_answer).Where(q => q.questionnaire_id == template.id).ToList();
+                var pAnswers = new List<Domain.Possible_answer>();
+
+                questions.ForEach(q =>
+                {
+                    q.questionnaire_id = Questionnaire.id;
+                });
+
+                context.Questions.AddRange(questions);
+                context.SaveChanges();
+
+
+                questions.ForEach(q =>
+                {
+                    Questions.Add(GetQuestionClass(q));
+                });
+            }
+
+            TemplateDialogOpen = false;
+        }
     }
 }

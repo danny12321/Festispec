@@ -44,7 +44,7 @@
                         <DataTemplate>
                             <Button Command="{Binding DataContext.ShowContactPerson, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
-                                  ToolTip="contact personen weergeven">
+                                  ToolTip="Contact personen weergeven">
                                 <materialDesign:PackIcon
                                     Kind="Contact"
                                     Height="20"

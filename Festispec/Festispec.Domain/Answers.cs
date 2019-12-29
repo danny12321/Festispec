@@ -17,6 +17,7 @@ namespace Festispec.Domain
         public int id { get; set; }
         public string answer { get; set; }
         public Nullable<int> question_id { get; set; }
+        public System.DateTime insertdate { get; set; }
     
         public virtual Questions Questions { get; set; }
     }

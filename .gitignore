@@ -234,3 +234,5 @@ _Pvt_Extensions
 .fake/
 *.binlog
 *.jfm
+Festispec/Festispec/connections.config
+FestispecWeb/FestispecWeb/connections.config
