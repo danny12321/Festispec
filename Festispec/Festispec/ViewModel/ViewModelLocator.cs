@@ -247,17 +247,15 @@ namespace Festispec.ViewModel
             }
         }
 
-        public ReportViewModel ReportVM{
-
-            return new ReportViewModel();
-        }
-        public InspectionEditViewModel InspectionEdit
+        public ReportViewModel ReportVM
         {
+
             get
             {
-                return new InspectionEditViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
+                return new ReportViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
+
 
         public TemplatesVM Templates
         {
