@@ -18,6 +18,7 @@ namespace Festispec.ViewModel.InspectorsVM
         private MainViewModel _main;
         private IDataService _service;
         public ICommand EditInspectorCommand { get; set; }
+        
         public ICommand GenerateLatLongBasedOnAdressCommand { get; set; }
         
         public InspectorviewModel SelectedInspector
@@ -33,8 +34,10 @@ namespace Festispec.ViewModel.InspectorsVM
             _service = dataService;
             _inspectorViewModel = i;
             EditInspectorCommand = new RelayCommand(EditInspectorMethod);
+            
             GenerateLatLongBasedOnAdressCommand = new RelayCommand(GenerateLatLongBasedOnAdress);
         }
+
         private void EditInspectorMethod()
         {
             if (CanEditInspector())

@@ -13,10 +13,10 @@ namespace Festispec.Domain
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FestispecEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public FestispecEntities()
-            : base("name=FestispecEntities")
+        public Entities()
+            : base("name=Entities")
         {
         }
     

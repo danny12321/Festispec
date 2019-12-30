@@ -13,12 +13,12 @@
 
     <StackPanel>
 
-        <PdfViewer:PdfDocumentView ItemSource="{Binding FilePathTemp}" Height="453" Margin="0,0,266,0"/>
+        <PdfViewer:PdfDocumentView ItemSource="{Binding FilePathTemp}" Height="719" Margin="0,0,469,0"/>
         <Border Padding="10">
             <Button HorizontalAlignment="Right" Command="{Binding ToPDF}" CommandParameter="{Binding EditInspectorCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
-                    Width="207"
-                    ToolTip="Download PDF">
+                    Width="264"
+                    ToolTip="Download PDF naar bureaublad">
                 Opslaan
             </Button>
         </Border>

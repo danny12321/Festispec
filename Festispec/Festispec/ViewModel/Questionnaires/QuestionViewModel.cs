@@ -18,7 +18,13 @@ namespace Festispec.ViewModel.Questionnaires
 
         private Questions _question;
 
-        public int Id { get; private set; }
+        public int Id
+        {
+            get
+            {
+                return _question.id;
+            }
+        }
 
         private QuestionTypeViewModel _type;
 
