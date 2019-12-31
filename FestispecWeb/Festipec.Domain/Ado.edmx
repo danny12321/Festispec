@@ -1,0 +1,1353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FestispecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Answers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="answer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="question_id" Type="int" />
+          <Property Name="insertdate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="postalcode" Type="nvarchar" MaxLength="6" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
+          <Property Name="street" Type="nvarchar" MaxLength="50" />
+          <Property Name="housenumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Contactpersons">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="client_id" Type="int" />
+          <Property Name="type_contact" Type="int" />
+        </EntityType>
+        <EntityType Name="Festival_contacts">
+          <Key>
+            <PropertyRef Name="Festival_id" />
+            <PropertyRef Name="Contactperson_id" />
+          </Key>
+          <Property Name="Festival_id" Type="int" Nullable="false" />
+          <Property Name="Contactperson_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Festivals">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="postalcode" Type="nvarchar" MaxLength="6" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
+          <Property Name="street" Type="nvarchar" MaxLength="50" />
+          <Property Name="housenumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" />
+          <Property Name="start_date" Type="datetime" Nullable="false" />
+          <Property Name="end_date" Type="datetime" Nullable="false" />
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="municipality_id" Type="int" />
+          <Property Name="latitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="longitude" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Inspections">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="500" />
+          <Property Name="start_date" Type="datetime" Nullable="false" />
+          <Property Name="end_date" Type="datetime" Nullable="false" />
+          <Property Name="finished" Type="datetime" />
+          <Property Name="festival_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inspectors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="birthday" Type="datetime" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="postalcode" Type="nvarchar" MaxLength="6" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
+          <Property Name="street" Type="nvarchar" MaxLength="50" />
+          <Property Name="housenumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="active" Type="datetime" />
+          <Property Name="latitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="longitude" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Inspectors_at_inspection">
+          <Key>
+            <PropertyRef Name="inpector_id" />
+            <PropertyRef Name="inspection_id" />
+          </Key>
+          <Property Name="inpector_id" Type="int" Nullable="false" />
+          <Property Name="inspection_id" Type="int" Nullable="false" />
+          <Property Name="absent" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Inspectors_availability">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="start_date" Type="datetime" Nullable="false" />
+          <Property Name="end_date" Type="datetime" Nullable="false" />
+          <Property Name="inspector_id" Type="int" Nullable="false" />
+          <Property Name="text" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Laws">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="municipality_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="website" Type="nvarchar" MaxLength="200" />
+          <Property Name="description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Municipalities">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Possible_answer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="answer" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="question_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Questionnaires">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="nvarchar" MaxLength="50" />
+          <Property Name="inspector_id" Type="int" />
+          <Property Name="inspection_id" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="finished" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="question" Type="nvarchar" MaxLength="500" />
+          <Property Name="type_question" Type="int" Nullable="false" />
+          <Property Name="questionnaire_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Quotations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="approved" Type="datetime" Nullable="false" />
+          <Property Name="client_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rolls">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type_contacts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type_questions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_rolls">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="role_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="inspector_id" Type="int" />
+        </EntityType>
+        <Association Name="FK_Answers_Questions">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="0..1" />
+          <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Answers">
+              <PropertyRef Name="question_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contactpersons_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Contactpersons">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contactpersons_Type_contacts">
+          <End Role="Type_contacts" Type="Self.Type_contacts" Multiplicity="0..1" />
+          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_contacts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Contactpersons">
+              <PropertyRef Name="type_contact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Festival_contacts_Contactpersons">
+          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="1" />
+          <End Role="Festival_contacts" Type="Self.Festival_contacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contactpersons">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Festival_contacts">
+              <PropertyRef Name="Contactperson_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Festival_contacts_Festivals">
+          <End Role="Festivals" Type="Self.Festivals" Multiplicity="1" />
+          <End Role="Festival_contacts" Type="Self.Festival_contacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Festivals">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Festival_contacts">
+              <PropertyRef Name="Festival_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Festivals_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Festivals" Type="Self.Festivals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Festivals">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Festivals_Municipalities">
+          <End Role="Municipalities" Type="Self.Municipalities" Multiplicity="0..1" />
+          <End Role="Festivals" Type="Self.Festivals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipalities">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Festivals">
+              <PropertyRef Name="municipality_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspections_Festivals">
+          <End Role="Festivals" Type="Self.Festivals" Multiplicity="1" />
+          <End Role="Inspections" Type="Self.Inspections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Festivals">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Inspections">
+              <PropertyRef Name="festival_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspectors_at_inspection_Inspections">
+          <End Role="Inspections" Type="Self.Inspections" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Inspectors_at_inspection" Type="Self.Inspectors_at_inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspections">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Inspectors_at_inspection">
+              <PropertyRef Name="inspection_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspectors_at_inspection_Inspectors">
+          <End Role="Inspectors" Type="Self.Inspectors" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Inspectors_at_inspection" Type="Self.Inspectors_at_inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspectors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Inspectors_at_inspection">
+              <PropertyRef Name="inpector_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspectors_availability_Inspectors">
+          <End Role="Inspectors" Type="Self.Inspectors" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Inspectors_availability" Type="Self.Inspectors_availability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspectors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Inspectors_availability">
+              <PropertyRef Name="inspector_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Laws_Municipalities">
+          <End Role="Municipalities" Type="Self.Municipalities" Multiplicity="1" />
+          <End Role="Laws" Type="Self.Laws" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipalities">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Laws">
+              <PropertyRef Name="municipality_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Possible_answer_Questions">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="Possible_answer" Type="Self.Possible_answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Possible_answer">
+              <PropertyRef Name="question_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questionnaires_Inspectors_at_inspection">
+          <End Role="Inspectors_at_inspection" Type="Self.Inspectors_at_inspection" Multiplicity="0..1" />
+          <End Role="Questionnaires" Type="Self.Questionnaires" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspectors_at_inspection">
+              <PropertyRef Name="inpector_id" />
+              <PropertyRef Name="inspection_id" />
+            </Principal>
+            <Dependent Role="Questionnaires">
+              <PropertyRef Name="inspector_id" />
+              <PropertyRef Name="inspection_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questions_Questionnaires">
+          <End Role="Questionnaires" Type="Self.Questionnaires" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questionnaires">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="questionnaire_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questions_Type_questions">
+          <End Role="Type_questions" Type="Self.Type_questions" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_questions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="type_question" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quotations_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Quotations" Type="Self.Quotations" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Quotations">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_rolls_Rolls">
+          <End Role="Rolls" Type="Self.Rolls" Multiplicity="1" />
+          <End Role="User_rolls" Type="Self.User_rolls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rolls">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User_rolls">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_rolls_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="User_rolls" Type="Self.User_rolls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User_rolls">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Inspectors">
+          <End Role="Inspectors" Type="Self.Inspectors" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspectors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="inspector_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FestispecModelStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Answers" EntityType="Self.Answers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contactpersons" EntityType="Self.Contactpersons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Festival_contacts" EntityType="Self.Festival_contacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Festivals" EntityType="Self.Festivals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inspections" EntityType="Self.Inspections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inspectors" EntityType="Self.Inspectors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inspectors_at_inspection" EntityType="Self.Inspectors_at_inspection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inspectors_availability" EntityType="Self.Inspectors_availability" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Laws" EntityType="Self.Laws" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Municipalities" EntityType="Self.Municipalities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Possible_answer" EntityType="Self.Possible_answer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Questionnaires" EntityType="Self.Questionnaires" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quotations" EntityType="Self.Quotations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rolls" EntityType="Self.Rolls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_contacts" EntityType="Self.Type_contacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_questions" EntityType="Self.Type_questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_rolls" EntityType="Self.User_rolls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Answers_Questions" Association="Self.FK_Answers_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contactpersons_Clients" Association="Self.FK_Contactpersons_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Contactpersons" EntitySet="Contactpersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contactpersons_Type_contacts" Association="Self.FK_Contactpersons_Type_contacts">
+            <End Role="Type_contacts" EntitySet="Type_contacts" />
+            <End Role="Contactpersons" EntitySet="Contactpersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Festival_contacts_Contactpersons" Association="Self.FK_Festival_contacts_Contactpersons">
+            <End Role="Contactpersons" EntitySet="Contactpersons" />
+            <End Role="Festival_contacts" EntitySet="Festival_contacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Festival_contacts_Festivals" Association="Self.FK_Festival_contacts_Festivals">
+            <End Role="Festivals" EntitySet="Festivals" />
+            <End Role="Festival_contacts" EntitySet="Festival_contacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Festivals_Clients" Association="Self.FK_Festivals_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Festivals" EntitySet="Festivals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Festivals_Municipalities" Association="Self.FK_Festivals_Municipalities">
+            <End Role="Municipalities" EntitySet="Municipalities" />
+            <End Role="Festivals" EntitySet="Festivals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspections_Festivals" Association="Self.FK_Inspections_Festivals">
+            <End Role="Festivals" EntitySet="Festivals" />
+            <End Role="Inspections" EntitySet="Inspections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspectors_at_inspection_Inspections" Association="Self.FK_Inspectors_at_inspection_Inspections">
+            <End Role="Inspections" EntitySet="Inspections" />
+            <End Role="Inspectors_at_inspection" EntitySet="Inspectors_at_inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspectors_at_inspection_Inspectors" Association="Self.FK_Inspectors_at_inspection_Inspectors">
+            <End Role="Inspectors" EntitySet="Inspectors" />
+            <End Role="Inspectors_at_inspection" EntitySet="Inspectors_at_inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspectors_availability_Inspectors" Association="Self.FK_Inspectors_availability_Inspectors">
+            <End Role="Inspectors" EntitySet="Inspectors" />
+            <End Role="Inspectors_availability" EntitySet="Inspectors_availability" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Laws_Municipalities" Association="Self.FK_Laws_Municipalities">
+            <End Role="Municipalities" EntitySet="Municipalities" />
+            <End Role="Laws" EntitySet="Laws" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Possible_answer_Questions" Association="Self.FK_Possible_answer_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Possible_answer" EntitySet="Possible_answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questionnaires_Inspectors_at_inspection" Association="Self.FK_Questionnaires_Inspectors_at_inspection">
+            <End Role="Inspectors_at_inspection" EntitySet="Inspectors_at_inspection" />
+            <End Role="Questionnaires" EntitySet="Questionnaires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questions_Questionnaires" Association="Self.FK_Questions_Questionnaires">
+            <End Role="Questionnaires" EntitySet="Questionnaires" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questions_Type_questions" Association="Self.FK_Questions_Type_questions">
+            <End Role="Type_questions" EntitySet="Type_questions" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quotations_Clients" Association="Self.FK_Quotations_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Quotations" EntitySet="Quotations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_rolls_Rolls" Association="Self.FK_User_rolls_Rolls">
+            <End Role="Rolls" EntitySet="Rolls" />
+            <End Role="User_rolls" EntitySet="User_rolls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_rolls_Users" Association="Self.FK_User_rolls_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_rolls" EntitySet="User_rolls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Inspectors" Association="Self.FK_Users_Inspectors">
+            <End Role="Inspectors" EntitySet="Inspectors" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FestispecModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Answers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="question_id" Type="Int32" />
+          <Property Name="insertdate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Questions" Relationship="Self.FK_Answers_Questions" FromRole="Answers" ToRole="Questions" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="housenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contactpersons" Relationship="Self.FK_Contactpersons_Clients" FromRole="Clients" ToRole="Contactpersons" />
+          <NavigationProperty Name="Festivals" Relationship="Self.FK_Festivals_Clients" FromRole="Clients" ToRole="Festivals" />
+          <NavigationProperty Name="Quotations" Relationship="Self.FK_Quotations_Clients" FromRole="Clients" ToRole="Quotations" />
+        </EntityType>
+        <EntityType Name="Contactpersons">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="client_id" Type="Int32" />
+          <Property Name="type_contact" Type="Int32" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Contactpersons_Clients" FromRole="Contactpersons" ToRole="Clients" />
+          <NavigationProperty Name="Type_contacts" Relationship="Self.FK_Contactpersons_Type_contacts" FromRole="Contactpersons" ToRole="Type_contacts" />
+          <NavigationProperty Name="Festivals" Relationship="Self.Festival_contacts" FromRole="Contactpersons" ToRole="Festivals" />
+        </EntityType>
+        <EntityType Name="Festivals">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="housenumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="municipality_id" Type="Int32" />
+          <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Festivals_Clients" FromRole="Festivals" ToRole="Clients" />
+          <NavigationProperty Name="Municipalities" Relationship="Self.FK_Festivals_Municipalities" FromRole="Festivals" ToRole="Municipalities" />
+          <NavigationProperty Name="Inspections" Relationship="Self.FK_Inspections_Festivals" FromRole="Festivals" ToRole="Inspections" />
+          <NavigationProperty Name="Contactpersons" Relationship="Self.Festival_contacts" FromRole="Festivals" ToRole="Contactpersons" />
+        </EntityType>
+        <EntityType Name="Inspections">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="finished" Type="DateTime" Precision="3" />
+          <Property Name="festival_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Festivals" Relationship="Self.FK_Inspections_Festivals" FromRole="Inspections" ToRole="Festivals" />
+          <NavigationProperty Name="Inspectors_at_inspection" Relationship="Self.FK_Inspectors_at_inspection_Inspections" FromRole="Inspections" ToRole="Inspectors_at_inspection" />
+        </EntityType>
+        <EntityType Name="Inspectors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="birthday" Type="DateTime" Precision="3" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="postalcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="housenumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="active" Type="DateTime" Precision="3" />
+          <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Inspectors_at_inspection" Relationship="Self.FK_Inspectors_at_inspection_Inspectors" FromRole="Inspectors" ToRole="Inspectors_at_inspection" />
+          <NavigationProperty Name="Inspectors_availability" Relationship="Self.FK_Inspectors_availability_Inspectors" FromRole="Inspectors" ToRole="Inspectors_availability" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Inspectors" FromRole="Inspectors" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Inspectors_at_inspection">
+          <Key>
+            <PropertyRef Name="inpector_id" />
+            <PropertyRef Name="inspection_id" />
+          </Key>
+          <Property Name="inpector_id" Type="Int32" Nullable="false" />
+          <Property Name="inspection_id" Type="Int32" Nullable="false" />
+          <Property Name="absent" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Inspections" Relationship="Self.FK_Inspectors_at_inspection_Inspections" FromRole="Inspectors_at_inspection" ToRole="Inspections" />
+          <NavigationProperty Name="Inspectors" Relationship="Self.FK_Inspectors_at_inspection_Inspectors" FromRole="Inspectors_at_inspection" ToRole="Inspectors" />
+          <NavigationProperty Name="Questionnaires" Relationship="Self.FK_Questionnaires_Inspectors_at_inspection" FromRole="Inspectors_at_inspection" ToRole="Questionnaires" />
+        </EntityType>
+        <EntityType Name="Inspectors_availability">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="inspector_id" Type="Int32" Nullable="false" />
+          <Property Name="text" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Inspectors" Relationship="Self.FK_Inspectors_availability_Inspectors" FromRole="Inspectors_availability" ToRole="Inspectors" />
+        </EntityType>
+        <EntityType Name="Laws">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="municipality_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="website" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Municipalities" Relationship="Self.FK_Laws_Municipalities" FromRole="Laws" ToRole="Municipalities" />
+        </EntityType>
+        <EntityType Name="Municipalities">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Festivals" Relationship="Self.FK_Festivals_Municipalities" FromRole="Municipalities" ToRole="Festivals" />
+          <NavigationProperty Name="Laws" Relationship="Self.FK_Laws_Municipalities" FromRole="Municipalities" ToRole="Laws" />
+        </EntityType>
+        <EntityType Name="Possible_answer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="answer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="question_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Questions" Relationship="Self.FK_Possible_answer_Questions" FromRole="Possible_answer" ToRole="Questions" />
+        </EntityType>
+        <EntityType Name="Questionnaires">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="inspector_id" Type="Int32" />
+          <Property Name="inspection_id" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="finished" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Inspectors_at_inspection" Relationship="Self.FK_Questionnaires_Inspectors_at_inspection" FromRole="Questionnaires" ToRole="Inspectors_at_inspection" />
+          <NavigationProperty Name="Questions" Relationship="Self.FK_Questions_Questionnaires" FromRole="Questionnaires" ToRole="Questions" />
+        </EntityType>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="question" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="type_question" Type="Int32" Nullable="false" />
+          <Property Name="questionnaire_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Answers" Relationship="Self.FK_Answers_Questions" FromRole="Questions" ToRole="Answers" />
+          <NavigationProperty Name="Possible_answer" Relationship="Self.FK_Possible_answer_Questions" FromRole="Questions" ToRole="Possible_answer" />
+          <NavigationProperty Name="Questionnaires" Relationship="Self.FK_Questions_Questionnaires" FromRole="Questions" ToRole="Questionnaires" />
+          <NavigationProperty Name="Type_questions" Relationship="Self.FK_Questions_Type_questions" FromRole="Questions" ToRole="Type_questions" />
+        </EntityType>
+        <EntityType Name="Quotations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="approved" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Quotations_Clients" FromRole="Quotations" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="Rolls">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.User_rolls" FromRole="Rolls" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Type_contacts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Contactpersons" Relationship="Self.FK_Contactpersons_Type_contacts" FromRole="Type_contacts" ToRole="Contactpersons" />
+        </EntityType>
+        <EntityType Name="Type_questions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Questions" Relationship="Self.FK_Questions_Type_questions" FromRole="Type_questions" ToRole="Questions" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="inspector_id" Type="Int32" />
+          <NavigationProperty Name="Inspectors" Relationship="Self.FK_Users_Inspectors" FromRole="Users" ToRole="Inspectors" />
+          <NavigationProperty Name="Rolls" Relationship="Self.User_rolls" FromRole="Users" ToRole="Rolls" />
+        </EntityType>
+        <Association Name="FK_Answers_Questions">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="0..1" />
+          <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Answers">
+              <PropertyRef Name="question_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contactpersons_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Contactpersons">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Festivals_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Festivals" Type="Self.Festivals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Festivals">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quotations_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Quotations" Type="Self.Quotations" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Quotations">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contactpersons_Type_contacts">
+          <End Role="Type_contacts" Type="Self.Type_contacts" Multiplicity="0..1" />
+          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_contacts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Contactpersons">
+              <PropertyRef Name="type_contact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Festivals_Municipalities">
+          <End Role="Municipalities" Type="Self.Municipalities" Multiplicity="0..1" />
+          <End Role="Festivals" Type="Self.Festivals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipalities">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Festivals">
+              <PropertyRef Name="municipality_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspections_Festivals">
+          <End Role="Festivals" Type="Self.Festivals" Multiplicity="1" />
+          <End Role="Inspections" Type="Self.Inspections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Festivals">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Inspections">
+              <PropertyRef Name="festival_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspectors_at_inspection_Inspections">
+          <End Role="Inspections" Type="Self.Inspections" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Inspectors_at_inspection" Type="Self.Inspectors_at_inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspections">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Inspectors_at_inspection">
+              <PropertyRef Name="inspection_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspectors_at_inspection_Inspectors">
+          <End Role="Inspectors" Type="Self.Inspectors" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Inspectors_at_inspection" Type="Self.Inspectors_at_inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspectors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Inspectors_at_inspection">
+              <PropertyRef Name="inpector_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspectors_availability_Inspectors">
+          <End Role="Inspectors" Type="Self.Inspectors" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Inspectors_availability" Type="Self.Inspectors_availability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspectors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Inspectors_availability">
+              <PropertyRef Name="inspector_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Inspectors">
+          <End Role="Inspectors" Type="Self.Inspectors" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspectors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="inspector_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questionnaires_Inspectors_at_inspection">
+          <End Role="Inspectors_at_inspection" Type="Self.Inspectors_at_inspection" Multiplicity="0..1" />
+          <End Role="Questionnaires" Type="Self.Questionnaires" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspectors_at_inspection">
+              <PropertyRef Name="inpector_id" />
+              <PropertyRef Name="inspection_id" />
+            </Principal>
+            <Dependent Role="Questionnaires">
+              <PropertyRef Name="inspector_id" />
+              <PropertyRef Name="inspection_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Laws_Municipalities">
+          <End Role="Municipalities" Type="Self.Municipalities" Multiplicity="1" />
+          <End Role="Laws" Type="Self.Laws" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipalities">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Laws">
+              <PropertyRef Name="municipality_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Possible_answer_Questions">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="Possible_answer" Type="Self.Possible_answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Possible_answer">
+              <PropertyRef Name="question_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questions_Questionnaires">
+          <End Role="Questionnaires" Type="Self.Questionnaires" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questionnaires">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="questionnaire_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questions_Type_questions">
+          <End Role="Type_questions" Type="Self.Type_questions" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_questions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="type_question" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Festival_contacts">
+          <End Role="Contactpersons" Type="Self.Contactpersons" Multiplicity="*" />
+          <End Role="Festivals" Type="Self.Festivals" Multiplicity="*" />
+        </Association>
+        <Association Name="User_rolls">
+          <End Role="Rolls" Type="Self.Rolls" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="FestispecEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
+          <EntitySet Name="Answers" EntityType="Self.Answers" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Contactpersons" EntityType="Self.Contactpersons" />
+          <EntitySet Name="Festivals" EntityType="Self.Festivals" />
+          <EntitySet Name="Inspections" EntityType="Self.Inspections" />
+          <EntitySet Name="Inspectors" EntityType="Self.Inspectors" />
+          <EntitySet Name="Inspectors_at_inspection" EntityType="Self.Inspectors_at_inspection" />
+          <EntitySet Name="Inspectors_availability" EntityType="Self.Inspectors_availability" />
+          <EntitySet Name="Laws" EntityType="Self.Laws" />
+          <EntitySet Name="Municipalities" EntityType="Self.Municipalities" />
+          <EntitySet Name="Possible_answer" EntityType="Self.Possible_answer" />
+          <EntitySet Name="Questionnaires" EntityType="Self.Questionnaires" />
+          <EntitySet Name="Questions" EntityType="Self.Questions" />
+          <EntitySet Name="Quotations" EntityType="Self.Quotations" />
+          <EntitySet Name="Rolls" EntityType="Self.Rolls" />
+          <EntitySet Name="Type_contacts" EntityType="Self.Type_contacts" />
+          <EntitySet Name="Type_questions" EntityType="Self.Type_questions" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Answers_Questions" Association="Self.FK_Answers_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contactpersons_Clients" Association="Self.FK_Contactpersons_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Contactpersons" EntitySet="Contactpersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Festivals_Clients" Association="Self.FK_Festivals_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Festivals" EntitySet="Festivals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quotations_Clients" Association="Self.FK_Quotations_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Quotations" EntitySet="Quotations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contactpersons_Type_contacts" Association="Self.FK_Contactpersons_Type_contacts">
+            <End Role="Type_contacts" EntitySet="Type_contacts" />
+            <End Role="Contactpersons" EntitySet="Contactpersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Festivals_Municipalities" Association="Self.FK_Festivals_Municipalities">
+            <End Role="Municipalities" EntitySet="Municipalities" />
+            <End Role="Festivals" EntitySet="Festivals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspections_Festivals" Association="Self.FK_Inspections_Festivals">
+            <End Role="Festivals" EntitySet="Festivals" />
+            <End Role="Inspections" EntitySet="Inspections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspectors_at_inspection_Inspections" Association="Self.FK_Inspectors_at_inspection_Inspections">
+            <End Role="Inspections" EntitySet="Inspections" />
+            <End Role="Inspectors_at_inspection" EntitySet="Inspectors_at_inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspectors_at_inspection_Inspectors" Association="Self.FK_Inspectors_at_inspection_Inspectors">
+            <End Role="Inspectors" EntitySet="Inspectors" />
+            <End Role="Inspectors_at_inspection" EntitySet="Inspectors_at_inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspectors_availability_Inspectors" Association="Self.FK_Inspectors_availability_Inspectors">
+            <End Role="Inspectors" EntitySet="Inspectors" />
+            <End Role="Inspectors_availability" EntitySet="Inspectors_availability" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Inspectors" Association="Self.FK_Users_Inspectors">
+            <End Role="Inspectors" EntitySet="Inspectors" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questionnaires_Inspectors_at_inspection" Association="Self.FK_Questionnaires_Inspectors_at_inspection">
+            <End Role="Inspectors_at_inspection" EntitySet="Inspectors_at_inspection" />
+            <End Role="Questionnaires" EntitySet="Questionnaires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Laws_Municipalities" Association="Self.FK_Laws_Municipalities">
+            <End Role="Municipalities" EntitySet="Municipalities" />
+            <End Role="Laws" EntitySet="Laws" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Possible_answer_Questions" Association="Self.FK_Possible_answer_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Possible_answer" EntitySet="Possible_answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questions_Questionnaires" Association="Self.FK_Questions_Questionnaires">
+            <End Role="Questionnaires" EntitySet="Questionnaires" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questions_Type_questions" Association="Self.FK_Questions_Type_questions">
+            <End Role="Type_questions" EntitySet="Type_questions" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="Festival_contacts" Association="Self.Festival_contacts">
+            <End Role="Contactpersons" EntitySet="Contactpersons" />
+            <End Role="Festivals" EntitySet="Festivals" />
+          </AssociationSet>
+          <AssociationSet Name="User_rolls" Association="Self.User_rolls">
+            <End Role="Rolls" EntitySet="Rolls" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FestispecModelStoreContainer" CdmEntityContainer="FestispecEntities">
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="FestispecModel.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Answers">
+            <EntityTypeMapping TypeName="FestispecModel.Answers">
+              <MappingFragment StoreEntitySet="Answers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+                <ScalarProperty Name="question_id" ColumnName="question_id" />
+                <ScalarProperty Name="insertdate" ColumnName="insertdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="FestispecModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="postalcode" ColumnName="postalcode" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="housenumber" ColumnName="housenumber" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contactpersons">
+            <EntityTypeMapping TypeName="FestispecModel.Contactpersons">
+              <MappingFragment StoreEntitySet="Contactpersons">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="type_contact" ColumnName="type_contact" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Festivals">
+            <EntityTypeMapping TypeName="FestispecModel.Festivals">
+              <MappingFragment StoreEntitySet="Festivals">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="postalcode" ColumnName="postalcode" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="housenumber" ColumnName="housenumber" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="municipality_id" ColumnName="municipality_id" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inspections">
+            <EntityTypeMapping TypeName="FestispecModel.Inspections">
+              <MappingFragment StoreEntitySet="Inspections">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="finished" ColumnName="finished" />
+                <ScalarProperty Name="festival_id" ColumnName="festival_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inspectors">
+            <EntityTypeMapping TypeName="FestispecModel.Inspectors">
+              <MappingFragment StoreEntitySet="Inspectors">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="postalcode" ColumnName="postalcode" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="housenumber" ColumnName="housenumber" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inspectors_at_inspection">
+            <EntityTypeMapping TypeName="FestispecModel.Inspectors_at_inspection">
+              <MappingFragment StoreEntitySet="Inspectors_at_inspection">
+                <ScalarProperty Name="inpector_id" ColumnName="inpector_id" />
+                <ScalarProperty Name="inspection_id" ColumnName="inspection_id" />
+                <ScalarProperty Name="absent" ColumnName="absent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inspectors_availability">
+            <EntityTypeMapping TypeName="FestispecModel.Inspectors_availability">
+              <MappingFragment StoreEntitySet="Inspectors_availability">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="inspector_id" ColumnName="inspector_id" />
+                <ScalarProperty Name="text" ColumnName="text" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Laws">
+            <EntityTypeMapping TypeName="FestispecModel.Laws">
+              <MappingFragment StoreEntitySet="Laws">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="municipality_id" ColumnName="municipality_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="website" ColumnName="website" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Municipalities">
+            <EntityTypeMapping TypeName="FestispecModel.Municipalities">
+              <MappingFragment StoreEntitySet="Municipalities">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Possible_answer">
+            <EntityTypeMapping TypeName="FestispecModel.Possible_answer">
+              <MappingFragment StoreEntitySet="Possible_answer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+                <ScalarProperty Name="question_id" ColumnName="question_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questionnaires">
+            <EntityTypeMapping TypeName="FestispecModel.Questionnaires">
+              <MappingFragment StoreEntitySet="Questionnaires">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="inspector_id" ColumnName="inspector_id" />
+                <ScalarProperty Name="inspection_id" ColumnName="inspection_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="finished" ColumnName="finished" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="FestispecModel.Questions">
+              <MappingFragment StoreEntitySet="Questions">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="question" ColumnName="question" />
+                <ScalarProperty Name="type_question" ColumnName="type_question" />
+                <ScalarProperty Name="questionnaire_id" ColumnName="questionnaire_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quotations">
+            <EntityTypeMapping TypeName="FestispecModel.Quotations">
+              <MappingFragment StoreEntitySet="Quotations">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="approved" ColumnName="approved" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rolls">
+            <EntityTypeMapping TypeName="FestispecModel.Rolls">
+              <MappingFragment StoreEntitySet="Rolls">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_contacts">
+            <EntityTypeMapping TypeName="FestispecModel.Type_contacts">
+              <MappingFragment StoreEntitySet="Type_contacts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_questions">
+            <EntityTypeMapping TypeName="FestispecModel.Type_questions">
+              <MappingFragment StoreEntitySet="Type_questions">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FestispecModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="inspector_id" ColumnName="inspector_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Festival_contacts" TypeName="FestispecModel.Festival_contacts" StoreEntitySet="Festival_contacts">
+            <EndProperty Name="Contactpersons">
+              <ScalarProperty Name="id" ColumnName="Contactperson_id" />
+            </EndProperty>
+            <EndProperty Name="Festivals">
+              <ScalarProperty Name="id" ColumnName="Festival_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="User_rolls" TypeName="FestispecModel.User_rolls" StoreEntitySet="User_rolls">
+            <EndProperty Name="Rolls">
+              <ScalarProperty Name="id" ColumnName="role_id" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="id" ColumnName="user_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
