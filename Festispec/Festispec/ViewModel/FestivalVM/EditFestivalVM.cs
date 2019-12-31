@@ -69,6 +69,11 @@ namespace Festispec.ViewModel.FestivalVM
 
             EditFestivalCommand = new RelayCommand(SaveClient, CanSaveClient);
 
+            using(var context = new FestispecEntities())
+            {
+                _selectedCountry = SelectedFestival.Country;
+            }
+
             ComboList = new ObservableCollection<string>();
             ComboList.Add("Nederland");
             ComboList.Add("België");
