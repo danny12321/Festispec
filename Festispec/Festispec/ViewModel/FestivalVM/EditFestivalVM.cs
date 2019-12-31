@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
@@ -19,10 +20,17 @@ namespace Festispec.ViewModel.FestivalVM
     {
         private IDataService _service;
         private MainViewModel _main;
-
         private ClientInfoVM _clients;
+        private string _selectedCountry;
+        public ObservableCollection<string> ComboList { get; set; }
 
         public ICommand EditFestivalCommand { get; set; }
+
+        public string SelectedCountry
+        {
+            get { return _selectedCountry; }
+            set { _selectedCountry = value; }
+        }
 
         public FestivalVM SelectedFestival
         {
@@ -60,6 +68,10 @@ namespace Festispec.ViewModel.FestivalVM
             this._clients = clients;
 
             EditFestivalCommand = new RelayCommand(SaveClient, CanSaveClient);
+
+            ComboList = new ObservableCollection<string>();
+            ComboList.Add("Nederland");
+            ComboList.Add("België");
 
             StartDateBegin = SelectedFestival.StartDate.Date;
             StartTime = SelectedFestival.StartDate.TimeOfDay;
