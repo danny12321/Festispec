@@ -87,7 +87,7 @@ namespace Festispec.ViewModel
             {
                 using (var context = new FestispecEntities())
                 {
-                    _userVm = context.Users.Include("Rolls").ToList().Where(u => u.email == "admin@admin.com").Select(u => new UsersVM(u)).First();
+                    _userVm = context.Users.Include("Rolls").ToList().Where(u => u.email == "admin@festispec.com").Select(u => new UsersVM(u)).First();
                 }
             }
             else
@@ -95,13 +95,13 @@ namespace Festispec.ViewModel
                 using (var context = new FestispecEntities())
                 {
                     var hashedPass = ComputeSha256Hash(Password);
-                    _userVm = context.Users.Include("Rolls").ToList().Where(u => (u.email == Email && u.password == hashedPass)).Select(u => new UsersVM(u)).First();
+                    hashedPass = hashedPass.ToUpper();
+                    _userVm = context.Users.Include("Rolls").ToList().Where(u => (u.email == Email && u.password == hashedPass)).Select(u => new UsersVM(u)).FirstOrDefault();
                 }
             }
 
             if (_userVm != null)
             {
-
                 // user is ingelogd
                 _dataService.LoggedInUser = _userVm;
                 new BaseWindow().Show();

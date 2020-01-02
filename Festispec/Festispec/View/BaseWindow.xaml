@@ -18,16 +18,15 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" Background="#32385D" Padding="10,100,0,0" MinWidth="250">
-            <ItemsControl ItemsSource="{Binding MenuItems}" FontSize="25" IsEnabled="{Binding IsChecked, ElementName=EnableListBox}" Background="#32385D">
+        <Border Grid.Column="0" Background="#32385D" Padding="0,100,0,0" MinWidth="250">
+            <ItemsControl ItemsSource="{Binding MenuItems}" IsEnabled="{Binding IsChecked, ElementName=EnableListBox}" Background="#32385D">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock>
-                            <Hyperlink Command="{Binding DataContext.SetPageCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding CommandParameter}" TextDecorations="None" Foreground="White">
-                                <materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="{Binding Icon}" VerticalAlignment="Center"/>
-                                <TextBlock Text="{Binding DisplayName}"></TextBlock>
-                            </Hyperlink>
-                        </TextBlock>
+                        <MenuItem FontSize="20" Foreground="White" Header="{Binding DisplayName}" Command="{Binding DataContext.SetPageCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding CommandParameter}">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Foreground="White" Kind="{Binding Icon}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
