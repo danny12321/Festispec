@@ -36,6 +36,7 @@ INSERT [dbo].[Type_questions] ([type]) VALUES (N'Open')
 INSERT [dbo].[Type_questions] ([type]) VALUES (N'Multiple Choise')
 INSERT [dbo].[Type_questions] ([type]) VALUES (N'Select')
 INSERT [dbo].[Type_questions] ([type]) VALUES (N'Image')
+INSERT [dbo].[Type_questions] ([type]) VALUES (N'Table')
 
 INSERT [dbo].[Type_contacts] ([type]) VALUES (N'Administratief')
 INSERT [dbo].[Type_contacts] ([type]) VALUES (N'Leidinggevend')

@@ -151,6 +151,9 @@ namespace Festispec.ViewModel.Questionnaires
                 case 4:
                     return new ImageQuestion(this, q);
 
+                case 5:
+                    return new TableQuestion(this, q);
+
                 default:
                     return null;
             }
