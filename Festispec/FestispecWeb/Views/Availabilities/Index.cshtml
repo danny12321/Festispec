@@ -5,34 +5,35 @@
 <!DOCTYPE html>
 <html>
 
+ 
+<head>
     <link href="~/Content/dhtmlxScheduler/dhtmlxscheduler-responsive.css" rel="stylesheet" type="text/css">
     <link href="~/Content/Calendar.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/dhtmlxScheduler/dhtmlxscheduler.js" type="text/javascript"></script>
     <script src="~/Scripts/dhtmlxScheduler/dhtmlxscheduler-responsive.js" type="text/javascript"></script>
-    <head>
-        <title>DHXScheduler initialization sample</title>
-        <style>
-            body {
-                background-color: #eee;
-            }
+    <title>DHXScheduler initialization sample</title>
+    <style>
+        body {
+            background-color: #eee;
+        }
 
-            .dhx_cal_today_button {
-                display: none;
-            }
+        .dhx_cal_today_button {
+            display: none;
+        }
 
-            .day_tab {
-                display: none;
-            }
+        .day_tab {
+            display: none;
+        }
 
-            .week_tab {
-                display: none;
-            }
+        .week_tab {
+            display: none;
+        }
 
-            .month_tab {
-                display: none;
-            }
-        </style>
-    </head>
+        .month_tab {
+            display: none;
+        }
+    </style>
+</head>
     <body>
         <div style="height:700px;margin:0 auto">
             @Html.Raw(Model.Render())

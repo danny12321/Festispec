@@ -1,5 +1,4 @@
-﻿using Festispec.Domain;
-using FestispecWeb.Models;
+﻿using FestispecWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,7 +13,7 @@ namespace FestispecWeb.Controllers
 {
     public class InspectionController : Controller
     {
-        FestispecEntities db = new FestispecEntities();
+        FestispecEntities1 db = new FestispecEntities1();
 
         public ActionResult Inspections()
         {

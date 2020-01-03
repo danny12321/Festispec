@@ -1,6 +1,5 @@
 ﻿
 using DHTMLX.Scheduler;
-using Festispec.Domain;
 using FestispecWeb.Models;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,7 @@ namespace FestispecWeb.Controllers
 {
     public class HomeController : Controller
     {
-        FestispecEntities db = new FestispecEntities();
+        FestispecEntities1 db = new FestispecEntities1();
         [HttpPost]
         public ActionResult Login(LoginModel user)
         {

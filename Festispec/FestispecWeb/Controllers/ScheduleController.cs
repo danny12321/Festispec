@@ -2,6 +2,7 @@
 using DHTMLX.Scheduler;
 using DHTMLX.Scheduler.Data;
 using Festispec.Domain;
+using FestispecWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace FestispecWeb.Controllers
         public ContentResult Data()
         {
             var uemail = (string)Session["username"];
-            var entities = new FestispecEntities();
+            var entities = new FestispecEntities1();
             var user = (int)entities.Users.Where(u => u.email.Equals(uemail)).Select(u => u.inspector_id).FirstOrDefault();
             var userinspectionid = entities.Inspectors_at_inspection.ToList().Where(i => i.inpector_id == user).Select(e => e.inspection_id);
             return (new SchedulerAjaxData(entities.Inspections.Select(e => new { e.id, e.start_date, e.end_date, text = e.description}).Where(e => userinspectionid.Contains(e.id)).ToList()

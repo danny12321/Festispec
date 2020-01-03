@@ -19,6 +19,7 @@ namespace Festispec.ViewModel.InspectorsVM
         private MainViewModel _main;
         private IDataService _service;
         public ICommand EditInspectorCommand { get; set; }
+        
         public ICommand GenerateLatLongBasedOnAdressCommand { get; set; }
 
         private string _selectedCountry;
@@ -43,6 +44,7 @@ namespace Festispec.ViewModel.InspectorsVM
             _service = dataService;
             _inspectorViewModel = i;
             EditInspectorCommand = new RelayCommand(EditInspectorMethod);
+            
             GenerateLatLongBasedOnAdressCommand = new RelayCommand(GenerateLatLongBasedOnAdress);
 
             using (var context = new FestispecEntities())

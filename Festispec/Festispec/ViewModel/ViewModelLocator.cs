@@ -38,6 +38,9 @@ namespace Festispec.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
+        
+           
+           
 
             SimpleIoc.Default.Register<PopUpViewModel>();
         }
@@ -243,6 +246,16 @@ namespace Festispec.ViewModel
                 return new InspectionAddViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
+
+        public ReportViewModel ReportVM
+        {
+
+            get
+            {
+                return new ReportViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+
         public InspectionEditViewModel InspectionEdit
         {
             get
@@ -250,7 +263,6 @@ namespace Festispec.ViewModel
                 return new InspectionEditViewModel(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
-
         public TemplatesVM Templates
         {
             get

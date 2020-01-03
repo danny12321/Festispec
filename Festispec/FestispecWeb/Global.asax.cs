@@ -20,11 +20,12 @@ namespace FestispecWeb
 
         void Application_AcquireRequestState(object sender, EventArgs e)
         {
+           
             HttpContext context = HttpContext.Current;
             // CheckSession() inlined
             if (Context.Request.Url.LocalPath != "/")
             {
-                if (context.Session["username"] == null)
+                if (context.Session["username"] == null )
                 {
                     Response.Redirect("~/");
                 }
