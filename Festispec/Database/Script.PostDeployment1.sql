@@ -33,10 +33,10 @@ INSERT [dbo].[Festivals] ([name], [postalcode],[street], [housenumber], [country
 INSERT [dbo].[Inspectors] ([name], [lastname], [birthday], [country], [city], [postalcode], [street], [housenumber], [phone], [active], [latitude], [longitude]) VALUES (N'Ben', N'de Strik', '19400420 00:00:00', N'Nederland', N'Amsterdam', N'1234AA', N'Laanweg', N'20', N'0611092837', '20191121 13:00:00', N'52.3736398', N'4.8990725')
 
 INSERT [dbo].[Type_questions] ([type]) VALUES (N'Open')
-INSERT [dbo].[Type_questions] ([type]) VALUES (N'Multiple Choise')
-INSERT [dbo].[Type_questions] ([type]) VALUES (N'Select')
-INSERT [dbo].[Type_questions] ([type]) VALUES (N'Image')
-INSERT [dbo].[Type_questions] ([type]) VALUES (N'Table')
+INSERT [dbo].[Type_questions] ([type]) VALUES (N'Meerkeuze')
+INSERT [dbo].[Type_questions] ([type]) VALUES (N'Selecteer')
+INSERT [dbo].[Type_questions] ([type]) VALUES (N'Afbeelding')
+INSERT [dbo].[Type_questions] ([type]) VALUES (N'Tabel')
 
 INSERT [dbo].[Type_contacts] ([type]) VALUES (N'Administratief')
 INSERT [dbo].[Type_contacts] ([type]) VALUES (N'Leidinggevend')
