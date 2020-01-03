@@ -95,12 +95,6 @@
     <Compile Include="Inspectors_availability.cs">
       <DependentUpon>ado.tt</DependentUpon>
     </Compile>
-    <Compile Include="Laws.cs">
-      <DependentUpon>ado.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Municipalities.cs">
-      <DependentUpon>ado.tt</DependentUpon>
-    </Compile>
     <Compile Include="Possible_answer.cs">
       <DependentUpon>ado.tt</DependentUpon>
     </Compile>

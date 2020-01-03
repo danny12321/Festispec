@@ -92,12 +92,6 @@ namespace Festispec.ViewModel.FestivalVM
             set { _festival.client_id = value; }
         }
 
-        public int? MunicipalityId
-        {
-            get { return _festival.municipality_id; }
-            set { _festival.municipality_id = value; }
-        }
-
         public string Latitude
         {
             get { return _festival.latitude; }

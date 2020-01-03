@@ -106,6 +106,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utils\UserRole.cs" />
     <Compile Include="Utils\LatLongGenerator.cs" />
     <Compile Include="Utils\PasswordHasher.cs" />
     <Compile Include="Utils\RouteDurationCalculator.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="ViewModel\InspectorsVM\InspectorviewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MenuItem.cs" />
     <Compile Include="ViewModel\Questionnaires\IQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Possible_answerVM.cs" />
     <Compile Include="ViewModel\MunicipalityVM\MunicipalityViewModel.cs" />

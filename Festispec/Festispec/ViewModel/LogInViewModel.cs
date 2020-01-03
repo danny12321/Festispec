@@ -34,6 +34,8 @@ namespace Festispec.ViewModel
 
         public string Password { get; set; }
 
+        private UsersVM _userVm;
+
         private IDataService _dataService;
         public bool ShowOfflineButton { get; set; }
       
@@ -51,23 +53,28 @@ namespace Festispec.ViewModel
             }
         }
 
-        public string CalculateMD5Hash(string input)
+        private string ComputeSha256Hash(string rawData)
         {
-            MD5 md5 = System.Security.Cryptography.MD5.Create();
-            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
-            byte[] hash = md5.ComputeHash(inputBytes);
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < hash.Length; i++)
+            // Create a SHA256
+            using (SHA256 sha256Hash = SHA256.Create())
             {
-                sb.Append(hash[i].ToString("X2"));
+                // ComputeHash - returns byte array
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convert byte array to a string
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
             }
-            return sb.ToString();
         }
 
 
         private void Login()
         {
-            var autoLogin = true;
+            var autoLogin = false;
 
             if ((string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Email)) && !autoLogin)
             {
@@ -75,40 +82,37 @@ namespace Festispec.ViewModel
                 return;
             }
 
-            List<Domain.Users> user;
-
             // Voor testen
             if (autoLogin)
             {
                 using (var context = new FestispecEntities())
                 {
-                    user = context.Users.ToList();
+                    _userVm = context.Users.Include("Rolls").ToList().Where(u => u.email == "admin@festispec.com").Select(u => new UsersVM(u)).First();
                 }
             }
             else
             {
                 using (var context = new FestispecEntities())
                 {
-                    var hPass = CalculateMD5Hash(Password);
-                    user = context.Users.Where(u => (u.email == Email && u.password == hPass)).ToList();
-                    Console.WriteLine(hPass);
+                    var hashedPass = ComputeSha256Hash(Password);
+                    hashedPass = hashedPass.ToUpper();
+                    _userVm = context.Users.Include("Rolls").ToList().Where(u => (u.email == Email && u.password == hashedPass)).Select(u => new UsersVM(u)).FirstOrDefault();
                 }
             }
 
-            if (user.Count > 0)
+            if (_userVm != null)
             {
                 // user is ingelogd
-                new UsersVM(user[0]);
+                _dataService.LoggedInUser = _userVm;
                 new BaseWindow().Show();
                 Application.Current.Windows[0].Close();
+                CreateOfflineUserData();
             }
             else
             {
                 // inloggegevens zijn fout
                 new PopUpWindow().Show();
             }
-
-            CreateOfflineUserData();
         }
 
         private bool HasInternetConnection()
@@ -136,7 +140,7 @@ namespace Festispec.ViewModel
         private void CreateOfflineUserData()
         {
             // TODO When login is up to date make user dynamic
-            string fileContent = JsonConvert.SerializeObject(new {Id = 1, Email = "email@mail.com", Firstname = "Testname", Lastname = "Testlastname", Roles = new string[] { "Admin" } }); ;
+            string fileContent = JsonConvert.SerializeObject(_userVm);
             
             string fileName = "User.json";
             string path = Path.Combine(Environment.CurrentDirectory, @"Offline\", fileName);
@@ -163,8 +167,8 @@ namespace Festispec.ViewModel
 
             // Nothing is done with this yet
             var userVM = new UsersVM();
-            userVM.id = parsedUserJson["Id"].Value<int>();
-            userVM.email = parsedUserJson["Email"].ToString();
+            userVM.id = parsedUserJson["id"].Value<int>();
+            userVM.email = parsedUserJson["email"].ToString();
 
             new BaseWindow().Show();
             Application.Current.Windows[0].Close();

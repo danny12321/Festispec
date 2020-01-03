@@ -10,6 +10,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Windows;
+using System.Collections.ObjectModel;
+using Festispec.Utils;
+using Festispec.ViewModel.DataService;
 
 namespace Festispec.ViewModel
 {
@@ -17,6 +20,8 @@ namespace Festispec.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private Page _frameContent;
+
+        public ObservableCollection<MenuItem> MenuItems { get; set; }
 
         public Page FrameContent
         {
@@ -45,9 +50,12 @@ namespace Festispec.ViewModel
         public ICommand BackCommand { get; set; }
 
         private Stack<Page> StackNavigator = new Stack<Page>();
+        private IDataService _service;
 
-        public MainViewModel()
+        public MainViewModel(IDataService service)
         {
+            _service = service;
+            SetMenuItems();
             SetPage("Home");
             BackCommand = new RelayCommand(Back, CanGoBack);
             SetPageCommand = new RelayCommand<string>((page) => SetPage(page));
@@ -208,6 +216,45 @@ namespace Festispec.ViewModel
         {
             new LoginWindow().Show();
             Application.Current.Windows[0].Close();
+        }
+
+        private void SetMenuItems()
+        {
+            var userRole = new UserRole(_service.LoggedInUser);
+
+            MenuItems = new ObservableCollection<MenuItem>();
+            Console.WriteLine();
+
+            if (userRole.HasUserRole(new string[] {"Admin", "ProjectManager", "Secretariat", "Sales", "Management" }))
+            {
+                MenuItems.Add(new MenuItem("Planning", "Schedule", "CalendarMonthOutline"));
+            }
+            if (userRole.HasUserRole(new string[] { "Admin", "Secretariat", "Sales", "ProjectManager" }) || _service.IsOffline)
+            {
+                MenuItems.Add(new MenuItem("Festivals", "Festival", "Camping"));
+            }
+            if (userRole.HasUserRole(new string[] { "Admin", "Secretariat", "Sales", "ProjectManager" }))
+            {
+                MenuItems.Add(new MenuItem("Klanten", "Clients", "AccountBoxOutline"));
+            }
+            if (userRole.HasUserRole(new string[] { "Admin", "Secretariat", "Sales", "ProjectManager" }))
+            {
+                MenuItems.Add(new MenuItem("Offerte", "", "FileDocument"));
+            }
+            if (userRole.HasUserRole(new string[] { "Admin", "Secretariat", "ProjectManager" }))
+            {
+                MenuItems.Add(new MenuItem("Sjablonen", "Templates", "ArrangeSendBackward"));
+            }
+            if (userRole.HasUserRole(new string[] { "Admin", "Sales", "Management" }))
+            {
+                MenuItems.Add(new MenuItem("Dashboard", "ManageDashboard", "MonitorDashboard"));
+            }
+            if (userRole.HasUserRole(new string[] { "Admin" }))
+            {
+                MenuItems.Add(new MenuItem("Gebruikers", "Users", "AccountBadgeHorizontalOutline"));
+            }
+            
+            MenuItems.Add(new MenuItem("Uitloggen", "Logout", "ExitToApp"));
         }
     }
 }
