@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,16 @@ namespace Festispec.ViewModel.InspectorsVM
         private IDataService _service;
         public ICommand EditInspectorCommand { get; set; }
         public ICommand GenerateLatLongBasedOnAdressCommand { get; set; }
-        
+
+        private string _selectedCountry;
+        public ObservableCollection<string> ComboList { get; set; }
+
+        public string SelectedCountry
+        {
+            get { return _selectedCountry; }
+            set { _selectedCountry = value; }
+        }
+
         public InspectorviewModel SelectedInspector
         {
             get
@@ -34,7 +44,16 @@ namespace Festispec.ViewModel.InspectorsVM
             _inspectorViewModel = i;
             EditInspectorCommand = new RelayCommand(EditInspectorMethod);
             GenerateLatLongBasedOnAdressCommand = new RelayCommand(GenerateLatLongBasedOnAdress);
+
+            using (var context = new FestispecEntities())
+            {
+                _selectedCountry = SelectedInspector.Country;
+            }
+            ComboList = new ObservableCollection<string>();
+            ComboList.Add("Nederland");
+            ComboList.Add("België");
         }
+
         private void EditInspectorMethod()
         {
             if (CanEditInspector())

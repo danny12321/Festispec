@@ -87,7 +87,6 @@ namespace Festispec.ViewModel.FestivalVMs
                 festivalVM.StartDate = parsedFestivalsJson[i]["StartDate"].ToObject<DateTime>();
                 festivalVM.EndDate = parsedFestivalsJson[i]["EndDate"].ToObject<DateTime>();
                 festivalVM.ClientId = parsedFestivalsJson[i]["ClientId"].ToObject<int>();
-                festivalVM.MunicipalityId = parsedFestivalsJson[i]["MunicipalityId"].ToObject<int?>();
                 festivalVM.Latitude = parsedFestivalsJson[i]["Latitude"].ToString();
                 festivalVM.Longitude = parsedFestivalsJson[i]["Longitude"].ToString();
 

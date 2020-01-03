@@ -9,7 +9,6 @@
 	[start_date] [datetime] NOT NULL,
 	[end_date] [datetime] NOT NULL,
 	[client_id] [int] NOT NULL,
-	[municipality_id] [int] NULL,
 	[latitude] [nvarchar](50) NULL,
 	[longitude] [nvarchar](50) NULL,
  CONSTRAINT [PK_Festivals] PRIMARY KEY CLUSTERED 
@@ -23,9 +22,3 @@ REFERENCES [dbo].[Clients] ([id])
 GO
 
 ALTER TABLE [dbo].[Festivals] CHECK CONSTRAINT [FK_Festivals_Clients]
-GO
-ALTER TABLE [dbo].[Festivals]  WITH CHECK ADD  CONSTRAINT [FK_Festivals_Municipalities] FOREIGN KEY([municipality_id])
-REFERENCES [dbo].[Municipalities] ([id])
-GO
-
-ALTER TABLE [dbo].[Festivals] CHECK CONSTRAINT [FK_Festivals_Municipalities]

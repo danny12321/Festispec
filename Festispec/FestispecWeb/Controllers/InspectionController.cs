@@ -69,7 +69,7 @@ namespace FestispecWeb.Controllers
                 return HttpNotFound();
             }
 
-            var qa = questionaires.Questions.Select(q =>
+            var qa = questionaires.Questions.OrderBy(q => q.type_question == 4 ? 1 : 0).Select(q =>
             {
                 var question = new AnswersVM() { Question = q };
                 var answers = new List<Answers>();
@@ -78,7 +78,7 @@ namespace FestispecWeb.Controllers
                 {
                     answers = db.Answers.Where(a => a.question_id == q.id).ToList();
                 }
-                else // else get online the last
+                else // else get only the last data
                 {
                     var b = db.Answers.Where(a => a.question_id == q.id).GroupBy(o => o.insertdate).ToList().LastOrDefault();
                     if (b != null)
@@ -135,6 +135,10 @@ namespace FestispecWeb.Controllers
                         case 4: // Images
                             SaveImageQuestion(answerVM);
                             break;
+
+                        case 5: // Table (Handle the same as open question)
+                            SaveOpenQuestion(answerVM);
+                            break;
                     }
 
                     if (isDone != null)
@@ -183,12 +187,12 @@ namespace FestispecWeb.Controllers
 
             answerVM.Answers.ForEach(a =>
             {
-                var answer = Existinganswer.FirstOrDefault(ea => ea.answer == a.answer);
+                var answer = Existinganswer?.FirstOrDefault(ea => ea.answer == a.answer);
 
                 if (answer == null) shouldSave = true;
             });
 
-            Existinganswer.ForEach(ea =>
+            Existinganswer?.ForEach(ea =>
             {
                 var answer = answerVM.Answers.FirstOrDefault(a => ea.answer == a.answer);
 

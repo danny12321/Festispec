@@ -25,15 +25,11 @@
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.FestivalName, Mode=TwoWay}"></TextBox>
                 <TextBlock FontSize="15" Text="Land:"></TextBlock>
                 <ComboBox Width="100"
-                        SelectedValue="{Binding Path=SelectedFestival.Country}"
+                           ItemsSource="{Binding ComboList}"
+                          SelectedItem="{Binding SelectedCountry, Mode=TwoWay}"
+                          SelectedValue="{Binding SelectedFestival.Country}"
                         Margin="0 8 0 8"
                         HorizontalAlignment="Left">
-                    <ComboBoxItem>
-                        Nederland
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        België
-                    </ComboBoxItem>
                 </ComboBox>
                 <TextBlock FontSize="15" Text="Plaats:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="6" Text="{Binding SelectedFestival.City, Mode=TwoWay}"></TextBox>
