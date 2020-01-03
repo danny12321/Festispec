@@ -38,8 +38,6 @@
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.StartDate}" IsReadOnly="True"></TextBox>
                 <TextBlock FontSize="15" Text="Eind datum:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.EndDate}" IsReadOnly="True"></TextBox>
-                <TextBlock FontSize="15" Text="Gemeente id:"></TextBlock>
-                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.MunicipalityId}" IsReadOnly="True"></TextBox>
                 <TextBlock FontSize="15" Text="Breedtegraad:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.Latitude}" IsReadOnly="True"></TextBox>
                 <TextBlock FontSize="15" Text="Hoogtegraad:"></TextBlock>

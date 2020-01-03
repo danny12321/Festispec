@@ -26,15 +26,11 @@
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedClient.ClientName, Mode=TwoWay}"></TextBox>
                 <TextBlock FontSize="15" Text="Land:"></TextBlock>
                 <ComboBox Width="100"
-                        SelectedValue="{Binding Path=SelectedClient.Country}"
+                           ItemsSource="{Binding ComboList}"
+                          SelectedItem="{Binding SelectedCountry, Mode=TwoWay}"
+                          SelectedValue="{Binding SelectedClient.Country}"
                         Margin="0 8 0 8"
                         HorizontalAlignment="Left">
-                    <ComboBoxItem>
-                        Nederland
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        België
-                    </ComboBoxItem>
                 </ComboBox>
                 <TextBlock FontSize="15" Text="Plaats:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedClient.City, Mode=TwoWay}"></TextBox>
@@ -50,8 +46,7 @@
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding EditClientCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
-                    Width="150"
-                    ToolTip="Wijzigingen opslaan">
+                    Width="150">
                         Opslaan
                     </Button>
                 </Border>

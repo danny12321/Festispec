@@ -24,19 +24,18 @@
         <EntityTypeShape EntityType="FestispecModel.Type_contacts" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Type_questions" Width="1.5" PointX="12" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Users" Width="1.5" PointX="9.75" PointY="7.5" IsExpanded="true" />
+
         <AssociationConnector Association="FestispecModel.FK_Answers_Questions" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Contactpersons_Clients" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Festivals_Clients" ManuallyRouted="false" />
-        <AssociationConnector Association="FestispecModel.FK_Quotations_Clients" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Contactpersons_Type_contacts" ManuallyRouted="false" />
-        <AssociationConnector Association="FestispecModel.FK_Festivals_Municipalities" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Inspections_Festivals" ManuallyRouted="false" />
+        <AssociationConnector Association="FestispecModel.FK_Quotations_Festival" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Inspectors_at_inspection_Inspections" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Inspectors_at_inspection_Inspectors" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Inspectors_availability_Inspectors" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Users_Inspectors" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Questionnaires_Inspectors_at_inspection" ManuallyRouted="false" />
-        <AssociationConnector Association="FestispecModel.FK_Laws_Municipalities" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Possible_answer_Questions" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Questions_Questionnaires" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Questions_Type_questions" ManuallyRouted="false" />

@@ -178,6 +178,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utils\UserRole.cs" />
     <Compile Include="Utils\LatLongGenerator.cs" />
     <Compile Include="Utils\PasswordHasher.cs" />
     <Compile Include="Utils\RouteDurationCalculator.cs" />
@@ -203,7 +204,6 @@
     <Compile Include="ViewModel\FestivalVM\FestivalInfoVM.cs" />
     <Compile Include="ViewModel\FestivalVM\FestivalManagementVM.cs" />
     <Compile Include="ViewModel\FestivalVM\FestivalVM.cs" />
-    <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\Inspections\FestivalVM.cs" />
     <Compile Include="ViewModel\Inspections\InspectionAddViewModel.cs" />
     <Compile Include="ViewModel\Inspections\InspectionsEditViewModel.cs" />
@@ -218,6 +218,7 @@
     <Compile Include="ViewModel\InspectorsVM\InspectorviewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MenuItem.cs" />
     <Compile Include="ViewModel\Questionnaires\IQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Possible_answerVM.cs" />
     <Compile Include="ViewModel\MunicipalityVM\MunicipalityViewModel.cs" />
@@ -426,10 +427,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Home.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Inspections\AddInspection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -472,10 +469,6 @@
     </Compile>
     <Compile Include="View\BaseWindow.xaml.cs">
       <DependentUpon>BaseWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="View\Home.xaml.cs">
-      <DependentUpon>Home.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
