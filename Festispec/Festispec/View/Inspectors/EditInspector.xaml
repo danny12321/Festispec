@@ -45,7 +45,13 @@
                 <TextBox FontSize="15" MaxLength="6" Text="{Binding SelectedInspector.PostalCode, Mode=TwoWay}"></TextBox>
 
                 <TextBlock FontSize="15" Text="Land:"></TextBlock>
-                <TextBox FontSize="15"  MaxLength="50" Text="{Binding SelectedInspector.Country, Mode=TwoWay}"></TextBox>
+                <ComboBox Width="100"
+                           ItemsSource="{Binding ComboList}"
+                          SelectedItem="{Binding SelectedCountry, Mode=TwoWay}"
+                          SelectedValue="{Binding SelectedInspector.Country}"
+                        Margin="0 8 0 8"
+                        HorizontalAlignment="Left">
+                </ComboBox>
 
                 <TextBlock FontSize="15" Text="Plaats:"></TextBlock>
                 <TextBox FontSize="15"  MaxLength="50" Text="{Binding SelectedInspector.City, Mode=TwoWay}"></TextBox>
