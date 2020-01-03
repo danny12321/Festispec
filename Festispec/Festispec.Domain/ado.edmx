@@ -917,7 +917,7 @@
           <End Role="Rolls" Type="Self.Rolls" Multiplicity="*" />
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="FestispecEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
           <EntitySet Name="Answers" EntityType="Self.Answers" />
           <EntitySet Name="Clients" EntityType="Self.Clients" />
@@ -1005,7 +1005,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FestispecModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="FestispecModelStoreContainer" CdmEntityContainer="FestispecEntities">
           <EntitySetMapping Name="C__RefactorLog">
             <EntityTypeMapping TypeName="FestispecModel.C__RefactorLog">
               <MappingFragment StoreEntitySet="__RefactorLog">
