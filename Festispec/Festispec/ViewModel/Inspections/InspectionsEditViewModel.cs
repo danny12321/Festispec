@@ -20,7 +20,7 @@ namespace Festispec.ViewModel.Inspections
 {
     public class InspectionEditViewModel : ViewModelBase
     {
-        private bool _useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt = false;
+        private bool _useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt = true;
 
         private int _festivalId;
         private int _inspetionId;

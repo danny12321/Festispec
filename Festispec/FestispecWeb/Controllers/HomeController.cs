@@ -15,6 +15,10 @@ namespace FestispecWeb.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel user)
         {
+            if(user.Password == null || user.UserName == null)
+            {
+                return View();
+            }
             var passwordhash = user.ComputeSha256Hash(user.Password);
             var user1 = db.Users.Where(u => u.email.Equals(user.UserName) && u.password.Equals(passwordhash)).FirstOrDefault();
             if (user1 != null)
@@ -24,7 +28,7 @@ namespace FestispecWeb.Controllers
                 return RedirectToAction("Index");
 
             }
-            
+            ModelState.AddModelError("", "Gebruikersnaam of Wachtwoord is onjuist");
             return View(user);
         }
         public ActionResult Logout()
