@@ -161,7 +161,7 @@ namespace Festispec.ViewModel.Questionnaires
 
         private void AddQuestion()
         {
-            var question = new Questions() { question = "New question", type_question = 2, questionnaire_id = Questionnaire.id };
+            var question = new Questions() { question = "Nieuwe vraag", type_question = 2, questionnaire_id = Questionnaire.id };
 
             using (var context = new FestispecEntities())
             {
