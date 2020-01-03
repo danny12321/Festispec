@@ -28,7 +28,7 @@ namespace FestispecWeb.Controllers
                 return RedirectToAction("Index");
 
             }
-            
+            ModelState.AddModelError("", "Gebruikersnaam of Wachtwoord is onjuist");
             return View(user);
         }
         public ActionResult Logout()
