@@ -17,7 +17,7 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-
+      
         <Border Grid.Column="0" Background="#32385D" Padding="0,100,0,0" MinWidth="250">
             <ItemsControl ItemsSource="{Binding MenuItems}" IsEnabled="{Binding IsChecked, ElementName=EnableListBox}" Background="#32385D">
                 <ItemsControl.ItemTemplate>

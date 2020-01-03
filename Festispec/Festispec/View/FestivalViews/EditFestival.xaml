@@ -65,8 +65,7 @@
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding EditFestivalCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
-                    Width="150"
-                    ToolTip="Wijzigingen opslaan">
+                    Width="150">
                         Opslaan
                     </Button>
                 </Border>

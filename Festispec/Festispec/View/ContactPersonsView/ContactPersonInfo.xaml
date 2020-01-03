@@ -19,7 +19,7 @@
         <Border Grid.Column="0" Padding="20">
             <StackPanel>
 
-                <TextBlock Text="contactpersoon gegevens" FontSize="25" Padding="0,10"/>
+                <TextBlock Text="Contactpersoon gegevens" FontSize="25" Padding="0,10"/>
 
                 <TextBlock FontSize="15" Text="Voornaam:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedContactPerson.ContactPersonName}" IsReadOnly="True"></TextBox>

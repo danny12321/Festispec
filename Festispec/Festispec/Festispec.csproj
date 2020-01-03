@@ -132,7 +132,6 @@
     <Compile Include="ViewModel\FestivalVM\FestivalInfoVM.cs" />
     <Compile Include="ViewModel\FestivalVM\FestivalManagementVM.cs" />
     <Compile Include="ViewModel\FestivalVM\FestivalVM.cs" />
-    <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\Inspections\FestivalVM.cs" />
     <Compile Include="ViewModel\Inspections\InspectionAddViewModel.cs" />
     <Compile Include="ViewModel\Inspections\InspectionEditViewModel.cs" />
@@ -352,10 +351,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Home.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Inspections\AddInspection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -394,10 +389,6 @@
     </Compile>
     <Compile Include="View\BaseWindow.xaml.cs">
       <DependentUpon>BaseWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="View\Home.xaml.cs">
-      <DependentUpon>Home.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
