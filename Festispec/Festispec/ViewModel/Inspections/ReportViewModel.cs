@@ -88,9 +88,9 @@ namespace Festispec.ViewModel.Inspections
                                 context.SaveChanges();
                             }
 
-                            switch (q.Type.Type.ToLower())
+                            switch (q.Type.Id)
                             {
-                                case "table":
+                                case 8: // table
                                     var y = new List<int>();
                                     var x = new List<string>();
                                     int index = 0;
@@ -132,21 +132,21 @@ namespace Festispec.ViewModel.Inspections
                                     doc.Add(img);
                                     break;
 
-                                case "open":
+                                case 1: // open
 
                                     foreach (Answers a in answers)
                                     {
                                         doc.Add(new Paragraph(a.answer));
                                     }
                                     break;
-                                case "multiple choise":
+                                case 2: // multiple choice
 
                                     foreach (Answers a in answers)
                                     {
                                         doc.Add(new Paragraph(a.answer));
                                     }
                                     break;
-                                case "select":
+                                case 3: // select
 
                                     foreach (Answers a in answers)
                                     {
