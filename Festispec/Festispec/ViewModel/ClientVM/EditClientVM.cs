@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,8 @@ namespace Festispec.ViewModel.ClientVM
         private IDataService _service;
         private MainViewModel _main;
         private ClientManageVM _clients;
+        private string _selectedCountry;
+        public ObservableCollection<string> ComboList { get; set; }
 
         public ICommand EditClientCommand { get; set; }
 
@@ -25,11 +28,26 @@ namespace Festispec.ViewModel.ClientVM
             get { return _service.SelectedClient; }
         }
 
+        public string SelectedCountry
+        {
+            get { return _selectedCountry; }
+            set { _selectedCountry = value; }
+        }
+
         public EditClientVM(MainViewModel main, IDataService service, ClientManageVM clients)
         {
             this._main = main;
             this._service = service;
             this._clients = clients;
+
+            using (var context = new FestispecEntities())
+            {
+                context.Clients.Attach(SelectedClient.ToModel());
+                _selectedCountry = SelectedClient.Country;
+            }
+            ComboList = new ObservableCollection<string>();
+            ComboList.Add("Nederland");
+            ComboList.Add("België");
 
             EditClientCommand = new RelayCommand(SaveClient, CanSaveClient);
         }

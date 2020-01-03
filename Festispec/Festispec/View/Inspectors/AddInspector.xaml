@@ -45,7 +45,18 @@
                 <TextBox FontSize="15" HorizontalAlignment="Left" Width="100" MaxLength="6" Text="{Binding Inspector.PostalCode, Mode=TwoWay}"></TextBox>
 
                 <TextBlock FontSize="15" Text="Land:"></TextBlock>
-                <TextBox FontSize="15"  MaxLength="50" Text="{Binding Inspector.Country, Mode=TwoWay}"></TextBox>
+                <ComboBox Width="100"
+                        Margin="0 8 0 8"
+                        HorizontalAlignment="Left"
+                        Text="{Binding Inspector.Country, Mode=TwoWay}">
+                    <ComboBoxItem
+                        IsSelected="True">
+                        Nederland
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        België
+                    </ComboBoxItem>
+                </ComboBox>
 
                 <TextBlock FontSize="15" Text="Plaats:"></TextBlock>
                 <TextBox FontSize="15"  MaxLength="50" Text="{Binding Inspector.City, Mode=TwoWay}"></TextBox>
@@ -77,8 +88,7 @@
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding AddInspectorCommand}" CommandParameter="{Binding AddInspectorCommand}"
                         Style="{StaticResource MaterialDesignRaisedButton}"
-                        Width="100"
-                        ToolTip="Inspecteur toevoegen" Content="Opslaan"/>
+                        Width="100" Content="Opslaan"/>
                 </Border>
 
             </StackPanel>

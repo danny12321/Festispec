@@ -9,31 +9,27 @@
         DataContext="{Binding Main, Source={StaticResource Locator}}"
         WindowState="Maximized"
         Title="Festispec CIB">
-
+    <Window.Resources>
+        <Visibility x:Key="AdminOnly">Collapsed</Visibility>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-
-        <Border Grid.Column="0" Background="#32385D" Padding="10,100,0,0" MinWidth="250">
-            <ListBox FontSize="25" IsEnabled="{Binding IsChecked, ElementName=EnableListBox}" Background="#32385D">
-
-                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Home" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="HomeVariant" VerticalAlignment="Center"/>Home</Hyperlink></TextBlock>
-                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Schedule" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="CalendarMonthOutline" VerticalAlignment="Center"/>Planning</Hyperlink></TextBlock>
-                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Festival" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="Camping" VerticalAlignment="Center"/>Festival</Hyperlink></TextBlock>
-                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Clients" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="AccountBoxOutline" VerticalAlignment="Center"/>Klanten</Hyperlink></TextBlock>
-                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Municipality" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="CityVariant" VerticalAlignment="Center"/>Gemeentes</Hyperlink></TextBlock>
-                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Inspectors" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="AccountGroup" VerticalAlignment="Center"/>Inspecteurs</Hyperlink></TextBlock>
-                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="FileDocument" VerticalAlignment="Center"/>Offerte</Hyperlink></TextBlock>
-              
-                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Templates" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="ArrangeSendBackward" VerticalAlignment="Center"/>Sjablonen</Hyperlink></TextBlock>
-
-                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="ManageDashboard" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="MonitorDashboard" VerticalAlignment="Center"/>Dashboard</Hyperlink></TextBlock>
-                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Users" TextDecorations="None" Foreground="White"><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="AccountBadgeHorizontalOutline" VerticalAlignment="Center"/>Gebruikers</Hyperlink></TextBlock>
-                <TextBlock><Hyperlink Command="{Binding SetPageCommand}" CommandParameter="Logout" TextDecorations="None" Foreground="White"><InlineUIContainer><materialDesign:PackIcon Height="25" Width="25" Margin="0,0,10,0" Kind="ExitToApp" VerticalAlignment="Center"/></InlineUIContainer><Run Text="Uitloggen"/></Hyperlink></TextBlock>
-               
-            </ListBox>
+      
+        <Border Grid.Column="0" Background="#32385D" Padding="0,100,0,0" MinWidth="250">
+            <ItemsControl ItemsSource="{Binding MenuItems}" IsEnabled="{Binding IsChecked, ElementName=EnableListBox}" Background="#32385D">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <MenuItem FontSize="20" Foreground="White" Header="{Binding DisplayName}" Command="{Binding DataContext.SetPageCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding CommandParameter}">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Foreground="White" Kind="{Binding Icon}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Border>
 
         <DockPanel Grid.Column="1">

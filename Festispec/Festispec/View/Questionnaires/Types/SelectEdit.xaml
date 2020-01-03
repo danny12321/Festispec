@@ -23,7 +23,6 @@
                         <TextBox 
                             Text="{Binding Answer}" 
                             Width="300" 
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         />
 
                         <Button Command="{Binding DeleteCommand}">

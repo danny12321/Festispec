@@ -11,8 +11,25 @@
       DataContext="{Binding Inspections, Source={StaticResource Locator}}">
 
     <StackPanel>
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="600"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
 
-        <TextBlock Text="{Binding NoInspections}" FontSize="20"></TextBlock>
+            <TextBlock Text="{Binding NoInspections}" Grid.Column="0" FontSize="28" Padding="20"></TextBlock>
+
+            <Button  Command="{Binding NavigateAddInspectionCommand}"
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                 ToolTip="Inspectie toevoegen">
+                <materialDesign:PackIcon
+                Kind="Add"
+                Height="24"
+                Width="24" />
+
+            </Button>
+        </Grid>
+
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Inspections}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Beschrijving" Binding="{Binding Description}" Foreground="#FF1D1616" Width="200"/>
@@ -33,8 +50,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-
-        <Button Margin="10,10,0,0" HorizontalAlignment="Left" Command="{Binding NavigateAddInspectionCommand}">Add</Button>
 
     </StackPanel>
     

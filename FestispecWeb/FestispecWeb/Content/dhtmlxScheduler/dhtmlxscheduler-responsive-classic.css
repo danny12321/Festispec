@@ -1,0 +1,47 @@
+﻿@media screen and (max-width : 767px) {
+	.dhx_cal_tab {
+		background-image: none !important;
+		margin-bottom: 0 !important;
+	}
+
+	.dhx_cal_today_button, .dhx_cal_tab {
+		text-decoration: none !important;
+	}
+
+	.dhx_cal_prev_button {
+		background: url(../../Scripts/dhtmlxScheduler/imgs_dhx_terrace/arrow_left.png) no-repeat center center #DCEAF8 !important;
+	}
+
+	.dhx_cal_next_button {
+		background: url(../../Scripts/dhtmlxScheduler/imgs_dhx_terrace/arrow_right.png) no-repeat center center #DCEAF8 !important;
+	}
+
+	.dhx_cal_navline .dhx_cal_prev_button,
+	.dhx_cal_navline .dhx_cal_next_button,
+	.dhx_cal_today_button, .dhx_cal_tab {
+		border: 1px solid #A4BED4;
+	}
+
+	.dhx_cal_today_button {
+		background-image: none !important;
+		background-color: #dbe4ed;
+	}
+
+	.dhx_cal_today_button:hover {
+		background-color: #D8E1EA;
+	}
+
+	.dhx_cal_container {
+		background-position: 0 82px !important;
+	}
+
+	.dhx_cal_tab.active {
+		border: 1px dotted #586A7E !important;
+	}
+}
+
+@media screen and (max-width : 450px) {
+	.dhx_cal_container {
+		background-position: 0 82px !important;
+	}
+}

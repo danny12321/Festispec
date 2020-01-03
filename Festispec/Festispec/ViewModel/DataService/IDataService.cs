@@ -22,6 +22,7 @@ namespace Festispec.ViewModel.DataService
         InspectionVM SelectedInspection { get; set; }
         InspectorviewModel SelectedInspector { get; set; }
         ViewModel.Users.UserVM SelectedUser { get; set; }
+        ViewModel.AccountsVM.UsersVM LoggedInUser { get; set; }
         bool IsOffline { get; set; }
     }
 }

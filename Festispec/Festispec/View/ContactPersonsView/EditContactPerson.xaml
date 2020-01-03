@@ -47,8 +47,7 @@
                 <Border Padding="10">
                     <Button HorizontalAlignment="Right" Command="{Binding SaveCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
-                    Width="100"
-                    ToolTip="Contactpersoon opslaan">
+                    Width="100">
                         Opslaan
                     </Button>
                 </Border>

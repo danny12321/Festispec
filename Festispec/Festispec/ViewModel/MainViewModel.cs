@@ -10,6 +10,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Windows;
+using System.Collections.ObjectModel;
+using Festispec.Utils;
+using Festispec.ViewModel.DataService;
 
 namespace Festispec.ViewModel
 {
@@ -17,6 +20,8 @@ namespace Festispec.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private Page _frameContent;
+
+        public ObservableCollection<MenuItem> MenuItems { get; set; }
 
         public Page FrameContent
         {
@@ -45,10 +50,13 @@ namespace Festispec.ViewModel
         public ICommand BackCommand { get; set; }
 
         private Stack<Page> StackNavigator = new Stack<Page>();
+        private IDataService _service;
 
-        public MainViewModel()
+        public MainViewModel(IDataService service)
         {
-            SetPage("Home");
+            _service = service;
+            SetPage("Schedule");
+            SetMenuItems();
             BackCommand = new RelayCommand(Back, CanGoBack);
             SetPageCommand = new RelayCommand<string>((page) => SetPage(page));
         }
@@ -58,10 +66,6 @@ namespace Festispec.ViewModel
 
             switch (page)
             {
-                case "Home":
-                    FrameContent = new Home();
-                    PageTitle = "Home";
-                    break;
                 case "Schedule":
                     FrameContent = new View.Schedule.Schedule();
                     PageTitle = "Planning";
@@ -92,15 +96,15 @@ namespace Festispec.ViewModel
                     break;
                 case "Inspections":
                     FrameContent = new View.Inspections.Inspections();
-                    PageTitle = "Inspections";
+                    PageTitle = "Inspecties";
                     break;
                 case "AddInspection":
                     FrameContent = new View.Inspections.AddInspection();
-                    PageTitle = "Add Inspection";
+                    PageTitle = "Inspectie toevoegen";
                     break;
                 case "EditInspection":
                     FrameContent = new View.Inspections.EditInspection();
-                    PageTitle = "Edit Inspection";
+                    PageTitle = "Inspectie toevoegen";
                     break;
                 case "Municipality":
                     FrameContent = new View.Municipality.Municipality();
@@ -148,15 +152,15 @@ namespace Festispec.ViewModel
                     break;
                 case "ShowAddContactPerson":
                     FrameContent = new View.ContactPersonsView.AddContactPerson();
-                    PageTitle = "contactpersoon toevoegen";
+                    PageTitle = "Contactpersoon toevoegen";
                     break;
                 case "ShowContactPersonInfo":
                     FrameContent = new View.ContactPersonsView.ContactPersonInfo();
-                    PageTitle = "contactpersoon informatie";
+                    PageTitle = "Contactpersoon informatie";
                     break;
                 case "ShowEditContactPerson":
                     FrameContent = new View.ContactPersonsView.EditContactPerson();
-                    PageTitle = "contactpersoon wijzigen";
+                    PageTitle = "Contactpersoon wijzigen";
                     break;
                 case "ContactPersonManagement":
                     FrameContent = new View.ContactPersonsView.ContactPersonsManage();
@@ -182,8 +186,8 @@ namespace Festispec.ViewModel
                     closeWindow();
                     break;
                 default:
-                    FrameContent = new Home();
-                    PageTitle = "Home";
+                    FrameContent = new View.Schedule.Schedule();
+                    PageTitle = "Planning";
                     break;
             }
 
@@ -208,6 +212,49 @@ namespace Festispec.ViewModel
         {
             new LoginWindow().Show();
             Application.Current.Windows[0].Close();
+        }
+
+        private void SetMenuItems()
+        {
+            var userRole = new UserRole(_service.LoggedInUser);
+
+            MenuItems = new ObservableCollection<MenuItem>();
+            Console.WriteLine();
+
+            if (userRole.HasUserRole(new string[] {"Admin", "ProjectManager", "Secretariat", "Sales", "Management" }))
+            {
+                MenuItems.Add(new MenuItem("Planning", "Schedule", "CalendarMonthOutline"));
+            }
+            if (userRole.HasUserRole(new string[] { "Admin", "Secretariat", "Sales", "ProjectManager" }) || _service.IsOffline)
+            {
+                MenuItems.Add(new MenuItem("Festivals", "Festival", "Camping"));
+            }
+            if (userRole.HasUserRole(new string[] { "Admin", "Secretariat", "Sales", "ProjectManager" }))
+            {
+                MenuItems.Add(new MenuItem("Klanten", "Clients", "AccountBoxOutline"));
+            }
+            if (userRole.HasUserRole(new string[] { "Admin", "Secretariat", "Sales", "ProjectManager" }))
+            {
+                MenuItems.Add(new MenuItem("Offerte", "", "FileDocument"));
+            }
+            if (userRole.HasUserRole(new string[] { "Admin", "Secretariat", "Sales", "ProjectManager" }))
+            {
+                MenuItems.Add(new MenuItem("Inspecteurs", "Inspectors", "AccountGroup"));
+            }
+            if (userRole.HasUserRole(new string[] { "Admin", "Secretariat", "ProjectManager" }))
+            {
+                MenuItems.Add(new MenuItem("Sjablonen", "Templates", "ArrangeSendBackward"));
+            }
+            if (userRole.HasUserRole(new string[] { "Admin", "Sales", "Management" }))
+            {
+                MenuItems.Add(new MenuItem("Dashboard", "ManageDashboard", "MonitorDashboard"));
+            }
+            if (userRole.HasUserRole(new string[] { "Admin" }))
+            {
+                MenuItems.Add(new MenuItem("Gebruikers", "Users", "AccountBadgeHorizontalOutline"));
+            }
+            
+            MenuItems.Add(new MenuItem("Uitloggen", "Logout", "ExitToApp"));
         }
     }
 }

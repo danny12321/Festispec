@@ -66,15 +66,13 @@
                           Width="100" />
                 </StackPanel>
 
-                <TextBox Margin="0,10,0,0" materialDesign:HintAssist.Hint="Gemeente ID" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" MaxLength="50" Text="{Binding Festival.MunicipalityId}" IsReadOnly="True"></TextBox>
-                <TextBox Margin="0,10,0,0" materialDesign:HintAssist.Hint="Breedtegraat" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" MaxLength="50" Text="{Binding Festival.Latitude, Mode=TwoWay}"></TextBox>
+                <TextBox Margin="0,10,0,0" materialDesign:HintAssist.Hint="Breedtegraad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" MaxLength="50" Text="{Binding Festival.Latitude, Mode=TwoWay}"></TextBox>
                 <TextBox Margin="0,10,0,0" materialDesign:HintAssist.Hint="Hoogtegraad" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" MaxLength="50" Text="{Binding Festival.Longitude, Mode=TwoWay}"></TextBox>
                 <Button  Margin="0,10,0,0" HorizontalAlignment="Left" Command="{Binding GenerateLatLongBasedOnAdressCommand}">Genereer op adres gegvens</Button>
 
                 <Button Margin="0,10,0,0" HorizontalAlignment="Right" Command="{Binding AddFestivalCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
-                    Width="100"
-                    ToolTip="Festival opslaan">
+                    Width="100">
                         Save
                     </Button>
 
