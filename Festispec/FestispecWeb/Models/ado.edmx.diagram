@@ -4,8 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a8d1b917ff674f299a12b0b0012bac0c" Name="Diagram1">
-        <EntityTypeShape EntityType="FestispecModel.C__RefactorLog" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+      <Diagram DiagramId="ea6cdc37e7624fd09e3e6186824f72a1" Name="Diagram1">
         <EntityTypeShape EntityType="FestispecModel.Answers" Width="1.5" PointX="16.5" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Clients" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Contactpersons" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
@@ -24,18 +23,19 @@
         <EntityTypeShape EntityType="FestispecModel.Type_contacts" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Type_questions" Width="1.5" PointX="12" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FestispecModel.Users" Width="1.5" PointX="9.75" PointY="7.5" IsExpanded="true" />
-
         <AssociationConnector Association="FestispecModel.FK_Answers_Questions" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Contactpersons_Clients" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Festivals_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="FestispecModel.FK_Quotations_Clients" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Contactpersons_Type_contacts" ManuallyRouted="false" />
+        <AssociationConnector Association="FestispecModel.FK_Festivals_Municipalities" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Inspections_Festivals" ManuallyRouted="false" />
-        <AssociationConnector Association="FestispecModel.FK_Quotations_Festival" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Inspectors_at_inspection_Inspections" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Inspectors_at_inspection_Inspectors" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Inspectors_availability_Inspectors" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Users_Inspectors" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Questionnaires_Inspectors_at_inspection" ManuallyRouted="false" />
+        <AssociationConnector Association="FestispecModel.FK_Laws_Municipalities" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Possible_answer_Questions" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Questions_Questionnaires" ManuallyRouted="false" />
         <AssociationConnector Association="FestispecModel.FK_Questions_Type_questions" ManuallyRouted="false" />

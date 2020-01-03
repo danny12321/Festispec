@@ -142,6 +142,14 @@ namespace Festispec.ViewModel
                     FrameContent = new View.Inspectors.EditInspector();
                     PageTitle = "Inspecteur bewerken";
                     break;
+                case "ReportPage":
+                    FrameContent = new View.Inspections.ReportView();
+                    PageTitle = "Rapportages";
+                    break;
+                case "EditInspection":
+                    FrameContent = new View.Inspections.EditInspection();
+                    PageTitle = "Inspectie";
+                    break;
                 case "Templates":
                     FrameContent = new View.Templates.Templates();
                     PageTitle = "Sjablonen";

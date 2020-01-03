@@ -59,6 +59,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -138,10 +140,79 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ado.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ado.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ado.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ado.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ado.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Answers.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AnswersVM.cs" />
+    <Compile Include="Models\Clients.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Contactpersons.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Festivals.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Inspections.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\InspectionVM.cs" />
     <Compile Include="Models\InspectorAvailability.cs" />
+    <Compile Include="Models\Inspectors.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Inspectors_at_inspection.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Inspectors_availability.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Laws.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\Municipalities.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Possible_answer.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Questionnaires.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Questions.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Quotations.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rolls.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Type_contacts.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Type_questions.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Users.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -155,8 +226,28 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\ado.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ado.edmx</DependentUpon>
+      <LastGenOutput>ado.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ado.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ado.edmx</DependentUpon>
+      <LastGenOutput>ado.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\ado.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ado.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ado.edmx.diagram">
+      <DependentUpon>ado.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\festispec-web - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\festispec-web - Web Deploy1.pubxml" />
+    <None Include="Properties\PublishProfiles\FestispecWeb1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler-responsive.js" />
     <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler.css" />
@@ -426,6 +517,9 @@
       <Project>{26F92110-69A7-4DFA-B246-625D32F30297}</Project>
       <Name>Festispec.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

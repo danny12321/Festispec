@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Festispec.Domain
+namespace FestispecWeb.Models
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class FestispecEntities1 : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public FestispecEntities1()
+            : base("name=FestispecEntities1")
         {
         }
     
@@ -25,7 +25,6 @@ namespace Festispec.Domain
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
         public virtual DbSet<Answers> Answers { get; set; }
         public virtual DbSet<Clients> Clients { get; set; }
         public virtual DbSet<Contactpersons> Contactpersons { get; set; }
@@ -34,6 +33,8 @@ namespace Festispec.Domain
         public virtual DbSet<Inspectors> Inspectors { get; set; }
         public virtual DbSet<Inspectors_at_inspection> Inspectors_at_inspection { get; set; }
         public virtual DbSet<Inspectors_availability> Inspectors_availability { get; set; }
+        public virtual DbSet<Laws> Laws { get; set; }
+        public virtual DbSet<Municipalities> Municipalities { get; set; }
         public virtual DbSet<Possible_answer> Possible_answer { get; set; }
         public virtual DbSet<Questionnaires> Questionnaires { get; set; }
         public virtual DbSet<Questions> Questions { get; set; }
