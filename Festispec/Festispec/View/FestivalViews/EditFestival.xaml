@@ -55,8 +55,6 @@
                       HorizontalAlignment="Left"
                       Text="{Binding EndTime}"
                       Width="100" />
-                <TextBlock FontSize="15" Text="Gemeente id:"></TextBlock>
-                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.MunicipalityId}" IsReadOnly="True"></TextBox>
                 <TextBlock FontSize="15" Text="Breedtegraad:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.Latitude, Mode=TwoWay}"></TextBox>
                 <TextBlock FontSize="15" Text="Hoogtegraad:"></TextBlock>
