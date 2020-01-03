@@ -71,7 +71,6 @@ namespace Festispec.ViewModel
             }
         }
 
-
         private void Login()
         {
             var autoLogin = false;

@@ -57,6 +57,7 @@ namespace Festispec.ViewModel
             _service = service;
             SetPage("Schedule");
             SetMenuItems();
+
             BackCommand = new RelayCommand(Back, CanGoBack);
             SetPageCommand = new RelayCommand<string>((page) => SetPage(page));
         }
@@ -210,7 +211,6 @@ namespace Festispec.ViewModel
 
         private void closeWindow()
         {
-            new LoginWindow().Show();
             Application.Current.Windows[0].Close();
         }
 
@@ -219,7 +219,6 @@ namespace Festispec.ViewModel
             var userRole = new UserRole(_service.LoggedInUser);
 
             MenuItems = new ObservableCollection<MenuItem>();
-            Console.WriteLine();
 
             if (userRole.HasUserRole(new string[] {"Admin", "ProjectManager", "Secretariat", "Sales", "Management" }))
             {
