@@ -38,7 +38,6 @@
             <Button
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Width="120"
-                    ToolTip="Resource name: MaterialDesignRaisedLightButton"
                     Command="{Binding OkCommand}"
                     CommandParameter="{Binding ElementName=PopUpWindowName}"
                     Content="ok" HorizontalAlignment="Center" Height="30" Margin="0,40,0,0"/>
