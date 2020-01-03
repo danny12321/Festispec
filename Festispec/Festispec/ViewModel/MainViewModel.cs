@@ -237,6 +237,10 @@ namespace Festispec.ViewModel
             {
                 MenuItems.Add(new MenuItem("Offerte", "", "FileDocument"));
             }
+            if (userRole.HasUserRole(new string[] { "Admin", "Secretariat", "Sales", "ProjectManager" }))
+            {
+                MenuItems.Add(new MenuItem("Inspecteurs", "Inspectors", "AccountGroup"));
+            }
             if (userRole.HasUserRole(new string[] { "Admin", "Secretariat", "ProjectManager" }))
             {
                 MenuItems.Add(new MenuItem("Sjablonen", "Templates", "ArrangeSendBackward"));
