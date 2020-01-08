@@ -23,11 +23,17 @@
         <ItemsControl ItemsSource="{Binding Templates}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock FontSize="20" Margin="10 0" Text="{Binding name}" />
-                            <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ItemsControl}, Path=DataContext.OpenTemplateCommand}" CommandParameter="{Binding}">Open</Button>
-                            <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ItemsControl}, Path=DataContext.DeleteTemplateCommand}" CommandParameter="{Binding}">Verwijderen</Button>
-                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="170"></ColumnDefinition>
+                            <ColumnDefinition Width="120"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                            
+                        <TextBlock Grid.Column="0" FontSize="20" Margin="10 0" Text="{Binding name}" />
+                        <Button Margin="10" Grid.Column="1" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ItemsControl}, Path=DataContext.OpenTemplateCommand}" CommandParameter="{Binding}">Open</Button>
+                        <Button Grid.Column="2" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ItemsControl}, Path=DataContext.DeleteTemplateCommand}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignOutlinedButton}">Verwijderen</Button>
+                    </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

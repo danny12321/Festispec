@@ -33,8 +33,6 @@ namespace FestispecWeb.Models
         public virtual DbSet<Inspectors> Inspectors { get; set; }
         public virtual DbSet<Inspectors_at_inspection> Inspectors_at_inspection { get; set; }
         public virtual DbSet<Inspectors_availability> Inspectors_availability { get; set; }
-        public virtual DbSet<Laws> Laws { get; set; }
-        public virtual DbSet<Municipalities> Municipalities { get; set; }
         public virtual DbSet<Possible_answer> Possible_answer { get; set; }
         public virtual DbSet<Questionnaires> Questionnaires { get; set; }
         public virtual DbSet<Questions> Questions { get; set; }
@@ -43,5 +41,6 @@ namespace FestispecWeb.Models
         public virtual DbSet<Type_contacts> Type_contacts { get; set; }
         public virtual DbSet<Type_questions> Type_questions { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
     }
 }

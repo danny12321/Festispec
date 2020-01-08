@@ -24,9 +24,9 @@ textarea {
 }
 
 .navbar-inverse {
-    background-color: #337ab7;
+    background-color: #337ab7 !important;
 }
 
-    .navbar-inverse .navbar-nav > li > a {
-        color: white;
-    }
+.navbar-inverse .navbar-nav > li > a {
+    color: white;
+}
