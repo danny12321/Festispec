@@ -55,7 +55,6 @@ namespace Festispec.ViewModel
         public MainViewModel(IDataService service)
         {
             _service = service;
-            SetPage("Schedule");
             SetMenuItems();
 
             BackCommand = new RelayCommand(Back, CanGoBack);
@@ -101,10 +100,6 @@ namespace Festispec.ViewModel
                     break;
                 case "AddInspection":
                     FrameContent = new View.Inspections.AddInspection();
-                    PageTitle = "Inspectie toevoegen";
-                    break;
-                case "EditInspection":
-                    FrameContent = new View.Inspections.EditInspection();
                     PageTitle = "Inspectie toevoegen";
                     break;
                 case "Municipality":

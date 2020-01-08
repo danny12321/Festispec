@@ -1,4 +1,5 @@
 ﻿using Festispec.Domain;
+using Festispec.ViewModel.DataService;
 using Festispec.ViewModel.Inspections;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -55,9 +56,16 @@ namespace Festispec.ViewModel.ScheduleVM
 
         public ICommand SetMonthCommand { get; set; }
 
-        public ScheduleVM()
+        private IDataService _service;
+
+        private MainViewModel _main;
+
+        public ScheduleVM(MainViewModel main, IDataService service)
         {
             Schedule = new ObservableCollection<ScheduleColumnVM>();
+
+            _main = main;
+            _service = service;
 
             MinWeek = new RelayCommand(() => SelectedDate = SelectedDate.AddDays(-AmountOfDaysToShow));
             AddWeek = new RelayCommand(() => SelectedDate = SelectedDate.AddDays(AmountOfDaysToShow));
@@ -75,8 +83,9 @@ namespace Festispec.ViewModel.ScheduleVM
 
             for (DateTime date = SelectedDate; date < SelectedDate.AddDays(AmountOfDaysToShow); date = date.AddDays(1))
             {
-                Schedule.Add(new ScheduleColumnVM(date));
+                Schedule.Add(new ScheduleColumnVM(date, _main, _service));
             }
         }
+
     }
 }
