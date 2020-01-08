@@ -1,4 +1,5 @@
 ﻿using Festispec.Domain;
+using Festispec.Utils;
 using Festispec.ViewModel.ClientVM;
 using Festispec.ViewModel.DataService;
 using GalaSoft.MvvmLight;
@@ -25,6 +26,7 @@ namespace Festispec.ViewModel.FestivalVM
         public ObservableCollection<string> ComboList { get; set; }
 
         public ICommand EditFestivalCommand { get; set; }
+        public ICommand GenerateLatLongBasedOnAdressCommand { get; set; }
 
         public string SelectedCountry
         {
@@ -68,8 +70,9 @@ namespace Festispec.ViewModel.FestivalVM
             this._clients = clients;
 
             EditFestivalCommand = new RelayCommand(SaveClient, CanSaveClient);
+            GenerateLatLongBasedOnAdressCommand = new RelayCommand(GenerateLatLongBasedOnAdress);
 
-            using(var context = new FestispecEntities())
+            using (var context = new FestispecEntities())
             {
                 _selectedCountry = SelectedFestival.Country;
             }
@@ -122,6 +125,22 @@ namespace Festispec.ViewModel.FestivalVM
                 return true;
             }
             return false;
+        }
+
+        private async void GenerateLatLongBasedOnAdress()
+        {
+            //You need atleast a country and a city to get a good result
+            if (SelectedFestival.Country != null || SelectedFestival.City != null)
+            {
+                LatLongGenerator latLongGenerator = new LatLongGenerator();
+
+                Task<string> latLongGeneratorAwait = latLongGenerator.GenerateLatLong(SelectedFestival.Country, SelectedFestival.City, SelectedFestival.Street, SelectedFestival.HouseNumber);
+                string latlong = await latLongGeneratorAwait;
+
+                SelectedFestival.Latitude = latlong.Split(',')[0];
+                SelectedFestival.Longitude = latlong.Split(',')[1];
+                RaisePropertyChanged("SelectedFestival");
+            }
         }
     }
 }
