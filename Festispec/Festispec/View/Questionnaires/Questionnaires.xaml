@@ -41,15 +41,15 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Border Padding="10" BorderThickness="0 0 0 1" BorderBrush="black">
+            <Border Padding="5" BorderThickness="0 0 0 1" BorderBrush="black">
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal" >
                     <TextBox
-                    materialDesign:HintAssist.Hint="Vragenlijst naam"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    FontSize="25"
-                    Text="{Binding Name}"
-                />
+                        materialDesign:HintAssist.Hint="Vragenlijst naam"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        FontSize="25"
+                        Text="{Binding Name}"
+                    />
 
                     <Button Command="{Binding OpenTemplateDialogCommand}" Content="Kies sjabloon"
                         HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0"/>
