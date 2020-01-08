@@ -150,6 +150,7 @@ namespace Festispec.ViewModel.Inspections
                                         doc.Add(new Paragraph(a.answer));
                                     }
                                     break;
+
                                 case 3: // select
 
                                     foreach (Answers a in answers)
