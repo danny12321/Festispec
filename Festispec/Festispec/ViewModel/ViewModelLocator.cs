@@ -308,6 +308,20 @@ namespace Festispec.ViewModel
                 return new EditUserVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
+        public AddQuotationViewModel AddQuotation
+        {
+            get
+            {
+                return new AddQuotationViewModel(ServiceLocator.Current.GetInstance<IDataService>(), Main);
+            }
+        }
+        public EditQuotationViewModel EditQuotation
+        {
+            get
+            {
+                return new EditQuotationViewModel(ServiceLocator.Current.GetInstance<IDataService>(), Main);
+            }
+        }
 
         public static void Cleanup()
         {
