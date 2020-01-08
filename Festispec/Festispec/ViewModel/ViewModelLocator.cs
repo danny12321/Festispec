@@ -16,6 +16,7 @@ using Festispec.ViewModel.ContactPersonsVM;
 using Festispec.ViewModel.DashboardVM;
 using Festispec.ViewModel.InspectorsVM;
 using Festispec.ViewModel.Users;
+using Festispec.ViewModel.QuotationsVM;
 
 namespace Festispec.ViewModel
 {
