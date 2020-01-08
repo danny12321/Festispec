@@ -29,13 +29,13 @@ namespace Festispec.ViewModel.QuotationsVM
         private void Add()
         {
             Quotation.FestivalId = _service.SelectedFestival.FestivalId;
-            Quotation.Approved = DateTime.Now;
+            
             using (var context = new FestispecEntities())
             {
 
                 context.Quotations.Add(Quotation.ToModel());
                 context.SaveChanges();
-                Quotation.Approved = null;
+                Quotation.Approved1 = null;
                 context.Quotations.Attach(Quotation.ToModel());
                 context.SaveChanges();
 

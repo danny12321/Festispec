@@ -39,7 +39,7 @@ namespace Festispec.ViewModel.QuotationsVM
             FilePath = exportFolder;
             var exportFile = System.IO.Path.Combine(exportFolder, quotationsName);
             FilePath = exportFile;
-            Approved = _service.SelectedQuotation.Approved != null;
+            Approved = _service.SelectedQuotation.Approved1 != null;
             ToPdf = new RelayCommand(GeneatePDF);
             Save = new RelayCommand(Edit);
         }
@@ -67,15 +67,15 @@ namespace Festispec.ViewModel.QuotationsVM
             {
                 if (Approved)
                 {
-                    if(_service.SelectedQuotation.Approved == null)
+                    if(_service.SelectedQuotation.Approved1 == null)
                     {
-                        _service.SelectedQuotation.Approved = DateTime.Now;
+                        _service.SelectedQuotation.Approved1 = DateTime.Now;
                         
                     }
                 }
                 else
                 {
-                    _service.SelectedQuotation.Approved = null;
+                    _service.SelectedQuotation.Approved1 = null;
                 }
                 context.Entry(_service.SelectedQuotation.ToModel()).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();

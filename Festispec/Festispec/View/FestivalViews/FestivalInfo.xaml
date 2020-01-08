@@ -42,6 +42,9 @@
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.Latitude}" IsReadOnly="True"></TextBox>
                 <TextBlock FontSize="15" Text="Hoogtegraad:"></TextBlock>
                 <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedFestival.Longitude}" IsReadOnly="True"></TextBox>
+                <Border BorderThickness="10">
+                    <Button Command="{Binding ShowQuotations}">Offertes</Button>
+                </Border>
 
             </StackPanel>
         </Border>

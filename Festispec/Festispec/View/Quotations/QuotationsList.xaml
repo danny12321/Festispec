@@ -9,7 +9,7 @@
       Title="QuotationsList"
           xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-      DataContext="{Binding QuotationListVM, Source={StaticResource Locator}}"
+      DataContext="{Binding quotationList, Source={StaticResource Locator}}"
      TextElement.FontWeight="Regular"
      TextElement.FontSize="13"
      TextOptions.TextFormattingMode="Ideal"

@@ -34,7 +34,18 @@ namespace Festispec.ViewModel.QuotationsVM
             set { _q.festival_id = value; }
         }
 
-        public DateTime? Approved
+        public DateTime Approved
+        {
+            get
+            {
+                return (DateTime)_q.approved;
+            }
+            set
+            {
+                _q.approved = (DateTime?)value;
+            }
+        }
+        public DateTime? Approved1
         {
             get
             {

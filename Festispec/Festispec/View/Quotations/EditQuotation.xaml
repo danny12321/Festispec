@@ -46,7 +46,7 @@
                         ToolTip="Resource name: MaterialDesignRaisedButton" Content="Download PDF" RenderTransformOrigin="0.534,-0.149" Margin="-188,0,207,0"/>
                 </Border>
                 <Border Padding="10">
-                    <Button HorizontalAlignment="Right" Command="{Binding AddInspectorCommand}" CommandParameter="{Binding AddInspectorCommand}"
+                    <Button HorizontalAlignment="Right" Command="{Binding Save}" CommandParameter="{Binding Save}"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         Width="100"
                         ToolTip="Resource name: MaterialDesignRaisedButton" Content="Opslaan" Margin="0,0,8,0"/>

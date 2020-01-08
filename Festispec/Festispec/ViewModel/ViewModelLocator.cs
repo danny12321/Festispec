@@ -323,6 +323,13 @@ namespace Festispec.ViewModel
                 return new EditQuotationViewModel(ServiceLocator.Current.GetInstance<IDataService>(), Main);
             }
         }
+        public QuotationListViewModel quotationList
+        {
+            get
+            {
+                return new QuotationListViewModel(ServiceLocator.Current.GetInstance<IDataService>(), Main);
+            }
+        }
 
         public static void Cleanup()
         {
