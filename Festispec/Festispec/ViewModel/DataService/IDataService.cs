@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Festispec.ViewModel.InspectorsVM;
+using Festispec.ViewModel.QuotationsVM;
 
 namespace Festispec.ViewModel.DataService
 {
@@ -21,6 +22,7 @@ namespace Festispec.ViewModel.DataService
         ContactPersonVM SelectedContactPerson { get; set; }
         InspectionVM SelectedInspection { get; set; }
         InspectorviewModel SelectedInspector { get; set; }
+        QuotationViewModel SelectedQuotation { get; set; }
         ViewModel.Users.UserVM SelectedUser { get; set; }
         ViewModel.AccountsVM.UsersVM LoggedInUser { get; set; }
         bool IsOffline { get; set; }
