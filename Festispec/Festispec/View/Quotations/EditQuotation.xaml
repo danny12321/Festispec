@@ -43,13 +43,13 @@
                     <Button HorizontalAlignment="Right" Command="{Binding ToPdf}" CommandParameter="{Binding AddInspectorCommand}"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         Width="127"
-                        ToolTip="Resource name: MaterialDesignRaisedButton" Content="Download PDF" RenderTransformOrigin="0.534,-0.149" Margin="-188,0,207,0"/>
+                        ToolTip="download als pdf" Content="Download PDF" RenderTransformOrigin="0.534,-0.149" Margin="-188,0,207,0"/>
                 </Border>
                 <Border Padding="10">
-                    <Button HorizontalAlignment="Right" Command="{Binding Save}" CommandParameter="{Binding Save}"
+                    <Button HorizontalAlignment="Left" Command="{Binding Save}" CommandParameter="{Binding Save}"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         Width="100"
-                        ToolTip="Resource name: MaterialDesignRaisedButton" Content="Opslaan" Margin="0,0,8,0"/>
+                        ToolTip="Opslaan" Content="Opslaan" Margin="0,0,8,0"/>
                 </Border>
 
             </StackPanel>

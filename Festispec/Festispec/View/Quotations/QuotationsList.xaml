@@ -8,14 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="QuotationsList"
           xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-      DataContext="{Binding quotationList, Source={StaticResource Locator}}"
-     TextElement.FontWeight="Regular"
-     TextElement.FontSize="13"
-     TextOptions.TextFormattingMode="Ideal"
-     TextOptions.TextRenderingMode="Auto"
-     Background="{DynamicResource MaterialDesignPaper}"
-     FontFamily="{DynamicResource MaterialDesignFont}">
+      DataContext="{Binding quotationList, Source={StaticResource Locator}}">
 
     <StackPanel>
         <Grid >
@@ -28,7 +21,7 @@
 
             <Button  Command="{Binding AddQuotation}"
                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                 ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                 ToolTip="Offerte toevoegen">
                 <materialDesign:PackIcon
                 Kind="Add"
                 Height="24"
@@ -42,12 +35,12 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naam" Binding="{Binding Qname}" Foreground="#FF1D1616" Width="250"/>
 
-                <DataGridTemplateColumn Width="100">
+                <DataGridTemplateColumn Width="100" Header="Informatie">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Grid.Column="1" Command="{Binding DataContext.EditQuotation, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
-                                ToolTip="Festival informatie">
+                                ToolTip="offerte informatie">
                                 <materialDesign:PackIcon
                                  Kind="About"
                                  Height="20"
