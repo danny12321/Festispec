@@ -122,12 +122,12 @@ namespace Festispec.ViewModel.Inspections
 
                     //Get the inspection
                     Inspection = new InspectionVM(context.Inspections.ToList().First(i => i.id == _inspetionId));
-                    StartDate = Inspection.Start_date;
+                    StartDate = Inspection.Start_date.Date;
                     StartTime = Inspection.Start_date.TimeOfDay;
 
-                    EndDate = Inspection.End_date;
+                    EndDate = Inspection.End_date.Date;
                     EndTime = Inspection.End_date.TimeOfDay;
-
+                    Console.WriteLine();
 
                     //Calc Travel Time
                     if (_useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt)
