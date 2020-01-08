@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec.View.Templates"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d"
       DataContext="{Binding Templates, Source={StaticResource Locator}}"
       d:DesignHeight="450" d:DesignWidth="800"
@@ -11,12 +12,26 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+
+
         <StackPanel Margin="10" Grid.Row="0" Orientation="Horizontal">
-            <Button Command="{Binding AddTemplateCommand}">Nieuw sjabloon</Button>
+            <TextBlock Text="Sjablonen" Grid.Column="0" Width="260" FontSize="28" Padding="20"></TextBlock>
+            <Button  Command="{Binding AddTemplateCommand}"
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                 ToolTip="Sjabloon toevoegen">
+                <materialDesign:PackIcon
+                Kind="Add"
+                Height="24"
+                Width="24" />
+            </Button>
         </StackPanel>
 
         <ScrollViewer Grid.Row="1">
@@ -32,7 +47,7 @@
                             
                         <TextBlock Grid.Column="0" FontSize="20" Margin="10 0" Text="{Binding name}" />
                         <Button Margin="10" Grid.Column="1" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ItemsControl}, Path=DataContext.OpenTemplateCommand}" CommandParameter="{Binding}">Open</Button>
-                        <Button Grid.Column="2" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ItemsControl}, Path=DataContext.DeleteTemplateCommand}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignOutlinedButton}">Verwijderen</Button>
+                        <Button Grid.Column="2" Background="Red" BorderThickness="0" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ItemsControl}, Path=DataContext.DeleteTemplateCommand}" CommandParameter="{Binding}">Verwijderen</Button>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

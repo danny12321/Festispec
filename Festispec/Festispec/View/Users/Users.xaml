@@ -11,6 +11,24 @@
       DataContext="{Binding UsersViewModel, Source={StaticResource Locator}}">
 
     <StackPanel>
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="600"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Gebruikers" FontSize="28" Grid.Column="0" Padding="20"/>
+
+            <Button  Command="{Binding NavigateAddUserCommand}"
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                 ToolTip="Gebruiker toevoegen">
+                <materialDesign:PackIcon
+                Kind="Add"
+                Height="24"
+                Width="24" />
+
+            </Button>
+        </Grid>
         
         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Users}" IsReadOnly="True">
             <DataGrid.Columns>
@@ -33,6 +51,5 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button HorizontalAlignment="Left" Command="{Binding NavigateAddUserCommand}">Voeg gebruiker toe</Button>
     </StackPanel>
 </Page>
