@@ -49,34 +49,36 @@ function questionnaireHandleTypeTable(question) {
     var columns = parseInt(table.getAttribute("data-columns"));
     var button = question.querySelector(".AddRow")
 
-    json.body.forEach(data => {
-        var row = document.createElement("tr");
+    if (json.body) {
+        json.body.forEach(data => {
+            var row = document.createElement("tr");
 
-        for (var i = 0; i < columns; i++) {
-            var td = document.createElement("td");
-            var input = document.createElement("input");
+            for (var i = 0; i < columns; i++) {
+                var td = document.createElement("td");
+                var input = document.createElement("input");
 
-            if (i !== 0) {
-                input.type = "number";
+                if (i !== 0) {
+                    input.type = "number";
+                }
+
+                input.value = data[i];
+                input.onchange = function (e) { HandleTableChange(question) };
+
+                td.appendChild(input);
+                row.appendChild(td);
             }
 
-            input.value = data[i];
-            input.onchange = function(e) { HandleTableChange(question) };
+            var td = document.createElement("td");
+            var button = document.createElement("button");
+            button.innerHTML = "X";
+            button.onclick = function (e) { row.remove(); HandleTableChange(question); }
 
-            td.appendChild(input);
+            td.appendChild(button);
             row.appendChild(td);
-        }
 
-        var td = document.createElement("td");
-        var button = document.createElement("button");
-        button.innerHTML = "X";
-        button.onclick = function(e) { row.remove(); HandleTableChange(question);}
-
-        td.appendChild(button);
-        row.appendChild(td);
-
-        body.appendChild(row);
-    });
+            body.appendChild(row);
+        });
+    }
 
     button.onclick = function(e) {
         e.preventDefault();

@@ -7,19 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Festipec.Domain
+namespace FestispecWeb.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Inspectors_availability
+    public partial class database_firewall_rules
     {
         public int id { get; set; }
-        public System.DateTime start_date { get; set; }
-        public System.DateTime end_date { get; set; }
-        public int inspector_id { get; set; }
-        public string text { get; set; }
-    
-        public virtual Inspectors Inspectors { get; set; }
+        public string name { get; set; }
+        public string start_ip_address { get; set; }
+        public string end_ip_address { get; set; }
+        public System.DateTime create_date { get; set; }
+        public System.DateTime modify_date { get; set; }
     }
 }

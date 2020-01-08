@@ -165,6 +165,9 @@
     <Compile Include="Models\Contactpersons.cs">
       <DependentUpon>ado.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\database_firewall_rules.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Festivals.cs">
       <DependentUpon>ado.tt</DependentUpon>
     </Compile>
@@ -182,13 +185,7 @@
     <Compile Include="Models\Inspectors_availability.cs">
       <DependentUpon>ado.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Laws.cs">
-      <DependentUpon>ado.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\Municipalities.cs">
-      <DependentUpon>ado.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Possible_answer.cs">
       <DependentUpon>ado.tt</DependentUpon>
     </Compile>

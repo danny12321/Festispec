@@ -47,12 +47,12 @@
                     <tr>
                         <td>@Html.Label("Email")</td>
                         <td>@Html.TextBoxFor(a => a.UserName)</td>
-                        <td>@Html.ValidationMessageFor(a => a.UserName)</td>
+                        <td>@Html.ValidationMessageFor(a => a.UserName, "Inlognaam is verplicht")</td>
                     </tr>
                     <tr>
                         <td>@Html.Label("Wachtwoord")</td>
                         <td>@Html.TextBoxFor(a => a.Password, new { @type = "password" })</td>
-                        <td>@Html.ValidationMessageFor(a => a.Password)</td>
+                        <td>@Html.ValidationMessageFor(a => a.Password, "Wachtwoord is verplicht")</td>
                     </tr>
                     <tr>
                         <td></td>
@@ -74,3 +74,12 @@
     </div>
 </body>
 </html>
+<style>
+    .field-validation-valid {
+        display: none;
+    }
+
+    .validation-summary-valid {
+        display: none;
+    }
+</style>

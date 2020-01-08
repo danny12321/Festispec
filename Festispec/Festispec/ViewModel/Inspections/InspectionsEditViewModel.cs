@@ -20,7 +20,7 @@ namespace Festispec.ViewModel.Inspections
 {
     public class InspectionEditViewModel : ViewModelBase
     {
-        private bool _useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt = false;
+        private bool _useUpAllFreeApiRequestsForTravelCalculationAndLetThierryPayForIt = true;
 
         private int _festivalId;
         private int _inspetionId;
@@ -413,7 +413,7 @@ namespace Festispec.ViewModel.Inspections
 
         private void AddQuestionnaire()
         {
-            var questionnaire = new Domain.Questionnaires() { inspection_id = _inspetionId };
+            var questionnaire = new Domain.Questionnaires() { name = "Nieuwe vragenlijst", inspection_id = _inspetionId };
 
             using (var context = new FestispecEntities())
             {

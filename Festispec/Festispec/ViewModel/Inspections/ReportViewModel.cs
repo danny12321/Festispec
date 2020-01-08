@@ -16,8 +16,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.DataVisualization.Charting;
+
 using System.Windows;
+
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
+//using System.Windows.Media.Imaging;
 
 namespace Festispec.ViewModel.Inspections
 {
@@ -88,9 +92,9 @@ namespace Festispec.ViewModel.Inspections
                                 context.SaveChanges();
                             }
 
-                            switch (q.Type.Type.ToLower())
+                            switch (q.Type.Id)
                             {
-                                case "table":
+                                case 8: // table
                                     var y = new List<int>();
                                     var x = new List<string>();
                                     int index = 0;
@@ -132,25 +136,36 @@ namespace Festispec.ViewModel.Inspections
                                     doc.Add(img);
                                     break;
 
-                                case "open":
+                                case 1: // open
 
                                     foreach (Answers a in answers)
                                     {
                                         doc.Add(new Paragraph(a.answer));
                                     }
                                     break;
-                                case "multiple choise":
+                                case 2: // multiple choice
 
                                     foreach (Answers a in answers)
                                     {
                                         doc.Add(new Paragraph(a.answer));
                                     }
                                     break;
-                                case "select":
+                                case 3: // select
 
                                     foreach (Answers a in answers)
                                     {
                                         doc.Add(new Paragraph(a.answer));
+                                    }
+                                    break;
+                                case 4: // afbeelding
+
+                                    foreach (Answers a in answers)
+                                    {
+
+
+                                        ImageData data1 = ImageDataFactory.Create(Base64ToImage(a.answer));
+                                        Image img1 = new Image(data1);
+                                        doc.Add(img1);
                                     }
                                     break;
                                 default:
@@ -168,6 +183,26 @@ namespace Festispec.ViewModel.Inspections
 
                 }
             }
+        }
+        public String Base64ToImage(string base64String)
+        {
+            byte[] imageBytes = Convert.FromBase64String(base64String);
+            BitmapImage bitmapImage = new BitmapImage();
+            MemoryStream ms = new MemoryStream(imageBytes);
+            bitmapImage.BeginInit();
+            bitmapImage.StreamSource = ms;
+            bitmapImage.EndInit();
+           
+            BitmapEncoder encoder = new PngBitmapEncoder();
+            var random = new Random();
+            encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+            var exportFolder = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache);
+            var exportFile = System.IO.Path.Combine(exportFolder, "plaatje-" + random.Next(2000) + ".jpg");
+            using (var fileStream = new System.IO.FileStream(exportFile, System.IO.FileMode.Create))
+            {
+                encoder.Save(fileStream);
+            }
+            return exportFile;
         }
         private void GeneratePdfTemp()
         {
