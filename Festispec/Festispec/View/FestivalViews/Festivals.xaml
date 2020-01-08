@@ -25,12 +25,11 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naam" Binding="{Binding FestivalName}" Foreground="#FF1D1616" Width="250"/>
                 <DataGridTextColumn Header="Jaar" Binding="{Binding Year}" Foreground="#FF1D1616" Width="250"/>
-                <DataGridTemplateColumn Width="100">
+                <DataGridTemplateColumn Width="100" Header="Informatie">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Grid.Column="1" Command="{Binding DataContext.ShowFestival, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
-                                ToolTip="Festival informatie">
+                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
                                 <materialDesign:PackIcon
                                  Kind="About"
                                  Height="20"
@@ -39,14 +38,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="100">
+                <DataGridTemplateColumn Width="100" Header="Inspecties">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Grid.Column="1" Command="{Binding DataContext.ShowAddInspection, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
-                                ToolTip="Inspectie toevoegen">
+                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
                                 <materialDesign:PackIcon
-                                 Kind="Add"
+                                 Kind="NotebookMultiple"
                                  Height="20"
                                  Width="20" />
                             </Button>

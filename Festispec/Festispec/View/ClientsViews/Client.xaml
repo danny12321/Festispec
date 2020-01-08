@@ -67,14 +67,14 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="90" Header="Informatie">
+                <DataGridTemplateColumn Width="90" Header="Festivals">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Command="{Binding DataContext.ShowClientInfo, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                   Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
-                                  ToolTip="Klant tonen">
+                                  ToolTip="Festivals tonen">
                                 <materialDesign:PackIcon
-                                    Kind="About"
+                                    Kind="Tent"
                                     Height="20"
                                     Width="20" />
                             </Button>
