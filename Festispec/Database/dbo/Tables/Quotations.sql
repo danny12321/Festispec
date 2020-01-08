@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Quotations](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[price] [decimal](10, 2) NULL,
-	[approved] [datetime] NOT NULL,
+	[approved] [datetime] NULL,
 	[festival_id] [int] NOT NULL,
  CONSTRAINT [PK_Quotation] PRIMARY KEY CLUSTERED 
 (
