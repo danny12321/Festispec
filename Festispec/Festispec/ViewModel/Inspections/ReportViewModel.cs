@@ -31,6 +31,7 @@ namespace Festispec.ViewModel.Inspections
     {
         public string FilePath { get; set; }
         public string FilePathTemp { get; set; }
+        public string Advice { get; set; }
         public ICommand ToPDF { get; set; }
         private QuestionnairesViewModel _qvm;
         public int Inspection_ID { get; set; }
@@ -145,7 +146,10 @@ namespace Festispec.ViewModel.Inspections
                                 default:
                                     break;
                             }
-
+                            if (Advice != null)
+                            {
+                                doc.Add(new Paragraph(Advice));
+                            }
                             doc.Add(new Div().SetMarginBottom(30));
                         }
                     }
