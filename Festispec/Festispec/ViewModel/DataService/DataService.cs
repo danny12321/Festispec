@@ -11,6 +11,7 @@ using Festispec.ViewModel.Inspections;
 using Festispec.ViewModel.InspectorsVM;
 using Festispec.ViewModel.Users;
 using Festispec.ViewModel.AccountsVM;
+using Festispec.ViewModel.QuotationsVM;
 
 namespace Festispec.ViewModel.DataService
 {
@@ -22,6 +23,7 @@ namespace Festispec.ViewModel.DataService
         public ContactPersonVM SelectedContactPerson { get; set; }
         public InspectionVM SelectedInspection { get; set; }
         public InspectorviewModel SelectedInspector { get; set; }
+        public QuotationViewModel SelectedQuotation { get; set; }
         public UserVM SelectedUser { get; set; }
         public bool IsOffline { get; set; } = false;
         public AccountsVM.UsersVM LoggedInUser { get; set; }

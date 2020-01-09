@@ -185,6 +185,22 @@ namespace Festispec.ViewModel
                 case "Logout":
                     closeWindow();
                     break;
+                case "ShowQuotations":
+                    FrameContent = new View.Quotations.QuotationsList();
+                    PageTitle = "Offerte Overzicht";
+                    break;
+                case "EditQuotation":
+                    FrameContent = new View.Quotations.EditQuotation();
+                    PageTitle = "Offerte Aanpassen";
+                    break;
+                case "AddQuotation":
+                    FrameContent = new View.Quotations.AddQuotation();
+                    PageTitle = "Offerte Toevoegen";
+                    break;
+                case "EditInspection":
+                    FrameContent = new View.Inspections.EditInspection();
+                    PageTitle = "Inspectie aanpassen";
+                    break;
                 default:
                     FrameContent = new View.Schedule.Schedule();
                     PageTitle = "Planning";
@@ -210,7 +226,10 @@ namespace Festispec.ViewModel
 
         private void closeWindow()
         {
-            Application.Current.Windows[0].Close();
+            //Application.Current.Windows[0].Close();
+
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
         }
 
         private void SetMenuItems()
@@ -230,10 +249,6 @@ namespace Festispec.ViewModel
             if (userRole.HasUserRole(new string[] { "Admin", "Secretariat", "Sales", "ProjectManager" }))
             {
                 MenuItems.Add(new MenuItem("Klanten", "Clients", "AccountBoxOutline"));
-            }
-            if (userRole.HasUserRole(new string[] { "Admin", "Secretariat", "Sales", "ProjectManager" }))
-            {
-                MenuItems.Add(new MenuItem("Offerte", "", "FileDocument"));
             }
             if (userRole.HasUserRole(new string[] { "Admin", "Secretariat", "Sales", "ProjectManager" }))
             {

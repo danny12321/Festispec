@@ -129,7 +129,7 @@ namespace Festispec.ViewModel.Users
             } else
             {
                 // Incorrect input -- Show error message
-                ErrorMessage = "Email moet ingevult zijn\nWachtwoord moet minimaal 6 karakters hebben";
+                ErrorMessage = "Email moet ingevuld zijn\nWachtwoord moet minimaal 6 karakters hebben";
                 RaisePropertyChanged("ErrorMessage");
             }
 

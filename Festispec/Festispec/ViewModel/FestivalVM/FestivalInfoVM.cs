@@ -20,7 +20,7 @@ namespace Festispec.ViewModel.FestivalVM
     {
         private IDataService _service;
         private MainViewModel _main;
-
+        public ICommand ShowQuotations { get; set; }
         public ObservableCollection<ContactPersonVM> Contactpersons { get; set; }
 
         public ContactPersonVM Contact;
@@ -58,11 +58,14 @@ namespace Festispec.ViewModel.FestivalVM
                 context.Festivals.Attach(SelectedFestival.ToModel());
                 Contactpersons = new ObservableCollection<ContactPersonVM>(SelectedFestival.ContactPersons);
             }
-
+            ShowQuotations = new RelayCommand(QuotationsList);
             ShowContactCommand = new RelayCommand(ShowContact);
             RemoveContactPersonToFestival = new RelayCommand(RemoveContactPerson, CanRemoveContactPerson);
         }
-
+        private void QuotationsList()
+        {
+            _main.SetPage("ShowQuotations");
+        }
         private bool CanRemoveContactPerson()
         {
             if(SelectedContactPerson != null)

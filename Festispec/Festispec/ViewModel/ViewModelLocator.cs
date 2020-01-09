@@ -16,6 +16,7 @@ using Festispec.ViewModel.ContactPersonsVM;
 using Festispec.ViewModel.DashboardVM;
 using Festispec.ViewModel.InspectorsVM;
 using Festispec.ViewModel.Users;
+using Festispec.ViewModel.QuotationsVM;
 
 namespace Festispec.ViewModel
 {
@@ -303,6 +304,27 @@ namespace Festispec.ViewModel
             get
             {
                 return new EditUserVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
+            }
+        }
+        public AddQuotationViewModel AddQuotation
+        {
+            get
+            {
+                return new AddQuotationViewModel(ServiceLocator.Current.GetInstance<IDataService>(), Main);
+            }
+        }
+        public EditQuotationViewModel EditQuotation
+        {
+            get
+            {
+                return new EditQuotationViewModel(ServiceLocator.Current.GetInstance<IDataService>(), Main);
+            }
+        }
+        public QuotationListViewModel quotationList
+        {
+            get
+            {
+                return new QuotationListViewModel(ServiceLocator.Current.GetInstance<IDataService>(), Main);
             }
         }
 

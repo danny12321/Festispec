@@ -18,6 +18,7 @@ namespace Festispec.ViewModel.InspectorsVM
         private InspectorListViewModel _inspectorViewModel;
         private MainViewModel _main;
         private IDataService _service;
+        public bool Approved { get; set; }
         public ICommand EditInspectorCommand { get; set; }
         
         public ICommand GenerateLatLongBasedOnAdressCommand { get; set; }
@@ -54,13 +55,25 @@ namespace Festispec.ViewModel.InspectorsVM
             ComboList = new ObservableCollection<string>();
             ComboList.Add("Nederland");
             ComboList.Add("België");
+            Approved = _service.SelectedInspector.Active != null;
         }
 
         private void EditInspectorMethod()
         {
             if (CanEditInspector())
             {
-                
+                if (Approved)
+                {
+                    if (_service.SelectedInspector.Active == null)
+                    {
+                        _service.SelectedInspector.Active = DateTime.Now;
+
+                    }
+                }
+                else
+                {
+                    _service.SelectedInspector.Active = null;
+                }
 
                 using (var context = new FestispecEntities())
                 {

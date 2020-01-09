@@ -55,11 +55,12 @@ namespace Festispec.ViewModel.DashboardVM
             using (var context = new FestispecEntities())
             {
                 var inspectors = context.Inspectors.ToList();
-                var quotation = context.Quotations.ToList();
+                var quotation = context.Quotations.ToList().Select(i => new QuotationsVM.QuotationViewModel(i));
                 var inspections = context.Inspections.ToList();
 
                 Inspectors = new ObservableCollection<InspectorviewModel>(inspectors.Select(i => new InspectorviewModel(i)).Where(i => i.Active != null));
-                var sum = quotation.Where(q => q.approved.Month == DateTime.Now.Month).Select(q => q.price).Sum();
+                var availablequotations = quotation.Where(q => q.Approved1 != null).ToList();
+                var sum = availablequotations.Where(q => q.Approved.Month == DateTime.Now.Month).Select(q => q.Price).Sum();
                 var text = (double)sum;
                 RevenueAmount = "€" + text.ToString();
 
@@ -76,18 +77,18 @@ namespace Festispec.ViewModel.DashboardVM
                 _november = inspections.Where(i => i.start_date.Month == 11 && i.start_date.Year == DateTime.Now.Year).Select(i => i.id).Count();
                 _december = inspections.Where(i => i.start_date.Month == 12 && i.start_date.Year == DateTime.Now.Year).Select(i => i.id).Count();
 
-                _january2 = (double)quotation.Where(q => q.approved.Month == 1 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
-                _february2 = (double)quotation.Where(q => q.approved.Month == 2 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
-                _march2 = (double)quotation.Where(q => q.approved.Month == 3 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
-                _april2 = (double)quotation.Where(q => q.approved.Month == 4 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
-                _may2 = (double)quotation.Where(q => q.approved.Month == 5 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
-                _june2 = (double)quotation.Where(q => q.approved.Month == 6 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
-                _july2 = (double)quotation.Where(q => q.approved.Month == 7 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
-                _august2 = (double)quotation.Where(q => q.approved.Month == 8 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
-                _september2 = (double)quotation.Where(q => q.approved.Month == 9 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
-                _october2 = (double)quotation.Where(q => q.approved.Month == 10 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
-                _november2 = (double)quotation.Where(q => q.approved.Month == 11 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
-                _december2 = (double)quotation.Where(q => q.approved.Month == 12 && q.approved.Year == DateTime.Now.Year).Select(q => q.price).Sum();
+                _january2 = (double)availablequotations.Where(q => q.Approved.Month == 1 && q.Approved.Year == DateTime.Now.Year).Select(q => q.Price).Sum();
+                _february2 = (double)availablequotations.Where(q => q.Approved.Month == 2 && q.Approved.Year == DateTime.Now.Year).Select(q => q.Price).Sum();
+                _march2 = (double)availablequotations.Where(q => q.Approved.Month == 3 && q.Approved.Year == DateTime.Now.Year).Select(q => q.Price).Sum();
+                _april2 = (double)availablequotations.Where(q => q.Approved.Month == 4 && q.Approved.Year == DateTime.Now.Year).Select(q => q.Price).Sum();
+                _may2 = (double)availablequotations.Where(q => q.Approved.Month == 5 && q.Approved.Year == DateTime.Now.Year).Select(q => q.Price).Sum();
+                _june2 = (double)availablequotations.Where(q => q.Approved.Month == 6 && q.Approved.Year == DateTime.Now.Year).Select(q => q.Price).Sum();
+                _july2 = (double)availablequotations.Where(q => q.Approved.Month == 7 && q.Approved.Year == DateTime.Now.Year).Select(q => q.Price).Sum();
+                _august2 = (double)availablequotations.Where(q => q.Approved.Month == 8 && q.Approved.Year == DateTime.Now.Year).Select(q => q.Price).Sum();
+                _september2 = (double)availablequotations.Where(q => q.Approved.Month == 9 && q.Approved.Year == DateTime.Now.Year).Select(q => q.Price).Sum();
+                _october2 = (double)availablequotations.Where(q => q.Approved.Month == 10 && q.Approved.Year == DateTime.Now.Year).Select(q => q.Price).Sum();
+                _november2 = (double)availablequotations.Where(q => q.Approved.Month == 11 && q.Approved.Year == DateTime.Now.Year).Select(q => q.Price).Sum();
+                _december2 = (double)availablequotations.Where(q => q.Approved.Month == 12 && q.Approved.Year == DateTime.Now.Year).Select(q => q.Price).Sum();
 
             }
 

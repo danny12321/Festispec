@@ -17,13 +17,17 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="600"/>
                 <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Rapportage" Grid.Column="0" FontSize="28" Padding="20"></TextBlock>
 
             <Button
+                 Grid.Column="1"
                  Command="{Binding ToPDF}" CommandParameter="{Binding EditInspectorCommand}"
                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                    VerticalAlignment="Top"
+                Margin="0 25"
                  ToolTip="Download PDF naar bureaublad">
                 <materialDesign:PackIcon
                 Kind="ContentSave"
@@ -31,10 +35,25 @@
                 Width="24" />
 
             </Button>
+            
+            <StackPanel Grid.Column="2">
+                <TextBox 
+                    Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                    Text="{Binding Advice}"
+                    AcceptsReturn="True"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    materialDesign:HintAssist.Hint="Advies: (word toegevoegd tijdens het opslaan)"
+                    MaxHeight="200"
+                    Margin="0 10"
+                    ></TextBox>
+            </StackPanel>
         </Grid>
 
         <PdfViewer:PdfDocumentView DockPanel.Dock="Top" ItemSource="{Binding FilePathTemp}" />
+        
 
 
     </DockPanel>
+    
 </Page>

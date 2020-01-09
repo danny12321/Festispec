@@ -231,6 +231,10 @@
     <Compile Include="ViewModel\Questionnaires\Types\OpenQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Types\SelectQuestion.cs" />
     <Compile Include="ViewModel\Questionnaires\Types\TableQuestion.cs" />
+    <Compile Include="ViewModel\QuotationsVM\AddQuotationViewModel.cs" />
+    <Compile Include="ViewModel\QuotationsVM\EditQuotationViewModel.cs" />
+    <Compile Include="ViewModel\QuotationsVM\QuotationsListViewModel.cs" />
+    <Compile Include="ViewModel\QuotationsVM\QuotationViewModel.cs" />
     <Compile Include="ViewModel\Templates\TemplatesVM.cs" />
     <Compile Include="ViewModel\ScheduleVM\ScheduleColumnVM.cs" />
     <Compile Include="ViewModel\ScheduleVM\ScheduleVM.cs" />
@@ -351,6 +355,15 @@
     </Compile>
     <Compile Include="View\Questionnaires\Types\TablePreview.xaml.cs">
       <DependentUpon>TablePreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Quotations\AddQuotation.xaml.cs">
+      <DependentUpon>AddQuotation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Quotations\EditQuotation.xaml.cs">
+      <DependentUpon>EditQuotation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Quotations\QuotationsList.xaml.cs">
+      <DependentUpon>QuotationsList.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Schedule\Schedule.xaml.cs">
       <DependentUpon>Schedule.xaml</DependentUpon>
@@ -532,6 +545,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Questionnaires\Types\TablePreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Quotations\AddQuotation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Quotations\EditQuotation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Quotations\QuotationsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

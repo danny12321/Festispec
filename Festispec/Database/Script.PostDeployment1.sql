@@ -13,7 +13,7 @@ Post-Deployment Script Template
 INSERT [dbo].[Rolls] ([role]) VALUES (N'Admin')
 INSERT [dbo].[Rolls] ([role]) VALUES (N'Inspector')
 INSERT [dbo].[Rolls] ([role]) VALUES (N'Sales')
-INSERT [dbo].[Rolls] ([role]) VALUES (N'Secretariat')
+INSERT [dbo].[Rolls] ([role]) VALUES (N'Secretariaat')
 INSERT [dbo].[Rolls] ([role]) VALUES (N'ProjectManager')
 INSERT [dbo].[Rolls] ([role]) VALUES (N'Management')
 
