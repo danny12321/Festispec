@@ -65,7 +65,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Naam" Binding="{Binding FestivalName}" Foreground="#FF1D1616" Width="200"/>
                         <DataGridTextColumn Header="Jaar" Binding="{Binding Year}" Foreground="#FF1D1616" Width="200"/>
-                        <DataGridTemplateColumn Width="75" Header="Edit">
+                        <DataGridTemplateColumn Width="95" Header="Wijzigen">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Command="{Binding DataContext.ShowEditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
@@ -79,7 +79,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Width="100" Header="Info">
+                        <DataGridTemplateColumn Width="100" Header="Informatie">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Command="{Binding DataContext.ShowFestivalCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
