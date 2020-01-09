@@ -226,7 +226,10 @@ namespace Festispec.ViewModel
 
         private void closeWindow()
         {
-            Application.Current.Windows[0].Close();
+            //Application.Current.Windows[0].Close();
+
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
         }
 
         private void SetMenuItems()
