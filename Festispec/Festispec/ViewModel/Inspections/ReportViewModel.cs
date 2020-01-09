@@ -60,10 +60,9 @@ namespace Festispec.ViewModel.Inspections
             FilePathTemp = exportFile;
             PdfGen(FilePathTemp);
 
-
             ToPDF = new RelayCommand(GeneratePdf);
-
         }
+
         private void PdfGen(string path)
         {
 
@@ -150,9 +149,10 @@ namespace Festispec.ViewModel.Inspections
                             doc.Add(new Div().SetMarginBottom(30));
                         }
                     }
+
                     if (Advice != null)
                     {
-                        doc.Add(new Paragraph("Advies: ").SetFontSize(18).SetBold());
+                        doc.Add(new Paragraph("Advies: ").SetFontSize(20).SetBold());
                         doc.Add(new Paragraph(Advice));
                     }
                 }
