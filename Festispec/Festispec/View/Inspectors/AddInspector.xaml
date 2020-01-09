@@ -1,0 +1,98 @@
+﻿<Page x:Class="Festispec.View.Inspectors.AddInspector"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Festispec.View.Inspectors"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      DataContext="{Binding AddInspector, Source={StaticResource Locator}}"
+      Title="AddInspector"
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Border Padding="20">
+            <StackPanel>
+
+                <TextBlock Text="Voeg een nieuwe inspecteur toe" FontSize="25" Padding="0,10"/>
+
+                <TextBlock FontSize="15" Text="Voornaam:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding Inspector.InspectorFirstName, Mode=TwoWay}"></TextBox>
+
+                <TextBlock FontSize="15" Text="Achternaam:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding Inspector.InspectorLastName, Mode=TwoWay}"></TextBox>
+
+                <TextBlock FontSize="15" Text="Email:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding Inspector.InspectorEmail, Mode=TwoWay}"></TextBox>
+
+                <TextBlock FontSize="15" Text="Geboorte Datum:"></TextBlock>
+
+                <DatePicker FontSize="15" HorizontalAlignment="Left" Width="100" materialDesign:HintAssist.Hint="Pick Date" SelectedDate="{Binding Inspector.Birthday,Mode=OneWayToSource}" DisplayDate="2019-11-19"/>
+
+                <TextBlock FontSize="15" Text="Postcode:"></TextBlock>
+                <TextBox FontSize="15" HorizontalAlignment="Left" Width="100" MaxLength="6" Text="{Binding Inspector.PostalCode, Mode=TwoWay}"></TextBox>
+
+                <TextBlock FontSize="15" Text="Land:"></TextBlock>
+                <ComboBox Width="100"
+                        Margin="0 8 0 8"
+                        HorizontalAlignment="Left"
+                        Text="{Binding Inspector.Country, Mode=TwoWay}">
+                    <ComboBoxItem
+                        IsSelected="True">
+                        Nederland
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        België
+                    </ComboBoxItem>
+                </ComboBox>
+
+                <TextBlock FontSize="15" Text="Plaats:"></TextBlock>
+                <TextBox FontSize="15"  MaxLength="50" Text="{Binding Inspector.City, Mode=TwoWay}"></TextBox>
+
+                <TextBlock FontSize="15" Text="Straat:"></TextBlock>
+                <TextBox FontSize="15"  MaxLength="50" Text="{Binding Inspector.Street, Mode=TwoWay}"></TextBox>
+
+                <TextBlock FontSize="15" Text="Huisnummer:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="10" Text="{Binding Inspector.Housenumber, Mode=TwoWay}"></TextBox>
+
+                <TextBlock FontSize="15" Text="TelefoonNummer:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding Inspector.Phone, Mode=TwoWay}"></TextBox>
+
+                <TextBlock FontSize="15" Text="Wachtwoord:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="10" Text="{Binding Password, Mode=TwoWay}" Margin="0,0,167,0"></TextBox>
+
+                <Button Content="Genereer Wachtwoord" Command="{Binding CreatePass}" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="193"/>
+
+                <TextBlock FontSize="15" Margin="0,10,0,0" Text="Breedtegraad:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding Inspector.Latitude, Mode=TwoWay}"></TextBox>
+
+                <TextBlock FontSize="15" Text="Hoogtegraad:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding Inspector.Longitude, Mode=TwoWay}"></TextBox>
+
+                <Border Padding="10">
+                    <Button HorizontalAlignment="Left" Command="{Binding GenerateLatLongBasedOnAdressCommand}">Genereer Adres Gegevens</Button>
+                </Border>
+
+                <Border Padding="10">
+                    <Button HorizontalAlignment="Right" Command="{Binding AddInspectorCommand}" CommandParameter="{Binding AddInspectorCommand}"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Width="100" Content="Opslaan"/>
+                </Border>
+
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Page>

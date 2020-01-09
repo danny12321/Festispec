@@ -1,0 +1,57 @@
+﻿@model FestispecWeb.Models.InspectionVM
+
+
+@{
+    ViewBag.Title = "Questionnaires";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container2">
+    <div class="row">
+        <div class="box">
+            <div class="col-md-6">
+                <h2 class="Text">@Model.Inspections.description</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br/>
+<h4><b>Inspectie gegevens:</b></h4>
+<p>Datum: @Model.Inspections.start_date.ToShortDateString()</p>
+<p>Tijd: @Model.Inspections.start_date.TimeOfDay</p>
+<p>Plek: @Model.Inspections.Festivals.country, @Model.Inspections.Festivals.city</p>
+<p>Locatie: @Model.Inspections.Festivals.street @Model.Inspections.Festivals.housenumber, @Model.Inspections.Festivals.postalcode</p>
+<br />
+
+<h3>Vragenlijsten</h3>
+
+<table class="table">
+    @foreach (var item in Model.Questionnaires)
+    {
+        <tr>
+            <td>
+                <p>@item.name</p>
+            </td>
+            <td>
+                <p>@item.version</p>
+            </td>
+            <td>
+                @Html.ActionLink("Naar vragenlijst", "questionnaire", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<style>
+    .container2 {
+        background-color: #4B4B4B;
+    }
+
+    .Text {
+        color: white;
+        margin-left: 10px;
+    }
+
+</style>

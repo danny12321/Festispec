@@ -1,0 +1,39 @@
+﻿<Page x:Class="Festispec.View.ContactPersonsView.ContactPersonInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Festispec.View.ContactPersonsView"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ContactPersonInfo"
+      DataContext="{Binding contactPersonInfo, Source={StaticResource Locator}}"
+      Background="White">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Padding="20">
+            <StackPanel>
+
+                <TextBlock Text="Contactpersoon gegevens" FontSize="25" Padding="0,10"/>
+
+                <TextBlock FontSize="15" Text="Voornaam:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedContactPerson.ContactPersonName}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="15" Text="Achternaam:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedContactPerson.ContactPersonLastName}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="15" Text="Email:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedContactPerson.ContactPersonMail}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="15" Text="Telefoonnummer:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding SelectedContactPerson.ContactPersonPhoneNumber}" IsReadOnly="True"></TextBox>
+                <TextBlock FontSize="15" Text="type contact:"></TextBlock>
+                <TextBox FontSize="15" MaxLength="50" Text="{Binding getTypeContact}" IsReadOnly="True"></TextBox>
+
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

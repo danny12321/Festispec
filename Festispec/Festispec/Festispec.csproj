@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0-preview2-19525-03\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0-preview2-19525-03\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -14,6 +15,23 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -24,6 +42,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,10 +52,114 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.Crypto.dll.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonServiceLocator, Version=2.0.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.5\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0-preview2-19525-03\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0-preview2-19525-03\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.barcodes, Version=7.1.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.9\lib\net40\itext.barcodes.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.forms, Version=7.1.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.9\lib\net40\itext.forms.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.io, Version=7.1.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.9\lib\net40\itext.io.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.kernel, Version=7.1.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.9\lib\net40\itext.kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.layout, Version=7.1.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.9\lib\net40\itext.layout.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.pdfa, Version=7.1.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.9\lib\net40\itext.pdfa.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.sign, Version=7.1.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.9\lib\net40\itext.sign.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.styledxmlparser, Version=7.1.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.9\lib\net40\itext.styledxmlparser.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.svg, Version=7.1.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.9\lib\net40\itext.svg.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.2.0.325, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.2.0\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.6.0.325, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.6.0\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Maps.MapControl.WPF">
+      <HintPath>..\..\..\..\..\..\Downloads\Microsoft.Maps.MapControl.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfPrintingNet, Version=4.9.11.0, Culture=neutral, PublicKeyToken=ded90f87675288f3, processorArchitecture=MSIL">
+      <HintPath>..\packages\PdfPrintingNet.4.9.11\lib\net20\PdfPrintingNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Compression.Base, Version=17.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Compression.Base.17.3.0.34\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=17.3460.0.34, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.17.3.0.34\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Pdf.Base, Version=17.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Pdf.Wpf.17.3.0.34\lib\net46\Syncfusion.Pdf.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.PdfViewer.WPF, Version=17.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.PdfViewer.WPF.17.3.0.34\lib\net46\Syncfusion.PdfViewer.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.WPF, Version=17.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Shared.WPF.17.3.0.34\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,7 +178,301 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Compile Include="Utils\UserRole.cs" />
+    <Compile Include="Utils\LatLongGenerator.cs" />
+    <Compile Include="Utils\PasswordHasher.cs" />
+    <Compile Include="Utils\RouteDurationCalculator.cs" />
+    <Compile Include="ViewModel\AccountsVM\UsersRollsVM.cs" />
+    <Compile Include="ViewModel\AccountsVM\UsersVM.cs" />
+    <Compile Include="ViewModel\ClientVM\AddClientsVM.cs" />
+    <Compile Include="ViewModel\ClientVM\ClientInfoVM.cs" />
+    <Compile Include="ViewModel\ClientVM\ClientManageVM.cs" />
+    <Compile Include="ViewModel\ClientVM\ClientsVM.cs" />
+    <Compile Include="ViewModel\ClientVM\EditClientVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\AddContactPersonVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\AddFestivalContactVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\ContactPersonInfoVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\ContactPersonManageVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\ContactPersonVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\EditContactPersonVM.cs" />
+    <Compile Include="ViewModel\ContactPersonsVM\TypeContactVM.cs" />
+    <Compile Include="ViewModel\DashboardVM\ManageDashboardVM.cs" />
+    <Compile Include="ViewModel\DataService\DataService.cs" />
+    <Compile Include="ViewModel\DataService\IDataService.cs" />
+    <Compile Include="ViewModel\FestivalVM\AddFestivalVM.cs" />
+    <Compile Include="ViewModel\FestivalVM\EditFestivalVM.cs" />
+    <Compile Include="ViewModel\FestivalVM\FestivalInfoVM.cs" />
+    <Compile Include="ViewModel\FestivalVM\FestivalManagementVM.cs" />
+    <Compile Include="ViewModel\FestivalVM\FestivalVM.cs" />
+    <Compile Include="ViewModel\Inspections\FestivalVM.cs" />
+    <Compile Include="ViewModel\Inspections\InspectionAddViewModel.cs" />
+    <Compile Include="ViewModel\Inspections\InspectionsEditViewModel.cs" />
+    <Compile Include="ViewModel\Inspections\InspectionsViewModel.cs" />
+    <Compile Include="ViewModel\Inspections\InspectionVM.cs" />
+    <Compile Include="ViewModel\Inspections\InspectorAtInspectionVM.cs" />
+    <Compile Include="ViewModel\Inspections\InspectorsVM.cs" />
+    <Compile Include="ViewModel\InspectorsVM\AddInspectorViewModel.cs" />
+    <Compile Include="ViewModel\InspectorsVM\EditInspectorViewModel.cs" />
+    <Compile Include="ViewModel\InspectorsVM\InspectorInfoViewModel.cs" />
+    <Compile Include="ViewModel\InspectorsVM\InspectorListViewModel.cs" />
+    <Compile Include="ViewModel\InspectorsVM\InspectorviewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MenuItem.cs" />
+    <Compile Include="ViewModel\Questionnaires\IQuestion.cs" />
+    <Compile Include="ViewModel\Questionnaires\Possible_answerVM.cs" />
+    <Compile Include="ViewModel\MunicipalityVM\MunicipalityViewModel.cs" />
+    <Compile Include="ViewModel\PopUpViewModel.cs" />
+    <Compile Include="ViewModel\Questionnaires\QuestionnairesViewModel.cs" />
+    <Compile Include="ViewModel\Questionnaires\QuestionTypeViewModel.cs" />
+    <Compile Include="ViewModel\Questionnaires\QuestionViewModel.cs" />
+    <Compile Include="ViewModel\Questionnaires\Types\ImageQuestion.cs" />
+    <Compile Include="ViewModel\Questionnaires\Types\MultipleChoiseQuestion.cs" />
+    <Compile Include="ViewModel\Questionnaires\Types\OpenQuestion.cs" />
+    <Compile Include="ViewModel\Questionnaires\Types\SelectQuestion.cs" />
+    <Compile Include="ViewModel\Questionnaires\Types\TableQuestion.cs" />
+    <Compile Include="ViewModel\QuotationsVM\AddQuotationViewModel.cs" />
+    <Compile Include="ViewModel\QuotationsVM\EditQuotationViewModel.cs" />
+    <Compile Include="ViewModel\QuotationsVM\QuotationsListViewModel.cs" />
+    <Compile Include="ViewModel\QuotationsVM\QuotationViewModel.cs" />
+    <Compile Include="ViewModel\Templates\TemplatesVM.cs" />
+    <Compile Include="ViewModel\ScheduleVM\ScheduleColumnVM.cs" />
+    <Compile Include="ViewModel\ScheduleVM\ScheduleVM.cs" />
+    <Compile Include="ViewModel\Users\AddUserVM.cs" />
+    <Compile Include="ViewModel\Users\EditUserVM.cs" />
+    <Compile Include="ViewModel\Users\UserRollVM.cs" />
+    <Compile Include="ViewModel\Users\UsersVM.cs" />
+    <Compile Include="ViewModel\Users\UserVM.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\ContactPersonsView\AddContactPerson.xaml.cs">
+      <DependentUpon>AddContactPerson.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactPersonsView\AddFestivalContact.xaml.cs">
+      <DependentUpon>AddFestivalContact.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactPersonsView\ContactPersonInfo.xaml.cs">
+      <DependentUpon>ContactPersonInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactPersonsView\ContactPersonsManage.xaml.cs">
+      <DependentUpon>ContactPersonsManage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactPersonsView\EditContactPerson.xaml.cs">
+      <DependentUpon>EditContactPerson.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dashboard\ManageDashboard.xaml.cs">
+      <DependentUpon>ManageDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Inspections\AddInspection.xaml.cs">
+      <DependentUpon>AddInspection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Inspections\EditInspection.xaml.cs">
+      <DependentUpon>EditInspection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Inspections\Inspections.xaml.cs">
+      <DependentUpon>Inspections.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientsViews\AddClients.xaml.cs">
+      <DependentUpon>AddClients.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientsViews\Client.xaml.cs">
+      <DependentUpon>Client.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\Inspections\ReportViewModel.cs" />
+    <Compile Include="View\Inspections\ReportView.xaml.cs">
+      <DependentUpon>ReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Inspectors\InspectorInfo.xaml.cs">
+      <DependentUpon>InspectorInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Municipality\AddMunicipality.xaml.cs">
+      <DependentUpon>AddMunicipality.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Municipality\Municipality.xaml.cs">
+      <DependentUpon>Municipality.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PopUpWindow.xaml.cs">
+      <DependentUpon>PopUpWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientsViews\ClientInfo.xaml.cs">
+      <DependentUpon>ClientInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientsViews\EditClient.xaml.cs">
+      <DependentUpon>EditClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FestivalViews\AddFestival.xaml.cs">
+      <DependentUpon>AddFestival.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FestivalViews\EditFestival.xaml.cs">
+      <DependentUpon>EditFestival.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FestivalViews\FestivalInfo.xaml.cs">
+      <DependentUpon>FestivalInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FestivalViews\Festivals.xaml.cs">
+      <DependentUpon>Festivals.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Inspectors\AddInspector.xaml.cs">
+      <DependentUpon>AddInspector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Inspectors\EditInspector.xaml.cs">
+      <DependentUpon>EditInspector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Inspectors\Inspectors.xaml.cs">
+      <DependentUpon>Inspectors.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Questionnaires.xaml.cs">
+      <DependentUpon>Questionnaires.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Template.xaml.cs">
+      <DependentUpon>Template.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\ImageEdit.xaml.cs">
+      <DependentUpon>ImageEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\ImagePreview.xaml.cs">
+      <DependentUpon>ImagePreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\MultipleChoiseEdit.xaml.cs">
+      <DependentUpon>MultipleChoiseEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\MultipleChoisePreview.xaml.cs">
+      <DependentUpon>MultipleChoisePreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\OpenEdit.xaml.cs">
+      <DependentUpon>OpenEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\OpenPreview.xaml.cs">
+      <DependentUpon>OpenPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\SelectEdit.xaml.cs">
+      <DependentUpon>SelectEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\SelectPreview.xaml.cs">
+      <DependentUpon>SelectPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\TableEdit.xaml.cs">
+      <DependentUpon>TableEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questionnaires\Types\TablePreview.xaml.cs">
+      <DependentUpon>TablePreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Quotations\AddQuotation.xaml.cs">
+      <DependentUpon>AddQuotation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Quotations\EditQuotation.xaml.cs">
+      <DependentUpon>EditQuotation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Quotations\QuotationsList.xaml.cs">
+      <DependentUpon>QuotationsList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Schedule\Schedule.xaml.cs">
+      <DependentUpon>Schedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Templates\Templates.xaml.cs">
+      <DependentUpon>Templates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Users\AddUser.xaml.cs">
+      <DependentUpon>AddUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Users\EditUser.xaml.cs">
+      <DependentUpon>EditUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Users\Users.xaml.cs">
+      <DependentUpon>Users.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\BaseWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClientsViews\AddClients.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClientsViews\Client.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClientsViews\ClientInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClientsViews\EditClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactPersonsView\AddContactPerson.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactPersonsView\AddFestivalContact.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactPersonsView\ContactPersonInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactPersonsView\ContactPersonsManage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactPersonsView\EditContactPerson.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dashboard\ManageDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FestivalViews\AddFestival.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FestivalViews\EditFestival.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FestivalViews\FestivalInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FestivalViews\Festivals.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspections\AddInspection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspections\EditInspection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspections\Inspections.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspections\ReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspectors\AddInspector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspectors\EditInspector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspectors\InspectorInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Inspectors\Inspectors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -63,10 +480,106 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="View\BaseWindow.xaml.cs">
+      <DependentUpon>BaseWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="View\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="View\Questionnaires\Questionnaires.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Municipality\AddMunicipality.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Municipality\Municipality.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PopUpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Template.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\ImageEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\ImagePreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\MultipleChoiseEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\MultipleChoisePreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\OpenEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\OpenPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\SelectEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\SelectPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\TableEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questionnaires\Types\TablePreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Quotations\AddQuotation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Quotations\EditQuotation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Quotations\QuotationsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Schedule\Schedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Users\AddUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Users\EditUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Users\Users.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Templates\Templates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -86,6 +599,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="connections.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -94,5 +611,31 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Festispec.Domain\Festispec.Domain.csproj">
+      <Project>{26F92110-69A7-4DFA-B246-625D32F30297}</Project>
+      <Name>Festispec.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0-preview2-19525-03\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0-preview2-19525-03\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0-preview2-19525-03\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0-preview2-19525-03\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0-preview2-19525-03\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0-preview2-19525-03\build\EntityFramework.targets')" />
 </Project>

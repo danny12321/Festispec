@@ -1,0 +1,48 @@
+﻿<Window x:Class="Festispec.View.BaseWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Festispec.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
+        WindowState="Maximized"
+        Title="Festispec CIB">
+    <Window.Resources>
+        <Visibility x:Key="AdminOnly">Collapsed</Visibility>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+      
+        <Border Grid.Column="0" Background="#32385D" Padding="0,100,0,0" MinWidth="250">
+            <ItemsControl ItemsSource="{Binding MenuItems}" IsEnabled="{Binding IsChecked, ElementName=EnableListBox}" Background="#32385D">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <MenuItem FontSize="20" Foreground="White" Header="{Binding DisplayName}" Command="{Binding DataContext.SetPageCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding CommandParameter}">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Foreground="White" Kind="{Binding Icon}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
+
+        <DockPanel Grid.Column="1">
+
+            <Border DockPanel.Dock="Top" Background="LightGray" Height="100">
+                <StackPanel Orientation="Horizontal">
+                    <Button Margin="10,0,0,0" Command="{Binding BackCommand}">Terug</Button>
+                    <TextBlock Text="{Binding PageTitle}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="20"/>
+                </StackPanel>
+            </Border>
+
+            <Frame DockPanel.Dock="Bottom" Content="{Binding FrameContent}" NavigationUIVisibility="Hidden"></Frame>
+        </DockPanel>
+
+    </Grid>
+</Window>

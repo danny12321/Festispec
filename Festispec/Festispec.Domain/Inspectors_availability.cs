@@ -18,7 +18,8 @@ namespace Festispec.Domain
         public System.DateTime start_date { get; set; }
         public System.DateTime end_date { get; set; }
         public int inspector_id { get; set; }
+        public string text { get; set; }
     
-        public virtual Inspector Inspector { get; set; }
+        public virtual Inspectors Inspectors { get; set; }
     }
 }

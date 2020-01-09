@@ -1,0 +1,58 @@
+﻿<Page x:Class="Festispec.View.FestivalViews.Festivals"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Festispec.View.FestivalViews"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      DataContext="{Binding festival, Source={StaticResource Locator}}"
+      Title="Festival beheer"
+      Background="White">
+
+    <StackPanel>
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="600"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Festival" FontSize="28" Grid.Column="0" Padding="20"/>
+        </Grid>
+
+        <DataGrid Margin="0 8 0 0" IsReadOnly="True" SelectedItem="{Binding SelectedFestival, Mode=TwoWay}" ItemsSource="{Binding FestivalList}" AutoGenerateColumns="False" CanUserSortColumns="True" CanUserAddRows="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Naam" Binding="{Binding FestivalName}" Foreground="#FF1D1616" Width="250"/>
+                <DataGridTextColumn Header="Jaar" Binding="{Binding Year}" Foreground="#FF1D1616" Width="250"/>
+                <DataGridTemplateColumn Width="100" Header="Informatie">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Grid.Column="1" Command="{Binding DataContext.ShowFestival, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+                                <materialDesign:PackIcon
+                                 Kind="About"
+                                 Height="20"
+                                 Width="20" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="100" Header="Inspecties">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Grid.Column="1" Command="{Binding DataContext.ShowAddInspection, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+                                <materialDesign:PackIcon
+                                 Kind="NotebookMultiple"
+                                 Height="20"
+                                 Width="20" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </StackPanel>
+</Page>

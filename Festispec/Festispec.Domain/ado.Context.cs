@@ -25,23 +25,21 @@ namespace Festispec.Domain
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Answer> Answers { get; set; }
-        public virtual DbSet<Client> Clients { get; set; }
-        public virtual DbSet<Contactperson> Contactpersons { get; set; }
-        public virtual DbSet<Festival> Festivals { get; set; }
-        public virtual DbSet<Inspection> Inspections { get; set; }
-        public virtual DbSet<Inspector> Inspectors { get; set; }
+        public virtual DbSet<Answers> Answers { get; set; }
+        public virtual DbSet<Clients> Clients { get; set; }
+        public virtual DbSet<Contactpersons> Contactpersons { get; set; }
+        public virtual DbSet<Festivals> Festivals { get; set; }
+        public virtual DbSet<Inspections> Inspections { get; set; }
+        public virtual DbSet<Inspectors> Inspectors { get; set; }
         public virtual DbSet<Inspectors_at_inspection> Inspectors_at_inspection { get; set; }
         public virtual DbSet<Inspectors_availability> Inspectors_availability { get; set; }
-        public virtual DbSet<Law> Laws { get; set; }
-        public virtual DbSet<Municipality> Municipalities { get; set; }
         public virtual DbSet<Possible_answer> Possible_answer { get; set; }
-        public virtual DbSet<Questionnaire> Questionnaires { get; set; }
-        public virtual DbSet<Question> Questions { get; set; }
-        public virtual DbSet<Quotation> Quotations { get; set; }
-        public virtual DbSet<Roll> Rolls { get; set; }
+        public virtual DbSet<Questionnaires> Questionnaires { get; set; }
+        public virtual DbSet<Questions> Questions { get; set; }
+        public virtual DbSet<Quotations> Quotations { get; set; }
+        public virtual DbSet<Rolls> Rolls { get; set; }
         public virtual DbSet<Type_contacts> Type_contacts { get; set; }
         public virtual DbSet<Type_questions> Type_questions { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }
