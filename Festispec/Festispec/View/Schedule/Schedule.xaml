@@ -28,7 +28,7 @@
 
 
         <ScrollViewer DockPanel.Dock="Bottom">
-            <ItemsControl ItemsSource="{Binding Schedule}">
+            <ItemsControl ItemsSource="{Binding Schedule}" x:Name="ScheduleControl">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="LightGray" Height="300" BorderThickness=" 1 0 1 0">
@@ -39,16 +39,19 @@
                                 </Border>
 
                                 <ScrollViewer DockPanel.Dock="Bottom" VerticalScrollBarVisibility="Auto">
-                                    <ItemsControl ItemsSource="{Binding Inspections}">
+                                    <ItemsControl ItemsSource="{Binding Inspections}" x:Name="InspectionControl">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
                                                 <StackPanel Margin="0 10">
-                                                    <TextBlock Text="{Binding Description}" FontSize="18" FontWeight="DemiBold"/>
+                                                    <TextBlock>
+                                                        <Hyperlink Command="{Binding DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}">
+                                                            <TextBlock Text="{Binding Description}" FontSize="18" FontWeight="DemiBold"></TextBlock>
+                                                        </Hyperlink>
+                                                    </TextBlock>
 
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="{Binding Start_date}"/>
-                                                        <TextBlock Text=" - "/>
-                                                        <TextBlock Text="{Binding End_date}"/>
+                                                    <StackPanel>
+                                                        <TextBlock Text="{Binding Start_date, StringFormat={}Van {0}}" />
+                                                        <TextBlock Text="{Binding End_date, StringFormat={}Tot {0}}"/>
                                                     </StackPanel>
                                                 </StackPanel>
                                             </DataTemplate>

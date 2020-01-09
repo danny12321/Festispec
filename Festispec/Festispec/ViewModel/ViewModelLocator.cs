@@ -39,10 +39,7 @@ namespace Festispec.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
-        
-           
-           
-
+      
             SimpleIoc.Default.Register<PopUpViewModel>();
         }
 
@@ -276,7 +273,7 @@ namespace Festispec.ViewModel
         {
             get
             {
-                return new ScheduleVM.ScheduleVM();
+                return new ScheduleVM.ScheduleVM(Main, ServiceLocator.Current.GetInstance<IDataService>());
             }
         }
 

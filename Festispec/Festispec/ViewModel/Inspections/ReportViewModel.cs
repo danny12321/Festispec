@@ -7,7 +7,9 @@ using GalaSoft.MvvmLight.Command;
 using iText.IO.Image;
 using iText.Kernel.Pdf;
 using iText.Layout;
+using iText.Layout.Borders;
 using iText.Layout.Element;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -45,7 +47,7 @@ namespace Festispec.ViewModel.Inspections
             {
 
                 var questionlists = context.Questionnaires.Include("Questions").ToList().Where(s => (s.inspection_id == _service.SelectedInspection.Id)).ToList();
-               
+
                 _questionnaires = new ObservableCollection<QuestionnairesViewModel>(questionlists.Select(q => new QuestionnairesViewModel(q)));
                 context.SaveChanges();
             }
@@ -55,8 +57,7 @@ namespace Festispec.ViewModel.Inspections
             var exportFile2 = System.IO.Path.Combine(exportFolder2, "Rapportage-" + _service.SelectedFestival.FestivalName + ".pdf");
             FilePath = exportFile2;
             FilePathTemp = exportFile;
-            GeneratePdfTemp();
-
+            PdfGen(FilePathTemp);
 
 
             ToPDF = new RelayCommand(GeneratePdf);
@@ -64,11 +65,6 @@ namespace Festispec.ViewModel.Inspections
         }
         private void PdfGen(string path)
         {
-            var random = new Random();
-            var random1 = random.Next(2842);
-            
-            var exportFolder1 = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache);
-            var exportFile1 = System.IO.Path.Combine(exportFolder1, "TempChartImage"+ random1  +".jpg");
 
             using (var writer = new PdfWriter(path))
             {
@@ -76,115 +72,222 @@ namespace Festispec.ViewModel.Inspections
                 {
 
                     var doc = new Document(pdf);
-                    doc.Add(new Paragraph("Rapportage - " + _service.SelectedFestival.FestivalName));
+                    CoverSheet(doc);
+
+                    bool isFirstQuestionnaire = true;
+
                     foreach (QuestionnairesViewModel ql in _questionnaires)
                     {
+                        if (!isFirstQuestionnaire)
+                        {
+                            doc.Add(new AreaBreak());
+                        }
+                        else
+                        {
+                            isFirstQuestionnaire = false;
+                        }
+
+                        doc.Add(new Paragraph(ql.Questionnaire.name).SetBold().SetFontSize(20));
 
                         foreach (QuestionViewModel q in ql.Questions)
                         {
-                            doc.Add(new Paragraph(q.Question + ": "));
-                            var answers = new List<Answers>();
+                            doc.Add(new Paragraph(q.Question).SetBold().SetFontSize(18));
+                            List<IGrouping<DateTime, Answers>> answers;
+
                             using (var context = new FestispecEntities())
                             {
-
-                               answers = context.Answers.ToList().Where(s => (s.question_id == q.Id)).ToList();
-
+                                answers = context.Answers.ToList().Where(s => (s.question_id == q.Id)).GroupBy(a => a.insertdate).ToList();
                                 context.SaveChanges();
                             }
 
+                            if (answers.Count == 0) continue;
+
                             switch (q.Type.Id)
                             {
-                                case 8: // table
-                                    var y = new List<int>();
-                                    var x = new List<string>();
-                                    int index = 0;
-                                    foreach (Answers a in answers)
-                                    {
-                                        if (index > ((answers.Count / 2) - 1))
-                                        {
-                                            y.Add(Int32.Parse(a.answer));
-                                        }
-                                        else
-                                        {
-                                            x.Add(a.answer);
-                                            index++;
-                                        }
-                                    }
-                      
-
-                                    // create the chart
-                                    var chart = new Chart();
-
-
-                                    var chartArea = new ChartArea();
-                                  //  chartArea.AxisX.LabelStyle.Format = "\nhh:mm";
-
-                                    chart.ChartAreas.Add(chartArea);
-
-                                    var series = new Series();
-                                    series.Name = "Series1";
-                                    series.ChartType = SeriesChartType.FastLine;
-                                 //   series.XValueType = ChartValueType.String;
-                                    chart.Series.Add(series);
-
-                                    // bind the datapoints
-                                    chart.Series["Series1"].Points.DataBindXY(x, y);
-
-                                    chart.SaveImage(exportFile1, ChartImageFormat.Jpeg);
-                                    ImageData data = ImageDataFactory.Create(exportFile1);
-                                    Image img = new Image(data);
-                                    doc.Add(img);
+                                case 5: // table
+                                    HandleChart(doc, answers.LastOrDefault()?.ToList());
                                     break;
 
                                 case 1: // open
 
-                                    foreach (Answers a in answers)
+                                    foreach (Answers a in answers.LastOrDefault()?.ToList())
                                     {
                                         doc.Add(new Paragraph(a.answer));
                                     }
                                     break;
                                 case 2: // multiple choice
 
-                                    foreach (Answers a in answers)
+                                    foreach (Answers a in answers.LastOrDefault()?.ToList())
                                     {
-                                        doc.Add(new Paragraph(a.answer));
+                                        doc.Add(new Paragraph($"• {a.answer}"));
                                     }
                                     break;
 
                                 case 3: // select
 
-                                    foreach (Answers a in answers)
+                                    foreach (Answers a in answers.LastOrDefault()?.ToList())
                                     {
-                                        doc.Add(new Paragraph(a.answer));
+                                        doc.Add(new Paragraph($"• {a.answer}"));
                                     }
                                     break;
+
                                 case 4: // afbeelding
-
-                                    foreach (Answers a in answers)
+                                    answers?.ForEach(group =>
                                     {
-
-
-                                        ImageData data1 = ImageDataFactory.Create(Base64ToImage(a.answer));
-                                        Image img1 = new Image(data1);
-                                        doc.Add(img1);
-                                    }
+                                        group?.ToList().ForEach(a =>
+                                        {
+                                            ImageData data1 = ImageDataFactory.Create(Base64ToImage(a.answer));
+                                            Image img1 = new Image(data1);
+                                            doc.Add(img1);
+                                        });
+                                    });
                                     break;
                                 default:
-
                                     break;
-
-
-
                             }
 
+                            doc.Add(new Div().SetMarginBottom(30));
                         }
-
                     }
-
-
                 }
             }
         }
+
+        private void CoverSheet(Document doc)
+        {
+            var festival = _service.SelectedFestival;
+            var inspection = _service.SelectedInspection;
+
+            var title = new Paragraph("Festispec rapportage - " + festival.FestivalName);
+            title.SetFontSize(24).SetBold();
+            doc.Add(title);
+
+            // Klant gegevens
+            doc.Add(new Paragraph("Klant gegevens").SetFontSize(18).SetBold());
+            var clientDetails = new Paragraph($"{festival.FestivalName} - {festival.Street} {festival.HouseNumber}, {festival.City} {festival.PostalCode}");
+            doc.Add(clientDetails);
+
+            doc.Add(new Div().SetMarginBottom(20));
+
+            // Inspectie gegevens
+            doc.Add(new Paragraph("Inspectie gegevens").SetFontSize(18).SetBold());
+            doc.Add(new Paragraph($"{inspection.Description}"));
+            doc.Add(new Paragraph($"Van {inspection.Start_date}"));
+            doc.Add(new Paragraph($"Tot {inspection.End_date}"));
+            doc.Add(new Paragraph($"Inspectie code {inspection.Id}"));
+
+            doc.Add(new Div().SetMarginBottom(20));
+
+            doc.Add(new Paragraph("Creatiedatum").SetFontSize(18).SetBold());
+            doc.Add(new Paragraph($"{DateTime.Now}"));
+
+            doc.Add(new AreaBreak());
+        }
+
+        private void HandleChart(Document doc, List<Answers> answers)
+        {
+            var random = new Random();
+
+            if (answers == null || answers.Count <= 0)
+            {
+                doc.Add(new Paragraph("Geen data ingevuld"));
+                return;
+            }
+
+            var json = JObject.Parse(answers.Last().answer);
+            var xname = json["head"][0].ToString();
+            List<List<int>> y = new List<List<int>>();
+            var x = new List<string>();
+
+            var head = json["head"].ToList();
+            var body = json["body"].ToList();
+
+            // Head -1 for the x as 
+            for (int i = 0; i < head.Count - 1; i++)
+            {
+                y.Add(new List<int>());
+            }
+
+            for (int i = 0; i < body.Count; i++)
+            { // loop every row
+                var row = body[i].ToList();
+
+                for (int j = 0; j < row.Count; j++)
+                { // loop every column in the row
+
+                    if (j == 0)
+                    {
+                        x.Add(row[j].ToString());
+                    }
+                    else
+                    {
+                        int value = Int32.Parse(row[j].ToString());
+                        y[j - 1].Add(value);
+                    }
+                }
+            }
+
+            var exportFolder1 = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache);
+            var exportFile1 = System.IO.Path.Combine(exportFolder1, "TempChartImage" + random.Next() + ".jpg");
+
+            //// create the chart
+            var chart = new Chart();
+            var legend = new Legend("Legenda");
+
+            var chartArea = new ChartArea("ChartArea");
+
+            chartArea.AxisX.Title = xname;
+            chartArea.AxisY.Title = "Waarde";
+            chart.ChartAreas.Add(chartArea);
+
+            for (int i = 0; i < y.Count; i++)
+            {
+                var row = y[i];
+                var series = new Series();
+                series.ChartType = SeriesChartType.FastLine;
+                series.Points.DataBindXY(x, row);
+                series.Name = json["head"][i + 1].ToString();
+                series.Label = json["head"][i + 1].ToString();
+
+                series.Legend = "Legenda";
+                chart.Series.Add(series);
+
+            }
+
+            legend.DockedToChartArea = "ChartArea";
+            chart.Legends.Add(legend);
+
+            chart.Width = 600;
+
+            chart.SaveImage(exportFile1, ChartImageFormat.Jpeg);
+            ImageData data = ImageDataFactory.Create(exportFile1);
+            Image img = new Image(data);
+            doc.Add(img);
+
+
+            //Table
+
+            var table = new Table(head.Count);
+            table.UseAllAvailableWidth();
+
+            for (int i = 0; i < head.Count; i++)
+            {
+                //table.AddCell(head[i].ToString());
+                table.AddCell(new Paragraph(head[i].ToString()).SetBold());
+            }
+
+            body.ForEach(row =>
+            {
+                row.ToList().ForEach(column =>
+                {
+                    table.AddCell(column.ToString());
+                });
+            });
+
+
+            doc.Add(table);
+        }
+
         public String Base64ToImage(string base64String)
         {
             byte[] imageBytes = Convert.FromBase64String(base64String);
@@ -193,7 +296,7 @@ namespace Festispec.ViewModel.Inspections
             bitmapImage.BeginInit();
             bitmapImage.StreamSource = ms;
             bitmapImage.EndInit();
-           
+
             BitmapEncoder encoder = new PngBitmapEncoder();
             var random = new Random();
             encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
@@ -205,24 +308,7 @@ namespace Festispec.ViewModel.Inspections
             }
             return exportFile;
         }
-        private void GeneratePdfTemp()
-        {
 
-
-            // copy the series and manipulate the copy
-            //   chart.DataManipulator.CopySeriesValues("Series1", "Series2");
-            // chart.DataManipulator.FinancialFormula(
-            //    FinancialFormula.WeightedMovingAverage,
-            //  "Series2"
-            // );
-            // chart.Series["Series2"].ChartType = SeriesChartType.FastLine;
-
-
-
-
-
-            PdfGen(FilePathTemp);
-        }
         private void GeneratePdf()
         {
             PdfGen(FilePath);
