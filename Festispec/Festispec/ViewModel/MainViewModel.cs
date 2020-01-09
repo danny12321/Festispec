@@ -197,6 +197,10 @@ namespace Festispec.ViewModel
                     FrameContent = new View.Quotations.AddQuotation();
                     PageTitle = "Offerte Toevoegen";
                     break;
+                case "EditInspection":
+                    FrameContent = new View.Inspections.EditInspection();
+                    PageTitle = "Inspectie aanpassen";
+                    break;
                 default:
                     FrameContent = new View.Schedule.Schedule();
                     PageTitle = "Planning";
