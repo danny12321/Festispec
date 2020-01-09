@@ -33,10 +33,11 @@
             </Button>
         </Grid>
 
-        <PdfViewer:PdfDocumentView DockPanel.Dock="Top" ItemSource="{Binding FilePathTemp}" />
-        <TextBlock>Advies: </TextBlock>
+        <PdfViewer:PdfDocumentView DockPanel.Dock="Top" Width="700px" Height="500px" ItemSource="{Binding FilePathTemp}" />
+        <TextBlock>Advies:</TextBlock>
         <TextBox Text="{Binding Advice}"></TextBox>
 
 
     </DockPanel>
+    
 </Page>
